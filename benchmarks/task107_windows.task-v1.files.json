@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "artifact_type": "task_runtime_file_manifest",
+  "task_name": "RobotPainting",
+  "platform": "windows",
+  "files": [
+    {
+      "path": "catalog_1.0.hash",
+      "bytes": 32,
+      "sha256": "30bab503325d54bad78c22b5cd28b31815daa7149b126d62e71400c5abfe6744"
+    },
+    {
+      "path": "catalog_1.0.json",
+      "bytes": 51783,
+      "sha256": "084800edc30a15d2fe4e528bb316f8b10946ef72bd62fab7f0ebb49c5cc42731"
+    },
+    {
+      "path": "cfg/task_config.yaml",
+      "bytes": 2644,
+      "sha256": "7e87eaa986bf4e895f705b2f970f1f51f9130c4fd87357329d9fec2fc09566ef"
+    },
+    {
+      "path": "defaultlocalgroup_assets_all_bcf1bd75cd2fcc5ef4e3062705db7e07.bundle",
+      "bytes": 6088288,
+      "sha256": "a9d1ea5e383284db8588dc9d3ece4b6f3d002373a4424d87d5690856a5ee3213"
+    },
+    {
+      "path": "dll/RobotPainting.dll",
+      "bytes": 199168,
+      "sha256": "4816a41354b09513e4e65c4317444d5bd756ed10f1b3031234647098bf75b50b"
+    },
+    {
+      "path": "Licenses/Panda/Apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "Licenses/Panda/LICENSE",
+      "bytes": 500,
+      "sha256": "ef8ffe20a709e1d03add25f689b8456ead2ae52b746a483aeb268b65ae974cc8"
+    },
+    {
+      "path": "Licenses/Panda/Third Party Notices.md",
+      "bytes": 4454,
+      "sha256": "614427b033b30f2d253746b3501eb41693e8d68f9095fd9f212628405e41596d"
+    },
+    {
+      "path": "Licenses/README.md",
+      "bytes": 566,
+      "sha256": "43c7815bf421a5e55553f908d5572f9b5fa2c037bd837216d41caec4caca23a2"
+    },
+    {
+      "path": "References/GoldenGateBridge_reference.png",
+      "bytes": 1415176,
+      "sha256": "54c7a2385db7ab9df4e2be820dfd32ede7576fe66d62c69832784599c7b4feb5"
+    },
+    {
+      "path": "References/painting_goal.txt",
+      "bytes": 63,
+      "sha256": "0ff7f878afd1aa3f085ede3a83816210bf8f8c2d595a026c07f8a63cad376df6"
+    },
+    {
+      "path": "References/provenance.json",
+      "bytes": 1564,
+      "sha256": "72a420b680566679d53a716789c6b6951c1099229283f8b6598ed0c3344a03a1"
+    },
+    {
+      "path": "References/README.md",
+      "bytes": 3039,
+      "sha256": "7abe33c9389ff92dabc4a58b9bab6f74c75962eb41b75d5a875e4952acd39f85"
+    }
+  ]
+}

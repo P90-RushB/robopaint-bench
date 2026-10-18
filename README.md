@@ -5,7 +5,8 @@
 建议公开仓库名为 `robopaint-bench`；当前本地目录名保留 `RobotPainting`。
 
 环境运行、模型调用、工具、上下文压缩、记录和回放均使用 AgentArk。本仓库提供评测
-配置、目标文件和离线准备脚本，不实现另一套 harness，不包含 Unity 环境和任务资源包。
+配置、目标文件、运行时下载安装和离线准备脚本，不实现另一套 harness。
+Unity Player 与 Task107 runtime mod 单独托管在 Hugging Face，不放进代码仓库。
 Colab、结果展示、画质评分与解说视频留待后续补充。
 
 ## 两个 benchmark
@@ -29,18 +30,36 @@ Colab、结果展示、画质评分与解说视频留待后续补充。
 
 ## 安装与机器设置
 
-使用现有 Python 环境安装 `benchmarks/versions.json` 锁定的 AgentArk 源码，
-例如在设置本机 `AGENTARK_SOURCE` 后运行：
+使用已有 Python **3.10.0–3.10.12** 环境。先将本机 `AGENTARK_SOURCE` 设置为要存放
+AgentArk Python 源码的新目录，再安装锁定版本：
 
 ```sh
+git clone https://github.com/P90-RushB/AgentArk.git "$AGENTARK_SOURCE"
+git -C "$AGENTARK_SOURCE" checkout 368eaa4a6018c6c178f3a073ab4b88cbff85c79d
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
 
-AgentArk 提供 Python 依赖。锁定提交现已推送到 AgentArk 远端；另一台机器可拉取
-仓库，切换到 `benchmarks/versions.json` 指定的提交后安装。准备脚本会检查版本和默认值。
-安装 Linux env **1.0.5**，以及对应平台的 **RobotPainting runtime mod**；
-Editor 源码包不等于 runtime mod。Mods 需有原始 `config.yaml.bak`，task store 需有
-`RobotPainting/cfg`、`dll`、Addressables 和 `References`。
+在 RoboPaintBench 根目录运行以下可选安装器，把 `ROBOTPAINTING_INSTALL` 设置为本机
+**尚不存在**的安装目录。它下载 env **1.0.5** 和同平台 **Task107 RobotPainting runtime
+mod**，核对版本锁中的不可变提交、字节数和 SHA-256，并打印本机环境变量设置命令：
+
+```sh
+python -m pip install huggingface_hub
+python scripts/install_runtime.py --platform linux --destination "$ROBOTPAINTING_INSTALL"
+```
+
+Windows PowerShell 对应命令为：
+
+```powershell
+python -m pip install huggingface_hub
+python scripts/install_runtime.py --platform windows --destination $env:ROBOTPAINTING_INSTALL
+```
+
+安装器沿用本机 Hugging Face 认证/缓存，不创建 Python 环境，不启动 Unity 或模型，
+不会覆盖已有安装目录或运行记录。需要仓库权限时先运行 `hf auth login`。
+详细目录结构、手动下载、已有 Player 接入和两平台运行步骤见
+[运行时安装说明](docs/runtime-installation.md)。Task107 的 ModelScope Editor 源码包
+用于 Unity 编辑开发，不能当作这里的 runtime mod。
 
 每台机器分别设置以下环境变量，或把路径传给准备脚本的对应参数：
 
@@ -89,7 +108,7 @@ task store 通过现有机制复用。两台机器分别运行即可；同机并
 预期输出是 `results.jsonl`、包含观测和 SimpleAgent trace 的 `trajectories.jsonl`、
 `paintings/` 下各 attempt 的画布与元数据。当前配置不自动录制连续视频。
 `manifest.json` 记录准备时的模型、实际默认预算、输入、Player 可执行文件、Mods baseline
-及完整 task 文件哈希；Linux task 包还须匹配仓库锁定的运行文件清单。
+及完整 task 文件哈希；两平台 task 包还须匹配各自锁定的运行文件清单。
 `effective_task.preview.yaml` 是只读合并预览，实际 Unity 配置仍由
 AgentArk 在启动时生成。准备完成不代表评测已执行或画作已保存。
 这些运行文件都被 Git 忽略。
@@ -120,7 +139,8 @@ python -m unittest discover -s tests -v
 ```
 
 检查覆盖两个目标的真实 AgentArk 配置加载与合并、参考图附件、自定义输入、运行隔离和
-拒绝覆盖旧输出。测试不调用模型、不启动 Unity。已完成的离线检查见
+拒绝覆盖旧输出，以及安装器的 ZIP 校验、安全解包与已有目录保护。
+测试不下载运行时、不调用模型、不启动 Unity。已完成的配置离线检查见
 [配置验收记录](docs/config-validation.md)。
 
 ## 已有结果与视频素材

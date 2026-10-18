@@ -61,7 +61,7 @@ class OfflinePreparationTests(unittest.TestCase):
                     "env_wrapper_cfg": {"context_manager": {"messages": {"enabled": True, "text_max_chars": 32768}}}}
         self.task_cfg = self.task / "cfg/task_config.yaml"
         self.task_cfg.write_text(yaml.safe_dump(task_cfg), encoding="utf-8")
-        runtime_manifest = self.repo / "benchmarks/task107_linux.files.json"
+        runtime_manifest = self.repo / "benchmarks" / self.lock["task"]["runtime_file_manifests"]["linux"]["filename"]
         runtime_manifest.write_text(json.dumps({"files": prepare_run.tree_manifest(self.task)}), encoding="utf-8")
         (self.repo / "benchmarks/versions.json").write_text(json.dumps(self.lock), encoding="utf-8")
         baseline = {"task_name": "OldTask", "width": 84, "height": 84, "obs_mode": "decision",

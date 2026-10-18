@@ -15,9 +15,18 @@
     "editor_source_revision": "40589ccfc7ece5ca9d8dd35f196fe4eb80eceeaf",
     "runtime_file_manifests": {
       "linux": {
-        "filename": "task107_linux.files.json"
+        "filename": "task107_linux.task-v1.files.json"
+      },
+      "windows": {
+        "filename": "task107_windows.task-v1.files.json"
       }
-    }
+    },
+    "runtime_release_id": "tasks-107-robotpainting-20261018",
+    "runtime_publication_changes": [
+      "task_info.record_match_rating set explicitly to 1; other parsed config unchanged",
+      "unsigned DLL CodeView build path reduced to RobotPainting.pdb; all other DLL bytes unchanged",
+      "Panda asset license notices included; authoring-only original JPEG omitted"
+    ]
   },
   "reference_images": {
     "GoldenGateBridge_reference.png": {
@@ -85,6 +94,35 @@
     "pelican": {
       "filename": "painting_goal.txt",
       "sha256": "9ed2d06bbdf73c4a595692bd165ae34b02b6eb32c2ffc7bb5b4d9cf6ff86b94f"
+    }
+  },
+  "runtime_downloads": {
+    "repo_id": "P90-RushB/AgentArk",
+    "repo_type": "dataset",
+    "revision": "86a260c904f0bd4010f24a6c471d5b66553ece7d",
+    "envs": {
+      "windows": {
+        "path": "artifacts/envs/1.0.5/windows/AgentArk-env-1.0.5-windows.zip",
+        "bytes": 121935121,
+        "sha256": "e0861b76cfcfd20495689dabd36689241c640193f06ecc8070d101ded372ab51"
+      },
+      "linux": {
+        "path": "artifacts/envs/1.0.5/linux/AgentArk-env-1.0.5-linux.zip",
+        "bytes": 138640937,
+        "sha256": "3a894106d2d3982290341e9bfa5d359b4c49dbf1515cb3e7fe9599e4d308f42c"
+      }
+    },
+    "tasks": {
+      "linux": {
+        "path": "artifacts/tasks/0100-0199/0107-RobotPainting/task-v1/env-1.0.5/linux/RobotPainting-task-v1-env-1.0.5-linux.zip",
+        "bytes": 6712518,
+        "sha256": "1a3e3a8722dd89b8051c12c6c08e948a9fda501957de958259384047919e5e86"
+      },
+      "windows": {
+        "path": "artifacts/tasks/0100-0199/0107-RobotPainting/task-v1/env-1.0.5/windows/RobotPainting-task-v1-env-1.0.5-windows.zip",
+        "bytes": 6297162,
+        "sha256": "a1714ae0c13ff3dcdbb98429c44a510aea23fbb226e44b2cb69dbd48edc2438a"
+      }
     }
   }
 }
