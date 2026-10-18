@@ -103,3 +103,71 @@ models:
       tools:
         enabled: true
         workspace_parent: runs/golden_gate/workspaces
+  - name: opus
+    agent_type: simple
+    provider: openrouter
+    model: anthropic/claude-opus-5.5
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    temperature: null
+    reasoning_effort: max
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: auto
+      output_token_parameter: max_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/golden_gate/workspaces
+  - name: grok
+    agent_type: simple
+    provider: openrouter
+    model: x-ai/grok-4.7
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    temperature: null
+    reasoning_effort: xhigh
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: required
+      output_token_parameter: max_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/golden_gate/workspaces
+  - name: wonder
+    agent_type: simple
+    provider: openrouter
+    model: meta/muse-wonder
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    temperature: null
+    reasoning_effort: max
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: auto
+      output_token_parameter: max_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/golden_gate/workspaces
+  - name: deepseek
+    agent_type: simple
+    provider: openrouter
+    model: deepseek/deepseek-v4.1-flash-1017
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    temperature: null
+    reasoning_effort: max
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: required
+      output_token_parameter: max_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/golden_gate/workspaces

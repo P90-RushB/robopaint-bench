@@ -24,7 +24,7 @@ DLL 的执行代码、Addressables 与任务机制没有变化。
 
 ```sh
 git clone https://github.com/P90-RushB/AgentArk.git "$AGENTARK_SOURCE"
-git -C "$AGENTARK_SOURCE" checkout 3b2ce5bfb95464461ab80effb77b89750b1d66e9
+git -C "$AGENTARK_SOURCE" checkout e8c01eaad7cd1dc9db6b849913d4bf752eb77d0b
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
 
@@ -40,13 +40,14 @@ AgentArk 提交、SimpleAgent 默认值、目标和平台任务文件。Python �
 ```sh
 git pull --ff-only
 git -C "$AGENTARK_SOURCE" fetch origin
-git -C "$AGENTARK_SOURCE" checkout 3b2ce5bfb95464461ab80effb77b89750b1d66e9
+git -C "$AGENTARK_SOURCE" checkout e8c01eaad7cd1dc9db6b849913d4bf752eb77d0b
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
 
 安装时按提交检出会使 AgentArk 处于 detached HEAD；只在该目录执行 `git pull`
 无法完成上述版本切换。如有本地修改，先保留并处理后再切换，不要强制覆盖。
-本次更新包含 viewer 对增量消息和完整历史的兼容修复；SimpleAgent 默认配置和
+锁定版本包含 viewer 对增量消息和完整历史的兼容修复，以及 SimpleAgent 对非法
+动作提交的有界工具错误反馈。SimpleAgent 默认配置和
 env 1.0.5、Task107 `task-v1` 资源锁保持不变，已有匹配资源无需重新下载。
 更新后重新启动 viewer 或评测进程，使其加载新的 Python 代码。
 历史评测记录仍保留原有版本信息。准备新评测时，`prepare_run.py` 会再次严格校验版本。

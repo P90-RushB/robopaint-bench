@@ -21,9 +21,20 @@ Colab、结果展示、画质评分与解说视频留待后续补充。
 每轮最终画布均保存，内部 reward 只代表提交保存，不是画质得分。
 详见[协议](benchmarks/protocol.md)和[版本及默认值快照](benchmarks/versions.json)。
 
-配置预置 OpenRouter 的 `sol` 与 `argon` 两个模型条目，分别为
-`openai/gpt-6.1-sol` / effort `max` 和 `google/gemini-4-argon` / effort `high`。
-两者继承同一版 SimpleAgent 默认：262,144-token 上下文、256 张图的阈值、
+两个 case 均预置以下 OpenRouter 模型条目，用 `--model` 选择名称：
+
+| 名称 | 模型 | effort | tool_choice |
+| --- | --- | --- | --- |
+| `sol` | `openai/gpt-6.1-sol` | `max` | `required` |
+| `argon` | `google/gemini-4-argon` | `high` | `required` |
+| `opus` | `anthropic/claude-opus-5.5` | `max` | `auto` |
+| `grok` | `x-ai/grok-4.7` | `xhigh` | `required` |
+| `wonder` | `meta/muse-wonder` | `max` | `auto` |
+| `deepseek` | `deepseek/deepseek-v4.1-flash-1017` | `max` | `required` |
+
+Opus 的 adaptive thinking 与强制工具选择不兼容，会返回 HTTP 400，因此使用 `auto`。
+Wonder 实测也返回 HTTP 400：Meta provider 只接受 `auto`，不支持 `none`、`required` 或指定工具名。
+所有条目继承同一版 SimpleAgent 默认：262,144-token 上下文、256 张图的阈值、
 20,480-token 动作输出预留、32,768-token 独立摘要输出预算；摘要 effort 继承动作。
 上下文的其他大小限制也可提前触发压缩，256 张图并非保证全部保留。
 工具默认保留最多 512 条可读取记录，支持压缩后重看历史图片。
@@ -35,7 +46,7 @@ AgentArk Python 源码的新目录，再安装锁定版本：
 
 ```sh
 git clone https://github.com/P90-RushB/AgentArk.git "$AGENTARK_SOURCE"
-git -C "$AGENTARK_SOURCE" checkout 3b2ce5bfb95464461ab80effb77b89750b1d66e9
+git -C "$AGENTARK_SOURCE" checkout e8c01eaad7cd1dc9db6b849913d4bf752eb77d0b
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
 

@@ -12,11 +12,18 @@
 只在每次尝试的首步提供；文本案例不附参考图，两路工作区图像仍然提供。
 消息为 append-only delta，轨迹保留图片。SimpleAgent 使用原生 assistant content 给出简短解释，
 通过 `submit_action` 提交环境动作。压缩可能移出旧图，已发布记录仍可通过工作区工具重新查看。
+非法 `submit_action` 会整批拒绝，不执行其中的工具或环境动作；模型收到原生工具错误反馈，
+在原有工具轮数、调用数和超时预算内重新提交。持续格式错误或预算耗尽仍作为运行错误记录。
 
 两个 YAML 均为原生 AgentArk `env_cfg` / `eval` / `models` 配置。
-两模型统一采用当前 SimpleAgent 默认上下文与工具预算，省略 `context`、`tools.limits` 及摘要 effort 覆盖；
+六个模型条目统一采用当前 SimpleAgent 默认上下文与工具预算，省略 `context`、`tools.limits` 及摘要 effort 覆盖；
 全字段默认快照和输入 SHA-256 位于 `versions.json`。动作输出预算均为 20,480 tokens，
-Sol effort 为 `max`，Argon 为 `high`；摘要继承对应动作 effort。
+`temperature: null`、`max_retries: 0`、超时 1800 秒，输出 token 参数为 `max_tokens`。
+Sol、Opus、Wonder、DeepSeek effort 为 `max`，Argon 为 `high`，Grok 为 `xhigh`；
+摘要继承对应动作 effort。各名称对应的模型 ID 见根目录 README。
+Sol、Argon、Grok、DeepSeek 的工具选择为 `required`；Opus 因 adaptive thinking 不接受强制工具选择
+（HTTP 400）而使用 `auto`。Wonder 实测返回 HTTP 400，Meta provider 只支持 `auto`，
+不支持 `none`、`required` 或指定工具名，因此同样使用 `auto`。
 旧 Argon 10,000-token 运行属于历史条件，不能作为这一统一协议的结果。
 本仓库当前不提供新协议下的模型结果。
 

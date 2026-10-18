@@ -280,7 +280,7 @@ def prepare(args: argparse.Namespace) -> Path:
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
     result.add_argument("--case", choices=CASES, required=True)
-    result.add_argument("--model", required=True, help="One models[].name from the case YAML (sol or argon).")
+    result.add_argument("--model", required=True, help="One models[].name from the case YAML (sol, argon, opus, grok, wonder, or deepseek).")
     result.add_argument("--env-path", default=os.getenv("AGENTARK_ENV_PATH"))
     result.add_argument("--mod-path", default=os.getenv("AGENTARK_MOD_PATH"))
     result.add_argument("--task-store", default=os.getenv("AGENTARK_TASK_STORE_PATH"))
