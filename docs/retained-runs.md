@@ -31,6 +31,27 @@ A2 由原段 6 动作和
 当前 Sol 应取另一行的新目录。Argon 摘要预算为旧版 10,000，当前 Sol 为 32,768，
 制作对比时保留 harness 差异说明。
 
+## HF 金门大桥 case 记录
+
+2026-10-18 用户授权发布两个模型的 results 和 trajectories。四份文件位于
+[Task107 / golden_gate](https://huggingface.co/datasets/P90-RushB/AgentArk/tree/90520211bee7327482ed71805473618cdaf2d61c/artifacts/records/0100-0199/0107-RobotPainting/golden_gate)，
+锁定提交 `90520211bee7327482ed71805473618cdaf2d61c`。后续其他 case 使用平行子目录。
+
+| 模型及目录 | results | trajectories |
+| --- | ---: | ---: |
+| Sol `gpt-6.1-sol/20261018-openrouter-max/` | 17,574,365 字节 | 78,722,012 字节 |
+| Argon `gemini-4-argon/20261018-openrouter-high/` | 3,281,805 字节 | 146,255,771 字节 |
+
+发布 results 仅移除重复输入历史和工具定义，保留每次模型调用输出、返回的明文及加密
+推理字段、完整动作和执行结果。Sol 保留 185 次调用；Argon 从不可变的完整恢复 export
+补回 76 次调用输出，再精简输入，未沿用会丢失原生推理的旧删除方式。全部 155 / 71 个
+动作及执行结果逐值核对一致，五份来源文件的 SHA-256 未变。
+
+两份 trajectories 与来源逐字节一致。Sol 仍只有每轮末尾 24 步的图像历史，全部 155 个
+动作保存在 results；Argon 保留三轮完整恢复历史。case 的 `records_manifest.json` 提供
+完整大小、SHA、来源指纹、保留范围和运行要求，README 包含参考照片署名及许可证。
+本批没有上传 HTTP 原始日志、录像或本地开发中间文件。
+
 ## 集中剪辑素材与校验索引
 
 以下路径相对于本机 RobotPainting / RoboPaintBench checkout 根目录：

@@ -78,6 +78,17 @@ python -m agent_ark.ark_eval.run_replay \
   --config "$REPLAY_CONFIG" --records "$RECOVERED_RESULTS" --index 0
 ```
 
+上述旧 `replay_ready` results 为 7,164,054 字节，足以驱动动作回放，但其删除整个
+`model_requests` 的方式也删掉了每次调用的原生推理输出；`assistant_raw` 公开动作说明
+不能替代完整的返回推理。原完整 export 和 audit 未丢失，也没有覆盖这份旧副本。
+
+后续用户要求公开保留完整思考的结果。HF 发布副本以已验证的 `replay_ready` 状态和
+动作结果为基底，从完整 export 对齐补回 76 次调用输出，仅移除重复输入历史及工具
+定义，所有已返回的明文和加密推理字段均保留。新 results 为 3,281,805 字节，
+SHA-256 为 `49c8e90f3ad01ae71c2efee7a9f7c9a3c416f990f516944b7bdda77e625ee9d9`。
+完整 71 个动作、执行结果、恢复状态与长动作显示仍保持一致，来源文件均未改动。
+下载位置及配套 trajectories 见[HF 金门大桥 case 记录](retained-runs.md#hf-金门大桥-case-记录)。
+
 ## Linux 实际验收
 
 在 env 1.0.5、相同 Linux Task107 包、seed 107、480 Hz 物理、固定笔、固定画板、
