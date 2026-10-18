@@ -35,9 +35,11 @@ AgentArk Python 源码的新目录，再安装锁定版本：
 
 ```sh
 git clone https://github.com/P90-RushB/AgentArk.git "$AGENTARK_SOURCE"
-git -C "$AGENTARK_SOURCE" checkout 368eaa4a6018c6c178f3a073ab4b88cbff85c79d
+git -C "$AGENTARK_SOURCE" checkout 3b2ce5bfb95464461ab80effb77b89750b1d66e9
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
+
+已有安装的更新步骤见[运行时安装说明](docs/runtime-installation.md#更新已有安装)。
 
 在 RoboPaintBench 根目录运行以下可选安装器，把 `ROBOTPAINTING_INSTALL` 设置为本机
 **尚不存在**的安装目录。它下载 env **1.0.5** 和同平台 **Task107 RobotPainting runtime

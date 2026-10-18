@@ -24,7 +24,7 @@ DLL 的执行代码、Addressables 与任务机制没有变化。
 
 ```sh
 git clone https://github.com/P90-RushB/AgentArk.git "$AGENTARK_SOURCE"
-git -C "$AGENTARK_SOURCE" checkout 368eaa4a6018c6c178f3a073ab4b88cbff85c79d
+git -C "$AGENTARK_SOURCE" checkout 3b2ce5bfb95464461ab80effb77b89750b1d66e9
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
 
@@ -32,6 +32,24 @@ PowerShell 使用 `$env:AGENTARK_SOURCE` 替代上面的 `"$AGENTARK_SOURCE"`。
 已有源码可以复用，但需要匹配该提交且没有已修改的包源码。`prepare_run.py` 会验证
 AgentArk 提交、SimpleAgent 默认值、目标和平台任务文件。Python 依赖来自 AgentArk；
 这里不维护另一份评测依赖或 harness。
+
+### 更新已有安装
+
+在 RoboPaintBench 根目录拉取更新，再将已有 AgentArk 源码切换到本次锁定提交：
+
+```sh
+git pull --ff-only
+git -C "$AGENTARK_SOURCE" fetch origin
+git -C "$AGENTARK_SOURCE" checkout 3b2ce5bfb95464461ab80effb77b89750b1d66e9
+python -m pip install -e "$AGENTARK_SOURCE"
+```
+
+安装时按提交检出会使 AgentArk 处于 detached HEAD；只在该目录执行 `git pull`
+无法完成上述版本切换。如有本地修改，先保留并处理后再切换，不要强制覆盖。
+本次更新包含 viewer 对增量消息和完整历史的兼容修复；SimpleAgent 默认配置和
+env 1.0.5、Task107 `task-v1` 资源锁保持不变，已有匹配资源无需重新下载。
+更新后重新启动 viewer 或评测进程，使其加载新的 Python 代码。
+历史评测记录仍保留原有版本信息。准备新评测时，`prepare_run.py` 会再次严格校验版本。
 
 ## 2. 下载并安装 env 1.0.5 + Task107
 
