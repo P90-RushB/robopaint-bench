@@ -122,3 +122,8 @@ python -m unittest discover -s tests -v
 检查覆盖两个目标的真实 AgentArk 配置加载与合并、参考图附件、自定义输入、运行隔离和
 拒绝覆盖旧输出。测试不调用模型、不启动 Unity。已完成的离线检查见
 [配置验收记录](docs/config-validation.md)。
+
+## 已有结果与视频素材
+
+金门大桥的已完成 Sol / Argon 原始记录与六轮剪辑素材见
+[保留结果索引](docs/retained-runs.md)。原始数据保留在本机，不随本代码仓库上传或克隆。
