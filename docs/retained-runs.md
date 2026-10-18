@@ -20,9 +20,10 @@ Sol 的完整标准结果与轨迹为 `linux/sol/results.jsonl` 和 `linux/sol/t
 Argon 必须同时保留 `linux/argon/audit/` 和 `recovery/argon_resume_02/audit/`，
 以及恢复校验的相关目录。三轮结果与全部 71 个动作由 `analysis/argon_audit_analysis.json`、
 `analysis/argon_actions.md`、`analysis/argon_segment_ledger.json` 和原始 audit 共同保存。
-Argon 没有正常终结的完整标准 results/trajectories JSONL；原段 results 仅是一条 error 记录，
-不要将它误当成完整推理结果。A2 由原段 6 动作和恢复后的 15 动作组成；恢复视频中的
-物理重建不能重复计为新模型动作。
+Argon 原运行没有正常终结的完整标准 results/trajectories JSONL；原段 results 仅是一条 error
+记录，不要将它误当成完整推理结果。已从 audit 另存完整 71 步的原生 JSONL，来源与验证
+见[Argon record 恢复](argon-record-recovery.md)。原始目录保持不变。A2 由原段 6 动作和
+恢复后的 15 动作组成；恢复视频中的物理重建不能重复计为新模型动作。
 
 `20261018_openrouter_formal` 中的旧 Sol 已作废，仅作历史证据保留。
 当前 Sol 应取另一行的新目录。Argon 摘要预算为旧版 10,000，当前 Sol 为 32,768，
