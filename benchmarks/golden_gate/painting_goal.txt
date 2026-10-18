@@ -1,0 +1,1 @@
+Reproduce the provided reference image as closely as possible.

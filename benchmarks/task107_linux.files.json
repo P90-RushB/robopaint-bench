@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "artifact_type": "task_runtime_file_manifest",
+  "task_name": "RobotPainting",
+  "platform": "linux",
+  "files": [
+    {
+      "path": "catalog_1.0.hash",
+      "sha256": "aa57bc60402e95d2eabb2adf3f5d811fca0f560e6d49801d40143d871c3323a8",
+      "bytes": 32
+    },
+    {
+      "path": "catalog_1.0.json",
+      "sha256": "5e8b6231dc1b8f2682cbdef5ff547a4990b3659d9de06dfcabdd18bf6c8629be",
+      "bytes": 51780
+    },
+    {
+      "path": "cfg/task_config.yaml",
+      "sha256": "aac6a3f730de972463e01dc52fc7dddc4cf501561d32eab73383c170e6faa66b",
+      "bytes": 2619
+    },
+    {
+      "path": "defaultlocalgroup_assets_all_6ff360ea8dd7ed6b501e76e442618e97.bundle",
+      "sha256": "700d492e046f5e0c66cf815bb39ce72764277ad788a002d64adb27c0c8c708e4",
+      "bytes": 6541000
+    },
+    {
+      "path": "dll/RobotPainting.dll",
+      "sha256": "9fe15930a1552489d1b779e9b64d8c5c11c721ee11137a16444b2fbfde2a9f3b",
+      "bytes": 199168
+    },
+    {
+      "path": "References/GoldenGateBridge_original.jpg",
+      "sha256": "80c7b70d6fd5616e66d98cca32ad2c152a0244a3b3008e5ec259ee0454f7cd05",
+      "bytes": 13848964
+    },
+    {
+      "path": "References/GoldenGateBridge_reference.png",
+      "sha256": "54c7a2385db7ab9df4e2be820dfd32ede7576fe66d62c69832784599c7b4feb5",
+      "bytes": 1415176
+    },
+    {
+      "path": "References/painting_goal.txt",
+      "sha256": "0ff7f878afd1aa3f085ede3a83816210bf8f8c2d595a026c07f8a63cad376df6",
+      "bytes": 63
+    },
+    {
+      "path": "References/provenance.json",
+      "sha256": "72a420b680566679d53a716789c6b6951c1099229283f8b6598ed0c3344a03a1",
+      "bytes": 1564
+    },
+    {
+      "path": "References/README.md",
+      "sha256": "7abe33c9389ff92dabc4a58b9bab6f74c75962eb41b75d5a875e4952acd39f85",
+      "bytes": 3039
+    }
+  ]
+}

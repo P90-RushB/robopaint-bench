@@ -1,0 +1,103 @@
+# RoboPaintBench: text-goal painting. Materialize with prepare_run.py.
+env_cfg:
+  env_path: "${AGENTARK_ENV_PATH}"
+  mod_path: "${AGENTARK_MOD_PATH}"
+  task_type: RLTask
+  no_graphics: false
+  unity_start_timeout_s: 1800
+  additional_args:
+    - -screen-fullscreen
+    - "0"
+    - -screen-width
+    - "1280"
+    - -screen-height
+    - "720"
+  runtime_sandbox:
+    enabled: true
+    auto_prepare: true
+    pool_size: 1
+    runtime_platform: linux
+    shared_task_store_path: "${AGENTARK_TASK_STORE_PATH}"
+    pool_root: "${ROBOTPAINTING_RUN_DIR}/runtime"
+    link_mode: auto
+  env_config_overrides:
+    override_by_task: true
+    num_parallel_envs: 1
+    obs_mode: decision
+    width: 960
+    height: 720
+    engine_para:
+      time_scale: 1
+    max_attempts: 3
+    max_steps_per_attempt: 96
+    reroll_group_seed_on_same_task: false
+    task_params:
+      reference_mode: text
+      brush_mode: fixed
+      pigment_mode: infinite
+      physics_frequency_hz: 480
+      grip_force_limit_newtons: 35
+      board_mode: fixed
+      save_canvas_enabled: true
+      canvas_output_directory: "${ROBOTPAINTING_RUN_DIR}/paintings"
+      reference_directory: "${ROBOTPAINTING_RUN_DIR}/inputs"
+      reference_filenames: []
+      painting_goal_filename: painting_goal.txt
+    env_wrapper_cfg:
+      attempt_initial_images: []
+      context_manager:
+        messages:
+          include_images: true
+          append_only: true
+          return_mode: delta
+
+eval:
+  output_path: runs/pelican/results.jsonl
+  stop_on_error: true
+  max_parallel_envs: 1
+  fixed_env_id: 0
+  cases:
+    - case_id: pelican-riding-a-bicycle-seed-107
+      task_name: RobotPainting
+      group_seed: 107
+  trajectory_save:
+    enabled: true
+    condition: all
+    include_images: true
+    output_path: runs/pelican/trajectories.jsonl
+
+models:
+  - name: sol
+    agent_type: simple
+    provider: openrouter
+    model: openai/gpt-6.1-sol
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    temperature: null
+    reasoning_effort: max
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: required
+      output_token_parameter: max_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/pelican/workspaces
+  - name: argon
+    agent_type: simple
+    provider: openrouter
+    model: google/gemini-4-argon
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    temperature: null
+    reasoning_effort: high
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: required
+      output_token_parameter: max_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/pelican/workspaces

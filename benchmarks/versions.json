@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "agentark": {
+    "repository": "https://github.com/P90-RushB/AgentArk",
+    "commit": "368eaa4a6018c6c178f3a073ab4b88cbff85c79d"
+  },
+  "environment": {
+    "version": "1.0.5",
+    "official_platform": "linux"
+  },
+  "task": {
+    "id": 107,
+    "name": "RobotPainting",
+    "editor_source_version": "source-v1",
+    "editor_source_revision": "40589ccfc7ece5ca9d8dd35f196fe4eb80eceeaf",
+    "runtime_file_manifests": {
+      "linux": {
+        "filename": "task107_linux.files.json"
+      }
+    }
+  },
+  "reference_images": {
+    "GoldenGateBridge_reference.png": {
+      "sha256": "54c7a2385db7ab9df4e2be820dfd32ede7576fe66d62c69832784599c7b4feb5",
+      "width": 1280,
+      "height": 800,
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "photographer": "Frank Schulenburg",
+      "title": "Golden Gate Bridge as seen from Battery East",
+      "photo_date": "2017-06-24",
+      "modification": "Full photograph resized to 1280x800 without cropping.",
+      "source": "https://commons.wikimedia.org/wiki/File:Golden_Gate_Bridge_as_seen_from_Battery_East.jpg"
+    }
+  },
+  "simple_agent_context_defaults": {
+    "max_context_characters": 524288,
+    "max_context_bytes": 16000000,
+    "max_context_tokens": 262144,
+    "output_reserve_tokens": 20480,
+    "recent_turns": 2,
+    "max_summary_calls": 4,
+    "max_images": 256,
+    "max_image_bytes": 16777216,
+    "image_token_estimate": 1024,
+    "max_archive_entries": 4096,
+    "max_archive_characters": 33554432,
+    "max_archive_bytes": 536870912,
+    "max_archive_image_bytes": 536870912,
+    "summary_input_characters": 196608,
+    "summary_input_bytes": 16000000,
+    "summary_input_tokens": 48000,
+    "summary_output_characters": 32000,
+    "summary_output_bytes": 128000,
+    "summary_output_tokens": 32768,
+    "max_action_output_characters": 120000,
+    "max_action_output_bytes": 512000,
+    "max_model_calls": 4096,
+    "timeout_seconds": 1800.0
+  },
+  "simple_agent_tool_limits_defaults": {
+    "max_calls": 32,
+    "max_model_rounds": 16,
+    "max_text_bytes": 65536,
+    "max_total_text_bytes": 524288,
+    "max_images": 4,
+    "max_image_bytes": 5242880,
+    "max_total_image_bytes": 10485760,
+    "max_note_bytes": 65536,
+    "max_workspace_bytes": 1048576,
+    "max_note_files": 128,
+    "max_scope_entries": 256,
+    "max_record_files": 1024,
+    "max_record_file_bytes": 33554432,
+    "max_record_bytes": 67108864,
+    "max_records": 512,
+    "max_published_bytes": 536870912,
+    "timeout_seconds": 1800.0
+  },
+  "goals": {
+    "golden_gate": {
+      "filename": "painting_goal.txt",
+      "sha256": "0ff7f878afd1aa3f085ede3a83816210bf8f8c2d595a026c07f8a63cad376df6"
+    },
+    "pelican": {
+      "filename": "painting_goal.txt",
+      "sha256": "9ed2d06bbdf73c4a595692bd165ae34b02b6eb32c2ffc7bb5b4d9cf6ff86b94f"
+    }
+  }
+}
