@@ -36,8 +36,8 @@ Colab、结果展示、画质评分与解说视频留待后续补充。
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
 
-AgentArk 提供 Python 依赖。本地尚未同步到远端的提交，需要先将包含该提交的
-AgentArk 仓库复制到另一台机器；不要用旧安装替代锁定版本。准备脚本会检查版本和默认值。
+AgentArk 提供 Python 依赖。锁定提交现已推送到 AgentArk 远端；另一台机器可拉取
+仓库，切换到 `benchmarks/versions.json` 指定的提交后安装。准备脚本会检查版本和默认值。
 安装 Linux env **1.0.5**，以及对应平台的 **RobotPainting runtime mod**；
 Editor 源码包不等于 runtime mod。Mods 需有原始 `config.yaml.bak`，task store 需有
 `RobotPainting/cfg`、`dll`、Addressables 和 `References`。
