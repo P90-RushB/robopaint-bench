@@ -140,6 +140,22 @@ class OfflinePreparationTests(unittest.TestCase):
         self.assertTrue(cfg["eval"]["cases"][0]["case_id"].startswith("custom-"))
         self.assert_template_unchanged()
 
+    def test_new_models_prepare_offline_with_isolated_outputs(self):
+        for model in ("qwen", "kimi", "mimo"):
+            with self.subTest(model=model):
+                path = prepare_run.prepare(self.args(model=model, output=model))
+                cfg = load_eval_config(str(path))
+                self.assertEqual([model], [item["name"] for item in cfg["models"]])
+                self.assertEqual(20480, cfg["models"][0]["max_completion_tokens"])
+                self.assertNotIn("context", cfg["models"][0]["simple_agent"])
+                self.assertNotIn("limits", cfg["models"][0]["simple_agent"]["tools"])
+                workspace = Path(cfg["models"][0]["simple_agent"]["tools"]["workspace_parent"])
+                self.assertEqual(path.parent / "workspaces", workspace)
+                record = json.loads((path.parent / "manifest.json").read_text("utf-8"))
+                self.assertTrue(record["preparation_only"])
+                self.assertFalse(record["custom_target"])
+        self.assert_template_unchanged()
+
     def test_text_only_can_override_an_image_case_without_stale_attachment(self):
         goal = self.root / "goal.txt"
         goal.write_text("Paint a lighthouse.\n", encoding="utf-8")

@@ -169,3 +169,56 @@ models:
       tools:
         enabled: true
         workspace_parent: runs/pelican/workspaces
+  - name: qwen
+    agent_type: simple
+    provider: openrouter
+    model: qwen/qwen3.8-max-prime
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    temperature: null
+    reasoning_effort: xhigh
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: auto
+      output_token_parameter: max_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/pelican/workspaces
+  - name: kimi
+    agent_type: simple
+    provider: openrouter
+    model: moonshotai/kimi-k3
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    temperature: null
+    reasoning_effort: max
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: required
+      output_token_parameter: max_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/pelican/workspaces
+  - name: mimo
+    agent_type: simple
+    provider: openrouter
+    model: xiaomi/mimo-v2.6-pro
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    temperature: null
+    thinking:
+      type: enabled
+    reasoning_effort: null
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: auto
+      output_token_parameter: max_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/pelican/workspaces

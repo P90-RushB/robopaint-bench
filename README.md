@@ -31,11 +31,25 @@ Colab、结果展示、画质评分与解说视频留待后续补充。
 | `grok` | `x-ai/grok-4.7` | `xhigh` | `required` |
 | `wonder` | `meta/muse-wonder` | `max` | `auto` |
 | `deepseek` | `deepseek/deepseek-v4.1-flash-1017` | `max` | `required` |
+| `qwen` | `qwen/qwen3.8-max-prime` | `xhigh` | `auto` |
+| `kimi` | `moonshotai/kimi-k3` | `max` | `required` |
+| `mimo` | `xiaomi/mimo-v2.6-pro` | 开启 thinking，无 effort 档位 | `auto` |
 
 Opus 的 adaptive thinking 与强制工具选择不兼容，会返回 HTTP 400，因此使用 `auto`。
 Wonder 实测也返回 HTTP 400：Meta provider 只接受 `auto`，不支持 `none`、`required` 或指定工具名。
+2026-10-19 核对 [OpenRouter 模型元数据](https://openrouter.ai/api/v1/models)：
+Qwen 最高可选 effort 为 `xhigh`，Kimi 为 `max`；MiMo 只公布 reasoning 开关，
+因此显式设置 `thinking.type: enabled`、不发送虚构的 effort 档位。
+[Qwen endpoint](https://openrouter.ai/api/v1/models/qwen/qwen3.8-max-prime/endpoints)
+支持 `auto`、不支持 `required`；
+[Kimi](https://openrouter.ai/api/v1/models/moonshotai/kimi-k3/endpoints) 有支持 `required` 的路由；
+[MiMo](https://openrouter.ai/api/v1/models/xiaomi/mimo-v2.6-pro/endpoints) 的各 provider
+对强制工具支持不同，使用共同支持的 `auto`。未固定 provider，实际路由须保存在运行记录中。
+三者均接受图像、支持工具，公布的输出上限足以容纳下面的动作及摘要预算。
+轻量能力快照和来源 SHA 见 [模型能力快照](benchmarks/openrouter-model-capabilities-20261019.json)；
+这只证明公开参数兼容性，没有执行模型推理探测。
 所有条目继承同一版 SimpleAgent 默认：262,144-token 上下文、256 张图的阈值、
-20,480-token 动作输出预留、32,768-token 独立摘要输出预算；摘要 effort 继承动作。
+20,480-token 动作输出预留、32,768-token 独立摘要输出预算；摘要推理设置继承动作。
 上下文的其他大小限制也可提前触发压缩，256 张图并非保证全部保留。
 工具默认保留最多 512 条可读取记录，支持压缩后重看历史图片。
 

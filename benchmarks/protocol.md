@@ -23,14 +23,17 @@
 中断后可从最后成功动作继续；保留原始分段记录、实际源码哈希和调用账本，合并为同一次评测。
 
 两个 YAML 均为原生 AgentArk `env_cfg` / `eval` / `models` 配置。
-六个模型条目统一采用当前 SimpleAgent 默认上下文与工具预算，省略 `context`、`tools.limits` 及摘要 effort 覆盖；
+九个模型条目统一采用当前 SimpleAgent 默认上下文与工具预算，省略 `context`、`tools.limits` 及摘要 effort 覆盖；
 全字段默认快照和输入 SHA-256 位于 `versions.json`。动作输出预算均为 20,480 tokens，
 `temperature: null`、`max_retries: 0`、超时 1800 秒，输出 token 参数为 `max_tokens`。
-Sol、Wonder、DeepSeek effort 为 `max`，Argon 和 Opus 为 `high`，Grok 为 `xhigh`；
-摘要继承对应动作 effort。各名称对应的模型 ID 见根目录 README。
-Sol、Argon、Grok、DeepSeek 的工具选择为 `required`；Opus 因 adaptive thinking 不接受强制工具选择
+Sol、Wonder、DeepSeek、Kimi effort 为 `max`，Argon 和 Opus 为 `high`，Grok、Qwen 为 `xhigh`；
+MiMo 开启 thinking，但 OpenRouter 元数据未公布 effort 选择，因此不发送 effort。
+摘要继承对应动作推理设置。各名称对应的模型 ID 见根目录 README。
+Sol、Argon、Grok、DeepSeek、Kimi 的工具选择为 `required`；Opus 因 adaptive thinking 不接受强制工具选择
 （HTTP 400）而使用 `auto`。Wonder 实测返回 HTTP 400，Meta provider 只支持 `auto`，
 不支持 `none`、`required` 或指定工具名，因此同样使用 `auto`。
+Qwen 的现有 endpoint 不支持 `required`，MiMo 各 provider 的强制工具支持不一致，
+两者均使用 `auto`；三者的公开参数核对时间与能力快照见 README。
 旧 Argon 10,000-token 运行属于历史条件，不能作为这一统一协议的结果。
 本仓库当前不提供新协议下的模型结果。
 

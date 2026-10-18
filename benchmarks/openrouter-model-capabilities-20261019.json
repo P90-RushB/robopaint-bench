@@ -1,0 +1,782 @@
+{
+  "schema": "robopaint.openrouter-model-capabilities.v1",
+  "checked_date": "2026-10-19",
+  "catalog_url": "https://openrouter.ai/api/v1/models",
+  "reasoning_documentation": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens#discovering-per-model-reasoning-options",
+  "catalog_response_sha256": "172bdcfe8c74858c91f2d02b9d14e4d320da27f8fb7fd039283b46a17be2058b",
+  "models": [
+    {
+      "id": "qwen/qwen3.8-max-prime",
+      "canonical_slug": "qwen/qwen3.8-max-prime-20260923",
+      "context_length": 1000000,
+      "architecture": {
+        "modality": "text+image+video->text",
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Qwen",
+        "instruct_type": null
+      },
+      "top_provider": {
+        "context_length": 1000000,
+        "max_completion_tokens": 131072,
+        "is_moderated": false
+      },
+      "reasoning": {
+        "mandatory": true,
+        "default_enabled": true,
+        "supported_efforts": [
+          "xhigh",
+          "high",
+          "medium",
+          "low",
+          "minimal"
+        ],
+        "default_effort": "xhigh"
+      },
+      "profile_name": "qwen",
+      "endpoint_url": "https://openrouter.ai/api/v1/models/qwen/qwen3.8-max-prime/endpoints",
+      "endpoint_response_sha256": "504b6fd7340820220f486f0f3088d79669b239ac32f0279a138898017ab9d32c",
+      "supported_parameters": [
+        "include_reasoning",
+        "max_tokens",
+        "reasoning",
+        "reasoning_effort",
+        "tool_choice",
+        "tools"
+      ],
+      "provider_endpoints": [
+        {
+          "provider_name": "Alibaba",
+          "tag": "alibaba",
+          "context_length": 1000000,
+          "max_prompt_tokens": 983616,
+          "max_completion_tokens": 131072,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": false,
+            "function": false
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "moonshotai/kimi-k3",
+      "canonical_slug": "moonshotai/kimi-k3-20260715",
+      "context_length": 1048576,
+      "architecture": {
+        "modality": "text+image+video->text",
+        "input_modalities": [
+          "text",
+          "image",
+          "video"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other",
+        "instruct_type": null
+      },
+      "top_provider": {
+        "context_length": 1048576,
+        "max_completion_tokens": 943718,
+        "is_moderated": false
+      },
+      "reasoning": {
+        "mandatory": false,
+        "default_enabled": true,
+        "supported_efforts": [
+          "max",
+          "high",
+          "low",
+          "none"
+        ],
+        "default_effort": "max"
+      },
+      "profile_name": "kimi",
+      "endpoint_url": "https://openrouter.ai/api/v1/models/moonshotai/kimi-k3/endpoints",
+      "endpoint_response_sha256": "6518cc1d39da8e1fa6f9989829fb338744e9aa662a6501b8528fbe621315ded1",
+      "supported_parameters": [
+        "include_reasoning",
+        "max_tokens",
+        "reasoning",
+        "reasoning_effort",
+        "tool_choice",
+        "tools"
+      ],
+      "provider_endpoints": [
+        {
+          "provider_name": "Relace",
+          "tag": "relace/fp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": false,
+            "function": false
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Wafer",
+          "tag": "wafer",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Morph",
+          "tag": "morph/fp8",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "InferenceNet",
+          "tag": "inference-net/fp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Wafer",
+          "tag": "wafer/us",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": false,
+            "auto": true,
+            "required": false,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Sail Research",
+          "tag": "sail-research/fp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Sail Research",
+          "tag": "sail-research/fp4/us",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "AkashML",
+          "tag": "akashml/fp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Makora",
+          "tag": "makora/fp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": false,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Decart",
+          "tag": "decart/mxfp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Chutes",
+          "tag": "chutes/mxfp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 65535,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "InferenceNet",
+          "tag": "inference-net/fast",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Phala",
+          "tag": "phala",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "DigitalOcean",
+          "tag": "digitalocean",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "DeepInfra",
+          "tag": "deepinfra/mxfp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Parasail",
+          "tag": "parasail/fast",
+          "context_length": 1000000,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 900000,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Amazon Bedrock",
+          "tag": "amazon-bedrock/us-east-2",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 128000,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": false
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Parasail",
+          "tag": "parasail/fp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Modal",
+          "tag": "modal/mxfp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Together",
+          "tag": "together",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Fireworks",
+          "tag": "fireworks",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "BaseTen",
+          "tag": "baseten/fp8",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 262144,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Moonshot AI",
+          "tag": "moonshotai/mxfp4",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tool_choice",
+            "tools",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Alibaba",
+          "tag": "alibaba",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 131072,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Fireworks",
+          "tag": "fireworks/us",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        },
+        {
+          "provider_name": "Fireworks",
+          "tag": "fireworks/fast",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice",
+            "reasoning_effort"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "xiaomi/mimo-v2.6-pro",
+      "canonical_slug": "xiaomi/mimo-v2.6-pro-20260921",
+      "context_length": 1050000,
+      "architecture": {
+        "modality": "text+image+audio+video->text",
+        "input_modalities": [
+          "text",
+          "image",
+          "video",
+          "audio"
+        ],
+        "output_modalities": [
+          "text"
+        ],
+        "tokenizer": "Other",
+        "instruct_type": null
+      },
+      "top_provider": {
+        "context_length": 1048576,
+        "max_completion_tokens": 131072,
+        "is_moderated": false
+      },
+      "reasoning": {
+        "mandatory": false
+      },
+      "profile_name": "mimo",
+      "endpoint_url": "https://openrouter.ai/api/v1/models/xiaomi/mimo-v2.6-pro/endpoints",
+      "endpoint_response_sha256": "86bda5d808c59efc45f1767fb561cfea50ce20e5296fc0775e75bfa7fce384e1",
+      "supported_parameters": [
+        "include_reasoning",
+        "max_tokens",
+        "reasoning",
+        "tool_choice",
+        "tools"
+      ],
+      "provider_endpoints": [
+        {
+          "provider_name": "DeepInfra",
+          "tag": "deepinfra/fp8",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 943718,
+          "supports_tool_choice": {
+            "none": true,
+            "auto": true,
+            "required": true,
+            "function": true
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice"
+          ]
+        },
+        {
+          "provider_name": "Novita",
+          "tag": "novita/fp8",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 131072,
+          "supports_tool_choice": {
+            "none": false,
+            "auto": true,
+            "required": false,
+            "function": false
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice"
+          ]
+        },
+        {
+          "provider_name": "GMICloud",
+          "tag": "gmicloud/bf16",
+          "context_length": 1050000,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 945000,
+          "supports_tool_choice": {
+            "none": false,
+            "auto": true,
+            "required": false,
+            "function": false
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice"
+          ]
+        },
+        {
+          "provider_name": "Xiaomi",
+          "tag": "xiaomi/fp8",
+          "context_length": 1048576,
+          "max_prompt_tokens": null,
+          "max_completion_tokens": 131072,
+          "supports_tool_choice": {
+            "none": false,
+            "auto": true,
+            "required": true,
+            "function": false
+          },
+          "supported_parameters": [
+            "reasoning",
+            "include_reasoning",
+            "max_tokens",
+            "tools",
+            "tool_choice"
+          ]
+        }
+      ]
+    }
+  ]
+}
