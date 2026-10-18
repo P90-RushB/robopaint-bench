@@ -27,7 +27,7 @@ Colab、结果展示、画质评分与解说视频留待后续补充。
 | --- | --- | --- | --- |
 | `sol` | `openai/gpt-6.1-sol` | `max` | `required` |
 | `argon` | `google/gemini-4-argon` | `high` | `required` |
-| `opus` | `anthropic/claude-opus-5.5` | `max` | `auto` |
+| `opus` | `anthropic/claude-opus-5.5` | `high` | `auto` |
 | `grok` | `x-ai/grok-4.7` | `xhigh` | `required` |
 | `wonder` | `meta/muse-wonder` | `max` | `auto` |
 | `deepseek` | `deepseek/deepseek-v4.1-flash-1017` | `max` | `required` |

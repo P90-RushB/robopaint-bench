@@ -17,13 +17,13 @@
 原生工具模式会在新决策开始时，对超过字符或编码字节硬上限 75% 的工作上下文提前尝试压缩，
 为后续工具交换留出空间。硬预算保持不变；受保护输入和摘要预算可能使其只能满足硬上限。
 原生工具续轮仍保留其签名前缀，不在续轮中途压缩。该预留不保证任意工具批次都能容纳。
-跨 harness 版本的断点续跑必须记录各阶段版本，不能标为从头使用锁定版本的运行。
+中断后可从最后成功动作继续；保留原始分段记录、实际源码哈希和调用账本，合并为同一次评测。
 
 两个 YAML 均为原生 AgentArk `env_cfg` / `eval` / `models` 配置。
 六个模型条目统一采用当前 SimpleAgent 默认上下文与工具预算，省略 `context`、`tools.limits` 及摘要 effort 覆盖；
 全字段默认快照和输入 SHA-256 位于 `versions.json`。动作输出预算均为 20,480 tokens，
 `temperature: null`、`max_retries: 0`、超时 1800 秒，输出 token 参数为 `max_tokens`。
-Sol、Opus、Wonder、DeepSeek effort 为 `max`，Argon 为 `high`，Grok 为 `xhigh`；
+Sol、Wonder、DeepSeek effort 为 `max`，Argon 和 Opus 为 `high`，Grok 为 `xhigh`；
 摘要继承对应动作 effort。各名称对应的模型 ID 见根目录 README。
 Sol、Argon、Grok、DeepSeek 的工具选择为 `required`；Opus 因 adaptive thinking 不接受强制工具选择
 （HTTP 400）而使用 `auto`。Wonder 实测返回 HTTP 400，Meta provider 只支持 `auto`，

@@ -108,7 +108,7 @@ models:
     base_url: https://openrouter.ai/api/v1
     api_key_env: OPENROUTER_API_KEY
     temperature: null
-    reasoning_effort: max
+    reasoning_effort: high
     max_completion_tokens: 20480
     max_retries: 0
     timeout_s: 1800
