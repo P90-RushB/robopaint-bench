@@ -46,7 +46,7 @@ AgentArk Python 源码的新目录，再安装锁定版本：
 
 ```sh
 git clone https://github.com/P90-RushB/AgentArk.git "$AGENTARK_SOURCE"
-git -C "$AGENTARK_SOURCE" checkout 299737b6eeddfb50e1f8edc9194b0a15d47049f3
+git -C "$AGENTARK_SOURCE" checkout 54ab7cb0adf6539419611b536811b9850e429520
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
 

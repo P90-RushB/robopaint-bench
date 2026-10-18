@@ -2,7 +2,7 @@
   "schema_version": 1,
   "agentark": {
     "repository": "https://github.com/P90-RushB/AgentArk",
-    "commit": "299737b6eeddfb50e1f8edc9194b0a15d47049f3"
+    "commit": "54ab7cb0adf6539419611b536811b9850e429520"
   },
   "environment": {
     "version": "1.0.5",

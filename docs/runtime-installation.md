@@ -24,7 +24,7 @@ DLL 的执行代码、Addressables 与任务机制没有变化。
 
 ```sh
 git clone https://github.com/P90-RushB/AgentArk.git "$AGENTARK_SOURCE"
-git -C "$AGENTARK_SOURCE" checkout 299737b6eeddfb50e1f8edc9194b0a15d47049f3
+git -C "$AGENTARK_SOURCE" checkout 54ab7cb0adf6539419611b536811b9850e429520
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
 
@@ -40,7 +40,7 @@ AgentArk 提交、SimpleAgent 默认值、目标和平台任务文件。Python �
 ```sh
 git pull --ff-only
 git -C "$AGENTARK_SOURCE" fetch origin
-git -C "$AGENTARK_SOURCE" checkout 299737b6eeddfb50e1f8edc9194b0a15d47049f3
+git -C "$AGENTARK_SOURCE" checkout 54ab7cb0adf6539419611b536811b9850e429520
 python -m pip install -e "$AGENTARK_SOURCE"
 ```
 
