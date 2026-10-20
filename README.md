@@ -4,7 +4,7 @@
 
 A robot-painting benchmark and playground built on [AgentArk](https://p90-rushb.github.io/agentark-hub/). Models use camera feedback to control a simulated Panda arm, find paint and paper, and paint through timed 3D movements.
 
-[**Replay in Colab**](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [**Run locally**](docs/local-setup.md) · [**Paint your own goal**](docs/custom-painting.md) · [**中文**](README.zh-CN.md)
+[**Website**](https://robopaintbench.org/) · [**Replay in Colab**](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [**Run locally**](docs/local-setup.md) · [**Paint your own goal**](docs/custom-painting.md) · [**中文**](README.zh-CN.md)
 
 ![Astra's robot painting the Golden Gate Bridge, shown from two workspace cameras and a brush-follow close-up](site/assets/media/astra-round3-complete.png)
 
@@ -20,7 +20,7 @@ A robot-painting benchmark and playground built on [AgentArk](https://p90-rushb.
 
 The two fixed targets each contain **11 models × 3 connected ICL rounds**: 66 saved canvases in total. Each round starts with fresh paper while the same agent retains experience through its context and memory. Model weights stay fixed. Both galleries default to the author's task-specific personal ranking.
 
-The [project website](docs/hosting.md) is for comparing paintings and watching recordings; this repository is for installing, replaying and running the environment. Its GitHub Pages deployment is pending.
+The [project website](https://robopaintbench.org/) is for comparing paintings and watching recordings; this repository is for installing, replaying and running the environment.
 
 ## Start here
 

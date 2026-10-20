@@ -19,7 +19,7 @@ body:
       label: Target
       options:
         - Golden Gate Bridge
-        - Pelican (pending official collection)
+        - A pelican riding a bicycle
         - Custom target / nonstandard experiment
     validations:
       required: true

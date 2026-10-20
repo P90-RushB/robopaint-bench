@@ -4,7 +4,7 @@
 
 基于 [AgentArk](https://p90-rushb.github.io/agentark-hub/) 的模拟机械臂绘画评测与实验环境。模型通过相机反馈控制 Panda 机械臂，寻找颜料和画纸，规划三维运动并落笔作画。
 
-[**Colab 在线回放**](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [**本地运行**](docs/local-setup.md) · [**自定义绘画**](docs/custom-painting.md) · [**English**](README.md)
+[**展示网站**](https://robopaintbench.org/) · [**Colab 在线回放**](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [**本地运行**](docs/local-setup.md) · [**自定义绘画**](docs/custom-painting.md) · [**English**](README.md)
 
 ![Astra 完成金门大桥第三轮绘画时的机械臂三视角画面](site/assets/media/astra-round3-complete.png)
 
@@ -20,7 +20,7 @@
 
 两个固定目标各包含 **11 模型 × 3 轮连续 ICL**，共 66 张最终画布。每轮换新画纸，前轮经验通过同一 agent 的上下文与记忆保留，模型参数不更新。两个目标分别默认采用作者给出的个人排名。
 
-[展示网页](docs/hosting.md)负责比较画作和观看视频；本仓库负责安装、回放与运行环境。GitHub Pages 展示页尚待部署。
+[展示网站](https://robopaintbench.org/)负责比较画作和观看视频；本仓库负责安装、回放与运行环境。
 
 ## 从这里开始
 

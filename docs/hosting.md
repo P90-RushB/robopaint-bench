@@ -1,6 +1,6 @@
 # Website and hosting decision
 
-Use **a GitHub repository + a GitHub Pages project site + externally hosted videos + a Colab notebook** for the first release. No server purchase is needed for this architecture.
+The public website is **[robopaintbench.org](https://robopaintbench.org/)**. The first release uses **a GitHub repository + GitHub Pages + Cloudflare-managed domain and DNS + externally hosted videos + Colab notebooks**. No server purchase is needed for this architecture.
 
 The repository carries the protocol, installation and evaluation entry points, source code, portable result metadata, curated website PNGs and issue-based submissions. The project site carries the interactive painting gallery, attempt comparisons, settings, and links into those documents. Bilibili/YouTube carry complete recordings and the later narrated video. Colab supplies user-started compute; a static page does not run Unity or hold model credentials.
 
@@ -12,7 +12,7 @@ This separates the public explanation from the compute bill. A hosted multi-user
 
 [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) serves static HTML/CSS/JavaScript from a repository. [Its limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits) include a 1 GB published site and a soft 100 GB/month bandwidth limit. Keep full videos and raw trajectories off the site. GitHub Free supports Pages from public repositories; private-repository availability depends on plan. Research checked 2026-10-19.
 
-The planned project URL, after actual deployment, is `https://p90-rushb.github.io/robopaint-bench/`. This is a deployment target, **not a claim that the site is already live**. A custom domain is optional and can be added later.
+`https://robopaintbench.org/` is the primary address used in repository links and sharing metadata. Cloudflare manages registration and DNS; GitHub Pages serves the built site. The default Pages address is `https://p90-rushb.github.io/robopaint-bench/`, which redirects to the configured custom domain after deployment.
 
 ## Local preview
 
@@ -46,11 +46,24 @@ The assembled page embeds its public result metadata, so its `index.html` can al
 The manual workflow is `.github/workflows/pages.yml`. Pushing a commit does not deploy the site. To publish:
 
 1. Review the selected website images, attribution and repository visibility. The owner has approved including the current selected images in Git; this does not license other evaluation data for publication.
-2. In repository Settings → Pages choose **GitHub Actions**. Check the account plan if keeping the repository private.
-3. Run **Deploy benchmark site** from the Actions tab. It has no media archive or approval-phrase input.
-4. Inspect the workflow's returned deployment URL, relative links, shared video player and mobile layout.
+2. In repository Settings → Pages choose **GitHub Actions**. The public repository supports Pages on GitHub Free.
+3. Configure **robopaintbench.org** as the Pages custom domain and point its Cloudflare DNS records to GitHub Pages, as described below.
+4. Run **Deploy benchmark site** from the Actions tab. It has no media archive or approval-phrase input.
+5. Inspect the workflow's returned deployment URL, HTTPS, relative links, shared video player and mobile layout.
 
-The workflow builds directly from the checked-in media and verifies each selected file against the tracked manifests before assembling the site. It never needs raw audits, model keys, a media-archive host or the local resource catalog. All links and assets are relative so `/robopaint-bench/` subpath deployment works.
+The workflow builds directly from the checked-in media and verifies each selected file against the tracked manifests before assembling the site. It never needs raw audits, model keys, a media-archive host or the local resource catalog. Content links and asset paths are relative, so both the custom-domain root and `/robopaint-bench/` subpath previews work. Canonical and social-preview metadata use the primary domain.
+
+### Custom domain and HTTPS
+
+Domain configuration is separate from the repository build:
+
+1. Verify domain ownership in the GitHub account's Pages settings using the supplied DNS TXT record. Add the custom domain to this repository's Pages settings before pointing public DNS at GitHub.
+2. In **Cloudflare → robopaintbench.org → DNS → Records**, configure the apex (`@`) with GitHub Pages' published `A` records and, if desired, `AAAA` records. Configure `www` as a `CNAME` to `p90-rushb.github.io`, without the repository name. The primary address remains the apex domain.
+3. Wait for GitHub's DNS check and TLS certificate, then enable **Enforce HTTPS**. Confirm both the primary URL and `www` resolve correctly and the latter redirects to the primary address. DNS and certificate provisioning can take up to 24 hours.
+
+This site uses a custom GitHub Actions workflow. The custom domain is stored in **Pages settings**; no repository `CNAME` file is required, and Actions-based Pages ignores such a file. Re-running the manual deployment workflow updates the site without changing the domain or DNS settings.
+
+Use the current [GitHub custom-domain instructions and DNS values](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) and [Cloudflare DNS record guide](https://developers.cloudflare.com/dns/manage-dns-records/how-to/create-dns-records/) when changing hosting. Domain renewal is managed in Cloudflare; it does not deploy new website content.
 
 ## Videos and recommendation updates
 
