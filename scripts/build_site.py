@@ -241,7 +241,8 @@ def build(output: Path, media_root: Path | None, archive: str | None, allow_miss
     for filename in ("index.html", "styles.css", "app.js", ".nojekyll"):
         text = (ROOT / "site" / filename).read_text(encoding="utf-8")
         if filename == "index.html":
-            text = text.replace('.md"', '.html"')
+            # Only local site documents become HTML; repository links stay Markdown.
+            text = re.sub(r'(href="docs/[^"#?]+)\.md(?=["#?])', r'\1.html', text)
         (output / filename).write_text(text, encoding="utf-8")
     (output / "assets").mkdir()
     shutil.copyfile(ROOT / "site/assets/mark.svg", output / "assets/mark.svg")

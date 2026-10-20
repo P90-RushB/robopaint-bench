@@ -115,6 +115,12 @@ class SiteBuildTests(unittest.TestCase):
             self.assertIn('id="pelican-benchmark-data"', (output / "index.html").read_text(encoding="utf-8"))
             self.assertEqual(json.loads((output / "data/pelican.json").read_text("utf-8"))["target"]["mode"], "text")
             self.assertEqual(report["model_videos"], 11)
+            home_links = LinkParser()
+            home_links.feed((output / "index.html").read_text(encoding="utf-8"))
+            guide = "https://github.com/P90-RushB/robopaint-bench/blob/main/docs/custom-painting.md"
+            self.assertIn(guide, home_links.links)
+            self.assertNotIn(guide.removesuffix(".md") + ".html", home_links.links)
+            self.assertIn("docs/protocol.html", home_links.links)
             broken = []
             for page in output.rglob("*.html"):
                 parser = LinkParser()
