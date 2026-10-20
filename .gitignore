@@ -12,3 +12,7 @@ downloads/
 runs/
 *.log
 *.zip
+# Selected benchmark media is assembled locally and published separately.
+site/assets/media/
+# Generated static output, browser QA and review archives belong in local_save/.
+site/data/

@@ -1,0 +1,852 @@
+{
+  "schema": "robopaint.public-release-manifest.v1",
+  "release_id": "golden-gate-2026-10-19-preview",
+  "publication_status": "local_preview_pending_media_approval",
+  "harness": {
+    "name": "AgentArk SimpleAgent",
+    "shared_across_models": true,
+    "shared_components": [
+      "Agent implementation",
+      "Task and action interface",
+      "Environment attempt and action budget"
+    ],
+    "model_access_backends": [
+      {
+        "id": "openrouter",
+        "label": "OpenRouter"
+      },
+      {
+        "id": "volcengine",
+        "label": "Volcengine Ark"
+      },
+      {
+        "id": "codex",
+        "label": "Codex SDK"
+      }
+    ],
+    "backend_role": "These backends supply model access inside the same AgentArk SimpleAgent evaluation loop. The Codex SDK supplies model access for Astra.",
+    "configuration_scope": "Actual reasoning effort, output budgets, transport limitations and continuation conditions are reported per model."
+  },
+  "session_protocol": {
+    "learning_protocol": "in_context_learning",
+    "session_structure": "one_continuous_agent_session",
+    "round_count": 3,
+    "experience_carries_across_rounds": true,
+    "canvas_resets_each_round": true,
+    "model_weight_updates": false,
+    "round_index_field": "attempt",
+    "context_management": "Experience carries across rounds through SimpleAgent's managed context and archives; context compression can summarize earlier interactions. Three rounds belong to one continuing agent session."
+  },
+  "source_catalog_sha256": "733833e948869161ecb5d8c4dede02eb151e7dfcd15109500ed856c48e6dc996",
+  "builder": "scripts/build_public_results.py",
+  "video_links_sha256": "14f50ac1ea25cb10de4e79d4317b773e27f735f7e0c9ef916206400507818543",
+  "video_link_policy": "Owner-curated model/attempt associations. Remote videos are not downloaded or hash-verified; recording hashes identify the retained originals, not re-encoded copies on video hosts.",
+  "verification_scope": "Canvas, metadata, and recommended record bytes were hashed locally. Canvas identity, dimensions, action counts, reference hash, and explicit attempt associations were checked. Video hashes and decode states are retained historical receipts; no new video decode or physical replay is claimed.",
+  "privacy": "Explicit allowlist only. No local source paths, raw records, native reasoning, API prompts, HTTP payloads, or credentials are included.",
+  "media_policy": "PNG copies are local preview assets. This manifest does not authorize publication of new evaluation media or records.",
+  "artifacts": [
+    {
+      "id": "sol/attempt-01/canvas",
+      "path": "assets/media/golden_gate/sol/attempt-01.png",
+      "sha256": "87d90276ee5630494a6e3adcddb6626a9ba81724213bb7b24c45bc1f05a53df7",
+      "bytes": 219621,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "sol/attempt-01/metadata",
+      "sha256": "0c3bd7eae95f7f8c520ccdcfe98127eb90265153019e3e70b3d0b6fb399155af",
+      "bytes": 2687,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "sol/attempt-01/video",
+      "sha256": "ca41c32631c59b0d79b97f40efc019d087a500eb8dad0fbacfea21b84b17a857",
+      "bytes": 125925707,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "sol/attempt-02/canvas",
+      "path": "assets/media/golden_gate/sol/attempt-02.png",
+      "sha256": "42bb9add23ea1e66bd7591f2cfb7d51ea1905ff3fa5d0a4ea255aa95c8fb6e19",
+      "bytes": 270919,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "sol/attempt-02/metadata",
+      "sha256": "c4285b64fc255b49ddc749310ca922d6d3d15a76cbcd4943503d1ea217e50a3a",
+      "bytes": 2687,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "sol/attempt-02/video",
+      "sha256": "c2928de76ad4dcb4ad2f0aa9c5bbb7646076248987f6df83729dfb4a9f09bd38",
+      "bytes": 134812687,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "sol/attempt-03/canvas",
+      "path": "assets/media/golden_gate/sol/attempt-03.png",
+      "sha256": "253a7539c33fcaf7e355c9652c5a5433baacca08c8b67894cf056643224994f9",
+      "bytes": 312255,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "sol/attempt-03/metadata",
+      "sha256": "4310b5a552ab69419653eefa54ec1e605fcdcb61eeae26c617a17f90c5c995f4",
+      "bytes": 2688,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "sol/attempt-03/video",
+      "sha256": "438e58bb3d7b112c21f00fe7d26e2c5cd5a63f8d96ace8fc1348acc937ebef3f",
+      "bytes": 193481789,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "sol/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/90520211bee7327482ed71805473618cdaf2d61c/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6.1-sol/20261018-openrouter-max/RobotPainting_gpt-6.1-sol_results.jsonl",
+      "sha256": "3189bf011628a6f87c25f910141a5ab0c456ecc7059bb4e52b1364877acdaaaf",
+      "bytes": 17574365,
+      "publication_status": "already_published"
+    },
+    {
+      "id": "argon/attempt-01/canvas",
+      "path": "assets/media/golden_gate/argon/attempt-01.png",
+      "sha256": "b66c0639ced54fdbdf6fee15ec9350468540878e15afa17d4bb0d3183d5ea48c",
+      "bytes": 182738,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "argon/attempt-01/metadata",
+      "sha256": "78c52bf3f73e5f7cdf469b48b834f8eb1d2dd2a5da8f1baf314adb92c88e8e5b",
+      "bytes": 2687,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "argon/attempt-01/video",
+      "sha256": "0af5ef5d9017d7c1e6f6c6d0a114a229cfdefd341de35a2a5490b7b512107a2c",
+      "bytes": 57241037,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "argon/attempt-02/canvas",
+      "path": "assets/media/golden_gate/argon/attempt-02.png",
+      "sha256": "fe8bc19fa6153e942ab59767f65a04f21a4889d3601fc6d16c68680d5029a5c7",
+      "bytes": 161043,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "argon/attempt-02/metadata",
+      "sha256": "19ff492db1cb86be20b21651149de524952f3280d63e95bb44e994e477bb009f",
+      "bytes": 2688,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "argon/attempt-02/video",
+      "sha256": "f7c386584ce3fdf94dc616ac7a363bee0d4dcf3f7fe459ca03d6073eb747240a",
+      "bytes": 52915377,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "argon/attempt-03/canvas",
+      "path": "assets/media/golden_gate/argon/attempt-03.png",
+      "sha256": "aca72f99bd1adf9e69e3d92af414b654ab981921d9a3a93ea9d1f90ccc24bce0",
+      "bytes": 132183,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "argon/attempt-03/metadata",
+      "sha256": "cc95cbec38ce714ee6d6c55e65b83758cace1262b9c6f68b9e1c63190c1dfda1",
+      "bytes": 2686,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "argon/attempt-03/video",
+      "sha256": "0c836ab18dd35175da3366305c30fdf75bd3329af52ad962d9b046de0bf410e6",
+      "bytes": 54495431,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "argon/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/90520211bee7327482ed71805473618cdaf2d61c/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gemini-4-argon/20261018-openrouter-high/RobotPainting_gemini-4-argon_results.jsonl",
+      "sha256": "49c8e90f3ad01ae71c2efee7a9f7c9a3c416f990f516944b7bdda77e625ee9d9",
+      "bytes": 3281805,
+      "publication_status": "already_published"
+    },
+    {
+      "id": "opus/attempt-01/canvas",
+      "path": "assets/media/golden_gate/opus/attempt-01.png",
+      "sha256": "ae4d0aff17a0d5575055af1e3646b311543a86206b7a0fd095745fb6e7e2ddcb",
+      "bytes": 121467,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "opus/attempt-01/metadata",
+      "sha256": "3db9893f8b307a39741c3fa6493873b8855cf60ccb64f8f22aacaa534fd46e8c",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "opus/attempt-01/video",
+      "sha256": "ed744bc4acc7c67bdede3db958398af07660a1f0e3a7262a5a4097b152198cb4",
+      "bytes": 42332654,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "opus/attempt-02/canvas",
+      "path": "assets/media/golden_gate/opus/attempt-02.png",
+      "sha256": "a5d464eeddc49103651468b43ed902018392bb7cc0c48098eef626f59ac76529",
+      "bytes": 142435,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "opus/attempt-02/metadata",
+      "sha256": "b2dc9bfaa77b2bbfd6629dcb7ad8cbfc405bdd04888e98c05641b4d93ce7f238",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "opus/attempt-02/video",
+      "sha256": "c8f57eaf4c9cab7216db1bcc5a4c07677c656d4f2d7a4c513c36f025e4ac0d22",
+      "bytes": 39600480,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "opus/attempt-03/canvas",
+      "path": "assets/media/golden_gate/opus/attempt-03.png",
+      "sha256": "9c6228ac917f59d7e4d8353cd2a60759b59fa2a1580c8edf522af64dcea14d47",
+      "bytes": 142526,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "opus/attempt-03/metadata",
+      "sha256": "4981b69fab9107aef96187f63c82fd67f659bba7d977ec921839fcfafd576991",
+      "bytes": 2682,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "opus/attempt-03/video",
+      "sha256": "270026b796cfd516b78ecc6c4772fd3b01e30804c724f588f4752bea281e05d5",
+      "bytes": 39917144,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "opus/record",
+      "url": null,
+      "sha256": "a8278eb4dd9f478411b233027ab13b75abc1b7f6a6fbdbe28cd0ca8195e48302",
+      "bytes": 4738672,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "grok/attempt-01/canvas",
+      "path": "assets/media/golden_gate/grok/attempt-01.png",
+      "sha256": "73ed26f0660685e450f4571d2e89a16bf0c08a3a84bed42545b60506e1535f1f",
+      "bytes": 22237,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "grok/attempt-01/metadata",
+      "sha256": "d835b1e27346fe35587b4d7e2fa39fe5326638fe51b2bf4f682cd91fda378cbd",
+      "bytes": 2687,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "grok/attempt-01/video",
+      "sha256": "53ea860b11af62154e2a56f5ad62843c6a0bf07d8cc9adc140c8a751705de2ba",
+      "bytes": 12920759,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "grok/attempt-02/canvas",
+      "path": "assets/media/golden_gate/grok/attempt-02.png",
+      "sha256": "a8af4cbba1e2452b0e9b938ba58ba06a790820e4d65e4ca4add26c1f252b6979",
+      "bytes": 106287,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "grok/attempt-02/metadata",
+      "sha256": "4b7aa1158dc31c29c91d6b7ddd9177023eb0e305a808bec55ca21d57a1eb6523",
+      "bytes": 2688,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "grok/attempt-02/video",
+      "sha256": "979038a69a224c48db64cc0308dc4b1858177e79778c308f2a18b827de956dc1",
+      "bytes": 76779002,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "grok/attempt-03/canvas",
+      "path": "assets/media/golden_gate/grok/attempt-03.png",
+      "sha256": "54bd1c648cca7bd7c5094a856e44a5f7225b7497e4914fb1d5b6030d721f290b",
+      "bytes": 108041,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "grok/attempt-03/metadata",
+      "sha256": "a38adadc344d634a59c231ada3d10a7048c6675db46d8233ec8bf2f4dc1750aa",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "grok/attempt-03/video",
+      "sha256": "4b0d1b3677bd92e77ca9e60f03ef209a04c11774b699c597c2f4a677cc824e3e",
+      "bytes": 63027838,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "grok/record",
+      "url": null,
+      "sha256": "9edd2baf01560d0ed16049dfe06da6d0f119c9f34be5ed4e28ffe1c2d37ae8d8",
+      "bytes": 34467532,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "wonder/attempt-01/canvas",
+      "path": "assets/media/golden_gate/wonder/attempt-01.png",
+      "sha256": "49e854190b514bd29dd5d6f385e348f3a0ef54de1027c6e8b124e18296c194e3",
+      "bytes": 83390,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "wonder/attempt-01/metadata",
+      "sha256": "5ccba37562572853966b0a9be7650f2d69a4ce2607c0653b02895d57f8ab9132",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "wonder/attempt-01/video",
+      "sha256": "66e55d30b51b58e9deabae4ec1aed2772f08937bf44813d891d95702e42372c4",
+      "bytes": 47850908,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "wonder/attempt-02/canvas",
+      "path": "assets/media/golden_gate/wonder/attempt-02.png",
+      "sha256": "760342809e50bcdf0c43f9c6d903b84a945585f278e10aab6ae10fed4616cfb8",
+      "bytes": 184981,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "wonder/attempt-02/metadata",
+      "sha256": "9864900e4b068caf6268763d31fd07423727b1def61e3a0ce218bd3f94cbcc9d",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "wonder/attempt-02/video",
+      "sha256": "1024eec9ae484c032cc94ea23e2ad8a408e73a265f8b7c7b139f49be5bb002d2",
+      "bytes": 70094987,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "wonder/attempt-03/canvas",
+      "path": "assets/media/golden_gate/wonder/attempt-03.png",
+      "sha256": "3e0716090985b1cb488635a81801c8282663a3c159f0a1327ee271603ade0c47",
+      "bytes": 212229,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "wonder/attempt-03/metadata",
+      "sha256": "830f4fff489c88e3041067313008e12c377c273ade8e9651c8b318eb8e9bb212",
+      "bytes": 2682,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "wonder/attempt-03/video",
+      "sha256": "e3fa7f9b1c920df5b1f4be1d7d791e8e3a9f5ff43ea5743f13ada9bd90a48e47",
+      "bytes": 61309646,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "wonder/record",
+      "url": null,
+      "sha256": "75959a3f41743558912289620c426437ad939656e8b68907e54496d40ac98e8c",
+      "bytes": 5064568,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "deepseek/attempt-01/canvas",
+      "path": "assets/media/golden_gate/deepseek/attempt-01.png",
+      "sha256": "4dc071b082b16b9226bf3082db3c7225e782fe811e68833a251ceaeee46536b6",
+      "bytes": 229309,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "deepseek/attempt-01/metadata",
+      "sha256": "e03879b9f46bca003b737c966de0c1e23ed0d0318201953fe5c939b998c74dc5",
+      "bytes": 2680,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "deepseek/attempt-01/video",
+      "sha256": "114632623cf56bd0f1eb90e295aec1067eeee592c8411f337f24143102eaad79",
+      "bytes": 129956953,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "deepseek/attempt-02/canvas",
+      "path": "assets/media/golden_gate/deepseek/attempt-02.png",
+      "sha256": "69e8380373ccd03b316210bfd6389d3752fba70519fbf4cace072e424ba5d649",
+      "bytes": 366027,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "deepseek/attempt-02/metadata",
+      "sha256": "dc38fcece57f2dbc8161046e2988587a4c7c473dab54e89f7ce0ea6ea2b60b54",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "deepseek/attempt-02/video",
+      "sha256": "06a93ee24dc4f90b5de86bf446dbfc5c18bcd69cd6a9758b9d30279b6441636d",
+      "bytes": 99795412,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "deepseek/attempt-03/canvas",
+      "path": "assets/media/golden_gate/deepseek/attempt-03.png",
+      "sha256": "8b165fc392c8a09bc73ff87edcfab7c400a3016ca9d8424117208511dc5ffae5",
+      "bytes": 292771,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "deepseek/attempt-03/metadata",
+      "sha256": "f3df2965803a6dba19c8ac7be627715f8ded0b2308ddb86205a9c0f2859b0ca0",
+      "bytes": 2682,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "deepseek/attempt-03/video",
+      "sha256": "28cd08438a30cb067b5973d4e0a91a39e28c3ad4cd68ac9f055c24c10903c4a3",
+      "bytes": 100289609,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "deepseek/record",
+      "url": null,
+      "sha256": "4d798148b2f0244e4241b7c372a65058f6e8b74623be0d9ecc2b3da6205b2b5f",
+      "bytes": 11880889,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "qwen/attempt-01/canvas",
+      "path": "assets/media/golden_gate/qwen/attempt-01.png",
+      "sha256": "0527c27b246e8dc873318dd30bd277ec3e0800d2bcf222fffdb551bea8594ac1",
+      "bytes": 184203,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "qwen/attempt-01/metadata",
+      "sha256": "d3a47e031c8eb06eed77973cf7d949092ce42aa4a8f38d32ecf38707dc29ed83",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "qwen/attempt-01/video",
+      "sha256": "91f59330d8ba8db221aa2a0025ce1cf60b9285da257fde6774c7d7afec20be85",
+      "bytes": 84991007,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "qwen/attempt-02/canvas",
+      "path": "assets/media/golden_gate/qwen/attempt-02.png",
+      "sha256": "60ececc5467b76421411c3e3cfe5a6e806fdee7b191f623667b5f48d9fde04b8",
+      "bytes": 199594,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "qwen/attempt-02/metadata",
+      "sha256": "8b795c668f57c4820ca5e99f9196140b7e1c88ce5529f67b1dbacd9daab87a5a",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "qwen/attempt-02/video",
+      "sha256": "2fcc920a972bf26bedb87ac9e198de2e4a9942d57f5b2a3e59948a2372d79cd7",
+      "bytes": 80737178,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "qwen/attempt-03/canvas",
+      "path": "assets/media/golden_gate/qwen/attempt-03.png",
+      "sha256": "b9abb92732209d286af30a2d33a634885b1d1ef2604f256282f07d237e11fff7",
+      "bytes": 182816,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "qwen/attempt-03/metadata",
+      "sha256": "6e47e2a1b10b74a9265e90d1ea273e145c0a107eb73cb1931349bff3ebc9d800",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "qwen/attempt-03/video",
+      "sha256": "d7cbc17dba07e8dc52f7fc2d2abdb167e13da94a0b337b7b189bf153124d39ed",
+      "bytes": 96095860,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "qwen/record",
+      "url": null,
+      "sha256": "d795acc2e884532f9e03729618d9c8388b0ee43ff969b789761d25cd997d289c",
+      "bytes": 9228338,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "kimi/attempt-01/canvas",
+      "path": "assets/media/golden_gate/kimi/attempt-01.png",
+      "sha256": "4f463db7446ad9de3d9bf606020e65874ff125ef1c934948120bea256aa9c7ad",
+      "bytes": 53679,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "kimi/attempt-01/metadata",
+      "sha256": "b5b1a25296d2b9e6e68452082086b6a3fc2d8a42ad6aaad5f877ce62a0f54428",
+      "bytes": 2679,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "kimi/attempt-01/video",
+      "sha256": "c355b8a5f58c6578c5829d1722b45b8e5493b4690312dcc9a0029b8b3861cb05",
+      "bytes": 13302913,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "kimi/attempt-02/canvas",
+      "path": "assets/media/golden_gate/kimi/attempt-02.png",
+      "sha256": "48e7b8efc3913ce3280574e5882ee998072e495984c2b852add0628210ad017b",
+      "bytes": 134706,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "kimi/attempt-02/metadata",
+      "sha256": "864c993979b756b0832cf96ba10d749101f1e9b6d0220393ccf7d8ff66c32aa3",
+      "bytes": 2682,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "kimi/attempt-02/video",
+      "sha256": "d7fb94ba91c6c497588b0cbefbff476caa23075a9d1be4f26cf7a87c2b69acf3",
+      "bytes": 40032127,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "kimi/attempt-03/canvas",
+      "path": "assets/media/golden_gate/kimi/attempt-03.png",
+      "sha256": "055c3f45a878bdc3c5eec922741b860eb7847106d0346ab1fdb9d1edb1864b6d",
+      "bytes": 116347,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "kimi/attempt-03/metadata",
+      "sha256": "76d254de7aa3e3d82a1267e616ede76fd906f87d09032a10aa0a5a364f260c0e",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "kimi/attempt-03/video",
+      "sha256": "6357d90f88a06489c9b547de451555ac483472adbbc3bff3d05a48508922e26d",
+      "bytes": 45882226,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "kimi/record",
+      "url": null,
+      "sha256": "e2fd87bdbb9e63e068addb89ba3041325403c31f095685345911c141f653cf36",
+      "bytes": 3821032,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "mimo/attempt-01/canvas",
+      "path": "assets/media/golden_gate/mimo/attempt-01.png",
+      "sha256": "cb5d0ce52a9e555c291850592d33f8b8cb6cde1dbde99ecfd572efaa54be26e3",
+      "bytes": 142850,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "mimo/attempt-01/metadata",
+      "sha256": "314987a991a0ca2a32dfba2709ef347ff20aacd69468611b566b42d17dddae82",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "mimo/attempt-01/video",
+      "sha256": "0ca4da4e682a829a5b1cfed3c96fe398d75ab6102b0007e0dd93e9249dfd0453",
+      "bytes": 25631851,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "mimo/attempt-02/canvas",
+      "path": "assets/media/golden_gate/mimo/attempt-02.png",
+      "sha256": "f84b75fbc5cf32b87285cd5570e02dee8d15793f289680dbf09b39b5a30eb2d6",
+      "bytes": 177957,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "mimo/attempt-02/metadata",
+      "sha256": "1348bacd4fe3851e3ad64d2b893ac439dafe026ddc34c973c3b93e929d86dff4",
+      "bytes": 2678,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "mimo/attempt-02/video",
+      "sha256": "3c8a948ce388b84f4138acd05b764c250e5e0d92ba62addb54f387b22a46385a",
+      "bytes": 17604586,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "mimo/attempt-03/canvas",
+      "path": "assets/media/golden_gate/mimo/attempt-03.png",
+      "sha256": "885f3e81fd82d5a7dec56003441f3604be8f151424abf57af94ec34dcf9fd371",
+      "bytes": 179327,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "mimo/attempt-03/metadata",
+      "sha256": "24e905083c397ad9ae1fe684ba0a32490b64dd1167c43b1333709ddccad7ecd5",
+      "bytes": 2679,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "mimo/attempt-03/video",
+      "sha256": "2bbc6980afad85bd726eaa11ef75fb89013dcbbdde3bb0c20376e71270b95f5a",
+      "bytes": 19170987,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "mimo/record",
+      "url": null,
+      "sha256": "976fe06a0bfcf9a067f447569c2484a692516942bbf09fa20cf88ed3e3c5bd59",
+      "bytes": 1804200,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "astra/attempt-01/canvas",
+      "path": "assets/media/golden_gate/astra/attempt-01.png",
+      "sha256": "7da5a8557dc6f18115eb6837f340d8f75a926c89e57a58d867a27aedfcb496cd",
+      "bytes": 192622,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "astra/attempt-01/metadata",
+      "sha256": "6f424f9c57c31eb8818ae5ba546aabf3e564d852ac1f56fd7cfb466bbe151d9b",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "astra/attempt-01/video",
+      "sha256": "cbb4015ed79b0bd220d037b442dd892e6f71f8b34d36f8671e0f5482031c11bf",
+      "bytes": 108616217,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "astra/attempt-02/canvas",
+      "path": "assets/media/golden_gate/astra/attempt-02.png",
+      "sha256": "10ac1724d2729a0fdef919c51ddf9959e1376ddacc60134d7ae82c2131e5fb25",
+      "bytes": 188640,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "astra/attempt-02/metadata",
+      "sha256": "3880a901363d0bb742a50a2ac11196c2296c76cea590638171e1a1369f79f026",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "astra/attempt-02/video",
+      "sha256": "212e5b5ccd280373b40facb72cb0b1f13397500b415ee4ed398f9a991c5c5a24",
+      "bytes": 100511212,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "astra/attempt-03/canvas",
+      "path": "assets/media/golden_gate/astra/attempt-03.png",
+      "sha256": "3196b3219f440ae4cd6f511adede27518efadc7863e540122b86bc28fc4d4e5c",
+      "bytes": 187737,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "astra/attempt-03/metadata",
+      "sha256": "b45ad4afa09290c5e031f350362faa761895b980d727fc3a179bb9bd4ba077ca",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "astra/attempt-03/video",
+      "sha256": "650d6fa54465d14f8f6cb396a71eafa4981855d1f8c39f430616195c65e7ab14",
+      "bytes": 106716193,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "astra/record",
+      "url": null,
+      "sha256": "4b21769d117d2db4ce866e394d3726da495e1bd491d5818c441e1caca0a57f16",
+      "bytes": 45054133,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "doubao/attempt-01/canvas",
+      "path": "assets/media/golden_gate/doubao/attempt-01.png",
+      "sha256": "4ca5c549735af8f5685a27ea64c7ba91a7c1cf4e70aff7abbf2f803cec72efbe",
+      "bytes": 181764,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "doubao/attempt-01/metadata",
+      "sha256": "1c412f17cfb68f3ee93c00103c5cdc272920a762dfbc11f31ca871152b3d4322",
+      "bytes": 2681,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "doubao/attempt-01/video",
+      "sha256": "c31d9155e55d2d1e7afce8cebc7f742d1cae389f79a09c5ebc1028bfafc94a11",
+      "bytes": 32394636,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "doubao/attempt-02/canvas",
+      "path": "assets/media/golden_gate/doubao/attempt-02.png",
+      "sha256": "4032171d98f57d9667d1def4dc9d7f10fe55102bde6c2d180830b197536b998c",
+      "bytes": 42458,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "doubao/attempt-02/metadata",
+      "sha256": "e32fb6fa7c1ecea8f2d88704a8c683e69884cd80df9807bc8ea00301b44c2479",
+      "bytes": 2676,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "doubao/attempt-02/video",
+      "sha256": "15193825ea080b6a32f27ffcb57b72095de92a3a3843fc9baad254f36ac85a60",
+      "bytes": 1185364,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "doubao/attempt-03/canvas",
+      "path": "assets/media/golden_gate/doubao/attempt-03.png",
+      "sha256": "e3c7b8eb83cd5db08f721035d1eb10c36d8f37077a2ea97c78997c588357a57c",
+      "bytes": 302628,
+      "width": 1024,
+      "height": 725,
+      "publication_status": "pending_approval"
+    },
+    {
+      "id": "doubao/attempt-03/metadata",
+      "sha256": "f9dff05971cec52968653f0ba304444bf6c3110f249479874073f37f9d3d7575",
+      "bytes": 2678,
+      "publication_status": "local_only"
+    },
+    {
+      "id": "doubao/attempt-03/video",
+      "sha256": "5aa7a83382a126f08e3e0681da45a5344578ec7ad1707003ce13395a66fa835b",
+      "bytes": 19216367,
+      "url": null,
+      "publication_status": "pending_video_host"
+    },
+    {
+      "id": "doubao/record",
+      "url": null,
+      "sha256": "40ec0889cdf936e4af7238c10ece2b0512cce18de6a1c5eea590e49624b095f4",
+      "bytes": 3708612,
+      "publication_status": "local_only"
+    }
+  ]
+}

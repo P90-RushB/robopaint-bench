@@ -10,8 +10,27 @@ import yaml
 
 TASK_PATH_OVERRIDES = (
     "AGENTARK_MOD_PATH", "AGENT_ARK_MOD_PATH", "AGENTARK_TASK107_CONFIG",
-    "AGENTARK_TASK107_REFERENCE_DIRECTORY",
+    "AGENTARK_TASK107_REFERENCE_DIRECTORY", "AGENTARK_TASK107_CANVAS_OUTPUT",
+    "AGENTARK_CANVAS_OUTPUT_DIRECTORY",
 )
+
+SOFTWARE_RENDER_ENV = {
+    "LIBGL_ALWAYS_SOFTWARE": "1", "GALLIUM_DRIVER": "llvmpipe",
+    "GALLIUM_NUM_THREADS": "2", "LP_NUM_THREADS": "2",
+}
+
+
+def apply_render_profile(cfg):
+    """Enforce the preparer's bounded software profile in this child only."""
+    overrides = cfg["env_cfg"].get("env_config_overrides", {})
+    render_env = overrides.get("virtual_display_render_env", {})
+    if overrides.get("virtual_display") is True and render_env.get("GALLIUM_DRIVER") == "llvmpipe":
+        if render_env != SOFTWARE_RENDER_ENV:
+            raise ValueError("Use the bounded software-rendering profile produced by prepare_run.py.")
+        # AgentArk's display manager intentionally honors inherited variables.
+        # This launcher owns its declared profile, so replace conflicting
+        # inherited values before importing/starting AgentArk.
+        os.environ.update(SOFTWARE_RENDER_ENV)
 
 
 def main(args=None):
@@ -28,7 +47,9 @@ def main(args=None):
     # paths. Shell variables outside this process are unchanged.
     for name in TASK_PATH_OVERRIDES:
         os.environ[name] = ""
+    apply_render_profile(cfg)
     from agent_ark.ark_eval.run_api_agent import main as agentark_main
+    apply_render_profile(cfg)
     args.config = str(path)
     return agentark_main(args)
 

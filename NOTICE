@@ -1,0 +1,18 @@
+RoboPaintBench
+Copyright 2026 RoboPaintBench contributors
+
+Built on AgentArk: https://github.com/P90-RushB/AgentArk
+
+The source-code license does not cover separately provisioned runtime/vendor
+assets, the Golden Gate photograph or retained evaluation media.
+
+Golden Gate reference: Frank Schulenburg, 2017-06-24,
+Golden Gate Bridge as seen from Battery East, Wikimedia Commons.
+CC BY-SA 4.0. Full photograph resized without cropping to 1280 x 800.
+Source: https://commons.wikimedia.org/wiki/File:Golden_Gate_Bridge_as_seen_from_Battery_East.jpg
+License: https://creativecommons.org/licenses/by-sa/4.0/
+
+Inspiration: Thijs Simonian's Bot Ross robot-painter demonstration,
+https://thijs.net/projects/robot-painter
+
+See docs/attribution.md for selected media status and runtime notice handling.

@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import socket
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -15,6 +16,7 @@ from agent_ark.agent.simple_agent.runtime import SimpleRuntimeConfig
 from agent_ark.agent.simple_agent.tools import ToolLimits
 # Import before the process guard: NumPy can run a Windows version probe.
 from agent_ark.ark_eval.run_api_agent import load_eval_config
+from agent_ark.ark_env.direct_env import EnvWrapper, _SharedXvfbManager
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("prepare_run", ROOT / "scripts/prepare_run.py")
@@ -166,6 +168,65 @@ class OfflinePreparationTests(unittest.TestCase):
         self.assertEqual([], hashes)
         self.assert_template_unchanged()
 
+    def test_doubao_uses_recorded_portable_api_profile(self):
+        path = prepare_run.prepare(self.args(model="doubao"))
+        model = load_eval_config(str(path))["models"][0]
+        self.assertEqual(("volcengine", "doubao-seed-2-1-pro-260915", "high"),
+                         (model["provider"], model["model"], model["reasoning_effort"]))
+        self.assertEqual({"type": "enabled"}, model["thinking"])
+        self.assertEqual("ARK_API_KEY", model["api_key_env"])
+        self.assertEqual("max_completion_tokens", model["simple_agent"]["output_token_parameter"])
+        self.assert_template_unchanged()
+
+    def test_colab_software_preview_is_explicit_and_offline(self):
+        path = prepare_run.prepare(self.args(extra=("--render-mode", "xvfb-software")))
+        env, _ = prepare_run.offline_contract(path, self.baseline, self.task_cfg)
+        self.assertTrue(env["virtual_display"])
+        self.assertTrue(env["virtual_display_force"])
+        self.assertEqual("llvmpipe", env["virtual_display_render_env"]["GALLIUM_DRIVER"])
+        self.assertEqual((3, 96), (env["max_attempts"], env["max_steps_per_attempt"]))
+        manifest = json.loads((path.parent / "manifest.json").read_text("utf-8"))
+        self.assertEqual("not_applicable_preview", manifest["rendering"]["benchmark_gpu_rendering"])
+        self.assertFalse(manifest["rendering"]["runtime_verified"])
+        wrapper = EnvWrapper.__new__(EnvWrapper)
+        wrapper.cfg = load_eval_config(str(path))["env_cfg"]
+        wrapper.env_info_mgr = SimpleNamespace(env_config=env)
+        display = wrapper._get_virtual_display_config()
+        self.assertTrue(display["enabled"])
+        self.assertTrue(display["force"])
+        self.assertEqual((1920, 1080), (display["width"], display["height"]))
+        self.assert_template_unchanged()
+
+    def test_existing_display_overrides_stale_active_virtual_display_flags(self):
+        baseline = prepare_run.read_yaml(self.baseline)
+        baseline.update(virtual_display=True, virtual_display_force=True)
+        self.baseline.write_text(yaml.safe_dump(baseline), encoding="utf-8")
+        self.before[self.baseline] = self.baseline.read_bytes()
+        path = prepare_run.prepare(self.args())
+        env, _ = prepare_run.offline_contract(path, self.baseline, self.task_cfg)
+        wrapper = EnvWrapper.__new__(EnvWrapper)
+        wrapper.cfg = load_eval_config(str(path))["env_cfg"]
+        wrapper.env_info_mgr = SimpleNamespace(env_config=env)
+        display = wrapper._get_virtual_display_config()
+        self.assertFalse(display["enabled"])
+        self.assertFalse(display["force"])
+        self.assert_template_unchanged()
+
+    def test_display_manager_reuses_supplied_display_without_starting_xvfb(self):
+        # Host-independent check of the pinned manager's reuse branch. The
+        # global process guard still forbids constructing Xvfb or Unity.
+        with patch("agent_ark.ark_env.direct_env.os.name", "posix"), \
+                patch("agent_ark.ark_env.direct_env.os.path.exists", return_value=True), \
+                patch("agent_ark.ark_env.direct_env.shutil.which", side_effect=AssertionError("Do not seek Xvfb")), \
+                patch.object(_SharedXvfbManager, "_proc", None), \
+                patch.dict("os.environ", {"DISPLAY": ":validated-display"}):
+            self.assertEqual(":validated-display", _SharedXvfbManager.ensure_started({"force": False}))
+
+    def test_software_preview_refuses_windows_before_run_creation(self):
+        with self.assertRaisesRegex(ValueError, "Linux-only"):
+            prepare_run.prepare(self.args(extra=("--render-mode", "xvfb-software", "--runtime-platform", "windows")))
+        self.assertFalse((self.root / "run").exists())
+
     def test_reusing_a_run_cannot_overwrite_records(self):
         args = self.args()
         path = prepare_run.prepare(args)
@@ -231,6 +292,35 @@ class OfflinePreparationTests(unittest.TestCase):
                 self.assertEqual("", __import__("os").environ[name])
             self.assertEqual("offline-test-key", __import__("os").environ["OPENROUTER_API_KEY"])
             self.assertEqual(":test-display", __import__("os").environ["DISPLAY"])
+
+    def test_preview_launcher_replaces_conflicting_inherited_renderer_variables(self):
+        path = prepare_run.prepare(self.args(extra=("--render-mode", "xvfb-software")))
+        spec = importlib.util.spec_from_file_location("preview_launch", ROOT / "scripts/run_eval.py")
+        launch = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(launch)
+        import os
+        original = dict(os.environ)
+        poisoned = {key: "inherited-conflict" for key in launch.SOFTWARE_RENDER_ENV}
+        poisoned.update(LIBGL_ALWAYS_SOFTWARE="0", GALLIUM_DRIVER="zink")
+        with patch.dict(os.environ, poisoned), patch("agent_ark.ark_eval.run_api_agent.main") as runner:
+            launch.main(["--config", str(path)])
+            runner.assert_called_once()
+            self.assertEqual(launch.SOFTWARE_RENDER_ENV,
+                             {key: os.environ[key] for key in launch.SOFTWARE_RENDER_ENV})
+        self.assertEqual(original, dict(os.environ))
+
+    def test_preview_launcher_refuses_unbounded_edited_renderer_profile(self):
+        path = prepare_run.prepare(self.args(extra=("--render-mode", "xvfb-software")))
+        cfg = prepare_run.read_yaml(path)
+        cfg["env_cfg"]["env_config_overrides"]["virtual_display_render_env"]["GALLIUM_NUM_THREADS"] = "999999"
+        path.write_text(yaml.safe_dump(cfg), encoding="utf-8")
+        spec = importlib.util.spec_from_file_location("preview_launch_bad", ROOT / "scripts/run_eval.py")
+        launch = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(launch)
+        with patch("agent_ark.ark_eval.run_api_agent.main") as runner:
+            with self.assertRaisesRegex(ValueError, "bounded software-rendering"):
+                launch.main(["--config", str(path)])
+            runner.assert_not_called()
 
 
 class VersionSnapshotTests(unittest.TestCase):

@@ -222,3 +222,24 @@ models:
       tools:
         enabled: true
         workspace_parent: runs/pelican/workspaces
+  # Portable API profile from the completed Doubao run. Historical results
+  # retain their recovery/usage provenance; this prepares a new evaluation.
+  - name: doubao
+    agent_type: simple
+    provider: volcengine
+    model: doubao-seed-2-1-pro-260915
+    base_url: https://ark.cn-beijing.volces.com/api/v3
+    api_key_env: ARK_API_KEY
+    temperature: null
+    thinking:
+      type: enabled
+    reasoning_effort: high
+    max_completion_tokens: 20480
+    max_retries: 0
+    timeout_s: 1800
+    simple_agent:
+      tool_choice: auto
+      output_token_parameter: max_completion_tokens
+      tools:
+        enabled: true
+        workspace_parent: runs/pelican/workspaces

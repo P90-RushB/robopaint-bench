@@ -1,0 +1,50 @@
+name: Submit a benchmark result
+description: Submit reproducible painting results with complete attempt evidence.
+title: '[Result] model / case / protocol version'
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: 'Read docs/submissions.md first. Share authorized artifacts only. Never paste credentials, private request bodies or hidden model reasoning.'
+  - type: input
+    id: identity
+    attributes:
+      label: Model identifier and provider
+      description: Exact API model ID, endpoint/provider and evaluation date.
+    validations:
+      required: true
+  - type: dropdown
+    id: case
+    attributes:
+      label: Target
+      options:
+        - Golden Gate Bridge
+        - Pelican (pending official collection)
+        - Custom target / nonstandard experiment
+    validations:
+      required: true
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Versions and actual settings
+      description: Protocol version, runtime/mod/source commits, seed, attempts/actions, backend, effort and output/context limits; all deviations and restarts.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: All attempt canvases and replay evidence
+      description: Accessible links, artifact hashes, attempt mapping, sanitized complete action records, replay verification scope and optional videos.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Evidence declaration
+      options:
+        - label: I included every attempt and disclosed interruptions and configuration changes.
+          required: true
+        - label: Submission/save reward is not presented as artistic quality.
+          required: true
+        - label: I have permission to share the linked artifacts and included applicable attribution.
+          required: true

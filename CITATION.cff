@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: Please cite this software preview when using RoboPaintBench.
+type: software
+title: 'RoboPaintBench: From pixels to physical strokes'
+authors:
+  - name: RoboPaintBench contributors
+version: 0.1.0-preview
+url: https://github.com/P90-RushB/robopaint-bench
+repository-code: https://github.com/P90-RushB/robopaint-bench
+license: Apache-2.0
+abstract: >-
+  A visual, replayable benchmark of language models controlling a simulated
+  robot arm to paint, built on AgentArk. The initial Golden Gate collection
+  includes eleven models and three sequential attempts per model.

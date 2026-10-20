@@ -152,6 +152,8 @@ def offline_contract(config_path: Path, base_path: Path, task_path: Path) -> tup
 
 
 def prepare(args: argparse.Namespace) -> Path:
+    if args.render_mode == "xvfb-software" and args.runtime_platform != "linux":
+        raise ValueError("xvfb-software rendering is Linux-only.")
     lock = json.loads((ROOT / "benchmarks/versions.json").read_text(encoding="utf-8"))
     identity = agentark_identity(lock, args.allow_version_mismatch)
     # AgentArk's import may have loaded the operator's .env after argparse.
@@ -231,8 +233,21 @@ def prepare(args: argparse.Namespace) -> Path:
                  "AGENTARK_TASK_STORE_PATH": str(store), "ROBOTPAINTING_RUN_DIR": str(output)}
     config = substitute(config, variables)
     env_cfg = config["env_cfg"]
+    env_cfg.setdefault("additional_args", []).extend(["-logFile", str(output / "player.log")])
     env_cfg["base_port"], env_cfg["auto_port_scan"] = args.base_port, True
     env_cfg["runtime_sandbox"]["runtime_platform"] = args.runtime_platform
+    # Runtime preserves display flags from the active Mods config before task
+    # overlay. Explicitly select this run's display policy over those flags.
+    env_cfg["env_config_overrides"].update(virtual_display=False, virtual_display_force=False)
+    if args.render_mode == "xvfb-software":
+        # Use AgentArk's existing display manager; never edit the immutable
+        # Player baseline, create a second runner, or launch Xvfb at prepare time.
+        env_cfg["env_config_overrides"].update(
+            virtual_display=True, virtual_display_force=True,
+            virtual_display_width=1920, virtual_display_height=1080,
+            virtual_display_render_env={"LIBGL_ALWAYS_SOFTWARE": "1", "GALLIUM_DRIVER": "llvmpipe",
+                                        "GALLIUM_NUM_THREADS": "2", "LP_NUM_THREADS": "2"})
+        env_cfg["additional_args"] = ["-force-glcore33", *env_cfg.get("additional_args", [])]
     params = env_cfg["env_config_overrides"]["task_params"]
     params.update(reference_mode="image" if references else "text", reference_filenames=names)
     wrapper = env_cfg["env_config_overrides"].setdefault("env_wrapper_cfg", {})
@@ -266,6 +281,8 @@ def prepare(args: argparse.Namespace) -> Path:
                 "standard_harness": identity["matches_version_lock"],
                 "task_matches_version_lock": task_matches,
                 "runtime_platform": args.runtime_platform, "agentark": identity,
+                "rendering": {"requested_mode": args.render_mode, "runtime_verified": False,
+                              "benchmark_gpu_rendering": "not_applicable_preview" if args.render_mode == "xvfb-software" else "unverified"},
                 "declared_versions": lock, "protocol": protocol,
                 "model": config["models"][0], "goal_sha256": goal_hash,
                 "reference_sha256": image_hashes, "template_sha256": sha256(template_path),
@@ -280,13 +297,15 @@ def prepare(args: argparse.Namespace) -> Path:
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
     result.add_argument("--case", choices=CASES, required=True)
-    result.add_argument("--model", required=True, help="One models[].name from the case YAML (sol, argon, opus, grok, wonder, or deepseek).")
+    result.add_argument("--model", required=True, help="One models[].name from the case YAML; see docs/quickstart.md.")
     result.add_argument("--env-path", default=os.getenv("AGENTARK_ENV_PATH"))
     result.add_argument("--mod-path", default=os.getenv("AGENTARK_MOD_PATH"))
     result.add_argument("--task-store", default=os.getenv("AGENTARK_TASK_STORE_PATH"))
     result.add_argument("--output-dir", help="A new directory; defaults to a unique runs/<case>/ directory.")
     result.add_argument("--base-port", type=int, default=5005)
     result.add_argument("--runtime-platform", choices=("linux", "windows"), default="linux")
+    result.add_argument("--render-mode", choices=("existing-display", "xvfb-software"), default="existing-display",
+                        help="Use a configured display, or Linux Xvfb software preview (not the benchmark GPU profile).")
     result.add_argument("--goal-file", help="Custom UTF-8 painting instructions; marks the target as custom.")
     images = result.add_mutually_exclusive_group()
     images.add_argument("--reference-image", action="append", help="Custom image; repeat for multiple ordered images.")

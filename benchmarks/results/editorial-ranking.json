@@ -1,0 +1,22 @@
+{
+  "schema": "robopaint.author-recommendation.v1",
+  "status": "provided",
+  "case_id": "golden_gate",
+  "attributed_to": "the benchmark author",
+  "basis": "The benchmark author's personal qualitative ranking of this Golden Gate collection.",
+  "date": "2026-10-19",
+  "tiers": [
+    {"label": "1", "model_ids": ["astra"]},
+    {"label": "2", "model_ids": ["sol"]},
+    {"label": "3", "model_ids": ["argon"]},
+    {"label": "4", "model_ids": ["opus"]},
+    {"label": "5", "model_ids": ["deepseek"]},
+    {"label": "6", "model_ids": ["wonder"]},
+    {"label": "7", "model_ids": ["qwen"]},
+    {"label": "8", "model_ids": ["mimo"]},
+    {"label": "9", "model_ids": ["kimi"]},
+    {"label": "10", "model_ids": ["grok"]},
+    {"label": "11", "model_ids": ["doubao"]}
+  ],
+  "note": "Order supplied by the benchmark author on 2026-10-19. This is a personal ranking, not an automated score or an aggregated human-rating result."
+}

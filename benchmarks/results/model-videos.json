@@ -1,0 +1,67 @@
+{
+  "schema": "robopaint.model-videos.v1",
+  "case_id": "golden_gate",
+  "playback_speed": 6,
+  "captions": [
+    "zh",
+    "en"
+  ],
+  "scope": "Each video combines the model's three sequential ICL rounds from one continuous session. Model thinking waits are absent; human-view recordings include a brush-follow camera.",
+  "models": {
+    "astra": {
+      "bvid": "BV1NTnF6cEhU",
+      "url": "https://www.bilibili.com/video/BV1NTnF6cEhU/",
+      "duration_seconds": 305.6333333333333
+    },
+    "sol": {
+      "bvid": "BV1S6nF6qEN3",
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEN3/",
+      "duration_seconds": 414.85
+    },
+    "argon": {
+      "bvid": "BV1S6nF6qEML",
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEML/",
+      "duration_seconds": 155.46666666666667
+    },
+    "opus": {
+      "bvid": "BV1SznF6MEUb",
+      "url": "https://www.bilibili.com/video/BV1SznF6MEUb/",
+      "duration_seconds": 125.33333333333333
+    },
+    "deepseek": {
+      "bvid": "BV1SznF6MErp",
+      "url": "https://www.bilibili.com/video/BV1SznF6MErp/",
+      "duration_seconds": 281.3
+    },
+    "wonder": {
+      "bvid": "BV1gznF6uEnt",
+      "url": "https://www.bilibili.com/video/BV1gznF6uEnt/",
+      "duration_seconds": 183.83333333333334
+    },
+    "qwen": {
+      "bvid": "BV1SznF6MEkV",
+      "url": "https://www.bilibili.com/video/BV1SznF6MEkV/",
+      "duration_seconds": 252.86666666666667
+    },
+    "mimo": {
+      "bvid": "BV1sTnF6cEqS",
+      "url": "https://www.bilibili.com/video/BV1sTnF6cEqS/",
+      "duration_seconds": 74.91666666666667
+    },
+    "kimi": {
+      "bvid": "BV1SznF6MEE1",
+      "url": "https://www.bilibili.com/video/BV1SznF6MEE1/",
+      "duration_seconds": 121.01666666666667
+    },
+    "grok": {
+      "bvid": "BV1UznF6MEor",
+      "url": "https://www.bilibili.com/video/BV1UznF6MEor/",
+      "duration_seconds": 296.3833333333333
+    },
+    "doubao": {
+      "bvid": "BV1NTnF6cERv",
+      "url": "https://www.bilibili.com/video/BV1NTnF6cERv/",
+      "duration_seconds": 109.51666666666667
+    }
+  }
+}

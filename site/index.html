@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="RoboPaintBench: robot painting as a test of in-context learning. Eleven models, three sequential rounds per session, fresh canvases with experience carried forward.">
+  <meta name="theme-color" content="#f5f3ec">
+  <meta property="og:title" content="RoboPaintBench — From pixels to physical strokes">
+  <meta property="og:description" content="Two cameras. One robot arm. Three in-context learning rounds in one continuous session.">
+  <title>RoboPaintBench — From pixels to physical strokes</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#results">Skip to results</a>
+<header class="nav wrap">
+  <a class="brand" href="#"><img src="assets/mark.svg" alt="" width="30" height="30">RoboPaint<span>Bench</span></a>
+  <nav aria-label="Main navigation"><a href="#results">Results</a><a href="#protocol">Protocol</a><a href="#run">Run it</a><a href="https://github.com/P90-RushB/robopaint-bench" class="repo-link">GitHub <span aria-hidden="true">↗</span></a></nav>
+</header>
+<main>
+<section class="hero wrap" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="dot"></span> AN AGENTARK BENCHMARK · v0.1 RESEARCH PREVIEW</p>
+    <h1 id="hero-title">From pixels<br>to <em>physical<br>strokes.</em></h1>
+    <p class="hero-intro">Give a language model two cameras, a simulated robot arm, and a paintbrush. Can it turn what it sees into a painting?</p>
+    <div class="actions"><a class="button" href="#results">Explore the paintings <span aria-hidden="true">↓</span></a><a class="text-link" href="#run">Try it yourself ↗</a></div>
+    <p class="hero-foot"><strong>In-context learning:</strong> one session, three sequential rounds.<br>Fresh canvas each round. Experience carries forward.</p>
+  </div>
+  <div class="hero-art">
+    <div class="art-label"><span>THE GOLDEN GATE STUDY</span><span>01 / 02</span></div>
+    <figure class="hero-scene">
+      <a class="hero-scene-image" href="assets/media/astra-round3-complete.png" target="_blank" rel="noopener" aria-label="Open the full robot recording frame"><img src="assets/media/astra-round3-complete.png" width="1920" height="1080" alt="GPT-6 Astra's simulated robot at the end of ICL Round 3, shown from two workspace cameras and a brush-follow close-up"></a>
+      <figcaption><strong>GPT-6 Astra · ICL Round 3 complete</strong><span>Two workspace views + a human-only brush close-up.</span></figcaption>
+    </figure>
+    <div class="hero-studies">
+      <figure>
+        <a class="hero-study-image" href="assets/media/reference.png" target="_blank" rel="noopener" aria-label="Open the Golden Gate Bridge reference at full size"><img src="assets/media/reference.png" width="1280" height="800" alt="Golden Gate Bridge reference photograph by Frank Schulenburg"></a>
+        <figcaption><span class="study-label">THE REFERENCE</span><small>Frank Schulenburg · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></small></figcaption>
+      </figure>
+      <figure>
+        <a class="hero-study-image" href="assets/media/golden_gate/astra/attempt-03.png" target="_blank" rel="noopener" aria-label="Open Astra's final Golden Gate painting at full size"><img id="hero-painting" src="assets/media/golden_gate/astra/attempt-03.png" width="1024" height="725" alt="Actual Golden Gate painting completed by GPT-6 Astra in ICL Round 3"></a>
+        <figcaption><span class="study-label">THE ROBOT'S PAINTING</span><small>GPT-6 Astra · ICL Round 3 · <a href="#results">All models ↗</a></small></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+<section class="facts" aria-label="Benchmark at a glance"><div class="wrap fact-grid"><div><strong id="model-count">11</strong><span>models in the collection</span></div><div><strong id="canvas-count">33</strong><span>round-end canvases</span></div><div><strong>3 × 96</strong><span>sequential ICL rounds × max actions</span></div><div><strong>2 views</strong><span>fixed workspace cameras</span></div></div></section>
+
+<section class="section wrap" id="results" aria-labelledby="results-title">
+  <div class="section-head"><div><p class="eyebrow">01 — THE GOLDEN GATE STUDY</p><h2 id="results-title">Same reference.<br><em>Different strokes.</em></h2></div><p>Compare how models paint and adapt through the session. Every round-end canvas is preserved, along with the actual run settings.</p></div>
+  <div class="icl-explainer" id="icl-explainer"><div><p class="eyebrow">IN-CONTEXT LEARNING</p><h3>One session. Experience carries forward.</h3></div><p>Each round starts on fresh paper. The same agent carries experience from earlier rounds into the next through its context and memory. Model weights stay fixed.</p></div>
+  <div class="gallery-tools"><div class="segmented" role="group" aria-label="Select an in-context learning round" aria-describedby="icl-explainer"><button data-attempt="1" aria-pressed="false">Round 1</button><span class="round-arrow" aria-hidden="true">→</span><button data-attempt="2" aria-pressed="false">Round 2</button><span class="round-arrow" aria-hidden="true">→</span><button data-attempt="3" aria-pressed="true" class="active">Round 3</button></div><label class="ordering">Order <select id="sort-order"><option value="author" selected>Author's personal ranking</option><option value="alphabetical">Alphabetical</option></select></label><label class="search">Find a model <input id="model-search" type="search" placeholder="Name or provider…" autocomplete="off"></label></div>
+  <p class="small muted" id="gallery-status" aria-live="polite">Loading the recorded collection…</p>
+  <div class="gallery" id="gallery"></div>
+  <noscript><p>This interactive gallery needs JavaScript. <a href="data/golden_gate.json">Download the result metadata</a> or read the repository.</p></noscript>
+  <div class="editorial-note"><span aria-hidden="true">↳</span><p id="ranking-note"><strong>The benchmark author's personal ranking.</strong> This qualitative ordering reflects the author's judgment. All three ICL rounds remain available for your own comparison. <a href="docs/scoring.md">How results are presented ↗</a></p></div>
+</section>
+
+<section class="section wrap" id="protocol" aria-labelledby="protocol-title">
+  <div class="section-head"><div><p class="eyebrow">THE EMBODIED PART</p><h2 id="protocol-title">It has to move<br><em>the brush.</em></h2></div><p>The model receives two fixed workspace camera images and flange pose feedback. It plans timed 3D movements; the simulated robot and soft brush turn them into marks. The recording adds a brush-follow close-up for human viewing.</p></div>
+  <figure class="robot-figure" id="recordings" aria-labelledby="recordings-title">
+    <div class="recordings-heading"><div><p class="eyebrow">WATCH THE PAINTING PROCESS</p><h3 id="recordings-title">Choose a model. Follow its brush.</h3></div><p>One player · 11 models · 6× playback</p></div>
+    <div class="model-video-controls" id="model-video-controls" role="group" aria-label="Select a model recording"></div>
+    <div class="model-video-stage">
+      <img id="model-video-poster" src="assets/media/robot-scene.png" width="1920" height="1080" alt="Robot painting recording with two workspace views and a brush-follow close-up">
+      <iframe id="model-video-player" title="Robot painting recording" loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+    </div>
+    <div class="recording-meta"><p id="model-video-status" aria-live="polite">Loading the model recordings…</p><a class="text-link" id="model-video-external" target="_blank" rel="noopener" hidden>Open on Bilibili ↗</a></div>
+    <figcaption>Each video follows three sequential ICL rounds in one continuous session, at 6× speed with Chinese and English captions. Model thinking waits are absent from recordings. Model input uses two fixed 960 × 720 workspace cameras; the brush-follow camera is only for human viewing. If the embedded player does not load, open the selected recording on Bilibili. <a href="assets/media/robot-motion.mp4" target="_blank" rel="noopener">Original-speed 12-second excerpt ↗</a></figcaption>
+  </figure>
+  <ol class="pipeline"><li><span>01</span><h3>Observe</h3><p>Two workspace views, flange pose, and public action feedback. The reference is attached at the start of each round.</p></li><li><span>02</span><h3>Plan</h3><p>Infer the workspace, find paint and paper, and choose a sequence of strokes using visual feedback.</p></li><li><span>03</span><h3>Act</h3><p>Submit 1–32 timed flange waypoints in robot-base coordinates, up to 20 simulated seconds per batch.</p></li><li><span>04</span><h3>Refine</h3><p>Inspect the next observation. Keep working, submit early, or carry experience into the next blank canvas.</p></li></ol>
+  <div class="protocol-bottom"><p><strong>Fixed conditions:</strong> seed 107 · Linux env 1.0.5 · fixed brush and paper · unlimited paint · 120 Hz control / 480 Hz physics · time scale 1.</p><a class="text-link" href="docs/protocol.md">Full benchmark protocol ↗</a></div>
+  <details class="run-details"><summary>Model settings and collection notes</summary><p><strong>One shared harness for every model.</strong> All 11 models use AgentArk's built-in <strong>SimpleAgent</strong>. OpenRouter, Volcengine Ark and the Codex SDK provide model access; they do not replace the harness. The agent loop, tool and observation interfaces, task conditions and environment action budget are shared. This keeps the comparison fair at the harness and task level.</p><p>Rows follow the author's personal ranking. The three ICL rounds form one continuous session: fresh paper each round, retained experience, fixed model weights. A public ICL round corresponds to a runtime <code>attempt</code>. Actual reasoning settings and output-limit behavior are recorded below.</p><div class="table-scroll"><table><thead><tr><th>Author rank</th><th>Model / access backend</th><th>Reasoning setting</th><th>Actions · ICL rounds 1 / 2 / 3</th><th>Run notes</th></tr></thead><tbody id="settings-table"></tbody></table></div><p class="small">The task's submission reward records saving/completion. It does not score fidelity or artistic quality. <a href="docs/limitations.md">Scope and limitations ↗</a></p></details>
+</section>
+
+<section class="compare-section" aria-labelledby="compare-title"><div class="wrap section"><div class="section-head"><div><p class="eyebrow">LOOK CLOSER</p><h2 id="compare-title">Put two canvases<br><em>side by side.</em></h2></div><p>Compare models at the same ICL round. Each model's rounds belong to one continuous session, with experience carried forward. Open a painting to inspect the full progression.</p></div><div class="compare-controls"><label>Left model<select id="compare-left" aria-label="Left comparison model"></select></label><label>Right model<select id="compare-right" aria-label="Right comparison model"></select></label><label>ICL round<select id="compare-attempt"><option value="1">Round 1</option><option value="2">Round 2</option><option value="3" selected>Round 3</option></select></label></div><div class="comparison" id="comparison"></div></div></section>
+
+<section class="section tracks wrap" aria-labelledby="tracks-title"><p class="eyebrow">ONE ROBOT. MORE THAN ONE QUESTION.</p><h2 id="tracks-title">The benchmark,<br><em>and the open canvas.</em></h2><div class="track-list"><article><span class="track-no">01</span><div><span class="pill">RESULTS AVAILABLE</span><h3>Golden Gate Bridge</h3><p>Reference-image reproduction. A shared photograph tests the translation from visual structure to deliberate physical strokes.</p></div><a href="#results" aria-label="Explore Golden Gate results">↗</a></article><article><span class="track-no">02</span><div><span class="pill pending">RESULTS PENDING</span><h3>A pelican riding a bicycle</h3><p>A text-only target with visual workspace feedback. Results are being assembled separately; none are included in this release.</p></div><a href="docs/protocol.md" aria-label="Read about the pelican protocol">↗</a></article><article><span class="track-no">∞</span><div><span class="pill neutral">CUSTOM DRAWING</span><h3>Your prompt. Your canvas.</h3><p>Try text, a reference image, or multiple references. Custom targets and altered physics are experiments with their own conditions.</p></div><a href="docs/custom-painting.md" aria-label="Read custom drawing guide">↗</a></article></div></section>
+
+<section class="run-section" id="run"><div class="wrap section"><div class="section-head"><div><p class="eyebrow">REPRODUCE IT. THEN EXPERIMENT.</p><h2>Give a model<br><em>the paintbrush.</em></h2></div><p>The same AgentArk evaluator handles inference, memory, recording, and replay. Start with the locked environment, or bring your own target.</p></div><div class="run-grid"><article><h3>Replay in Colab</h3><p>Choose a model record and replay its painting process with GPU rendering. Follow the camera views, actions and results in the viewer. No model API key is needed.</p><a class="button" href="https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing" target="_blank" rel="noopener">Open Golden Gate Colab ↗</a><ol class="colab-steps"><li>Select a <strong>T4 GPU</strong> in <strong>Runtime → Change runtime type</strong>.</li><li>Choose <strong>Runtime → Run all</strong> and let the environment start.</li><li><strong>Open the viewer URL printed in Step 7.</strong> This separate page shows the live camera views and action history throughout the replay.</li></ol><p><a class="text-link" href="docs/colab-record.md">Replay & interaction guide ↗</a></p><p class="small">To evaluate a new model using your own API access, use the <a href="https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/RobotPainting_Colab.ipynb">model evaluation notebook ↗</a>.</p></article><article><h3>Run locally</h3><div class="code-block"><code>python scripts/prepare_run.py \
+  --case golden_gate --model sol</code><button id="copy-command" aria-label="Copy prepare command">Copy</button></div><p>Preparation is offline and does not call a model. Follow the quickstart to install the runtime and execute the generated config.</p><a class="text-link" href="docs/quickstart.md">Installation & first run ↗</a><a class="text-link secondary-link" href="docs/replay.md">Replay a recorded run ↗</a></article></div><p class="run-note">The standard track fixes the physics. The environment also supports configurable brush attachment, paint behavior, and other task parameters; altered settings must be reported separately.</p></div></section>
+
+<section class="section wrap closing"><div><p class="eyebrow">OPEN, INSPECTABLE, REPLAYABLE</p><h2>Watch the process.<br><em>Question the result.</em></h2><p><a href="#recordings">Watch every model's painting process</a>, then <a href="#run">replay recorded model runs in Colab</a> to inspect the interaction yourself. A narrated explainer is coming later.</p><div class="actions"><a class="button" href="https://github.com/P90-RushB/robopaint-bench/issues/new?template=result-submission.yml">Submit a result ↗</a><a class="text-link" href="docs/submissions.md">Submission requirements ↗</a></div></div><aside><h3>Inspiration & attribution</h3><p>Inspired by <a href="https://thijs.net/projects/robot-painter">Thijs's robot-painter demonstration</a>. RoboPaintBench is an independent simulated benchmark built on <a href="https://github.com/P90-RushB/AgentArk">AgentArk</a>. It is not a reproduction of that real-robot experiment.</p><p>Reference photograph: <a href="https://commons.wikimedia.org/wiki/File:Golden_Gate_Bridge_as_seen_from_Battery_East.jpg">Frank Schulenburg, 2017</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, resized without cropping. <a href="docs/attribution.md">Asset and license notes ↗</a></p><p><a href="data/golden_gate.json">Result metadata ↓</a> · <a href="docs/hosting.md">Release and hosting notes ↗</a></p></aside></section>
+</main>
+<footer class="wrap"><span>RoboPaintBench <span class="muted">/ Built on AgentArk</span></span><span>v0.1 · Golden Gate collection · 2026-10-19</span><a href="https://github.com/P90-RushB/robopaint-bench">Source ↗</a></footer>
+<dialog id="painting-dialog"><button class="dialog-close" aria-label="Close painting details">Close ×</button><div id="dialog-content"></div></dialog>
+</body>
+</html>

@@ -1,0 +1,1205 @@
+{
+  "schema": "robopaint.public-results.v1",
+  "case_id": "golden_gate",
+  "release_id": "golden-gate-2026-10-19-preview",
+  "publication_status": "local_preview_pending_media_approval",
+  "harness": {
+    "name": "AgentArk SimpleAgent",
+    "shared_across_models": true,
+    "shared_components": [
+      "Agent implementation",
+      "Task and action interface",
+      "Environment attempt and action budget"
+    ],
+    "model_access_backends": [
+      {
+        "id": "openrouter",
+        "label": "OpenRouter"
+      },
+      {
+        "id": "volcengine",
+        "label": "Volcengine Ark"
+      },
+      {
+        "id": "codex",
+        "label": "Codex SDK"
+      }
+    ],
+    "backend_role": "These backends supply model access inside the same AgentArk SimpleAgent evaluation loop. The Codex SDK supplies model access for Astra.",
+    "configuration_scope": "Actual reasoning effort, output budgets, transport limitations and continuation conditions are reported per model."
+  },
+  "target": {
+    "title": "Golden Gate Bridge",
+    "mode": "reference_image",
+    "instruction": "Reproduce the provided reference image as closely as possible.",
+    "reference": {
+      "path": "assets/media/reference.png",
+      "sha256": "54c7a2385db7ab9df4e2be820dfd32ede7576fe66d62c69832784599c7b4feb5",
+      "width": 1280,
+      "height": 800,
+      "author": "Frank Schulenburg",
+      "license": "CC BY-SA 4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Golden_Gate_Bridge_as_seen_from_Battery_East.jpg",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "modification": "Full image proportionally resized to 1280 × 800; no crop."
+    }
+  },
+  "protocol": {
+    "attempts": 3,
+    "max_steps_per_attempt": 96,
+    "group_seed": 107,
+    "official_platform": "linux",
+    "environment_version": "1.0.5",
+    "task_version": "task-v1",
+    "brush": "fixed",
+    "paper": "fixed",
+    "pigment": "infinite",
+    "learning_protocol": "in_context_learning",
+    "session_structure": "one_continuous_agent_session",
+    "round_count": 3,
+    "experience_carries_across_rounds": true,
+    "canvas_resets_each_round": true,
+    "model_weight_updates": false,
+    "round_index_field": "attempt",
+    "context_management": "Experience carries across rounds through SimpleAgent's managed context and archives; context compression can summarize earlier interactions. Three rounds belong to one continuing agent session."
+  },
+  "quality": {
+    "status": "unscored",
+    "note": "All models share AgentArk SimpleAgent and the task conditions. All three final canvases are retained in attempt order. The author's personal ranking is stored separately; no numerical artistic-quality scores are assigned. Submission reward checks the save/submission process. Actual reasoning settings and model-access details accompany each model."
+  },
+  "model_count": 11,
+  "attempt_count": 33,
+  "models": [
+    {
+      "id": "sol",
+      "label": "GPT-6.1 Sol",
+      "model_id": "openai/gpt-6.1-sol",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "max",
+      "effort_label": "max",
+      "attempt_steps": [
+        55,
+        44,
+        56
+      ],
+      "total_environment_actions": 155,
+      "comparison_group": "http-20480",
+      "caveats": [],
+      "replay_verification": "Historical official physical replay: 56 actions (attempt 1 plus one action); first-attempt canvas and raw PNG matched. No new full three-attempt replay is claimed.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/90520211bee7327482ed71805473618cdaf2d61c/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6.1-sol/20261018-openrouter-max/RobotPainting_gpt-6.1-sol_results.jsonl",
+        "sha256": "3189bf011628a6f87c25f910141a5ab0c456ecc7059bb4e52b1364877acdaaaf",
+        "bytes": 17574365,
+        "publication_status": "already_published"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 55,
+          "episode_id": "1df477b9bb5045d18af57754bde4a53a",
+          "recorded_at": "2026-10-17T23:51:31.5758400Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/sol/attempt-01.png",
+            "sha256": "87d90276ee5630494a6e3adcddb6626a9ba81724213bb7b24c45bc1f05a53df7",
+            "bytes": 219621,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "0c3bd7eae95f7f8c520ccdcfe98127eb90265153019e3e70b3d0b6fb399155af",
+            "bytes": 2687
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "ca41c32631c59b0d79b97f40efc019d087a500eb8dad0fbacfea21b84b17a857",
+            "bytes": 125925707,
+            "duration_s": 675.0,
+            "verified_full_decode": null,
+            "verification": "Historical recorder manifest confirms completed encoding; the catalog does not supply a full-decode flag."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 44,
+          "episode_id": "4b4ed1e8b2854745b89535f7264ca239",
+          "recorded_at": "2026-10-18T01:41:20.7623600Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/sol/attempt-02.png",
+            "sha256": "42bb9add23ea1e66bd7591f2cfb7d51ea1905ff3fa5d0a4ea255aa95c8fb6e19",
+            "bytes": 270919,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "c4285b64fc255b49ddc749310ca922d6d3d15a76cbcd4943503d1ea217e50a3a",
+            "bytes": 2687
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "c2928de76ad4dcb4ad2f0aa9c5bbb7646076248987f6df83729dfb4a9f09bd38",
+            "bytes": 134812687,
+            "duration_s": 701.3333333333334,
+            "verified_full_decode": null,
+            "verification": "Historical recorder manifest confirms completed encoding; the catalog does not supply a full-decode flag."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 56,
+          "episode_id": "656237740f574a64a96f4c7ddac069a8",
+          "recorded_at": "2026-10-18T04:44:25.4953260Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/sol/attempt-03.png",
+            "sha256": "253a7539c33fcaf7e355c9652c5a5433baacca08c8b67894cf056643224994f9",
+            "bytes": 312255,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "4310b5a552ab69419653eefa54ec1e605fcdcb61eeae26c617a17f90c5c995f4",
+            "bytes": 2688
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "438e58bb3d7b112c21f00fe7d26e2c5cd5a63f8d96ace8fc1348acc937ebef3f",
+            "bytes": 193481789,
+            "duration_s": 947.1666666666666,
+            "verified_full_decode": null,
+            "verification": "Historical recorder manifest confirms completed encoding; the catalog does not supply a full-decode flag."
+          }
+        }
+      ]
+    },
+    {
+      "id": "argon",
+      "label": "Gemini 4 Argon",
+      "model_id": "google/gemini-4-argon",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "high",
+      "effort_label": "high",
+      "attempt_steps": [
+        26,
+        21,
+        24
+      ],
+      "total_environment_actions": 71,
+      "comparison_group": "http-20480",
+      "caveats": [
+        "The full action record was reconstructed from retained originals and continuation segments."
+      ],
+      "replay_verification": "Historical official physical replay: all 71 actions; six final PNGs matched and three videos decoded. Not rerun for this preview.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/90520211bee7327482ed71805473618cdaf2d61c/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gemini-4-argon/20261018-openrouter-high/RobotPainting_gemini-4-argon_results.jsonl",
+        "sha256": "49c8e90f3ad01ae71c2efee7a9f7c9a3c416f990f516944b7bdda77e625ee9d9",
+        "bytes": 3281805,
+        "publication_status": "already_published"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 26,
+          "episode_id": "eb1a18223a214c47ad3d3002bd4f537c",
+          "recorded_at": "2026-10-17T17:59:19.9487010Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/argon/attempt-01.png",
+            "sha256": "b66c0639ced54fdbdf6fee15ec9350468540878e15afa17d4bb0d3183d5ea48c",
+            "bytes": 182738,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "78c52bf3f73e5f7cdf469b48b834f8eb1d2dd2a5da8f1baf314adb92c88e8e5b",
+            "bytes": 2687
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "0af5ef5d9017d7c1e6f6c6d0a114a229cfdefd341de35a2a5490b7b512107a2c",
+            "bytes": 57241037,
+            "duration_s": 280.5,
+            "verified_full_decode": null,
+            "verification": "Historical recorder manifest confirms completed encoding; the catalog does not supply a full-decode flag."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 21,
+          "episode_id": "d15c04bbcf584b7a80ff35688d202470",
+          "recorded_at": "2026-10-17T19:25:43.5053490Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/argon/attempt-02.png",
+            "sha256": "fe8bc19fa6153e942ab59767f65a04f21a4889d3601fc6d16c68680d5029a5c7",
+            "bytes": 161043,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "19ff492db1cb86be20b21651149de524952f3280d63e95bb44e994e477bb009f",
+            "bytes": 2688
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "f7c386584ce3fdf94dc616ac7a363bee0d4dcf3f7fe459ca03d6073eb747240a",
+            "bytes": 52915377,
+            "duration_s": 263.75,
+            "verified_full_decode": null,
+            "verification": "Historical recorder manifest confirms completed encoding; the catalog does not supply a full-decode flag."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 24,
+          "episode_id": "f6ffc3aeb06c40e8a2d749a5afe2b510",
+          "recorded_at": "2026-10-17T19:50:33.5859080Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/argon/attempt-03.png",
+            "sha256": "aca72f99bd1adf9e69e3d92af414b654ab981921d9a3a93ea9d1f90ccc24bce0",
+            "bytes": 132183,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "cc95cbec38ce714ee6d6c55e65b83758cace1262b9c6f68b9e1c63190c1dfda1",
+            "bytes": 2686
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "0c836ab18dd35175da3366305c30fdf75bd3329af52ad962d9b046de0bf410e6",
+            "bytes": 54495431,
+            "duration_s": 277.6666666666667,
+            "verified_full_decode": null,
+            "verification": "Historical recorder manifest confirms completed encoding; the catalog does not supply a full-decode flag."
+          }
+        }
+      ]
+    },
+    {
+      "id": "opus",
+      "label": "Claude Opus 5.5",
+      "model_id": "anthropic/claude-opus-5.5",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "high",
+      "effort_label": "max → high",
+      "attempt_steps": [
+        17,
+        13,
+        13
+      ],
+      "total_environment_actions": 43,
+      "comparison_group": "mixed-profile",
+      "caveats": [
+        "Mixed profile: attempt 1 actions 1–4 used max reasoning and a 65,536-token output budget; the remaining 39 actions used high reasoning and 20,480 tokens. Later attempts retained the earlier context."
+      ],
+      "replay_verification": "Offline record verification: all 43 actions. Historical official physical replay: 18 actions (attempt 1 plus one action).",
+      "record": {
+        "url": null,
+        "sha256": "a8278eb4dd9f478411b233027ab13b75abc1b7f6a6fbdbe28cd0ca8195e48302",
+        "bytes": 4738672,
+        "publication_status": "local_only"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 17,
+          "episode_id": "f9d9ad7f89a849f0b44737e9e66e53b9",
+          "recorded_at": "2026-10-18T14:04:36.0844470Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/opus/attempt-01.png",
+            "sha256": "ae4d0aff17a0d5575055af1e3646b311543a86206b7a0fd095745fb6e7e2ddcb",
+            "bytes": 121467,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "3db9893f8b307a39741c3fa6493873b8855cf60ccb64f8f22aacaa534fd46e8c",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "ed744bc4acc7c67bdede3db958398af07660a1f0e3a7262a5a4097b152198cb4",
+            "bytes": 42332654,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 13,
+          "episode_id": "ba23fd943fa64be183455e40e3c5f7b3",
+          "recorded_at": "2026-10-18T14:21:08.5481330Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/opus/attempt-02.png",
+            "sha256": "a5d464eeddc49103651468b43ed902018392bb7cc0c48098eef626f59ac76529",
+            "bytes": 142435,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "b2dc9bfaa77b2bbfd6629dcb7ad8cbfc405bdd04888e98c05641b4d93ce7f238",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "c8f57eaf4c9cab7216db1bcc5a4c07677c656d4f2d7a4c513c36f025e4ac0d22",
+            "bytes": 39600480,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 13,
+          "episode_id": "8ce8c448de2a4a2ab7226a42975a5b5c",
+          "recorded_at": "2026-10-18T14:35:43.9411280Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/opus/attempt-03.png",
+            "sha256": "9c6228ac917f59d7e4d8353cd2a60759b59fa2a1580c8edf522af64dcea14d47",
+            "bytes": 142526,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "4981b69fab9107aef96187f63c82fd67f659bba7d977ec921839fcfafd576991",
+            "bytes": 2682
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "270026b796cfd516b78ecc6c4772fd3b01e30804c724f588f4752bea281e05d5",
+            "bytes": 39917144,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "grok",
+      "label": "Grok 4.7",
+      "model_id": "x-ai/grok-4.7",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "xhigh",
+      "effort_label": "xhigh",
+      "attempt_steps": [
+        96,
+        96,
+        47
+      ],
+      "total_environment_actions": 239,
+      "comparison_group": "http-20480",
+      "caveats": [
+        "Completed continuation: 96 / 96 / 47 environment steps. Tool-budget failures consumed rejected environment steps; these were harness-generated feedback, not model-selected painting motions. Budgets were unchanged.",
+        "Some original request usage is unknown; complete billing totals are unavailable."
+      ],
+      "replay_verification": "Offline ReplayAgent reader matched all 239 saved actions. All three final videos decoded. No new full official physical replay was performed.",
+      "record": {
+        "url": null,
+        "sha256": "9edd2baf01560d0ed16049dfe06da6d0f119c9f34be5ed4e28ffe1c2d37ae8d8",
+        "bytes": 34467532,
+        "publication_status": "local_only"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 96,
+          "episode_id": "7842b0d476384c17a5ca8d2585e98dc8",
+          "recorded_at": "2026-10-18T15:59:21.3441470Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/grok/attempt-01.png",
+            "sha256": "73ed26f0660685e450f4571d2e89a16bf0c08a3a84bed42545b60506e1535f1f",
+            "bytes": 22237,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "d835b1e27346fe35587b4d7e2fa39fe5326638fe51b2bf4f682cd91fda378cbd",
+            "bytes": 2687
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "53ea860b11af62154e2a56f5ad62843c6a0bf07d8cc9adc140c8a751705de2ba",
+            "bytes": 12920759,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 96,
+          "episode_id": "f64718cb800441cbb0a097d9c053bbd8",
+          "recorded_at": "2026-10-18T17:18:33.8217080Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/grok/attempt-02.png",
+            "sha256": "a8af4cbba1e2452b0e9b938ba58ba06a790820e4d65e4ca4add26c1f252b6979",
+            "bytes": 106287,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "4b7aa1158dc31c29c91d6b7ddd9177023eb0e305a808bec55ca21d57a1eb6523",
+            "bytes": 2688
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "979038a69a224c48db64cc0308dc4b1858177e79778c308f2a18b827de956dc1",
+            "bytes": 76779002,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 47,
+          "episode_id": "3165960d4056463595c7967ce88da4d6",
+          "recorded_at": "2026-10-19T14:08:07.0451310Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/grok/attempt-03.png",
+            "sha256": "54bd1c648cca7bd7c5094a856e44a5f7225b7497e4914fb1d5b6030d721f290b",
+            "bytes": 108041,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "a38adadc344d634a59c231ada3d10a7048c6675db46d8233ec8bf2f4dc1750aa",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "4b0d1b3677bd92e77ca9e60f03ef209a04c11774b699c597c2f4a677cc824e3e",
+            "bytes": 63027838,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "wonder",
+      "label": "Meta Muse Wonder",
+      "model_id": "meta/muse-wonder",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "max",
+      "effort_label": "max",
+      "attempt_steps": [
+        44,
+        26,
+        21
+      ],
+      "total_environment_actions": 91,
+      "comparison_group": "http-20480",
+      "caveats": [
+        "The same evaluation continued after harness repairs. Some historical request usage is unknown."
+      ],
+      "replay_verification": "Historical physical verification: attempt 1 plus one action (45 actions). No full three-attempt physical rerun was performed.",
+      "record": {
+        "url": null,
+        "sha256": "75959a3f41743558912289620c426437ad939656e8b68907e54496d40ac98e8c",
+        "bytes": 5064568,
+        "publication_status": "local_only"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 44,
+          "episode_id": "8bb39418f7224d40a8e3925153e13d09",
+          "recorded_at": "2026-10-18T16:17:39.5674590Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/wonder/attempt-01.png",
+            "sha256": "49e854190b514bd29dd5d6f385e348f3a0ef54de1027c6e8b124e18296c194e3",
+            "bytes": 83390,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "5ccba37562572853966b0a9be7650f2d69a4ce2607c0653b02895d57f8ab9132",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "66e55d30b51b58e9deabae4ec1aed2772f08937bf44813d891d95702e42372c4",
+            "bytes": 47850908,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 26,
+          "episode_id": "44cec8cdc22b496db39c8e0d558e1304",
+          "recorded_at": "2026-10-18T16:47:12.3013190Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/wonder/attempt-02.png",
+            "sha256": "760342809e50bcdf0c43f9c6d903b84a945585f278e10aab6ae10fed4616cfb8",
+            "bytes": 184981,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "9864900e4b068caf6268763d31fd07423727b1def61e3a0ce218bd3f94cbcc9d",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "1024eec9ae484c032cc94ea23e2ad8a408e73a265f8b7c7b139f49be5bb002d2",
+            "bytes": 70094987,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 21,
+          "episode_id": "d37b5e15e67947d7802140f9ad478aa8",
+          "recorded_at": "2026-10-18T17:06:40.5398560Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/wonder/attempt-03.png",
+            "sha256": "3e0716090985b1cb488635a81801c8282663a3c159f0a1327ee271603ade0c47",
+            "bytes": 212229,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "830f4fff489c88e3041067313008e12c377c273ade8e9651c8b318eb8e9bb212",
+            "bytes": 2682
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "e3fa7f9b1c920df5b1f4be1d7d791e8e3a9f5ff43ea5743f13ada9bd90a48e47",
+            "bytes": 61309646,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "deepseek",
+      "label": "DeepSeek V4.1 Flash1017",
+      "model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "max",
+      "effort_label": "max",
+      "attempt_steps": [
+        59,
+        56,
+        35
+      ],
+      "total_environment_actions": 150,
+      "comparison_group": "http-20480",
+      "caveats": [
+        "The same evaluation continued after harness repairs."
+      ],
+      "replay_verification": "Historical physical verification: attempt 1 plus one action (60 actions). No full three-attempt physical rerun was performed.",
+      "record": {
+        "url": null,
+        "sha256": "4d798148b2f0244e4241b7c372a65058f6e8b74623be0d9ecc2b3da6205b2b5f",
+        "bytes": 11880889,
+        "publication_status": "local_only"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 59,
+          "episode_id": "d0bafa551e534280b2db1340a3f9a724",
+          "recorded_at": "2026-10-18T14:32:34.4361370Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/deepseek/attempt-01.png",
+            "sha256": "4dc071b082b16b9226bf3082db3c7225e782fe811e68833a251ceaeee46536b6",
+            "bytes": 229309,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "e03879b9f46bca003b737c966de0c1e23ed0d0318201953fe5c939b998c74dc5",
+            "bytes": 2680
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "114632623cf56bd0f1eb90e295aec1067eeee592c8411f337f24143102eaad79",
+            "bytes": 129956953,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 56,
+          "episode_id": "d291d1598a514219a794f94999845b90",
+          "recorded_at": "2026-10-18T15:16:23.6336370Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/deepseek/attempt-02.png",
+            "sha256": "69e8380373ccd03b316210bfd6389d3752fba70519fbf4cace072e424ba5d649",
+            "bytes": 366027,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "dc38fcece57f2dbc8161046e2988587a4c7c473dab54e89f7ce0ea6ea2b60b54",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "06a93ee24dc4f90b5de86bf446dbfc5c18bcd69cd6a9758b9d30279b6441636d",
+            "bytes": 99795412,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 35,
+          "episode_id": "40cd1211850b453593ffe98809cd3c58",
+          "recorded_at": "2026-10-18T15:57:00.6881060Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/deepseek/attempt-03.png",
+            "sha256": "8b165fc392c8a09bc73ff87edcfab7c400a3016ca9d8424117208511dc5ffae5",
+            "bytes": 292771,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "f3df2965803a6dba19c8ac7be627715f8ded0b2308ddb86205a9c0f2859b0ca0",
+            "bytes": 2682
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "28cd08438a30cb067b5973d4e0a91a39e28c3ad4cd68ac9f055c24c10903c4a3",
+            "bytes": 100289609,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "qwen",
+      "label": "Qwen3.8 Max Prime",
+      "model_id": "qwen/qwen3.8-max-prime",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "xhigh",
+      "effort_label": "xhigh",
+      "attempt_steps": [
+        67,
+        41,
+        46
+      ],
+      "total_environment_actions": 154,
+      "comparison_group": "http-20480",
+      "caveats": [
+        "The same evaluation continued with the 20,480-token action budget. Two historical requests have unknown usage."
+      ],
+      "replay_verification": "All 154 saved actions matched in ReplayAgent reading; 115 physical reconstruction actions and 116 observation gates were checked. This was not a new full official physical replay.",
+      "record": {
+        "url": null,
+        "sha256": "d795acc2e884532f9e03729618d9c8388b0ee43ff969b789761d25cd997d289c",
+        "bytes": 9228338,
+        "publication_status": "local_only"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 67,
+          "episode_id": "c7a91a974bab481db58029c462adc03b",
+          "recorded_at": "2026-10-18T23:33:07.8027940Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/qwen/attempt-01.png",
+            "sha256": "0527c27b246e8dc873318dd30bd277ec3e0800d2bcf222fffdb551bea8594ac1",
+            "bytes": 184203,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "d3a47e031c8eb06eed77973cf7d949092ce42aa4a8f38d32ecf38707dc29ed83",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "91f59330d8ba8db221aa2a0025ce1cf60b9285da257fde6774c7d7afec20be85",
+            "bytes": 84991007,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 41,
+          "episode_id": "dd6e4d47bcd543cebc1587f1e3459c33",
+          "recorded_at": "2026-10-19T00:28:37.7539300Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/qwen/attempt-02.png",
+            "sha256": "60ececc5467b76421411c3e3cfe5a6e806fdee7b191f623667b5f48d9fde04b8",
+            "bytes": 199594,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "8b795c668f57c4820ca5e99f9196140b7e1c88ce5529f67b1dbacd9daab87a5a",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "2fcc920a972bf26bedb87ac9e198de2e4a9942d57f5b2a3e59948a2372d79cd7",
+            "bytes": 80737178,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 46,
+          "episode_id": "356d8abc79b64ddf800c03dcdb804997",
+          "recorded_at": "2026-10-19T02:42:17.4736260Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/qwen/attempt-03.png",
+            "sha256": "b9abb92732209d286af30a2d33a634885b1d1ef2604f256282f07d237e11fff7",
+            "bytes": 182816,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "6e47e2a1b10b74a9265e90d1ea273e145c0a107eb73cb1931349bff3ebc9d800",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "d7cbc17dba07e8dc52f7fc2d2abdb167e13da94a0b337b7b189bf153124d39ed",
+            "bytes": 96095860,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "kimi",
+      "label": "Kimi K3",
+      "model_id": "moonshotai/kimi-k3",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "max",
+      "effort_label": "max",
+      "attempt_steps": [
+        11,
+        23,
+        28
+      ],
+      "total_environment_actions": 62,
+      "comparison_group": "http-20480",
+      "caveats": [],
+      "replay_verification": "Historical official physical replay: 12 actions (attempt 1 plus one action); not all 62 actions.",
+      "record": {
+        "url": null,
+        "sha256": "e2fd87bdbb9e63e068addb89ba3041325403c31f095685345911c141f653cf36",
+        "bytes": 3821032,
+        "publication_status": "local_only"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 11,
+          "episode_id": "b7efcab215fa4c56a2394f26dc1baf16",
+          "recorded_at": "2026-10-18T20:40:57.8532070Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/kimi/attempt-01.png",
+            "sha256": "4f463db7446ad9de3d9bf606020e65874ff125ef1c934948120bea256aa9c7ad",
+            "bytes": 53679,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "b5b1a25296d2b9e6e68452082086b6a3fc2d8a42ad6aaad5f877ce62a0f54428",
+            "bytes": 2679
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "c355b8a5f58c6578c5829d1722b45b8e5493b4690312dcc9a0029b8b3861cb05",
+            "bytes": 13302913,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 23,
+          "episode_id": "33491c2bdaae472b9b18b78153e7eb21",
+          "recorded_at": "2026-10-18T21:02:29.3739170Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/kimi/attempt-02.png",
+            "sha256": "48e7b8efc3913ce3280574e5882ee998072e495984c2b852add0628210ad017b",
+            "bytes": 134706,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "864c993979b756b0832cf96ba10d749101f1e9b6d0220393ccf7d8ff66c32aa3",
+            "bytes": 2682
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "d7fb94ba91c6c497588b0cbefbff476caa23075a9d1be4f26cf7a87c2b69acf3",
+            "bytes": 40032127,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 28,
+          "episode_id": "216b323bccf44bbdabbe8189bded7625",
+          "recorded_at": "2026-10-18T21:37:02.5683680Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/kimi/attempt-03.png",
+            "sha256": "055c3f45a878bdc3c5eec922741b860eb7847106d0346ab1fdb9d1edb1864b6d",
+            "bytes": 116347,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "76d254de7aa3e3d82a1267e616ede76fd906f87d09032a10aa0a5a364f260c0e",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "6357d90f88a06489c9b547de451555ac483472adbbc3bff3d05a48508922e26d",
+            "bytes": 45882226,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mimo",
+      "label": "MiMo V2.6 Pro",
+      "model_id": "xiaomi/mimo-v2.6-pro",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": null,
+      "effort_label": "thinking enabled",
+      "attempt_steps": [
+        19,
+        6,
+        6
+      ],
+      "total_environment_actions": 31,
+      "comparison_group": "budget-supplement",
+      "caveats": [
+        "Budget supplement: one earlier action used 20,480 tokens; continuation used a 65,536-token output budget with thinking enabled. This is not a standard 20,480-token completion."
+      ],
+      "replay_verification": "Historical official physical replay: 20 actions (attempt 1 plus one action); not all 31 actions.",
+      "record": {
+        "url": null,
+        "sha256": "976fe06a0bfcf9a067f447569c2484a692516942bbf09fa20cf88ed3e3c5bd59",
+        "bytes": 1804200,
+        "publication_status": "local_only"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 19,
+          "episode_id": "8baa481757454213a7254ec16b857f6c",
+          "recorded_at": "2026-10-19T04:58:43.5087890Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/mimo/attempt-01.png",
+            "sha256": "cb5d0ce52a9e555c291850592d33f8b8cb6cde1dbde99ecfd572efaa54be26e3",
+            "bytes": 142850,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "314987a991a0ca2a32dfba2709ef347ff20aacd69468611b566b42d17dddae82",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "0ca4da4e682a829a5b1cfed3c96fe398d75ab6102b0007e0dd93e9249dfd0453",
+            "bytes": 25631851,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 6,
+          "episode_id": "cf9dc9f5bf004d4ab9d02abd05f2fc8b",
+          "recorded_at": "2026-10-19T05:08:19.5825840Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/mimo/attempt-02.png",
+            "sha256": "f84b75fbc5cf32b87285cd5570e02dee8d15793f289680dbf09b39b5a30eb2d6",
+            "bytes": 177957,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "1348bacd4fe3851e3ad64d2b893ac439dafe026ddc34c973c3b93e929d86dff4",
+            "bytes": 2678
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "3c8a948ce388b84f4138acd05b764c250e5e0d92ba62addb54f387b22a46385a",
+            "bytes": 17604586,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 6,
+          "episode_id": "4daf6da3315b4d78add802fb15667071",
+          "recorded_at": "2026-10-19T05:15:57.1955910Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/mimo/attempt-03.png",
+            "sha256": "885f3e81fd82d5a7dec56003441f3604be8f151424abf57af94ec34dcf9fd371",
+            "bytes": 179327,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "24e905083c397ad9ae1fe684ba0a32490b64dd1167c43b1333709ddccad7ecd5",
+            "bytes": 2679
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "2bbc6980afad85bd726eaa11ef75fb89013dcbbdde3bb0c20376e71270b95f5a",
+            "bytes": 19170987,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "astra",
+      "label": "GPT-6 Astra",
+      "model_id": "gpt-6-astra",
+      "backend": "codex",
+      "backend_label": "Codex SDK",
+      "effort": "ultra",
+      "effort_label": "ultra",
+      "attempt_steps": [
+        39,
+        31,
+        33
+      ],
+      "total_environment_actions": 103,
+      "comparison_group": "sdk-subscription",
+      "caveats": [
+        "SimpleAgent uses the Codex SDK for model access with ultra reasoning. The declared 20,480-token budget was not enforced as an API output cap; it is not equivalent to an HTTP max-token limit. API dollar cost is unavailable."
+      ],
+      "replay_verification": "Historical Linux official physical replay: 40 actions (attempt 1 plus one action), pixel-identical canvas and raw PNG. Three final videos fully decoded; no full three-attempt replay is claimed.",
+      "record": {
+        "url": null,
+        "sha256": "4b21769d117d2db4ce866e394d3726da495e1bd491d5818c441e1caca0a57f16",
+        "bytes": 45054133,
+        "publication_status": "local_only"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 39,
+          "episode_id": "cb9946432350419b924a491206e74421",
+          "recorded_at": "2026-10-19T08:19:24.1696060Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/astra/attempt-01.png",
+            "sha256": "7da5a8557dc6f18115eb6837f340d8f75a926c89e57a58d867a27aedfcb496cd",
+            "bytes": 192622,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "6f424f9c57c31eb8818ae5ba546aabf3e564d852ac1f56fd7cfb466bbe151d9b",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "cbb4015ed79b0bd220d037b442dd892e6f71f8b34d36f8671e0f5482031c11bf",
+            "bytes": 108616217,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 31,
+          "episode_id": "61e66dd06b5b40e2a2d166318ca464f7",
+          "recorded_at": "2026-10-19T09:37:58.2201560Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/astra/attempt-02.png",
+            "sha256": "10ac1724d2729a0fdef919c51ddf9959e1376ddacc60134d7ae82c2131e5fb25",
+            "bytes": 188640,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "3880a901363d0bb742a50a2ac11196c2296c76cea590638171e1a1369f79f026",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "212e5b5ccd280373b40facb72cb0b1f13397500b415ee4ed398f9a991c5c5a24",
+            "bytes": 100511212,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 33,
+          "episode_id": "5905234c869e4bcab0ed9ddb5747aba1",
+          "recorded_at": "2026-10-19T10:56:05.7497370Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/astra/attempt-03.png",
+            "sha256": "3196b3219f440ae4cd6f511adede27518efadc7863e540122b86bc28fc4d4e5c",
+            "bytes": 187737,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "b45ad4afa09290c5e031f350362faa761895b980d727fc3a179bb9bd4ba077ca",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "650d6fa54465d14f8f6cb396a71eafa4981855d1f8c39f430616195c65e7ab14",
+            "bytes": 106716193,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        }
+      ]
+    },
+    {
+      "id": "doubao",
+      "label": "Doubao Seed2.1 Pro260915",
+      "model_id": "doubao-seed-2-1-pro-260915",
+      "backend": "volcengine",
+      "backend_label": "Volcengine Ark",
+      "effort": "high",
+      "effort_label": "high",
+      "attempt_steps": [
+        53,
+        7,
+        17
+      ],
+      "total_environment_actions": 77,
+      "comparison_group": "http-20480",
+      "caveats": [
+        "Continuation restored the same evaluation. Two HTTP requests have unknown usage; known token totals are incomplete.",
+        "Attempt 2 voluntarily submitted after six contact-protection motion results; its seven steps are a completed attempt."
+      ],
+      "replay_verification": "Historical Linux official physical replay: 54 actions (attempt 1 plus one action), pixel-identical canvas and raw PNG. Three final videos fully decoded; no full three-attempt replay is claimed.",
+      "record": {
+        "url": null,
+        "sha256": "40ec0889cdf936e4af7238c10ece2b0512cce18de6a1c5eea590e49624b095f4",
+        "bytes": 3708612,
+        "publication_status": "local_only"
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 53,
+          "episode_id": "66aba06f08304810bb93dea3d4a660bf",
+          "recorded_at": "2026-10-19T11:06:11.0311720Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/doubao/attempt-01.png",
+            "sha256": "4ca5c549735af8f5685a27ea64c7ba91a7c1cf4e70aff7abbf2f803cec72efbe",
+            "bytes": 181764,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "1c412f17cfb68f3ee93c00103c5cdc272920a762dfbc11f31ca871152b3d4322",
+            "bytes": 2681
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "c31d9155e55d2d1e7afce8cebc7f742d1cae389f79a09c5ebc1028bfafc94a11",
+            "bytes": 32394636,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 7,
+          "episode_id": "9b6398ca1e514f38bf9eaef69cd39ac4",
+          "recorded_at": "2026-10-19T11:06:47.5301530Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/doubao/attempt-02.png",
+            "sha256": "4032171d98f57d9667d1def4dc9d7f10fe55102bde6c2d180830b197536b998c",
+            "bytes": 42458,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "e32fb6fa7c1ecea8f2d88704a8c683e69884cd80df9807bc8ea00301b44c2479",
+            "bytes": 2676
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "15193825ea080b6a32f27ffcb57b72095de92a3a3843fc9baad254f36ac85a60",
+            "bytes": 1185364,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 17,
+          "episode_id": "6b306c0fc3484a459ed62071dbd351a6",
+          "recorded_at": "2026-10-19T11:16:42.4932530Z",
+          "canvas": {
+            "path": "assets/media/golden_gate/doubao/attempt-03.png",
+            "sha256": "e3c7b8eb83cd5db08f721035d1eb10c36d8f37077a2ea97c78997c588357a57c",
+            "bytes": 302628,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "f9dff05971cec52968653f0ba304444bf6c3110f249479874073f37f9d3d7575",
+            "bytes": 2678
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "5aa7a83382a126f08e3e0681da45a5344578ec7ad1707003ce13395a66fa835b",
+            "bytes": 19216367,
+            "duration_s": null,
+            "verified_full_decode": true,
+            "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
+          }
+        }
+      ]
+    }
+  ]
+}
