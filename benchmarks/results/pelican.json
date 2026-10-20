@@ -2,7 +2,7 @@
   "schema": "robopaint.public-results.v1",
   "case_id": "pelican",
   "release_id": "pelican-2026-10-20",
-  "publication_status": "public_records_and_videos_local_canvas_preview",
+  "publication_status": "public_records_videos_and_versioned_site_canvases",
   "harness": {
     "name": "AgentArk SimpleAgent",
     "shared_across_models": true,

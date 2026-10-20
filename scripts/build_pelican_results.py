@@ -264,7 +264,7 @@ def build_release(dataset_manifest: Path, production_models: Path, delivery_mani
             "trajectory": {**file_receipts["trajectory"], "full_history": full_history, "saved_steps_per_attempt": saved_steps},
             "token_usage": None, "api_cost_usd": None, "video_url": url, "attempts": attempts})
     results = {"schema": "robopaint.public-results.v1", "case_id": "pelican", "release_id": RELEASE_ID,
-        "publication_status": "public_records_and_videos_local_canvas_preview",
+        "publication_status": "public_records_videos_and_versioned_site_canvases",
         "harness": {"name": "AgentArk SimpleAgent", "shared_across_models": True,
             "shared_components": ["Agent implementation", "Task and action interface", "Environment attempt and action budget"],
             "model_access_backends": [{"id": key, "label": label} for key, label in BACKEND_LABELS.items()],
@@ -291,7 +291,7 @@ def build_release(dataset_manifest: Path, production_models: Path, delivery_mani
                 "session_protocol": SESSION, "harness": results["harness"],
                 "verification_scope": "Source canvas/metadata and exported record/trajectory bytes were hashed locally. Episodes, steps, text target and protocol were checked. Historical video decode/replay receipts were retained; no new inference, physical replay or video decode was performed by this builder.",
                 "privacy": "Explicit allowlist only. No local source paths, raw payloads, request history, credentials, reasoning contents or private context stores.",
-                "media_policy": "Byte-identical source canvas PNG copies are ignored local preview assets, published separately from Git. Raw records, trajectories, logs and videos are not copied into the code repository.",
+                "media_policy": "The 33 selected byte-identical canvas PNGs are versioned website assets under site/assets/media/pelican. Raw records, trajectories, logs and full videos are not copied into the code repository.",
                 "artifacts": artifacts}
     outputs = {"pelican.json": results, "pelican-ranking.json": ranking, "pelican-videos.json": videos,
                "pelican-release-manifest.json": manifest}
@@ -330,7 +330,7 @@ def main() -> int:
     parser.add_argument("--publication-status", type=Path, required=True)
     parser.add_argument("--payload-root", type=Path)
     parser.add_argument("--output", type=Path, default=ROOT / "benchmarks/results")
-    parser.add_argument("--media-output", type=Path, help="Ignored assets/media root; adds pelican/<model>/attempt-XX.png")
+    parser.add_argument("--media-output", type=Path, help="Selected website media root; adds pelican/<model>/attempt-XX.png")
     args = parser.parse_args()
     try:
         write_release(args.dataset_manifest, args.production_models, args.delivery_manifest, args.publication_status,

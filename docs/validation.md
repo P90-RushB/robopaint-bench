@@ -1,6 +1,6 @@
 # v0.1 preview validation
 
-This page retains dated checks below; later follow-ups supersede only the presentation or runtime scope they explicitly cover.
+This page retains dated checks below; later follow-ups supersede only the presentation or runtime scope they explicitly cover. Media policies and missing-file reports in earlier checkpoints describe those earlier states. The current integrated checkout tracks **69 selected website PNGs** across Golden Gate and Pelican; it requires no external media ZIP for a normal build. Raw records, trajectories, request logs and full videos remain outside Git.
 
 Checked 2026-10-19. This validates the benchmark presentation and onboarding changes, not a new model evaluation or a new full physical replay.
 
@@ -55,7 +55,7 @@ The current opening hero shows Astra’s final ICL Round 3 three-camera recordin
 
 The standalone replay notebook has empty execution outputs; its three owner-selected preview illustrations and verified eleven-file source archive are intentional notebook presentation/bootstrap assets. Full raw records, request bodies, videos and machine-local outputs are excluded from Git. The website’s selected media is supplied separately through the size/hash-checked media bundle. Pelican results remain a future integration; this checkpoint includes no new model evaluation, numerical quality scoring or automatic site deployment.
 
-## Pelican integration follow-up, 2026-10-20
+## Initial Pelican local integration checkpoint, 2026-10-20
 
 The separate Pelican collection is now integrated: **11 models, 33 final
 canvases and 603 recorded environment actions**. The importer verifies the
@@ -79,13 +79,13 @@ BVID and displays 4× simulated-time speed; Golden Gate stays 6×. The embedded
 Bilibili region was blank in the inspected in-app browser, so stream playback
 is not claimed. Each selected recording has a direct Bilibili fallback link.
 
-This machine has all 33 verified Pelican PNGs but lacks the other machine's
+At this earlier checkpoint, this machine had all 33 verified Pelican PNGs but lacked the other machine's
 37 selected Golden Gate media files. Its local two-task preview therefore uses
 the explicit source-only build flag and reports those missing Golden Gate
 files. Normal and publication builds continue to refuse incomplete media;
 Golden Gate metadata and original source media were not replaced. A separate
 Pelican-only ZIP contains exactly the 33 reviewed PNGs, with no records, videos
-or logs. See [cross-machine media transfer](hosting.md#transfer-pelican-media-to-the-other-machine).
+or logs. This earlier ZIP handoff requirement is superseded by the repository-media integration below.
 
 The new [Pelican Colab](pelican-results.md#replay-without-inference) was checked
 offline; no fresh hosted GPU execution is claimed. This integration made no
@@ -93,3 +93,19 @@ model calls, Unity launches, new physical replays, video re-encodes, external
 media uploads or Pages deployment. Existing dated evaluation/replay receipts
 retain their original scope. Raw evidence and all historical recovery segments
 remain intact.
+
+## Upstream Golden Gate repository-media checkpoint, 2026-10-20
+
+The owner requested that required website illustrations travel with the repository. At upstream commit `5a76b71`, the selected Golden Gate website PNGs were versioned under `site/assets/media/`: 33 round-end canvases, the reference photograph and two robot recording stills, totaling 36 images. The obsolete 12-second MP4 excerpt and its page link have been removed from the active site selection; the original local clip and older review archives remain preserved. The 11 complete model videos continue to play from Bilibili.
+
+That Golden Gate checkpoint allowed a fresh checkout to build its complete site directly with `python scripts/build_site.py --output <new-directory>` after installing `requirements-site.txt`. It needs no local evidence catalog or external media ZIP. Size/SHA-256 verification still applies to every selected image. Raw records, full recordings, local validation output and credentials remain excluded.
+
+
+## Two-task repository-media integration, 2026-10-20
+
+The upstream `5a76b71` snapshot was imported through the reviewed offline ZIP and merged with the independent Pelican integration. The active selected image set now has **69 tracked PNGs**: 36 Golden Gate images (33 canvases, one reference and two robot recording stills) plus 33 Pelican canvases. The old 12-second MP4 is excluded from the active site; original local recordings and earlier archives remain preserved. All selected images are available in the integrated checkout, superseding the earlier report of missing Golden Gate media.
+
+Normal fresh-clone builds use the checked-in results and images; no private catalog or external media ZIP is required. The manual Pages workflow builds from that checkout and no longer takes a media-archive URL or approval phrase. A merge, source push or local preview is not a Pages deployment. Raw records, trajectories, HTTP logs, complete videos, credentials and machine-local output remain excluded from Git.
+
+<!-- MERGE_VALIDATION_RESULTS: replace after the final merged-source test, asset/build and browser checks. Do not reuse an earlier checkpoint's count as the merged-source result. -->
+Final merged-source test counts, size/hash-checked image totals and visual checks are pending at this editing checkpoint. No new model inference, Unity execution, physical replay or hosted Pelican Colab execution is claimed by this merge.

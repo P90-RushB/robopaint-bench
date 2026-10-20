@@ -66,7 +66,7 @@
   },
   "verification_scope": "Source canvas/metadata and exported record/trajectory bytes were hashed locally. Episodes, steps, text target and protocol were checked. Historical video decode/replay receipts were retained; no new inference, physical replay or video decode was performed by this builder.",
   "privacy": "Explicit allowlist only. No local source paths, raw payloads, request history, credentials, reasoning contents or private context stores.",
-  "media_policy": "Byte-identical source canvas PNG copies are ignored local preview assets, published separately from Git. Raw records, trajectories, logs and videos are not copied into the code repository.",
+  "media_policy": "The 33 selected byte-identical canvas PNGs are versioned website assets under site/assets/media/pelican. Raw records, trajectories, logs and full videos are not copied into the code repository.",
   "artifacts": [
     {
       "id": "sol/record",

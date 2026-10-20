@@ -8,6 +8,11 @@ No reference image is supplied. The model still receives the same two fixed 960 
 
 The completed independent collection contains **11 models, 33 attempts and 603 actions**. Golden Gate's author ranking is not applied here. Display order and action counts are not quality scores. Submission reward checks the saving/submission workflow, not whether the pelican or bicycle is recognizable.
 
+All 33 selected round-end PNGs are versioned under `site/assets/media/pelican`,
+with exact hashes and episode associations. Together with Golden Gate's 36
+selected images, a fresh clone contains all 69 website assets. Original records,
+HTTP logs, unselected media and complete videos remain outside Git.
+
 ## Actual historical settings
 
 | Model | Access / reasoning | Actions, attempts 1 / 2 / 3 |

@@ -247,7 +247,6 @@ function updateTaskContent(){
   byId('observation-description').textContent=`Two workspace views, flange pose, and public action feedback. ${textOnly?'The drawing target is text only; no reference image is attached.':'The reference is attached at the start of each round.'}`;
   byId('recordings-summary').textContent=`One player · ${collection.models.length} models · ${playbackSpeed}× playback`;
   byId('recordings-caption').textContent=`Each video follows three sequential ICL rounds in one continuous session, at ${playbackSpeed}× simulation-time speed with Chinese and English captions. Model thinking waits are absent from recordings. Model input uses two fixed 960 × 720 workspace cameras; the brush-follow camera is only for human viewing. If the embedded player does not load, open the selected recording on Bilibili.`;
-  byId('original-excerpt').hidden=!golden;
   byId('run-command').textContent=`python scripts/prepare_run.py \\\n  --case ${activeCase.id} --model sol`;
   const replay=byId('case-colab-link');
   const colab=publicURL(activeCase.colab_url);

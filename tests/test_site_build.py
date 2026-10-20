@@ -105,7 +105,7 @@ class SiteBuildTests(unittest.TestCase):
             output = Path(tmp) / "site"
             report = builder.build(output, None, None, True)
             self.assertEqual(report["models"], 11)
-            self.assertEqual(len(report["missing_media"]), 70)
+            self.assertEqual(len(report["missing_media"]), 69)
             self.assertEqual(set(report["cases"]), {"golden_gate", "pelican"})
             self.assertEqual(report["cases"]["pelican"]["attempts"], 33)
             self.assertFalse(report["publication_performed"])
@@ -143,7 +143,7 @@ class SiteBuildTests(unittest.TestCase):
         self.assertIsNone(by_id["pelican"]["results"]["target"].get("reference"))
         self.assertEqual(by_id["golden_gate"]["videos"]["playback_speed"], 6)
         self.assertEqual(by_id["pelican"]["videos"]["playback_speed"], 4)
-        self.assertEqual(len(expected), 70)
+        self.assertEqual(len(expected), 69)
         self.assertFalse(set(by_id["pelican"]["expected_media"]) & set(by_id["golden_gate"]["expected_media"]))
 
     def test_text_case_cannot_smuggle_a_reference_image(self):
@@ -168,6 +168,14 @@ class SiteBuildTests(unittest.TestCase):
             (directory / "cases.json").write_text(json.dumps(catalog), "utf-8")
             with patch.object(builder, "ROOT", root), self.assertRaisesRegex(ValueError, "Unsafe"):
                 builder.load_cases()
+    def test_repository_images_build_a_complete_site_without_an_external_archive(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "site"
+            report = builder.build(output, ROOT / "site/assets/media", None, False)
+            self.assertEqual(report["verified_media"], 69)
+            self.assertEqual(report["missing_media"], [])
+            self.assertEqual(len(list((output / "assets/media").rglob("*.png"))), 69)
+            self.assertEqual(list((output / "assets/media").rglob("*.mp4")), [])
 
     def test_public_build_refuses_missing_media_before_creating_output(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -228,7 +228,7 @@ def build(output: Path, media_root: Path | None, archive: str | None, allow_miss
             media[key] = payload
     missing = sorted(set(expected) - set(media))
     if missing and not allow_missing:
-        raise ValueError(f"Missing {len(missing)} verified assets; assemble the media bundle first. First missing: {missing[0]}")
+        raise ValueError(f"Missing {len(missing)} verified assets; restore the tracked site/assets/media files or supply a matching media archive. First missing: {missing[0]}")
     if publication_approved and missing:
         raise ValueError("A publication build requires all verified media")
     output = output.resolve()
