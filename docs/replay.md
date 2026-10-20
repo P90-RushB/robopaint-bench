@@ -2,7 +2,9 @@
 
 Replay uses AgentArk's existing `ReplayAgent` and `run_replay` entry point. It executes saved environment actions without calling a model API. A compatible Unity Player, matching task/configuration, original goal/reference inputs and a complete action record are required.
 
-For the guided Golden Gate example, use [the recording Colab notebook](../notebooks/GoldenGate_Record_Colab.ipynb) and [its guide](colab-record.md). It downloads and verifies the public Sol record, prepares the locked runtime, selects GPU or explicit CPU rendering, and exposes the observation/history viewer. Its human mode saves new manually chosen actions.
+**For your first local replay, use the [Windows / Linux walkthrough](local-setup.md).** It downloads a selected published record, prepares the matching runtime and opens AgentArk's observation/history viewer without model inference.
+
+For guided online replay, use [the Golden Gate Colab](../notebooks/GoldenGate_Record_Colab.ipynb) and [its guide](colab-record.md). Select any of the 11 model records; the notebook verifies its download, prepares the locked runtime and exposes the viewer.
 
 The independent [Pelican notebook](../notebooks/Pelican_Record_Colab.ipynb) supports all 11 models using that case’s locked public action records. See [Pelican download and local replay commands](pelican-results.md#replay-without-inference). It does not redirect to Golden Gate or invoke a model.
 

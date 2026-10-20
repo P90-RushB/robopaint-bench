@@ -141,3 +141,34 @@ All **138 tests passed**. JavaScript syntax, notebook source-bundle checks and
 Git whitespace checks passed. The site build verified all **69 images**, with
 zero missing media. This update changes presentation and ranking metadata;
 it performs no new inference, physical replay or Pages deployment.
+
+## Repository onboarding and desktop replay, 2026-10-20
+
+The English and Chinese READMEs now introduce the three painting modes, show
+one actual robot recording frame, and link to separate local setup and
+environment/configuration guides. The guides cover Windows PowerShell and
+Linux, no-inference replay, desktop environment viewing, custom prompt/images,
+provider access and a force-grip/finite-pigment configuration example. Result
+tables and historical details remain in the dedicated result/protocol files.
+
+The existing no-inference helper now accepts `--runtime-platform windows` and
+defaults that platform to `existing-display`; Linux/Colab retain the prior
+software-preview default unless explicitly configured for a GPU display.
+Offline tests exercise the real preparer and AgentArk loader with synthetic
+Windows runtime identities, without starting Unity or a model. The source
+identity check also distinguishes a tracked AgentArk source checkout from an
+unrelated Git repository surrounding an installed `.venv` package, while
+retaining editable-source commit/dirty checks. Both embedded notebook bundles
+were refreshed after these helper changes.
+
+All **145 tests passed**, notebook source bundles are current, and the website
+build verified all **69 images**. The 71 local links in the READMEs and new
+guides resolve. Browser inspection checked the README layout, actual image
+and configuration-document navigation. These checks do not constitute a fresh
+Windows physical replay, model evaluation or hosted Colab execution.
+
+AgentArk Hub's local Task 107 integration builds 220 pages and adds only the
+canonical RobotPainting release alongside its existing 216 task entries. The
+task page, real cover, three painting modes, Colab/local guides and homepage
+card were browser-checked. Its commit remains local: pushing Hub main would
+deploy automatically, while the benchmark repository is still private.

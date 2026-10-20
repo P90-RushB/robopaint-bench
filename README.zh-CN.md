@@ -1,42 +1,72 @@
-# RoboPaintBench：机器人绘画基准
+# RoboPaintBench · 机器人绘画基准
 
-**从视觉到落笔。** 基于开源 [AgentArk](https://github.com/P90-RushB/AgentArk) 的模拟机械臂绘画评测，观察大模型如何利用视觉反馈规划三维运动、蘸颜料、画笔画，并利用前轮经验继续作画。
+**大模型能否把绘画目标变成机械臂的真实落笔动作？**
 
-当前为 **v0.1 研究预览**：金门大桥与鹈鹕骑自行车两个目标，各11模型、每个模型3轮上下文学习，共66张最终画布。页面展示所有ICL轮次，支持轮次切换、模型并排比较、完整三轮进程与实际推理设置。鹈鹕为独立的纯文字目标结果，33轮、603动作；自定义绘画单独呈现。
+基于 [AgentArk](https://p90-rushb.github.io/agentark-hub/) 的模拟机械臂绘画评测与实验环境。模型通过相机反馈控制 Panda 机械臂，寻找颜料和画纸，规划三维运动并落笔作画。
 
-**上下文学习（In-context learning）：ICL Round 1 → ICL Round 2 → ICL Round 3。** 每个模型进行一段连续会话：换轮清空画纸，前轮经验通过SimpleAgent的正常上下文、摘要和交互档案保留，供后轮参考。模型参数不更新，是否进步由实际画作体现。“ICL Round n”是展示名称，对应配置和原始记录中的`attempt n`。
+[**Colab 在线回放**](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [**本地运行**](docs/local-setup.md) · [**自定义绘画**](docs/custom-painting.md) · [**English**](README.md)
 
-**所有11个模型，包括Astra，都使用AgentArk内置的同一套SimpleAgent harness。** 代理循环、动作与观察接口、任务步数和轮次预算保持一致，在harness和任务层面提供统一比较条件。Codex SDK、OpenRouter和Volcengine Ark只负责接入模型；Astra同样由SimpleAgent驱动画画。各模型的实际推理设置单独记录。
+![Astra 完成金门大桥第三轮绘画时的机械臂三视角画面](site/assets/media/astra-round3-complete.png)
 
-**金门大桥**页面默认采用作者于 **2026-10-19** 提供的**个人主观排名**：**Astra → Sol → Argon → Opus → DeepSeek → Wonder（Meta）→ Qwen → MiMo → Kimi → Grok → Doubao**。这是署名推荐，不是数值指标或多人共识排名。所有33张画布保留可查看，主比较默认第3轮；后续人工盲评为可选补充。环境的提交reward只代表保存/提交流程，不是画画好坏。
+*真实录制帧：Astra 完成第 3 轮 ICL 绘画。模型获得两路固定工作区相机，笔尖跟随近景供观众观看。*
 
-## 入口
+## 三种绘画模式
 
-- [英文项目说明](README.md)：结果表、协议、版本和全部文档。
-- [展示页本地预览与GitHub Pages](docs/hosting.md)：首版不需要购买服务器。
-- [打开金门大桥 Colab 回放](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing)与[中文使用说明](docs/colab-record.zh-CN.md)：默认 GPU 渲染，不需要模型 API Key；全部运行后打开第 7 步输出的 viewer 链接，查看相机画面及动作历史。[Notebook 源文件](notebooks/GoldenGate_Record_Colab.ipynb)也保存在仓库中。
-- [鹈鹕结果、实际设置与回放说明](docs/pelican-results.md)和[独立鹈鹕 Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/Pelican_Record_Colab.ipynb)：可选11模型的公开record，不调用模型；新notebook仅做离线检查，未宣称已在线跑通。
-- [首次评测](docs/quickstart.md)与[新模型评测 Colab](notebooks/RobotPainting_Colab.ipynb)：复用 AgentArk 原有评测器，显式启动后才调用模型。
-- [任意图片/文字绘画](docs/custom-painting.md)与[回放](docs/replay.md)。
-- [基准协议](benchmarks/protocol.md)、[结果呈现和可选人工评分](docs/scoring.md)、[局限](docs/limitations.md)。
-- [中文发布与传播方案](docs/launch-plan.zh-CN.md)。
+| 模式 | 给模型的目标 | 可以做什么 |
+| --- | --- | --- |
+| **参考图绘画 · 金门大桥** | 统一参考照片与复现指令。 | 回放已发布的模型记录，或在相同目标上评测模型。 |
+| **纯文字绘画 · 鹈鹕骑自行车** | 文字描述，不附参考画作；模型仍通过相机观察工作区。 | 比较不同模型如何把同一句话转化为画面。 |
+| **自定义绘画 · 你的目标** | 自己的 prompt、一张或多张参考图，也可组合使用。 | 选择模型，让机械臂画你指定的内容。 |
 
-标准条件是同一会话中的3轮连续ICL、每轮最多96环境动作、种子107、两路960×720固定相机、固定笔/纸、无限颜料、120Hz控制/480Hz物理。换轮保留经验，三轮具有依赖关系。金门大桥参考图只在每轮首步附加，后续可从历史档案回看。
+两个固定目标各包含 **11 模型 × 3 轮连续 ICL**，共 66 张最终画布。每轮换新画纸，前轮经验通过同一 agent 的上下文与记忆保留，模型参数不更新。两个目标分别默认采用作者给出的个人排名。
 
-录像用的人类笔尖跟随镜头不提供给模型。模型推理等待不会计入录像，所以录像时长不是端到端推理耗时。
+[展示网页](docs/hosting.md)负责比较画作和观看视频；本仓库负责安装、回放与运行环境。GitHub Pages 展示页尚待部署。
 
-Grok最新资料已补完第三轮：96/96/47步；其中一个预算失败是明确记录的harness无移动拒绝步。共同SimpleAgent harness下，Opus混合推理设置、MiMo提高输出预算、Astra的Codex SDK后端输出限制差异已保留。统一任务和代理机制并不代表相同推理消耗，首版不宣称等算力对照。
+## 从这里开始
 
-发布结构为GitHub仓库、GitHub Pages网页、B站/YouTube视频、Colab计算入口。网页源码、元数据及精选网站PNG图片随Git版本管理：当前共69张：金门大桥36张（33张画布、1张参考图和2张机械臂录制帧），鹈鹕33张轮末画布。新克隆仓库安装`requirements-site.txt`后，执行`python scripts/build_site.py --output local_save/site-preview-01`即可构建完整网页，无需另传媒体包或私有结果索引。完整视频由B站播放，旧的12秒本地片段不再纳入网站。原始记录、请求/推理、完整录像、日志和本机输出继续留在Git之外。Notebook 保留用户指定的三张内嵌预览图，供启动前阅读；不包含执行输出或原始 record。图片入库不代表适用代码的Apache-2.0许可，也不授权发布其他评测数据。GitHub Pages仍需手动部署。Colab 回放／交互示例的实际 GPU、网页、动作和录像验证范围见[运行报告](docs/colab-validation-20261020.md)；新模型付费推理另行启动。
+| 你想做什么 | 入口 |
+| --- | --- |
+| **在线观看模型回放** | [金门大桥 Colab](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [鹈鹕 Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/Pelican_Record_Colab.ipynb) |
+| **在自己的电脑运行** | [Windows / Linux 安装与首次回放](docs/local-setup.md) |
+| **让模型画自己的目标** | [自定义 prompt 与参考图](docs/custom-painting.md) · [自定义绘画 Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/RobotPainting_Colab.ipynb) |
+| **了解或修改环境配置** | [环境与配置说明](docs/environment.md) |
 
-参考照片：Frank Schulenburg，CC BY-SA 4.0；完整[来源与许可说明](docs/attribution.md)。灵感来自 [Thijs Simonian 的现实机器人画桥演示](https://thijs.net/projects/robot-painter)，本项目使用自己的模拟Panda机器人与协议。
+### 在线：打开 Colab 观看
 
-## 鹈鹕骑自行车
+1. 打开回放 notebook，在 **Runtime → Change runtime type** 选择 **T4 GPU**。
+2. 选择要回放的模型 record，点击 **Runtime → Run all**。
+3. **打开第 7 步输出的 viewer 网址**，观看相机画面、动作与交互历史。
 
-目标原文为 `Paint a pelican riding a bicycle.`，不附参考图，但保留两路工作区相机。11模型的三轮均完成，共33张画布、603动作。
+回放执行已保存的动作，**不需要模型 API Key**。让模型新画一幅画需要自己的模型服务凭据；自定义绘画 notebook 默认先准备配置，由用户显式启用推理。[Colab 中文说明](docs/colab-record.zh-CN.md) · [自定义绘画](docs/custom-painting.md) · [验证范围](docs/validation.md)。
 
-鹈鹕页面默认采用作者于 **2026-10-20** 提供的独立个人排名：**Astra → Sol → Argon → Opus → Wonder（Meta）→ MiMo → Qwen → Kimi → DeepSeek → Doubao → Grok**，画廊与实际设置表均按此排列。[排名元数据](benchmarks/results/pelican-ranking.json)保留署名、日期及顺序；这是主观推荐，不是数值评分或多人共识结果。
+### 本地：Windows 或 Linux
 
-[公开结果](benchmarks/results/pelican.json)和[视频索引](benchmarks/results/pelican-videos.json)分别记录轮次、证据与链接。11段成片均含完整三轮，采用**播放速度：4× / Speed: 4×**，按模拟时间加速；去掉模型等待时间，极短步骤字幕暂停有明确标注。笔尖跟随近景只供观众观看。
+安装对应平台的 Player 与 RobotPainting task 后，可以选择**回放记录**或**启动模型作画**。图形桌面上可直接观看 Unity 环境窗口；回放还提供浏览器内的相机与历史 viewer。不需要 Unity Editor，也无需下载模型权重。
 
-HF的record和trajectory固定在 `b16fb52e866ce6a33c52e287f04bfe4a77964453`，带文件大小和SHA-256。完整record覆盖603动作；六个模型的首轮trajectory只保留末24步，不能作为完整历史或完整context。实际档位保留差异：Opus为high，MiMo两次请求临时使用65,536输出上限，Astra为订阅Codex SDK的max且无等价API硬输出上限。Astra的历史SDK适配器未包含在锁定上游代码中，因此不把它伪装成可移植的新评测模板。
+[本地安装指南](docs/local-setup.md)分别提供 Windows PowerShell 和 Linux 命令。Python 版本为 **3.10.0–3.10.12**；安装器下载锁定运行时，并打印当前终端需要设置的路径。
+
+## 环境配置概览
+
+| 配置 | 固定 benchmark 设置 |
+| --- | --- |
+| 环境与任务 | AgentArk **Task 107 · RobotPainting**；env **1.0.5**、task **task-v1** |
+| 轮次与预算 | **3 轮连续 ICL**，每轮最多 **96 个环境动作**；seed **107** |
+| 模型观察 | 两路固定 **960 × 720** 工作区相机、末端位姿与动作反馈 |
+| 动作 | 每个动作最多 32 个带时间的末端路径点，笔与纸接触产生笔迹 |
+| 绘画机制 | 固定笔、固定画板、无限颜料 |
+| 仿真时序 | 120 Hz 控制、480 Hz 物理、time scale 1 |
+| Agent harness | 所有模型使用 AgentArk 内置的 **SimpleAgent** |
+
+也支持力夹持画笔、有限颜料与干笔/重新蘸取、随机画板、不同物理频率等设置。[配置文档](docs/environment.md)说明如何创建独立实验条件。Codex SDK、OpenRouter 和火山引擎是同一 SimpleAgent 内的模型接入后端；各模型实际推理设置及差异保留在[协议](benchmarks/protocol.md)与结果资料中。提交 reward 表示保存/提交状态，不评价画作质量。
+
+## AgentArk 中的一个任务
+
+RoboPaintBench 专门研究 AgentArk 的 **RobotPainting 这一个 task**。[**AgentArk Hub**](https://p90-rushb.github.io/agentark-hub/)是更广泛的任务入口，可以理解为**大模型的 Steam**：发现环境、运行任务、观察模型如何行动。[AgentArk 源码与 Python 包](https://github.com/P90-RushB/AgentArk)。
+
+## 结果与开发资料
+
+- [金门大桥结果](benchmarks/results/golden_gate.json) · [鹈鹕结果与设置](docs/pelican-results.md) · [作者排名与可选评分](docs/scoring.md)。
+- [评测协议](benchmarks/protocol.md) · [版本锁](benchmarks/versions.json) · [进阶回放](docs/replay.md) · [局限](docs/limitations.md)。
+- [提交新结果](docs/submissions.md) · [构建与部署展示网页](docs/hosting.md) · [开发验证](docs/validation.md)。
+
+网站所需 69 张精选 PNG 已随仓库提供，完整视频由 B 站播放。代码与文档采用 Apache-2.0；运行时资产和评测图片保留各自条款。参考照片为 Frank Schulenburg 的 CC BY-SA 4.0 作品；灵感来自 [Thijs Simonian 的机器人绘画演示](https://thijs.net/projects/robot-painter)。[来源与许可](docs/attribution.md) · [引用](CITATION.cff)。

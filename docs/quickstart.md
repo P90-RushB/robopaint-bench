@@ -1,10 +1,12 @@
 # Run RoboPaintBench
 
+**New here?** Start with [Windows / Linux setup and your first replay](local-setup.md), or [environment settings](environment.md). This page retains the detailed model-access and graphics notes.
+
 Start with the [Golden Gate replay / interaction notebook](../notebooks/GoldenGate_Record_Colab.ipynb) to use the simulator without a model API key. It defaults to NVIDIA GPU rendering and replays public saved actions, with an alternative manual interaction mode. See the [Colab guide](colab-record.md) and [dated execution report](colab-validation-20261020.md).
 
 For the independent text-only Pelican case, use the [Pelican replay notebook](../notebooks/Pelican_Record_Colab.ipynb) and [record/settings guide](pelican-results.md). It selects Pelican records rather than Golden Gate data. Its notebook extension is checked offline; Golden Gate’s hosted validation is not a hosted Pelican result.
 
-For a new SimpleAgent evaluation, use the separate [evaluation notebook](../notebooks/RobotPainting_Colab.ipynb), or a Linux graphics machine. Its default is **prepare only**, with a software-rendering preview profile; paid model evaluation is outside the hosted replay/interaction check. Installing dependencies and downloading the runtime do not make paid model calls. No Unity Editor or local model weights are required.
+For a new SimpleAgent evaluation, use the separate [evaluation notebook](../notebooks/RobotPainting_Colab.ipynb), or a Windows/Linux graphics desktop. The notebook defaults to **prepare only**, with a software-rendering preview profile; paid model evaluation is outside the hosted replay/interaction check. Installing dependencies and downloading the runtime do not make paid model calls. No Unity Editor or local model weights are required.
 
 ## Local installation
 

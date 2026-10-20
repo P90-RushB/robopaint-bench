@@ -86,8 +86,9 @@ def prepare(args) -> Path:
         raise ValueError("Replay preparation requires --record-path from download-record.")
     # Sol is only an offline template used by the existing preparer. It is
     # removed below; source-model selection never constructs an API agent.
-    command = ["--case", args.case, "--model", "sol", "--runtime-platform", "linux",
-               "--render-mode", args.render_mode, "--output-dir", args.run_dir,
+    render_mode = args.render_mode or ("existing-display" if args.runtime_platform == "windows" else "xvfb-software")
+    command = ["--case", args.case, "--model", "sol", "--runtime-platform", args.runtime_platform,
+               "--render-mode", render_mode, "--output-dir", args.run_dir,
                "--base-port", str(args.base_port)]
     for flag, value in (("--env-path", args.env_path), ("--mod-path", args.mod_path),
                         ("--task-store", args.task_store)):
@@ -207,7 +208,9 @@ def parser() -> argparse.ArgumentParser:
     prep.add_argument("--env-path", default=os.getenv("AGENTARK_ENV_PATH"))
     prep.add_argument("--mod-path", default=os.getenv("AGENTARK_MOD_PATH"))
     prep.add_argument("--task-store", default=os.getenv("AGENTARK_TASK_STORE_PATH"))
-    prep.add_argument("--render-mode", choices=("existing-display", "xvfb-software"), default="xvfb-software")
+    prep.add_argument("--runtime-platform", choices=("linux", "windows"), default="linux")
+    prep.add_argument("--render-mode", choices=("existing-display", "xvfb-software"),
+                      help="Default: existing-display on Windows, xvfb-software on Linux. Use existing-display for a configured GPU display.")
     prep.add_argument("--graphics-api", choices=("default", "glcore33", "vulkan"), default="default",
                       help="Request an API; this does not prove GPU use or configure drivers.")
     prep.add_argument("--viewer-port", type=int, default=18181)

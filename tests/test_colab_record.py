@@ -101,11 +101,84 @@ class ColabRecordTests(unittest.TestCase):
     def test_human_preparation_has_no_model_and_preserves_three_attempt_budget(self):
         path = self.prepare(mode="human")
         cfg = yaml.safe_load(path.read_text("utf-8"))
+        self.assertEqual("linux", self.seed_args.runtime_platform)
+        self.assertEqual("xvfb-software", self.seed_args.render_mode)
         self.assertEqual([], cfg["models"])
         self.assertTrue(cfg["hooks"]["human_interaction"]["enabled"])
         self.assertIsNone(cfg["hooks"]["human_interaction"]["timeout_s"])
         self.assertEqual((3, 96), tuple(cfg["env_cfg"]["env_config_overrides"][key]
                                       for key in ("max_attempts", "max_steps_per_attempt")))
+
+    def test_windows_replay_prepares_existing_display_with_real_preparer_offline(self):
+        # Only the immutable runtime identity is synthetic. Exercise the real
+        # preparer and AgentArk's read-only merge/loader without launching any
+        # Player, viewer, model, Xvfb, download or subprocess.
+        from agent_ark.ark_eval.run_api_agent import load_eval_config
+
+        player = self.root / "player"
+        player.mkdir()
+        executable = player / "AgentArk.exe"
+        executable.write_bytes(b"offline fixture - never execute")
+        mods = player / "AgentArk_Data/Resources/Mods"
+        mods.mkdir(parents=True)
+        task = mods / "all_tasks/RobotPainting"
+        (task / "cfg").mkdir(parents=True)
+        (task / "dll").mkdir()
+        (task / "dll/RobotPainting.dll").write_bytes(b"offline fixture")
+        (task / "catalog_1.0.json").write_text("{}\n", encoding="utf-8")
+        (task / "scene.bundle").write_bytes(b"offline fixture")
+        (task / "cfg/task_config.yaml").write_text(yaml.safe_dump({
+            "task_name": "RobotPainting", "max_attempts": 3, "max_steps_per_attempt": 96,
+            "task_params": {}, "env_wrapper_cfg": {},
+        }), encoding="utf-8")
+        # A stale virtual-display policy must not activate Xvfb on Windows.
+        (mods / "config.yaml.bak").write_text(yaml.safe_dump({
+            "task_name": "OldTask", "engine_para": {"time_scale": 1},
+            "virtual_display": True, "virtual_display_force": True,
+        }), encoding="utf-8")
+        (mods / "config.yaml").write_text("task_name: OldTask\n", encoding="utf-8")
+        before = {path: path.read_bytes() for path in player.rglob("*") if path.is_file()}
+        run_dir = self.root / "windows replay"
+        args = record.parser().parse_args([
+            "prepare", "--runtime-platform", "windows", "--case", "pelican", "--model", "astra",
+            "--record-path", str(self.source), "--run-dir", str(run_dir),
+            "--env-path", str(executable), "--mod-path", str(mods), "--task-store", str(task.parent),
+        ])
+        with patch.object(record.prepare_run, "agentark_identity", return_value={"matches_version_lock": True}), \
+                patch.object(record.prepare_run, "check_task_files", return_value=True) as task_check, \
+                patch("subprocess.Popen", side_effect=AssertionError("No processes during preparation")):
+            path = record.prepare(args)
+        self.assertEqual("windows", task_check.call_args.args[1])
+        cfg = load_eval_config(str(path))
+        env = cfg["env_cfg"]
+        self.assertFalse(env["no_graphics"])
+        self.assertTrue(env["runtime_sandbox"]["enabled"])
+        self.assertEqual("windows", env["runtime_sandbox"]["runtime_platform"])
+        self.assertEqual(run_dir / "runtime", Path(env["runtime_sandbox"]["pool_root"]))
+        self.assertFalse(env["env_config_overrides"]["virtual_display"])
+        self.assertFalse(env["env_config_overrides"]["virtual_display_force"])
+        self.assertNotIn("-force-glcore33", env["additional_args"])
+        self.assertNotIn("models", cfg)
+        self.assertNotIn("eval", cfg)
+        self.assertFalse(cfg["robopaint_record"]["model_inference"])
+        self.assertTrue(cfg["hooks"]["visualization"]["enabled"])
+        self.assertEqual("127.0.0.1", cfg["hooks"]["visualization"]["host"])
+        self.assertFalse(cfg["hooks"]["human_interaction"]["enabled"])
+        self.assertEqual(run_dir / "replay_results.jsonl", Path(cfg["replay"]["output_path"]))
+        manifest = json.loads((run_dir / "manifest.json").read_text("utf-8"))
+        self.assertEqual("windows", manifest["runtime_platform"])
+        self.assertEqual("existing-display", manifest["rendering"]["requested_mode"])
+        self.assertEqual("prepared_only_not_runtime_validated", manifest["validation_status"])
+        self.assertEqual(before, {path: path.read_bytes() for path in player.rglob("*") if path.is_file()})
+
+    def test_windows_replay_refuses_explicit_xvfb_before_creating_output(self):
+        args = record.parser().parse_args([
+            "prepare", "--runtime-platform", "windows", "--render-mode", "xvfb-software",
+            "--record-path", str(self.source), "--run-dir", str(self.root / "must-not-exist"),
+        ])
+        with self.assertRaisesRegex(ValueError, "Linux-only"):
+            record.prepare(args)
+        self.assertFalse((self.root / "must-not-exist").exists())
 
     def test_pelican_preparation_selects_text_case_without_constructing_source_model(self):
         with patch.object(record, "record_contract", return_value=self.contract) as contract:

@@ -2,11 +2,14 @@
 
 Custom drawing reuses the same Panda simulation, SimpleAgent, records and replay. Write a UTF-8 goal file, choose a model, then prepare and launch a fresh run. This creates a `custom-…` case ID and records `custom_target: true`; it is separate from the fixed Golden Gate and Pelican benchmarks.
 
+**Start online:** [open the custom-painting Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/RobotPainting_Colab.ipynb), supply your prompt/images and provider credentials, then explicitly enable the prepared run.
+
+**Start locally:** follow [Windows / Linux setup](local-setup.md), then use the commands below. Add `--runtime-platform windows` on Windows; Linux is the default. On a graphics desktop, the Unity environment window lets you watch the model paint. [Environment settings](environment.md).
+
 ## Text only
 
 ```sh
-python scripts/prepare_run.py --case golden_gate --model sol \
-  --goal-file my_goal.txt --text-only
+python scripts/prepare_run.py --case golden_gate --model sol --goal-file my_goal.txt --text-only
 ```
 
 Example `my_goal.txt`:
@@ -21,9 +24,7 @@ The model receives the goal and robot workspace cameras; no reference artwork is
 ## One or several reference images
 
 ```sh
-python scripts/prepare_run.py --case golden_gate --model doubao \
-  --goal-file my_goal.txt \
-  --reference-image person.png --reference-image landscape.jpg
+python scripts/prepare_run.py --case golden_gate --model doubao --goal-file my_goal.txt --reference-image person.png --reference-image landscape.jpg
 ```
 
 Images retain their supplied order. Explain it in the goal, for example: “Paint the person in image 1 within the landscape in image 2.” References are attached at the start of each attempt; SimpleAgent's normal context/archive tools handle later access. The script copies inputs and stores their hashes. Use images you may share; third-party image rights also matter when publishing the resulting input bundle.

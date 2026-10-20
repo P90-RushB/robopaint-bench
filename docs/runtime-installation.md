@@ -1,4 +1,6 @@
-# 另一台机器安装与运行
+# Advanced runtime installation / 进阶安装
+
+For the shorter Windows/Linux walkthrough, start with [local setup](local-setup.md). This reference retains the artifact layout, versioning and manual-installation details.
 
 RoboPaintBench 使用 AgentArk 原有的评测、SimpleAgent、任务加载、记录和回放流程。
 运行时资源位于 [Hugging Face AgentArk dataset](https://huggingface.co/datasets/P90-RushB/AgentArk)，

@@ -58,18 +58,33 @@ def agentark_identity(lock: dict, allow_mismatch: bool) -> dict:
     commit, dirty = None, None
     for parent in package.parents:
         if (parent / ".git").exists():
+            relative = package.relative_to(parent).as_posix()
+            # An installed .venv can sit inside an unrelated Git checkout.
+            # Only a tracked AgentArk source package belongs to this repo.
+            try:
+                subprocess.check_output(
+                    ["git", "-C", str(parent), "ls-files", "--error-unmatch", "--", relative + "/__init__.py"],
+                    text=True, stderr=subprocess.DEVNULL,
+                )
+            except subprocess.CalledProcessError as error:
+                if error.returncode != 1:
+                    raise
+                continue
             commit = subprocess.check_output(
                 ["git", "-C", str(parent), "rev-parse", "HEAD"], text=True
             ).strip()
-            relative = package.relative_to(parent).as_posix()
             dirty = bool(subprocess.check_output(
                 ["git", "-C", str(parent), "status", "--porcelain", "--", relative], text=True
             ).strip())
             break
     if commit is None:
-        direct_url = metadata.distribution("agent-ark").read_text("direct_url.json")
-        if direct_url:
-            commit = json.loads(direct_url).get("vcs_info", {}).get("commit_id")
+        try:
+            direct_url = metadata.distribution("agent-ark").read_text("direct_url.json")
+        except metadata.PackageNotFoundError:
+            direct_url = None
+        provenance = json.loads(direct_url) if direct_url else {}
+        if not provenance.get("dir_info", {}).get("editable"):
+            commit = provenance.get("vcs_info", {}).get("commit_id")
     context = asdict(SimpleRuntimeConfig())
     limits = asdict(ToolLimits(max_records=512))
     matches = (commit == lock["agentark"]["commit"] and dirty is not True

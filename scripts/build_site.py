@@ -279,7 +279,7 @@ def build(output: Path, media_root: Path | None, archive: str | None, allow_miss
         destination.write_bytes(payload)
     (output / "docs").mkdir()
     docs = {"protocol.md": ROOT / "benchmarks/protocol.md"}
-    for filename in ("scoring.md", "submissions.md", "limitations.md", "quickstart.md", "custom-painting.md", "replay.md", "pelican-results.md", "hosting.md", "attribution.md", "release.md", "runtime-installation.md", "colab-record.md", "colab-record.zh-CN.md", "colab-validation-20261020.md"):
+    for filename in ("scoring.md", "submissions.md", "limitations.md", "quickstart.md", "local-setup.md", "environment.md", "custom-painting.md", "replay.md", "pelican-results.md", "hosting.md", "attribution.md", "release.md", "runtime-installation.md", "colab-record.md", "colab-record.zh-CN.md", "colab-validation-20261020.md"):
         docs[filename] = ROOT / "docs" / filename
     for filename, source in docs.items():
         render_doc(source, output / "docs" / filename.replace(".md", ".html"), filename.removesuffix(".md").replace("-", " ").title())
