@@ -3,6 +3,12 @@
 The source archive contains no runtime, records, media, logs or credentials.
 An independently supplied SHA-256 is required before trusting an uploaded ZIP;
 the internal manifest checks consistency, not the identity of its publisher.
+
+All allowlisted sources are text. Packaging converts CRLF line endings to LF
+before recording sizes and hashes, so equivalent Windows and Unix checkouts
+produce identical archives without modifying the checkout. Other source bytes
+are preserved. Verification always checks the exact archived bytes and never
+normalizes archive members.
 """
 from __future__ import annotations
 
@@ -78,7 +84,7 @@ def source_file(root: Path, relative: str) -> bytes:
         payload = stream.read(MAX_FILE_BYTES + 1)
     if not 0 < len(payload) <= MAX_FILE_BYTES:
         raise BundleError("A source file is empty or exceeds the size limit")
-    return payload
+    return payload.replace(b"\r\n", b"\n")
 
 
 def new_destination(path: Path) -> Path:

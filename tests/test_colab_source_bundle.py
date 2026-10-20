@@ -75,6 +75,31 @@ class ColabSourceBundleTests(unittest.TestCase):
         again = self.root / "same-source.zip"
         self.assertEqual(self.report["archive_sha256"], bundle.pack(self.source, again)["archive_sha256"])
 
+    def test_lf_and_crlf_checkouts_produce_identical_lf_archives_without_source_changes(self):
+        lf_source = self.root / "lf-checkout"
+        crlf_source = self.root / "crlf-checkout"
+        originals = {}
+        canonical = {}
+        for name in bundle.ALLOWED_FILES:
+            payload = ("text fixture for " + name + "\nsecond line: caf\u00e9\n").encode("utf-8")
+            canonical[name] = payload
+            for root, content in ((lf_source, payload), (crlf_source, payload.replace(b"\n", b"\r\n"))):
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(content)
+                originals[path] = content
+        lf_archive = self.root / "lf-source.zip"
+        crlf_archive = self.root / "crlf-source.zip"
+        lf_report = bundle.pack(lf_source, lf_archive)
+        crlf_report = bundle.pack(crlf_source, crlf_archive)
+        self.assertEqual(lf_report["archive_sha256"], crlf_report["archive_sha256"])
+        self.assertEqual(lf_archive.read_bytes(), crlf_archive.read_bytes())
+        bundle.unpack(crlf_archive, self.destination, crlf_report["archive_sha256"])
+        for name, payload in canonical.items():
+            self.assertEqual(payload, (self.destination / name).read_bytes(), name)
+        for path, content in originals.items():
+            self.assertEqual(content, path.read_bytes(), str(path))
+
     def test_missing_source_or_existing_destinations_preserve_files(self):
         self.archive.write_bytes(b"preserve existing archive")
         with self.assertRaises(FileExistsError):
@@ -100,7 +125,8 @@ class ColabSourceBundleTests(unittest.TestCase):
 
     def test_manifest_digest_and_size_must_match_even_for_trusted_zip(self):
         target = bundle.ALLOWED_FILES[0]
-        for change in (lambda payload: payload + b"tampered", lambda payload: b"x" * len(payload)):
+        for change in (lambda payload: payload + b"tampered", lambda payload: b"x" * len(payload),
+                       lambda payload: payload.replace(b"\n", b"\r\n")):
             with self.subTest(change=change):
                 path, sha = self.rewritten(lambda entries: [(name, change(data) if name == target else data, mode) for name, data, mode in entries])
                 self.rejected(path, sha)

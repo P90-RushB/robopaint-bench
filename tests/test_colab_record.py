@@ -235,7 +235,8 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
             archive.write_bytes(base64.b64decode(values["EMBEDDED_SOURCE_ZIP_B64"], validate=True))
             _, payloads = package_colab_source.verify_archive(archive, values["SOURCE_ARCHIVE_SHA256"])
             for relative, payload in payloads.items():
-                self.assertEqual((ROOT / relative).read_bytes(), payload, relative)
+                expected = (ROOT / relative).read_bytes().replace(b"\r\n", b"\n")
+                self.assertEqual(expected, payload, relative)
 
     def test_notebook_has_blank_outputs_valid_code_and_no_inference_default(self):
         notebook = json.loads((ROOT / "notebooks/GoldenGate_Record_Colab.ipynb").read_text("utf-8"))
@@ -297,7 +298,8 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
                     self.assertEqual("embedded", scope["SOURCE_RECEIPT"]["mode"])
                     self.assertEqual(14, scope["SOURCE_RECEIPT"]["files"])
                     for relative in defaults["SOURCE_FILES"]:
-                        self.assertEqual((ROOT / relative).read_bytes(), (scope["BENCH"] / relative).read_bytes())
+                        expected = (ROOT / relative).read_bytes().replace(b"\r\n", b"\n")
+                        self.assertEqual(expected, (scope["BENCH"] / relative).read_bytes(), relative)
                 scope["run"].assert_not_called()
 
     def test_notebook_bootstrap_checks_exact_source_closure_before_extraction(self):
@@ -362,7 +364,7 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
             receipt = package_colab_source.pack(ROOT, archive)
             restored = scope["unpack_source_bundle"](archive, root / "restored", receipt["archive_sha256"])
             self.assertEqual(14, restored["files"])
-            self.assertEqual((ROOT / "scripts/colab_record.py").read_bytes(),
+            self.assertEqual((ROOT / "scripts/colab_record.py").read_bytes().replace(b"\r\n", b"\n"),
                              (root / "restored/scripts/colab_record.py").read_bytes())
 
     def test_gpu_notebook_launch_consumes_all_graphics_unset_variables(self):
