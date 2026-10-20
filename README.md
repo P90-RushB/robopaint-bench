@@ -4,7 +4,7 @@
 
 A robot-painting benchmark and playground built on [AgentArk](https://p90-rushb.github.io/agentark-hub/). Models use camera feedback to control a simulated Panda arm, find paint and paper, and paint through timed 3D movements.
 
-[**Website**](https://robopaintbench.org/) · [**Replay in Colab**](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [**Run locally**](docs/local-setup.md) · [**Paint your own goal**](docs/custom-painting.md) · [**中文**](README.zh-CN.md)
+[**Website**](https://robopaintbench.org/) · [**Replay in Colab**](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/GoldenGate_Record_Colab.ipynb) · [**Run locally**](docs/local-setup.md) · [**Paint your own goal**](docs/custom-painting.md) · [**中文**](README.zh-CN.md)
 
 ![Astra's robot painting the Golden Gate Bridge, shown from two workspace cameras and a brush-follow close-up](site/assets/media/astra-round3-complete.png)
 
@@ -26,7 +26,7 @@ The [project website](https://robopaintbench.org/) is for comparing paintings an
 
 | You want to… | Open |
 | --- | --- |
-| **Watch a replay online** | [Golden Gate Colab](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [Pelican Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/Pelican_Record_Colab.ipynb) |
+| **Watch a replay online** | [Golden Gate Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/GoldenGate_Record_Colab.ipynb) · [Pelican Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/Pelican_Record_Colab.ipynb) |
 | **Run on your own computer** | [Windows / Linux setup and first replay](docs/local-setup.md) |
 | **Ask a model to paint something new** | [Custom prompt and reference-image guide](docs/custom-painting.md) · [Custom painting Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/RobotPainting_Colab.ipynb) |
 | **Change the simulation settings** | [Environment and configuration guide](docs/environment.md) |

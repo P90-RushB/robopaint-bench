@@ -16,6 +16,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import uuid
 import zipfile
 from unittest.mock import Mock, patch
 
@@ -250,20 +251,22 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
         entry = record.record_contract()
         self.assertEqual(17574365, entry["bytes"])
         self.assertEqual("3189bf011628a6f87c25f910141a5ab0c456ecc7059bb4e52b1364877acdaaaf", entry["sha256"])
-        self.assertEqual("90520211bee7327482ed71805473618cdaf2d61c", entry["revision"])
+        self.assertEqual("1d4f382a163256a9f75e3817b68698c1e73e6fa1", entry["revision"])
 
-    def test_every_pelican_contract_has_fixed_revision_and_distinct_complete_record(self):
-        release = json.loads((ROOT / "benchmarks/results/pelican.json").read_text("utf-8"))
-        filenames = set()
-        for model in release["models"]:
-            with self.subTest(model=model["id"]):
-                entry = record.record_contract("pelican", model["id"])
-                self.assertEqual("b16fb52e866ce6a33c52e287f04bfe4a77964453", entry["revision"])
-                self.assertIn("/pelican/", entry["filename"])
-                self.assertTrue(entry["all_actions_complete"])
-                self.assertEqual(model["record"]["sha256"], entry["sha256"])
-                filenames.add(entry["filename"])
-        self.assertEqual(11, len(filenames))
+    def test_every_public_contract_has_fixed_revision_and_distinct_complete_record(self):
+        for case, revision in (("golden_gate", "1d4f382a163256a9f75e3817b68698c1e73e6fa1"),
+                               ("pelican", "b16fb52e866ce6a33c52e287f04bfe4a77964453")):
+            release = json.loads((ROOT / f"benchmarks/results/{case}.json").read_text("utf-8"))
+            filenames = set()
+            for model in release["models"]:
+                with self.subTest(case=case, model=model["id"]):
+                    entry = record.record_contract(case, model["id"])
+                    self.assertEqual(revision, entry["revision"])
+                    self.assertIn(f"/{case}/", entry["filename"])
+                    self.assertTrue(entry["all_actions_complete"])
+                    self.assertEqual(model["record"]["sha256"], entry["sha256"])
+                    filenames.add(entry["filename"])
+            self.assertEqual(11, len(filenames))
         for case, model in (("unknown", "sol"), ("pelican", "not-a-model"), ("../../private", "sol")):
             with self.subTest(case=case, model=model), self.assertRaises(ValueError):
                 record.record_contract(case, model)
@@ -336,6 +339,42 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
         self.assertNotIn("ARK_API_KEY", joined)
         self.assertIn('graphics["environment"]', joined)
         self.assertIn("LOCAL_CHECKOUT", joined)
+
+    def test_golden_gate_notebook_routes_each_selected_record_to_download_and_prepare(self):
+        notebook = json.loads((ROOT / "notebooks/GoldenGate_Record_Colab.ipynb").read_text("utf-8"))
+        source = next("".join(c["source"]) for c in notebook["cells"] if c.get("id") == "goldengate-record-06")
+        models = json.loads((ROOT / "benchmarks/results/golden_gate.json").read_text("utf-8"))["models"]
+        for model in models:
+            with self.subTest(model=model["id"]), tempfile.TemporaryDirectory() as temporary:
+                tree = ast.parse(source)
+                selection = next(node for node in tree.body if isinstance(node, ast.Assign)
+                                 and isinstance(node.targets[0], ast.Name) and node.targets[0].id == "RECORD_MODEL")
+                selection.value = ast.Constant(model["id"])
+                ast.fix_missing_locations(tree)
+                calls = []
+                def fake_run(command, **kwargs):
+                    calls.append(command)
+                    if command[2] == "prepare":
+                        Path(command[command.index("--run-dir") + 1]).mkdir()
+                root = Path(temporary)
+                process = Mock()
+                process.check_output.return_value = "offline-fixture\n"
+                scope = {"SESSION": root, "PYTHON": root / "python", "HELPER": root / "helper",
+                         "PLAYER": root / "player", "MODS": root / "mods", "STORE": root / "store",
+                         "BENCH": root, "RENDERER": "gpu", "RENDER_MODE": "existing-display",
+                         "GRAPHICS_API": "glcore33", "SOURCE_RECEIPT": {}, "run": fake_run,
+                         "subprocess": process, "json": json, "uuid": uuid}
+                with patch("builtins.print"):
+                    exec(compile(tree, "notebook-prepare", "exec"), scope)
+                download, prepare = calls
+                self.assertEqual("download-record", download[2])
+                self.assertEqual("prepare", prepare[2])
+                for command in calls:
+                    self.assertEqual("golden_gate", command[command.index("--case") + 1])
+                    self.assertEqual(model["id"], command[command.index("--model") + 1])
+                self.assertEqual(download[download.index("--destination") + 1],
+                                 prepare[prepare.index("--record-path") + 1])
+                self.assertEqual(model["id"], scope["PREPARED_SELECTION"][0])
 
     def test_single_file_embedded_source_bootstraps_exact_reviewed_files_and_rejects_tampering(self):
         notebook = json.loads((ROOT / "notebooks/GoldenGate_Record_Colab.ipynb").read_text("utf-8"))
@@ -450,9 +489,9 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
                  "MESA_LOADER_DRIVER_OVERRIDE", "LIBGL_DRIVERS_PATH"]
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            selection = ("replay", "gpu", "existing-display", "glcore33", 18181, 5005)
+            selection = ("sol", "replay", "gpu", "existing-display", "glcore33", 18181, 5005)
             process = Mock()
-            scope = {"RUN": root, "PREPARED_SELECTION": selection, "MODE": "replay", "RENDERER": "gpu",
+            scope = {"RUN": root, "PREPARED_SELECTION": selection, "RECORD_MODEL": "sol", "MODE": "replay", "RENDERER": "gpu",
                      "RENDER_MODE": "existing-display", "GRAPHICS_API": "glcore33", "VIEWER_PORT": 18181,
                      "BASE_PORT": 5005, "GRAPHICS_UNSET_ENV": unset, "GRAPHICS_ENV": {"DISPLAY": ":99"},
                      "RECORD_MOTION_VIDEO": False, "PYTHON": Path("/python"), "HELPER": Path("/helper"),
@@ -464,6 +503,10 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
                     self.assertNotIn(key, environment)
                     self.assertEqual("inherited-conflict", os.environ[key])
                 self.assertEqual(":99", environment["DISPLAY"])
+                scope["RECORD_MODEL"] = "argon"
+                with self.assertRaisesRegex(RuntimeError, "Selections changed after preparation"):
+                    exec(compile(tree, "notebook-launch", "exec"), scope)
+                process.Popen.assert_called_once()
 
     def test_live_session_blocks_prepare_and_launch_without_losing_handle(self):
         notebook = json.loads((ROOT / "notebooks/GoldenGate_Record_Colab.ipynb").read_text("utf-8"))

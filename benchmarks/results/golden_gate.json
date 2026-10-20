@@ -2,7 +2,7 @@
   "schema": "robopaint.public-results.v1",
   "case_id": "golden_gate",
   "release_id": "golden-gate-2026-10-19-preview",
-  "publication_status": "local_preview_pending_media_approval",
+  "publication_status": "public_records_videos_and_versioned_site_canvases",
   "harness": {
     "name": "AgentArk SimpleAgent",
     "shared_across_models": true,
@@ -86,12 +86,22 @@
       "total_environment_actions": 155,
       "comparison_group": "http-20480",
       "caveats": [],
-      "replay_verification": "Historical official physical replay: 56 actions (attempt 1 plus one action); first-attempt canvas and raw PNG matched. No new full three-attempt replay is claimed.",
+      "replay_verification": "Hosted Colab T4 replay (2026-10-20): all 155 actions (55/44/56), all five ReplayAgent checks and all three final canvas hashes matched. Scope: this fixed record, not general cross-GPU determinism.",
       "record": {
-        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/90520211bee7327482ed71805473618cdaf2d61c/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6.1-sol/20261018-openrouter-max/RobotPainting_gpt-6.1-sol_results.jsonl",
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6.1-sol/20261018-openrouter-max/RobotPainting_gpt-6.1-sol_results.jsonl",
         "sha256": "3189bf011628a6f87c25f910141a5ab0c456ecc7059bb4e52b1364877acdaaaf",
         "bytes": 17574365,
-        "publication_status": "already_published"
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "7f1f0b1b954ce5311cb0c1b39517eabb84a09f598cf72792819343e83cc570a5",
+        "source_bytes": 76449255,
+        "action_count": 155,
+        "attempt_action_counts": [
+          55,
+          44,
+          56
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -169,7 +179,25 @@
             "verification": "Historical recorder manifest confirms completed encoding; the catalog does not supply a full-decode flag."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6.1-sol/20261018-openrouter-max/RobotPainting_gpt-6.1-sol_trajectories.jsonl",
+        "sha256": "dd6d9744f0100a7bcb0a5cb8c9e649f92a301f97508bf3d285a43bfe40c0bac2",
+        "bytes": 78722012,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "dd6d9744f0100a7bcb0a5cb8c9e649f92a301f97508bf3d285a43bfe40c0bac2",
+        "source_bytes": 78722012,
+        "action_count": 155,
+        "attempt_action_counts": [
+          55,
+          44,
+          56
+        ],
+        "history_coverage": "last 24 steps per attempt (72/155 actions), not a full 155-action image history",
+        "full_history": false
+      },
+      "video_url": "https://www.bilibili.com/video/BV1S6nF6qEN3/"
     },
     {
       "id": "argon",
@@ -191,10 +219,20 @@
       ],
       "replay_verification": "Historical official physical replay: all 71 actions; six final PNGs matched and three videos decoded. Not rerun for this preview.",
       "record": {
-        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/90520211bee7327482ed71805473618cdaf2d61c/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gemini-4-argon/20261018-openrouter-high/RobotPainting_gemini-4-argon_results.jsonl",
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gemini-4-argon/20261018-openrouter-high/RobotPainting_gemini-4-argon_results.jsonl",
         "sha256": "49c8e90f3ad01ae71c2efee7a9f7c9a3c416f990f516944b7bdda77e625ee9d9",
         "bytes": 3281805,
-        "publication_status": "already_published"
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "818bcb587645551438299f48ecd8ece9e7d49ff14572a789cfc53d2b356354dc",
+        "source_bytes": 7164054,
+        "action_count": 71,
+        "attempt_action_counts": [
+          26,
+          21,
+          24
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -272,7 +310,25 @@
             "verification": "Historical recorder manifest confirms completed encoding; the catalog does not supply a full-decode flag."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gemini-4-argon/20261018-openrouter-high/RobotPainting_gemini-4-argon_trajectories.jsonl",
+        "sha256": "a7845817f7dd679cc207161bcf89f82297d38b40ce3bb37db75cb65b58132598",
+        "bytes": 146255771,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "a7845817f7dd679cc207161bcf89f82297d38b40ce3bb37db75cb65b58132598",
+        "source_bytes": 146255771,
+        "action_count": 71,
+        "attempt_action_counts": [
+          26,
+          21,
+          24
+        ],
+        "history_coverage": "all 71 recovered logical actions; 26/21/24 per attempt; model-visible API messages and labeled viewer projections",
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1S6nF6qEML/"
     },
     {
       "id": "opus",
@@ -294,10 +350,20 @@
       ],
       "replay_verification": "Offline record verification: all 43 actions. Historical official physical replay: 18 actions (attempt 1 plus one action).",
       "record": {
-        "url": null,
-        "sha256": "a8278eb4dd9f478411b233027ab13b75abc1b7f6a6fbdbe28cd0ca8195e48302",
-        "bytes": 4738672,
-        "publication_status": "local_only"
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/claude-opus-5.5/20261018-openrouter-high/RobotPainting_claude-opus-5.5_results.jsonl",
+        "sha256": "4cba33fadbb625a8e50e9a61bca129fc3224ac6713506d8085fd3bc484bc239f",
+        "bytes": 4610807,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "a8278eb4dd9f478411b233027ab13b75abc1b7f6a6fbdbe28cd0ca8195e48302",
+        "source_bytes": 4738672,
+        "action_count": 43,
+        "attempt_action_counts": [
+          17,
+          13,
+          13
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -375,7 +441,33 @@
             "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/claude-opus-5.5/20261018-openrouter-high/RobotPainting_claude-opus-5.5_trajectories.jsonl",
+        "sha256": "897770b968642113ccc4a11709101e378ad67844ea1028b1aad1d6d3bdf92869",
+        "bytes": 46952384,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "7de15cc17bfe4366d36247c9ea9e8a18544a71e7e4692f5c758d425a3c7d3312",
+        "source_bytes": 46948067,
+        "action_count": 43,
+        "attempt_action_counts": [
+          17,
+          13,
+          13
+        ],
+        "history_coverage": {
+          "history_steps_per_attempt": [
+            17,
+            13,
+            13
+          ],
+          "full_action_history": true,
+          "embedded_image_payloads": 175
+        },
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1SznF6MEUb/"
     },
     {
       "id": "grok",
@@ -398,10 +490,20 @@
       ],
       "replay_verification": "Offline ReplayAgent reader matched all 239 saved actions. All three final videos decoded. No new full official physical replay was performed.",
       "record": {
-        "url": null,
-        "sha256": "9edd2baf01560d0ed16049dfe06da6d0f119c9f34be5ed4e28ffe1c2d37ae8d8",
-        "bytes": 34467532,
-        "publication_status": "local_only"
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/grok-4.7/20261018-openrouter-xhigh/RobotPainting_grok-4.7_results.jsonl",
+        "sha256": "3992c6ddf998754235a5b03a4ca8c75eb019767f7383b7cb94374b010ded04ed",
+        "bytes": 34250388,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "9edd2baf01560d0ed16049dfe06da6d0f119c9f34be5ed4e28ffe1c2d37ae8d8",
+        "source_bytes": 34467532,
+        "action_count": 239,
+        "attempt_action_counts": [
+          96,
+          96,
+          47
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -479,7 +581,33 @@
             "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/grok-4.7/20261018-openrouter-xhigh/RobotPainting_grok-4.7_trajectories.jsonl",
+        "sha256": "abefba165f8f542869666868e8561ddc5328b6dbdd5eaa8904869262ba9e6417",
+        "bytes": 228772938,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "a7e6eabbe2d2d533997e6535a35ffce38ba0a71fec581551e2f67922c09c0018",
+        "source_bytes": 228749802,
+        "action_count": 239,
+        "attempt_action_counts": [
+          96,
+          96,
+          47
+        ],
+        "history_coverage": {
+          "history_steps_per_attempt": [
+            96,
+            96,
+            47
+          ],
+          "full_action_history": true,
+          "embedded_image_payloads": 959
+        },
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1UznF6MEor/"
     },
     {
       "id": "wonder",
@@ -501,10 +629,20 @@
       ],
       "replay_verification": "Historical physical verification: attempt 1 plus one action (45 actions). No full three-attempt physical rerun was performed.",
       "record": {
-        "url": null,
-        "sha256": "75959a3f41743558912289620c426437ad939656e8b68907e54496d40ac98e8c",
-        "bytes": 5064568,
-        "publication_status": "local_only"
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/meta-muse-wonder/20261018-openrouter-max/RobotPainting_meta-muse-wonder_results.jsonl",
+        "sha256": "ff1bf39030d0fd1788e764674fd3b8d286c678cda3d54658a3fa18444354de67",
+        "bytes": 4866018,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "75959a3f41743558912289620c426437ad939656e8b68907e54496d40ac98e8c",
+        "source_bytes": 5064568,
+        "action_count": 91,
+        "attempt_action_counts": [
+          44,
+          26,
+          21
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -582,7 +720,33 @@
             "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/meta-muse-wonder/20261018-openrouter-max/RobotPainting_meta-muse-wonder_trajectories.jsonl",
+        "sha256": "cabf335efbb8ed0549d12c8afbad0f1aae7e9f95bab5f2299e4f868bc32863a9",
+        "bytes": 89634663,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "cabf335efbb8ed0549d12c8afbad0f1aae7e9f95bab5f2299e4f868bc32863a9",
+        "source_bytes": 89634663,
+        "action_count": 91,
+        "attempt_action_counts": [
+          44,
+          26,
+          21
+        ],
+        "history_coverage": {
+          "history_steps_per_attempt": [
+            44,
+            26,
+            21
+          ],
+          "full_action_history": true,
+          "embedded_image_payloads": 367
+        },
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1gznF6uEnt/"
     },
     {
       "id": "deepseek",
@@ -604,10 +768,20 @@
       ],
       "replay_verification": "Historical physical verification: attempt 1 plus one action (60 actions). No full three-attempt physical rerun was performed.",
       "record": {
-        "url": null,
-        "sha256": "4d798148b2f0244e4241b7c372a65058f6e8b74623be0d9ecc2b3da6205b2b5f",
-        "bytes": 11880889,
-        "publication_status": "local_only"
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/deepseek-v4.1-flash-1017/20261018-openrouter-max/RobotPainting_deepseek-v4.1-flash-1017_results.jsonl",
+        "sha256": "ab385b8b3b8583443c2a6dbfaa37bc260cfba71275033fde1ef43a8bb00f7f40",
+        "bytes": 11525233,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "4d798148b2f0244e4241b7c372a65058f6e8b74623be0d9ecc2b3da6205b2b5f",
+        "source_bytes": 11880889,
+        "action_count": 150,
+        "attempt_action_counts": [
+          59,
+          56,
+          35
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -685,7 +859,33 @@
             "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/deepseek-v4.1-flash-1017/20261018-openrouter-max/RobotPainting_deepseek-v4.1-flash-1017_trajectories.jsonl",
+        "sha256": "91843f48904a9f0568a6c7017d824c444915dceb4fea5b42335558bc4fbd5d39",
+        "bytes": 163752554,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "91843f48904a9f0568a6c7017d824c444915dceb4fea5b42335558bc4fbd5d39",
+        "source_bytes": 163752554,
+        "action_count": 150,
+        "attempt_action_counts": [
+          59,
+          56,
+          35
+        ],
+        "history_coverage": {
+          "history_steps_per_attempt": [
+            59,
+            56,
+            35
+          ],
+          "full_action_history": true,
+          "embedded_image_payloads": 603
+        },
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1SznF6MErp/"
     },
     {
       "id": "qwen",
@@ -707,10 +907,20 @@
       ],
       "replay_verification": "All 154 saved actions matched in ReplayAgent reading; 115 physical reconstruction actions and 116 observation gates were checked. This was not a new full official physical replay.",
       "record": {
-        "url": null,
-        "sha256": "d795acc2e884532f9e03729618d9c8388b0ee43ff969b789761d25cd997d289c",
-        "bytes": 9228338,
-        "publication_status": "local_only"
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/qwen3.8-max-prime/20261019-openrouter-xhigh/RobotPainting_qwen3.8-max-prime_results.jsonl",
+        "sha256": "61ade2ed772adcf9cfb2e8d9345adb52ebb50a1d283c48ee1d8c53b0b91c9e43",
+        "bytes": 8829172,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "d795acc2e884532f9e03729618d9c8388b0ee43ff969b789761d25cd997d289c",
+        "source_bytes": 9228338,
+        "action_count": 154,
+        "attempt_action_counts": [
+          67,
+          41,
+          46
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -788,7 +998,33 @@
             "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/qwen3.8-max-prime/20261019-openrouter-xhigh/RobotPainting_qwen3.8-max-prime_trajectories.jsonl",
+        "sha256": "8a14bdea544448ec6631678cc2ba9c2686e1b196f3b93e808abd550b536a6c0b",
+        "bytes": 156667188,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "8a14bdea544448ec6631678cc2ba9c2686e1b196f3b93e808abd550b536a6c0b",
+        "source_bytes": 156667188,
+        "action_count": 154,
+        "attempt_action_counts": [
+          67,
+          41,
+          46
+        ],
+        "history_coverage": {
+          "history_steps_per_attempt": [
+            67,
+            41,
+            46
+          ],
+          "full_action_history": true,
+          "embedded_image_payloads": 619
+        },
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1SznF6MEkV/"
     },
     {
       "id": "kimi",
@@ -808,10 +1044,20 @@
       "caveats": [],
       "replay_verification": "Historical official physical replay: 12 actions (attempt 1 plus one action); not all 62 actions.",
       "record": {
-        "url": null,
-        "sha256": "e2fd87bdbb9e63e068addb89ba3041325403c31f095685345911c141f653cf36",
-        "bytes": 3821032,
-        "publication_status": "local_only"
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/kimi-k3/20261019-openrouter-max/RobotPainting_kimi-k3_results.jsonl",
+        "sha256": "c70518f677a110a659462bfb2f32082b15c0fcbb1629c67367274108f7e87dbe",
+        "bytes": 3668727,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "e2fd87bdbb9e63e068addb89ba3041325403c31f095685345911c141f653cf36",
+        "source_bytes": 3821032,
+        "action_count": 62,
+        "attempt_action_counts": [
+          11,
+          23,
+          28
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -889,7 +1135,33 @@
             "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/kimi-k3/20261019-openrouter-max/RobotPainting_kimi-k3_trajectories.jsonl",
+        "sha256": "d54b40f66cab3614014a9542636e0e23a99642a8713109c7a71ac1d73c27b387",
+        "bytes": 66283580,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "d54b40f66cab3614014a9542636e0e23a99642a8713109c7a71ac1d73c27b387",
+        "source_bytes": 66283580,
+        "action_count": 62,
+        "attempt_action_counts": [
+          11,
+          23,
+          28
+        ],
+        "history_coverage": {
+          "history_steps_per_attempt": [
+            11,
+            23,
+            28
+          ],
+          "full_action_history": true,
+          "embedded_image_payloads": 251
+        },
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1SznF6MEE1/"
     },
     {
       "id": "mimo",
@@ -911,10 +1183,20 @@
       ],
       "replay_verification": "Historical official physical replay: 20 actions (attempt 1 plus one action); not all 31 actions.",
       "record": {
-        "url": null,
-        "sha256": "976fe06a0bfcf9a067f447569c2484a692516942bbf09fa20cf88ed3e3c5bd59",
-        "bytes": 1804200,
-        "publication_status": "local_only"
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/mimo-v2.6-pro/20261019-openrouter-default/RobotPainting_mimo-v2.6-pro_results.jsonl",
+        "sha256": "e743fe92b55381c1402de2231b79f742f7675d6cd22fefd1dabcb9bbbf67c411",
+        "bytes": 1729705,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "976fe06a0bfcf9a067f447569c2484a692516942bbf09fa20cf88ed3e3c5bd59",
+        "source_bytes": 1804200,
+        "action_count": 31,
+        "attempt_action_counts": [
+          19,
+          6,
+          6
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -992,7 +1274,33 @@
             "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/mimo-v2.6-pro/20261019-openrouter-default/RobotPainting_mimo-v2.6-pro_trajectories.jsonl",
+        "sha256": "e75a10f79c605061ad7c9d37c13c75d869ee922b9e594f578ffbca6500696182",
+        "bytes": 36652981,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "e75a10f79c605061ad7c9d37c13c75d869ee922b9e594f578ffbca6500696182",
+        "source_bytes": 36652981,
+        "action_count": 31,
+        "attempt_action_counts": [
+          19,
+          6,
+          6
+        ],
+        "history_coverage": {
+          "history_steps_per_attempt": [
+            19,
+            6,
+            6
+          ],
+          "full_action_history": true,
+          "embedded_image_payloads": 127
+        },
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1sTnF6cEqS/"
     },
     {
       "id": "astra",
@@ -1014,10 +1322,20 @@
       ],
       "replay_verification": "Historical Linux official physical replay: 40 actions (attempt 1 plus one action), pixel-identical canvas and raw PNG. Three final videos fully decoded; no full three-attempt replay is claimed.",
       "record": {
-        "url": null,
-        "sha256": "4b21769d117d2db4ce866e394d3726da495e1bd491d5818c441e1caca0a57f16",
-        "bytes": 45054133,
-        "publication_status": "local_only"
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6-astra/20261019-codex-ultra/RobotPainting_gpt-6-astra_results.jsonl",
+        "sha256": "37397383039d85bcbb76a8e4ccde699a90591fdbf900c8bf0a9bd7059bc72c61",
+        "bytes": 4670935,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "4b21769d117d2db4ce866e394d3726da495e1bd491d5818c441e1caca0a57f16",
+        "source_bytes": 45054133,
+        "action_count": 103,
+        "attempt_action_counts": [
+          39,
+          31,
+          33
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -1095,7 +1413,33 @@
             "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6-astra/20261019-codex-ultra/RobotPainting_gpt-6-astra_trajectories.jsonl",
+        "sha256": "9d5454f28a1c7be4a9e79f88ef76f08fdd8c5d770084777f3ba7b3e765430c90",
+        "bytes": 108398486,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "9d5454f28a1c7be4a9e79f88ef76f08fdd8c5d770084777f3ba7b3e765430c90",
+        "source_bytes": 108398486,
+        "action_count": 103,
+        "attempt_action_counts": [
+          39,
+          31,
+          33
+        ],
+        "history_coverage": {
+          "history_steps_per_attempt": [
+            39,
+            31,
+            33
+          ],
+          "full_action_history": true,
+          "embedded_image_payloads": 415
+        },
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1NTnF6cEhU/"
     },
     {
       "id": "doubao",
@@ -1118,10 +1462,20 @@
       ],
       "replay_verification": "Historical Linux official physical replay: 54 actions (attempt 1 plus one action), pixel-identical canvas and raw PNG. Three final videos fully decoded; no full three-attempt replay is claimed.",
       "record": {
-        "url": null,
-        "sha256": "40ec0889cdf936e4af7238c10ece2b0512cce18de6a1c5eea590e49624b095f4",
-        "bytes": 3708612,
-        "publication_status": "local_only"
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/doubao-seed-2-1-pro-260915/20261019-volcengine-high/RobotPainting_doubao-seed-2-1-pro-260915_results.jsonl",
+        "sha256": "8d76ca4fde94e5d2c7be2e42464d9d9c363b917716c65eebd38201d17d04e91a",
+        "bytes": 3578395,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "40ec0889cdf936e4af7238c10ece2b0512cce18de6a1c5eea590e49624b095f4",
+        "source_bytes": 3708612,
+        "action_count": 77,
+        "attempt_action_counts": [
+          53,
+          7,
+          17
+        ],
+        "all_actions_complete": true
       },
       "attempts": [
         {
@@ -1199,7 +1553,33 @@
             "verification": "Historical collection receipt; video bytes are not rehashed or copied by this builder."
           }
         }
-      ]
+      ],
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/doubao-seed-2-1-pro-260915/20261019-volcengine-high/RobotPainting_doubao-seed-2-1-pro-260915_trajectories.jsonl",
+        "sha256": "29ced00dd9caa50315f0e10cb0457c0f1a3bc6430b274eb53b3c7d95c7652994",
+        "bytes": 79415276,
+        "publication_status": "already_published",
+        "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+        "source_sha256": "29ced00dd9caa50315f0e10cb0457c0f1a3bc6430b274eb53b3c7d95c7652994",
+        "source_bytes": 79415276,
+        "action_count": 77,
+        "attempt_action_counts": [
+          53,
+          7,
+          17
+        ],
+        "history_coverage": {
+          "history_steps_per_attempt": [
+            53,
+            7,
+            17
+          ],
+          "full_action_history": true,
+          "embedded_image_payloads": 311
+        },
+        "full_history": true
+      },
+      "video_url": "https://www.bilibili.com/video/BV1NTnF6cERv/"
     }
   ]
 }

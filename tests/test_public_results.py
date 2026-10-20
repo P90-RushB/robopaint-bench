@@ -2,6 +2,7 @@
 import importlib.util
 import json
 from pathlib import Path
+import re
 import struct
 import tempfile
 import unittest
@@ -34,6 +35,10 @@ class PublicResultsTests(unittest.TestCase):
         default_links = patch.object(public, "DEFAULT_VIDEO_LINKS", self.video_links)
         default_links.start()
         self.addCleanup(default_links.stop)
+        self.reviewed_artifacts = public.DEFAULT_PUBLIC_ARTIFACTS
+        default_artifacts = patch.object(public, "DEFAULT_PUBLIC_ARTIFACTS", None)
+        default_artifacts.start()
+        self.addCleanup(default_artifacts.stop)
         self.output = self.root / "public"
         self.media = self.root / "preview"
         self.marker = "PRIVATE_NATIVE_REASONING_MUST_NOT_LEAVE_SOURCE"
@@ -82,6 +87,22 @@ class PublicResultsTests(unittest.TestCase):
 
     def save_catalog(self):
         self.catalog_path.write_text(json.dumps(self.catalog), "utf-8")
+
+    def fixture_public_artifacts(self):
+        """Bind real publication receipts to small, deterministic source fixtures."""
+        mapping = json.loads(self.reviewed_artifacts.read_text("utf-8"))
+        for source in self.catalog["models"]:
+            model = mapping["models"][source["name"]]
+            record = Path(source["recommended_record"])
+            model["record"].update(source_sha256=public.sha256(record), source_bytes=record.stat().st_size)
+            for kind in ("record", "trajectory"):
+                model[kind].update(action_count=6, attempt_action_counts=[1, 2, 3])
+            model["canvases"] = [{"sha256": public.sha256(self.root / source["name"] / str(attempt) / "canvas.png"),
+                                   "bytes": (self.root / source["name"] / str(attempt) / "canvas.png").stat().st_size}
+                                  for attempt in (1, 2, 3)]
+        path = self.root / "public-artifacts.json"
+        path.write_text(json.dumps(mapping), "utf-8")
+        return path, mapping
 
     def test_public_release_has_all_attempts_and_no_private_payload(self):
         result = public.write_release(self.catalog_path, self.output, self.media)
@@ -195,6 +216,117 @@ class PublicResultsTests(unittest.TestCase):
             self.assertEqual(manifest["video_links_sha256"], public.sha256(explicit))
             video = next(item for item in manifest["artifacts"] if item["id"] == "astra/attempt-03/video")
             self.assertEqual(video["publication_status"], "linked_public_video")
+
+    def test_checked_in_public_contracts_preserve_all_reviewed_downloads(self):
+        mapping = public.load_public_artifacts(self.reviewed_artifacts)
+        current = json.loads((ROOT / "benchmarks/results/golden_gate.json").read_text("utf-8"))
+        self.assertEqual(set(mapping), {model["id"] for model in current["models"]})
+        for model in current["models"]:
+            for kind in ("record", "trajectory"):
+                self.assertEqual(mapping[model["id"]][kind], model[kind])
+                self.assertEqual(mapping[model["id"]][kind]["attempt_action_counts"], model["attempt_steps"])
+        self.assertFalse(mapping["sol"]["trajectory"]["full_history"])
+        self.assertIn("72/155", mapping["sol"]["trajectory"]["history_coverage"])
+
+    def test_regeneration_keeps_all_public_records_trajectories_and_media_approvals(self):
+        path, mapping = self.fixture_public_artifacts()
+        for _ in range(2):
+            result = public.write_release(self.catalog_path, self.output, public_artifacts=path)
+            self.assertEqual(result["publication_status"], "public_records_videos_and_versioned_site_canvases")
+            self.assertEqual(len(result["models"]), 11)
+            for model in result["models"]:
+                reviewed = mapping["models"][model["id"]]
+                self.assertEqual(model["record"], reviewed["record"])
+                self.assertEqual(model["trajectory"], reviewed["trajectory"])
+                self.assertEqual(model["video_url"], reviewed["video_url"])
+            manifest = json.loads((self.output / "release-manifest.json").read_text("utf-8"))
+            self.assertEqual(manifest["publication_status"], result["publication_status"])
+            self.assertEqual(manifest["public_artifacts_sha256"], public.sha256(path))
+            canvas = [item for item in manifest["artifacts"] if item["id"].endswith("/canvas")]
+            self.assertEqual(len(canvas), 33)
+            self.assertEqual({item["publication_status"] for item in canvas}, {"versioned_site_asset"})
+            self.assertEqual(len([item for item in manifest["artifacts"] if item["id"].endswith("/trajectory")]), 11)
+            originals = [item for item in manifest["artifacts"] if re.fullmatch(r"[^/]+/attempt-\d+/video", item["id"])]
+            self.assertEqual(len(originals), 33)
+            self.assertTrue(all(item["url_scope"] == "combined_model_video" for item in originals))
+
+    def test_public_approvals_reject_mismatched_sources_rounds_and_canvases_before_writing(self):
+        path, mapping = self.fixture_public_artifacts()
+        mutations = (
+            ("record", "source_sha256", "0" * 64, "source record identity mismatch"),
+            ("record", "source_bytes", 1, "source record identity mismatch"),
+            ("record", "attempt_action_counts", [1, 1, 4], "round action counts mismatch"),
+            ("trajectory", "attempt_action_counts", [2, 2, 2], "round action counts mismatch"),
+        )
+        for kind, key, bad, message in mutations:
+            with self.subTest(kind=kind, key=key):
+                altered = json.loads(json.dumps(mapping))
+                altered["models"]["sol"][kind][key] = bad
+                path.write_text(json.dumps(altered), "utf-8")
+                with self.assertRaisesRegex(public.EvidenceError, message):
+                    public.write_release(self.catalog_path, self.output, self.media, public_artifacts=path)
+                self.assertFalse(self.output.exists())
+                self.assertFalse(self.media.exists())
+        mapping["models"]["sol"]["canvases"][0]["sha256"] = "0" * 64
+        path.write_text(json.dumps(mapping), "utf-8")
+        with self.assertRaisesRegex(public.EvidenceError, "selected-canvas identity mismatch"):
+            public.write_release(self.catalog_path, self.output, self.media, public_artifacts=path)
+        self.assertFalse(self.output.exists())
+        self.assertFalse(self.media.exists())
+
+    def test_exact_reviewed_public_source_is_accepted_without_changing_original_receipt(self):
+        path, mapping = self.fixture_public_artifacts()
+        receipt = mapping["models"]["sol"]["record"]
+        receipt.update(sha256=receipt["source_sha256"], bytes=receipt["source_bytes"],
+                       source_sha256="f" * 64, source_bytes=999)
+        path.write_text(json.dumps(mapping), "utf-8")
+        result, _, _ = public.build_results(self.catalog_path, public_artifacts=path)
+        actual = next(model for model in result["models"] if model["id"] == "sol")["record"]
+        self.assertEqual(actual, receipt)
+        self.assertEqual(actual["source_sha256"], "f" * 64)
+        # A public-copy hash alone is insufficient: its byte count also binds.
+        receipt["bytes"] += 1
+        path.write_text(json.dumps(mapping), "utf-8")
+        with self.assertRaisesRegex(public.EvidenceError, "identity mismatch"):
+            public.build_results(self.catalog_path, public_artifacts=path)
+
+    def test_unpublished_collection_keeps_pending_controls_and_cannot_use_approvals(self):
+        with patch.object(public, "DEFAULT_PUBLIC_ARTIFACTS", self.reviewed_artifacts):
+            with self.assertRaisesRegex(public.EvidenceError, "identity mismatch"):
+                public.build_results(self.catalog_path)
+            result, manifest, _ = public.build_results(self.catalog_path, unpublished=True)
+        self.assertEqual(result["publication_status"], "local_preview_pending_media_approval")
+        self.assertNotIn("public_artifacts_sha256", manifest)
+        self.assertTrue(all(model["record"]["url"] is None and "trajectory" not in model for model in result["models"]))
+        with self.assertRaisesRegex(public.EvidenceError, "cannot use public-artifact approvals"):
+            public.build_results(self.catalog_path, public_artifacts=self.reviewed_artifacts, unpublished=True)
+
+    def test_public_artifact_mapping_rejects_unreviewed_shapes_and_mutable_downloads(self):
+        path, mapping = self.fixture_public_artifacts()
+        invalid = []
+        altered = json.loads(json.dumps(mapping))
+        altered["case_id"] = "another_collection"
+        invalid.append(altered)
+        altered = json.loads(json.dumps(mapping))
+        del altered["models"]["sol"]
+        invalid.append(altered)
+        altered = json.loads(json.dumps(mapping))
+        artifact = altered["models"]["sol"]["record"]
+        artifact["url"] = artifact["url"].replace(artifact["revision"], "main")
+        invalid.append(altered)
+        altered = json.loads(json.dumps(mapping))
+        del altered["models"]["sol"]["trajectory"]["history_coverage"]
+        invalid.append(altered)
+        for index, value in enumerate(invalid):
+            with self.subTest(index=index):
+                path.write_text(json.dumps(value), "utf-8")
+                with self.assertRaises(public.EvidenceError):
+                    public.write_release(self.catalog_path, self.output, self.media, public_artifacts=path)
+                self.assertFalse(self.output.exists())
+                self.assertFalse(self.media.exists())
+        path.write_text('{"schema":"first","schema":"duplicate"}', "utf-8")
+        with self.assertRaisesRegex(public.EvidenceError, "Duplicate key"):
+            public.load_public_artifacts(path)
 
     def test_video_links_reject_unknown_models_attempts_and_schema(self):
         bad_mappings = [

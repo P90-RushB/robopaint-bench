@@ -10,5 +10,7 @@ repository-code: https://github.com/P90-RushB/robopaint-bench
 license: Apache-2.0
 abstract: >-
   A visual, replayable benchmark of language models controlling a simulated
-  robot arm to paint, built on AgentArk. The initial Golden Gate collection
-  includes eleven models and three sequential attempts per model.
+  robot arm to paint, built on AgentArk. Golden Gate Bridge reference-image
+  painting and a pelican-riding-a-bicycle text goal each include eleven models
+  and three connected in-context learning rounds per model. The same
+  environment also supports custom prompts and reference images.

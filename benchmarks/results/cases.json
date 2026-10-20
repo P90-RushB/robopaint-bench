@@ -16,7 +16,7 @@
         "recommendation": "recommendation-data",
         "videos": "model-video-data"
       },
-      "colab_url": "https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing"
+      "colab_url": "https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/GoldenGate_Record_Colab.ipynb"
     },
     {
       "id": "pelican",

@@ -1,7 +1,7 @@
 {
   "schema": "robopaint.public-release-manifest.v1",
   "release_id": "golden-gate-2026-10-19-preview",
-  "publication_status": "local_preview_pending_media_approval",
+  "publication_status": "public_records_videos_and_versioned_site_canvases",
   "harness": {
     "name": "AgentArk SimpleAgent",
     "shared_across_models": true,
@@ -43,7 +43,7 @@
   "video_link_policy": "Owner-curated model/attempt associations. Remote videos are not downloaded or hash-verified; recording hashes identify the retained originals, not re-encoded copies on video hosts.",
   "verification_scope": "Canvas, metadata, and recommended record bytes were hashed locally. Canvas identity, dimensions, action counts, reference hash, and explicit attempt associations were checked. Video hashes and decode states are retained historical receipts; no new video decode or physical replay is claimed.",
   "privacy": "Explicit allowlist only. No local source paths, raw records, native reasoning, API prompts, HTTP payloads, or credentials are included.",
-  "media_policy": "PNG copies are local preview assets. This manifest does not authorize publication of new evaluation media or records.",
+  "media_policy": "The reviewed selected PNGs are versioned website assets; records, trajectories and combined model videos are already public. These approvals apply only to the matched source identities and do not authorize new evaluation media or records.",
   "artifacts": [
     {
       "id": "sol/attempt-01/canvas",
@@ -52,7 +52,7 @@
       "bytes": 219621,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "sol/attempt-01/metadata",
@@ -64,8 +64,9 @@
       "id": "sol/attempt-01/video",
       "sha256": "ca41c32631c59b0d79b97f40efc019d087a500eb8dad0fbacfea21b84b17a857",
       "bytes": 125925707,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEN3/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "sol/attempt-02/canvas",
@@ -74,7 +75,7 @@
       "bytes": 270919,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "sol/attempt-02/metadata",
@@ -86,8 +87,9 @@
       "id": "sol/attempt-02/video",
       "sha256": "c2928de76ad4dcb4ad2f0aa9c5bbb7646076248987f6df83729dfb4a9f09bd38",
       "bytes": 134812687,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEN3/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "sol/attempt-03/canvas",
@@ -96,7 +98,7 @@
       "bytes": 312255,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "sol/attempt-03/metadata",
@@ -108,15 +110,50 @@
       "id": "sol/attempt-03/video",
       "sha256": "438e58bb3d7b112c21f00fe7d26e2c5cd5a63f8d96ace8fc1348acc937ebef3f",
       "bytes": 193481789,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEN3/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "sol/record",
-      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/90520211bee7327482ed71805473618cdaf2d61c/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6.1-sol/20261018-openrouter-max/RobotPainting_gpt-6.1-sol_results.jsonl",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6.1-sol/20261018-openrouter-max/RobotPainting_gpt-6.1-sol_results.jsonl",
       "sha256": "3189bf011628a6f87c25f910141a5ab0c456ecc7059bb4e52b1364877acdaaaf",
       "bytes": 17574365,
-      "publication_status": "already_published"
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "7f1f0b1b954ce5311cb0c1b39517eabb84a09f598cf72792819343e83cc570a5",
+      "source_bytes": 76449255,
+      "action_count": 155,
+      "attempt_action_counts": [
+        55,
+        44,
+        56
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "sol/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6.1-sol/20261018-openrouter-max/RobotPainting_gpt-6.1-sol_trajectories.jsonl",
+      "sha256": "dd6d9744f0100a7bcb0a5cb8c9e649f92a301f97508bf3d285a43bfe40c0bac2",
+      "bytes": 78722012,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "dd6d9744f0100a7bcb0a5cb8c9e649f92a301f97508bf3d285a43bfe40c0bac2",
+      "source_bytes": 78722012,
+      "action_count": 155,
+      "attempt_action_counts": [
+        55,
+        44,
+        56
+      ],
+      "history_coverage": "last 24 steps per attempt (72/155 actions), not a full 155-action image history",
+      "full_history": false
+    },
+    {
+      "id": "sol/model-video",
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEN3/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "argon/attempt-01/canvas",
@@ -125,7 +162,7 @@
       "bytes": 182738,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "argon/attempt-01/metadata",
@@ -137,8 +174,9 @@
       "id": "argon/attempt-01/video",
       "sha256": "0af5ef5d9017d7c1e6f6c6d0a114a229cfdefd341de35a2a5490b7b512107a2c",
       "bytes": 57241037,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEML/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "argon/attempt-02/canvas",
@@ -147,7 +185,7 @@
       "bytes": 161043,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "argon/attempt-02/metadata",
@@ -159,8 +197,9 @@
       "id": "argon/attempt-02/video",
       "sha256": "f7c386584ce3fdf94dc616ac7a363bee0d4dcf3f7fe459ca03d6073eb747240a",
       "bytes": 52915377,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEML/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "argon/attempt-03/canvas",
@@ -169,7 +208,7 @@
       "bytes": 132183,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "argon/attempt-03/metadata",
@@ -181,15 +220,50 @@
       "id": "argon/attempt-03/video",
       "sha256": "0c836ab18dd35175da3366305c30fdf75bd3329af52ad962d9b046de0bf410e6",
       "bytes": 54495431,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEML/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "argon/record",
-      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/90520211bee7327482ed71805473618cdaf2d61c/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gemini-4-argon/20261018-openrouter-high/RobotPainting_gemini-4-argon_results.jsonl",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gemini-4-argon/20261018-openrouter-high/RobotPainting_gemini-4-argon_results.jsonl",
       "sha256": "49c8e90f3ad01ae71c2efee7a9f7c9a3c416f990f516944b7bdda77e625ee9d9",
       "bytes": 3281805,
-      "publication_status": "already_published"
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "818bcb587645551438299f48ecd8ece9e7d49ff14572a789cfc53d2b356354dc",
+      "source_bytes": 7164054,
+      "action_count": 71,
+      "attempt_action_counts": [
+        26,
+        21,
+        24
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "argon/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gemini-4-argon/20261018-openrouter-high/RobotPainting_gemini-4-argon_trajectories.jsonl",
+      "sha256": "a7845817f7dd679cc207161bcf89f82297d38b40ce3bb37db75cb65b58132598",
+      "bytes": 146255771,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "a7845817f7dd679cc207161bcf89f82297d38b40ce3bb37db75cb65b58132598",
+      "source_bytes": 146255771,
+      "action_count": 71,
+      "attempt_action_counts": [
+        26,
+        21,
+        24
+      ],
+      "history_coverage": "all 71 recovered logical actions; 26/21/24 per attempt; model-visible API messages and labeled viewer projections",
+      "full_history": true
+    },
+    {
+      "id": "argon/model-video",
+      "url": "https://www.bilibili.com/video/BV1S6nF6qEML/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "opus/attempt-01/canvas",
@@ -198,7 +272,7 @@
       "bytes": 121467,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "opus/attempt-01/metadata",
@@ -210,8 +284,9 @@
       "id": "opus/attempt-01/video",
       "sha256": "ed744bc4acc7c67bdede3db958398af07660a1f0e3a7262a5a4097b152198cb4",
       "bytes": 42332654,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MEUb/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "opus/attempt-02/canvas",
@@ -220,7 +295,7 @@
       "bytes": 142435,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "opus/attempt-02/metadata",
@@ -232,8 +307,9 @@
       "id": "opus/attempt-02/video",
       "sha256": "c8f57eaf4c9cab7216db1bcc5a4c07677c656d4f2d7a4c513c36f025e4ac0d22",
       "bytes": 39600480,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MEUb/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "opus/attempt-03/canvas",
@@ -242,7 +318,7 @@
       "bytes": 142526,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "opus/attempt-03/metadata",
@@ -254,15 +330,58 @@
       "id": "opus/attempt-03/video",
       "sha256": "270026b796cfd516b78ecc6c4772fd3b01e30804c724f588f4752bea281e05d5",
       "bytes": 39917144,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MEUb/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "opus/record",
-      "url": null,
-      "sha256": "a8278eb4dd9f478411b233027ab13b75abc1b7f6a6fbdbe28cd0ca8195e48302",
-      "bytes": 4738672,
-      "publication_status": "local_only"
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/claude-opus-5.5/20261018-openrouter-high/RobotPainting_claude-opus-5.5_results.jsonl",
+      "sha256": "4cba33fadbb625a8e50e9a61bca129fc3224ac6713506d8085fd3bc484bc239f",
+      "bytes": 4610807,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "a8278eb4dd9f478411b233027ab13b75abc1b7f6a6fbdbe28cd0ca8195e48302",
+      "source_bytes": 4738672,
+      "action_count": 43,
+      "attempt_action_counts": [
+        17,
+        13,
+        13
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "opus/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/claude-opus-5.5/20261018-openrouter-high/RobotPainting_claude-opus-5.5_trajectories.jsonl",
+      "sha256": "897770b968642113ccc4a11709101e378ad67844ea1028b1aad1d6d3bdf92869",
+      "bytes": 46952384,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "7de15cc17bfe4366d36247c9ea9e8a18544a71e7e4692f5c758d425a3c7d3312",
+      "source_bytes": 46948067,
+      "action_count": 43,
+      "attempt_action_counts": [
+        17,
+        13,
+        13
+      ],
+      "history_coverage": {
+        "history_steps_per_attempt": [
+          17,
+          13,
+          13
+        ],
+        "full_action_history": true,
+        "embedded_image_payloads": 175
+      },
+      "full_history": true
+    },
+    {
+      "id": "opus/model-video",
+      "url": "https://www.bilibili.com/video/BV1SznF6MEUb/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "grok/attempt-01/canvas",
@@ -271,7 +390,7 @@
       "bytes": 22237,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "grok/attempt-01/metadata",
@@ -283,8 +402,9 @@
       "id": "grok/attempt-01/video",
       "sha256": "53ea860b11af62154e2a56f5ad62843c6a0bf07d8cc9adc140c8a751705de2ba",
       "bytes": 12920759,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1UznF6MEor/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "grok/attempt-02/canvas",
@@ -293,7 +413,7 @@
       "bytes": 106287,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "grok/attempt-02/metadata",
@@ -305,8 +425,9 @@
       "id": "grok/attempt-02/video",
       "sha256": "979038a69a224c48db64cc0308dc4b1858177e79778c308f2a18b827de956dc1",
       "bytes": 76779002,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1UznF6MEor/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "grok/attempt-03/canvas",
@@ -315,7 +436,7 @@
       "bytes": 108041,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "grok/attempt-03/metadata",
@@ -327,15 +448,58 @@
       "id": "grok/attempt-03/video",
       "sha256": "4b0d1b3677bd92e77ca9e60f03ef209a04c11774b699c597c2f4a677cc824e3e",
       "bytes": 63027838,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1UznF6MEor/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "grok/record",
-      "url": null,
-      "sha256": "9edd2baf01560d0ed16049dfe06da6d0f119c9f34be5ed4e28ffe1c2d37ae8d8",
-      "bytes": 34467532,
-      "publication_status": "local_only"
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/grok-4.7/20261018-openrouter-xhigh/RobotPainting_grok-4.7_results.jsonl",
+      "sha256": "3992c6ddf998754235a5b03a4ca8c75eb019767f7383b7cb94374b010ded04ed",
+      "bytes": 34250388,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "9edd2baf01560d0ed16049dfe06da6d0f119c9f34be5ed4e28ffe1c2d37ae8d8",
+      "source_bytes": 34467532,
+      "action_count": 239,
+      "attempt_action_counts": [
+        96,
+        96,
+        47
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "grok/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/grok-4.7/20261018-openrouter-xhigh/RobotPainting_grok-4.7_trajectories.jsonl",
+      "sha256": "abefba165f8f542869666868e8561ddc5328b6dbdd5eaa8904869262ba9e6417",
+      "bytes": 228772938,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "a7e6eabbe2d2d533997e6535a35ffce38ba0a71fec581551e2f67922c09c0018",
+      "source_bytes": 228749802,
+      "action_count": 239,
+      "attempt_action_counts": [
+        96,
+        96,
+        47
+      ],
+      "history_coverage": {
+        "history_steps_per_attempt": [
+          96,
+          96,
+          47
+        ],
+        "full_action_history": true,
+        "embedded_image_payloads": 959
+      },
+      "full_history": true
+    },
+    {
+      "id": "grok/model-video",
+      "url": "https://www.bilibili.com/video/BV1UznF6MEor/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "wonder/attempt-01/canvas",
@@ -344,7 +508,7 @@
       "bytes": 83390,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "wonder/attempt-01/metadata",
@@ -356,8 +520,9 @@
       "id": "wonder/attempt-01/video",
       "sha256": "66e55d30b51b58e9deabae4ec1aed2772f08937bf44813d891d95702e42372c4",
       "bytes": 47850908,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1gznF6uEnt/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "wonder/attempt-02/canvas",
@@ -366,7 +531,7 @@
       "bytes": 184981,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "wonder/attempt-02/metadata",
@@ -378,8 +543,9 @@
       "id": "wonder/attempt-02/video",
       "sha256": "1024eec9ae484c032cc94ea23e2ad8a408e73a265f8b7c7b139f49be5bb002d2",
       "bytes": 70094987,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1gznF6uEnt/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "wonder/attempt-03/canvas",
@@ -388,7 +554,7 @@
       "bytes": 212229,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "wonder/attempt-03/metadata",
@@ -400,15 +566,58 @@
       "id": "wonder/attempt-03/video",
       "sha256": "e3fa7f9b1c920df5b1f4be1d7d791e8e3a9f5ff43ea5743f13ada9bd90a48e47",
       "bytes": 61309646,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1gznF6uEnt/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "wonder/record",
-      "url": null,
-      "sha256": "75959a3f41743558912289620c426437ad939656e8b68907e54496d40ac98e8c",
-      "bytes": 5064568,
-      "publication_status": "local_only"
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/meta-muse-wonder/20261018-openrouter-max/RobotPainting_meta-muse-wonder_results.jsonl",
+      "sha256": "ff1bf39030d0fd1788e764674fd3b8d286c678cda3d54658a3fa18444354de67",
+      "bytes": 4866018,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "75959a3f41743558912289620c426437ad939656e8b68907e54496d40ac98e8c",
+      "source_bytes": 5064568,
+      "action_count": 91,
+      "attempt_action_counts": [
+        44,
+        26,
+        21
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "wonder/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/meta-muse-wonder/20261018-openrouter-max/RobotPainting_meta-muse-wonder_trajectories.jsonl",
+      "sha256": "cabf335efbb8ed0549d12c8afbad0f1aae7e9f95bab5f2299e4f868bc32863a9",
+      "bytes": 89634663,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "cabf335efbb8ed0549d12c8afbad0f1aae7e9f95bab5f2299e4f868bc32863a9",
+      "source_bytes": 89634663,
+      "action_count": 91,
+      "attempt_action_counts": [
+        44,
+        26,
+        21
+      ],
+      "history_coverage": {
+        "history_steps_per_attempt": [
+          44,
+          26,
+          21
+        ],
+        "full_action_history": true,
+        "embedded_image_payloads": 367
+      },
+      "full_history": true
+    },
+    {
+      "id": "wonder/model-video",
+      "url": "https://www.bilibili.com/video/BV1gznF6uEnt/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "deepseek/attempt-01/canvas",
@@ -417,7 +626,7 @@
       "bytes": 229309,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "deepseek/attempt-01/metadata",
@@ -429,8 +638,9 @@
       "id": "deepseek/attempt-01/video",
       "sha256": "114632623cf56bd0f1eb90e295aec1067eeee592c8411f337f24143102eaad79",
       "bytes": 129956953,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MErp/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "deepseek/attempt-02/canvas",
@@ -439,7 +649,7 @@
       "bytes": 366027,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "deepseek/attempt-02/metadata",
@@ -451,8 +661,9 @@
       "id": "deepseek/attempt-02/video",
       "sha256": "06a93ee24dc4f90b5de86bf446dbfc5c18bcd69cd6a9758b9d30279b6441636d",
       "bytes": 99795412,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MErp/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "deepseek/attempt-03/canvas",
@@ -461,7 +672,7 @@
       "bytes": 292771,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "deepseek/attempt-03/metadata",
@@ -473,15 +684,58 @@
       "id": "deepseek/attempt-03/video",
       "sha256": "28cd08438a30cb067b5973d4e0a91a39e28c3ad4cd68ac9f055c24c10903c4a3",
       "bytes": 100289609,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MErp/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "deepseek/record",
-      "url": null,
-      "sha256": "4d798148b2f0244e4241b7c372a65058f6e8b74623be0d9ecc2b3da6205b2b5f",
-      "bytes": 11880889,
-      "publication_status": "local_only"
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/deepseek-v4.1-flash-1017/20261018-openrouter-max/RobotPainting_deepseek-v4.1-flash-1017_results.jsonl",
+      "sha256": "ab385b8b3b8583443c2a6dbfaa37bc260cfba71275033fde1ef43a8bb00f7f40",
+      "bytes": 11525233,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "4d798148b2f0244e4241b7c372a65058f6e8b74623be0d9ecc2b3da6205b2b5f",
+      "source_bytes": 11880889,
+      "action_count": 150,
+      "attempt_action_counts": [
+        59,
+        56,
+        35
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "deepseek/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/deepseek-v4.1-flash-1017/20261018-openrouter-max/RobotPainting_deepseek-v4.1-flash-1017_trajectories.jsonl",
+      "sha256": "91843f48904a9f0568a6c7017d824c444915dceb4fea5b42335558bc4fbd5d39",
+      "bytes": 163752554,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "91843f48904a9f0568a6c7017d824c444915dceb4fea5b42335558bc4fbd5d39",
+      "source_bytes": 163752554,
+      "action_count": 150,
+      "attempt_action_counts": [
+        59,
+        56,
+        35
+      ],
+      "history_coverage": {
+        "history_steps_per_attempt": [
+          59,
+          56,
+          35
+        ],
+        "full_action_history": true,
+        "embedded_image_payloads": 603
+      },
+      "full_history": true
+    },
+    {
+      "id": "deepseek/model-video",
+      "url": "https://www.bilibili.com/video/BV1SznF6MErp/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "qwen/attempt-01/canvas",
@@ -490,7 +744,7 @@
       "bytes": 184203,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "qwen/attempt-01/metadata",
@@ -502,8 +756,9 @@
       "id": "qwen/attempt-01/video",
       "sha256": "91f59330d8ba8db221aa2a0025ce1cf60b9285da257fde6774c7d7afec20be85",
       "bytes": 84991007,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MEkV/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "qwen/attempt-02/canvas",
@@ -512,7 +767,7 @@
       "bytes": 199594,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "qwen/attempt-02/metadata",
@@ -524,8 +779,9 @@
       "id": "qwen/attempt-02/video",
       "sha256": "2fcc920a972bf26bedb87ac9e198de2e4a9942d57f5b2a3e59948a2372d79cd7",
       "bytes": 80737178,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MEkV/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "qwen/attempt-03/canvas",
@@ -534,7 +790,7 @@
       "bytes": 182816,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "qwen/attempt-03/metadata",
@@ -546,15 +802,58 @@
       "id": "qwen/attempt-03/video",
       "sha256": "d7cbc17dba07e8dc52f7fc2d2abdb167e13da94a0b337b7b189bf153124d39ed",
       "bytes": 96095860,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MEkV/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "qwen/record",
-      "url": null,
-      "sha256": "d795acc2e884532f9e03729618d9c8388b0ee43ff969b789761d25cd997d289c",
-      "bytes": 9228338,
-      "publication_status": "local_only"
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/qwen3.8-max-prime/20261019-openrouter-xhigh/RobotPainting_qwen3.8-max-prime_results.jsonl",
+      "sha256": "61ade2ed772adcf9cfb2e8d9345adb52ebb50a1d283c48ee1d8c53b0b91c9e43",
+      "bytes": 8829172,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "d795acc2e884532f9e03729618d9c8388b0ee43ff969b789761d25cd997d289c",
+      "source_bytes": 9228338,
+      "action_count": 154,
+      "attempt_action_counts": [
+        67,
+        41,
+        46
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "qwen/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/qwen3.8-max-prime/20261019-openrouter-xhigh/RobotPainting_qwen3.8-max-prime_trajectories.jsonl",
+      "sha256": "8a14bdea544448ec6631678cc2ba9c2686e1b196f3b93e808abd550b536a6c0b",
+      "bytes": 156667188,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "8a14bdea544448ec6631678cc2ba9c2686e1b196f3b93e808abd550b536a6c0b",
+      "source_bytes": 156667188,
+      "action_count": 154,
+      "attempt_action_counts": [
+        67,
+        41,
+        46
+      ],
+      "history_coverage": {
+        "history_steps_per_attempt": [
+          67,
+          41,
+          46
+        ],
+        "full_action_history": true,
+        "embedded_image_payloads": 619
+      },
+      "full_history": true
+    },
+    {
+      "id": "qwen/model-video",
+      "url": "https://www.bilibili.com/video/BV1SznF6MEkV/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "kimi/attempt-01/canvas",
@@ -563,7 +862,7 @@
       "bytes": 53679,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "kimi/attempt-01/metadata",
@@ -575,8 +874,9 @@
       "id": "kimi/attempt-01/video",
       "sha256": "c355b8a5f58c6578c5829d1722b45b8e5493b4690312dcc9a0029b8b3861cb05",
       "bytes": 13302913,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MEE1/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "kimi/attempt-02/canvas",
@@ -585,7 +885,7 @@
       "bytes": 134706,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "kimi/attempt-02/metadata",
@@ -597,8 +897,9 @@
       "id": "kimi/attempt-02/video",
       "sha256": "d7fb94ba91c6c497588b0cbefbff476caa23075a9d1be4f26cf7a87c2b69acf3",
       "bytes": 40032127,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MEE1/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "kimi/attempt-03/canvas",
@@ -607,7 +908,7 @@
       "bytes": 116347,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "kimi/attempt-03/metadata",
@@ -619,15 +920,58 @@
       "id": "kimi/attempt-03/video",
       "sha256": "6357d90f88a06489c9b547de451555ac483472adbbc3bff3d05a48508922e26d",
       "bytes": 45882226,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1SznF6MEE1/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "kimi/record",
-      "url": null,
-      "sha256": "e2fd87bdbb9e63e068addb89ba3041325403c31f095685345911c141f653cf36",
-      "bytes": 3821032,
-      "publication_status": "local_only"
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/kimi-k3/20261019-openrouter-max/RobotPainting_kimi-k3_results.jsonl",
+      "sha256": "c70518f677a110a659462bfb2f32082b15c0fcbb1629c67367274108f7e87dbe",
+      "bytes": 3668727,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "e2fd87bdbb9e63e068addb89ba3041325403c31f095685345911c141f653cf36",
+      "source_bytes": 3821032,
+      "action_count": 62,
+      "attempt_action_counts": [
+        11,
+        23,
+        28
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "kimi/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/kimi-k3/20261019-openrouter-max/RobotPainting_kimi-k3_trajectories.jsonl",
+      "sha256": "d54b40f66cab3614014a9542636e0e23a99642a8713109c7a71ac1d73c27b387",
+      "bytes": 66283580,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "d54b40f66cab3614014a9542636e0e23a99642a8713109c7a71ac1d73c27b387",
+      "source_bytes": 66283580,
+      "action_count": 62,
+      "attempt_action_counts": [
+        11,
+        23,
+        28
+      ],
+      "history_coverage": {
+        "history_steps_per_attempt": [
+          11,
+          23,
+          28
+        ],
+        "full_action_history": true,
+        "embedded_image_payloads": 251
+      },
+      "full_history": true
+    },
+    {
+      "id": "kimi/model-video",
+      "url": "https://www.bilibili.com/video/BV1SznF6MEE1/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "mimo/attempt-01/canvas",
@@ -636,7 +980,7 @@
       "bytes": 142850,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "mimo/attempt-01/metadata",
@@ -648,8 +992,9 @@
       "id": "mimo/attempt-01/video",
       "sha256": "0ca4da4e682a829a5b1cfed3c96fe398d75ab6102b0007e0dd93e9249dfd0453",
       "bytes": 25631851,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1sTnF6cEqS/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "mimo/attempt-02/canvas",
@@ -658,7 +1003,7 @@
       "bytes": 177957,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "mimo/attempt-02/metadata",
@@ -670,8 +1015,9 @@
       "id": "mimo/attempt-02/video",
       "sha256": "3c8a948ce388b84f4138acd05b764c250e5e0d92ba62addb54f387b22a46385a",
       "bytes": 17604586,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1sTnF6cEqS/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "mimo/attempt-03/canvas",
@@ -680,7 +1026,7 @@
       "bytes": 179327,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "mimo/attempt-03/metadata",
@@ -692,15 +1038,58 @@
       "id": "mimo/attempt-03/video",
       "sha256": "2bbc6980afad85bd726eaa11ef75fb89013dcbbdde3bb0c20376e71270b95f5a",
       "bytes": 19170987,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1sTnF6cEqS/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "mimo/record",
-      "url": null,
-      "sha256": "976fe06a0bfcf9a067f447569c2484a692516942bbf09fa20cf88ed3e3c5bd59",
-      "bytes": 1804200,
-      "publication_status": "local_only"
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/mimo-v2.6-pro/20261019-openrouter-default/RobotPainting_mimo-v2.6-pro_results.jsonl",
+      "sha256": "e743fe92b55381c1402de2231b79f742f7675d6cd22fefd1dabcb9bbbf67c411",
+      "bytes": 1729705,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "976fe06a0bfcf9a067f447569c2484a692516942bbf09fa20cf88ed3e3c5bd59",
+      "source_bytes": 1804200,
+      "action_count": 31,
+      "attempt_action_counts": [
+        19,
+        6,
+        6
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "mimo/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/mimo-v2.6-pro/20261019-openrouter-default/RobotPainting_mimo-v2.6-pro_trajectories.jsonl",
+      "sha256": "e75a10f79c605061ad7c9d37c13c75d869ee922b9e594f578ffbca6500696182",
+      "bytes": 36652981,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "e75a10f79c605061ad7c9d37c13c75d869ee922b9e594f578ffbca6500696182",
+      "source_bytes": 36652981,
+      "action_count": 31,
+      "attempt_action_counts": [
+        19,
+        6,
+        6
+      ],
+      "history_coverage": {
+        "history_steps_per_attempt": [
+          19,
+          6,
+          6
+        ],
+        "full_action_history": true,
+        "embedded_image_payloads": 127
+      },
+      "full_history": true
+    },
+    {
+      "id": "mimo/model-video",
+      "url": "https://www.bilibili.com/video/BV1sTnF6cEqS/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "astra/attempt-01/canvas",
@@ -709,7 +1098,7 @@
       "bytes": 192622,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "astra/attempt-01/metadata",
@@ -721,8 +1110,9 @@
       "id": "astra/attempt-01/video",
       "sha256": "cbb4015ed79b0bd220d037b442dd892e6f71f8b34d36f8671e0f5482031c11bf",
       "bytes": 108616217,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1NTnF6cEhU/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "astra/attempt-02/canvas",
@@ -731,7 +1121,7 @@
       "bytes": 188640,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "astra/attempt-02/metadata",
@@ -743,8 +1133,9 @@
       "id": "astra/attempt-02/video",
       "sha256": "212e5b5ccd280373b40facb72cb0b1f13397500b415ee4ed398f9a991c5c5a24",
       "bytes": 100511212,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1NTnF6cEhU/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "astra/attempt-03/canvas",
@@ -753,7 +1144,7 @@
       "bytes": 187737,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "astra/attempt-03/metadata",
@@ -765,15 +1156,58 @@
       "id": "astra/attempt-03/video",
       "sha256": "650d6fa54465d14f8f6cb396a71eafa4981855d1f8c39f430616195c65e7ab14",
       "bytes": 106716193,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1NTnF6cEhU/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "astra/record",
-      "url": null,
-      "sha256": "4b21769d117d2db4ce866e394d3726da495e1bd491d5818c441e1caca0a57f16",
-      "bytes": 45054133,
-      "publication_status": "local_only"
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6-astra/20261019-codex-ultra/RobotPainting_gpt-6-astra_results.jsonl",
+      "sha256": "37397383039d85bcbb76a8e4ccde699a90591fdbf900c8bf0a9bd7059bc72c61",
+      "bytes": 4670935,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "4b21769d117d2db4ce866e394d3726da495e1bd491d5818c441e1caca0a57f16",
+      "source_bytes": 45054133,
+      "action_count": 103,
+      "attempt_action_counts": [
+        39,
+        31,
+        33
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "astra/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/gpt-6-astra/20261019-codex-ultra/RobotPainting_gpt-6-astra_trajectories.jsonl",
+      "sha256": "9d5454f28a1c7be4a9e79f88ef76f08fdd8c5d770084777f3ba7b3e765430c90",
+      "bytes": 108398486,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "9d5454f28a1c7be4a9e79f88ef76f08fdd8c5d770084777f3ba7b3e765430c90",
+      "source_bytes": 108398486,
+      "action_count": 103,
+      "attempt_action_counts": [
+        39,
+        31,
+        33
+      ],
+      "history_coverage": {
+        "history_steps_per_attempt": [
+          39,
+          31,
+          33
+        ],
+        "full_action_history": true,
+        "embedded_image_payloads": 415
+      },
+      "full_history": true
+    },
+    {
+      "id": "astra/model-video",
+      "url": "https://www.bilibili.com/video/BV1NTnF6cEhU/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     },
     {
       "id": "doubao/attempt-01/canvas",
@@ -782,7 +1216,7 @@
       "bytes": 181764,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "doubao/attempt-01/metadata",
@@ -794,8 +1228,9 @@
       "id": "doubao/attempt-01/video",
       "sha256": "c31d9155e55d2d1e7afce8cebc7f742d1cae389f79a09c5ebc1028bfafc94a11",
       "bytes": 32394636,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1NTnF6cERv/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "doubao/attempt-02/canvas",
@@ -804,7 +1239,7 @@
       "bytes": 42458,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "doubao/attempt-02/metadata",
@@ -816,8 +1251,9 @@
       "id": "doubao/attempt-02/video",
       "sha256": "15193825ea080b6a32f27ffcb57b72095de92a3a3843fc9baad254f36ac85a60",
       "bytes": 1185364,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1NTnF6cERv/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "doubao/attempt-03/canvas",
@@ -826,7 +1262,7 @@
       "bytes": 302628,
       "width": 1024,
       "height": 725,
-      "publication_status": "pending_approval"
+      "publication_status": "versioned_site_asset"
     },
     {
       "id": "doubao/attempt-03/metadata",
@@ -838,15 +1274,60 @@
       "id": "doubao/attempt-03/video",
       "sha256": "5aa7a83382a126f08e3e0681da45a5344578ec7ad1707003ce13395a66fa835b",
       "bytes": 19216367,
-      "url": null,
-      "publication_status": "pending_video_host"
+      "url": "https://www.bilibili.com/video/BV1NTnF6cERv/",
+      "publication_status": "retained_original_linked_via_model_video",
+      "url_scope": "combined_model_video"
     },
     {
       "id": "doubao/record",
-      "url": null,
-      "sha256": "40ec0889cdf936e4af7238c10ece2b0512cce18de6a1c5eea590e49624b095f4",
-      "bytes": 3708612,
-      "publication_status": "local_only"
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/doubao-seed-2-1-pro-260915/20261019-volcengine-high/RobotPainting_doubao-seed-2-1-pro-260915_results.jsonl",
+      "sha256": "8d76ca4fde94e5d2c7be2e42464d9d9c363b917716c65eebd38201d17d04e91a",
+      "bytes": 3578395,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "40ec0889cdf936e4af7238c10ece2b0512cce18de6a1c5eea590e49624b095f4",
+      "source_bytes": 3708612,
+      "action_count": 77,
+      "attempt_action_counts": [
+        53,
+        7,
+        17
+      ],
+      "all_actions_complete": true
+    },
+    {
+      "id": "doubao/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/1d4f382a163256a9f75e3817b68698c1e73e6fa1/artifacts/records/0100-0199/0107-RobotPainting/golden_gate/doubao-seed-2-1-pro-260915/20261019-volcengine-high/RobotPainting_doubao-seed-2-1-pro-260915_trajectories.jsonl",
+      "sha256": "29ced00dd9caa50315f0e10cb0457c0f1a3bc6430b274eb53b3c7d95c7652994",
+      "bytes": 79415276,
+      "publication_status": "already_published",
+      "revision": "1d4f382a163256a9f75e3817b68698c1e73e6fa1",
+      "source_sha256": "29ced00dd9caa50315f0e10cb0457c0f1a3bc6430b274eb53b3c7d95c7652994",
+      "source_bytes": 79415276,
+      "action_count": 77,
+      "attempt_action_counts": [
+        53,
+        7,
+        17
+      ],
+      "history_coverage": {
+        "history_steps_per_attempt": [
+          53,
+          7,
+          17
+        ],
+        "full_action_history": true,
+        "embedded_image_payloads": 311
+      },
+      "full_history": true
+    },
+    {
+      "id": "doubao/model-video",
+      "url": "https://www.bilibili.com/video/BV1NTnF6cERv/",
+      "publication_status": "linked_public_video",
+      "scope": "Three sequential ICL rounds in one combined video."
     }
-  ]
+  ],
+  "public_artifacts_sha256": "df589f158d2858e1bc353b40e898fb714581680c31430feb807df552474b31a8",
+  "public_artifact_policy": "Reviewed public contracts are retained only after the record matches the original source or exact reviewed public copy by hash/size, and round action counts and selected canvas identities match. Original source receipts are preserved separately from sanitized public hashes. Trajectory history coverage is preserved without claiming every history is complete."
 }

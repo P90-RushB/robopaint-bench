@@ -1,6 +1,6 @@
 # v0.1 preview validation
 
-This page retains dated checks below; later follow-ups supersede only the presentation or runtime scope they explicitly cover. Media policies and missing-file reports in earlier checkpoints describe those earlier states. The current integrated checkout tracks **69 selected website PNGs** across Golden Gate and Pelican; it requires no external media ZIP for a normal build. Raw records, trajectories, request logs and full videos remain outside Git.
+This page retains dated checks below; later follow-ups supersede only the presentation or runtime scope they explicitly cover. Media policies and missing-file reports in earlier checkpoints describe those earlier states. The current integrated checkout tracks **69 selected website PNGs** across Golden Gate and Pelican; it requires no external media ZIP for a normal build. Raw records, trajectories, request logs and full videos remain outside Git. The repository, [website](https://robopaintbench.org/) and [Hub task page](https://p90-rushb.github.io/agentark-hub/tasks/robot-painting/) are public; see the pre-publication follow-up at the end for current link and notebook checks.
 
 Checked 2026-10-19. This validates the benchmark presentation and onboarding changes, not a new model evaluation or a new full physical replay.
 
@@ -172,3 +172,54 @@ canonical RobotPainting release alongside its existing 216 task entries. The
 task page, real cover, three painting modes, Colab/local guides and homepage
 card were browser-checked. Its commit remains local: pushing Hub main would
 deploy automatically, while the benchmark repository is still private.
+
+## Public release audit and replay coverage, 2026-10-20
+
+The earlier private-repository and local-only Hub checkpoints above are historical.
+The public website, repository and Hub now describe the same three modes,
+three connected ICL rounds with at most 96 actions each, common SimpleAgent
+harness, two model-visible cameras, author-specific rankings, and Windows/Linux
+and Colab entry points. Both galleries have the owner's task-specific personal
+ranking; neither has a numerical artistic-quality score.
+
+Anonymous checks passed for all **22 Bilibili video pages, 22 embed URLs and
+22 thumbnail URLs**, with matching model/target titles and 6× Golden Gate / 4×
+Pelican playback labels. A Golden Gate video also played in Chrome. All **44
+record/trajectory URLs** and the **four pinned Windows/Linux env/task ZIPs**
+were accessible. These are already-published external resources; this audit
+uploaded no evaluation payloads. Hub's task page, cover and all 16 distinct
+link destinations were accessible, and its deployed revision matched main.
+
+Golden Gate's missing public download mappings were connected to the existing
+immutable release at `1d4f382a163256a9f75e3817b68698c1e73e6fa1`. All 22 original
+source sizes/hashes and the 11 action-count triples matched the published
+manifest. The generator retains these reviewed public contracts through a checked-in
+[artifact mapping](../benchmarks/golden_gate/public-artifacts.json), accepts only
+matching original bytes or the exact reviewed public copy, and rejects unknown
+identities or changed round/canvas associations. Public sanitized record sizes/hashes are retained separately from
+original source identities. Every model now has a public record and trajectory;
+Sol's partial trajectory window remains explicitly labeled. Complete action
+records, rather than limited trajectory windows, are used for native replay.
+
+The Golden Gate notebook now selects any of its 11 model records. Tests execute
+its preparation cell for every model and check that record download and replay
+preparation use the same model/case. Changing that selection after preparation
+blocks launch. Both replay notebooks retain GPU rendering, embedded verified
+source, no model API key, MP4 recording off and the Step 7 viewer link.
+
+Current Colab entrances use the GitHub-maintained notebooks, so documentation
+and embedded source updates travel together. The owner's [original public Drive
+copy](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing)
+remains an older Sol-only snapshot, not the maintained entry point. Both routes
+were checked in the Colab browser; the Drive snapshot was also readable
+anonymously. All three maintained notebooks opened, their code compiled and
+their stored outputs were empty. Stale Pelican ranking, future-video and
+round-end canvas-save descriptions were corrected.
+
+All **152 offline tests passed**, both fourteen-file embedded bundles matched
+the current source, and a complete publication build verified all **69 selected
+images**, with zero missing media. All 69 live PNG URLs returned HTTP 200 and image/png. The live site document crawl found no broken
+HTTP targets or document anchors; task hashes are handled by the site's case
+switcher. This audit does not claim a fresh GPU replay for every model, a hosted
+Pelican replay, paid custom inference, or complete playback of every video.
+Existing dated runtime-validation scopes remain unchanged.

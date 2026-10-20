@@ -2,8 +2,10 @@
 """Build a small, allowlisted result index from the private resource catalog.
 
 No inference, network, video copying, or raw-record export takes place. The
-catalog and source files stay local. Optional PNG copies are byte-identical and
-belong in an ignored preview directory until publication is authorized.
+catalog and source files stay local. The checked-in public-artifacts mapping
+preserves reviewed downloads and media approvals only when source identities
+match. Use --unpublished for a genuinely new, local-only collection; it retains
+the default pending-approval controls. PNG copies remain byte-identical.
 """
 from __future__ import annotations
 
@@ -21,6 +23,7 @@ from urllib.parse import parse_qsl, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_VIDEO_LINKS = ROOT / "benchmarks/results/video-links.json"
+DEFAULT_PUBLIC_ARTIFACTS = ROOT / "benchmarks/golden_gate/public-artifacts.json"
 RELEASE_ID = "golden-gate-2026-10-19-preview"
 REFERENCE_SHA256 = "54c7a2385db7ab9df4e2be820dfd32ede7576fe66d62c69832784599c7b4feb5"
 # These strings are curated public metadata, never copied from free-form audit
@@ -53,7 +56,7 @@ CAVEATS = {
     "doubao": ["Continuation restored the same evaluation. Two HTTP requests have unknown usage; known token totals are incomplete.", "Attempt 2 voluntarily submitted after six contact-protection motion results; its seven steps are a completed attempt."],
 }
 REPLAY_SCOPES = {
-    "sol": "Historical official physical replay: 56 actions (attempt 1 plus one action); first-attempt canvas and raw PNG matched. No new full three-attempt replay is claimed.",
+    "sol": "Hosted Colab T4 replay (2026-10-20): all 155 actions (55/44/56), all five ReplayAgent checks and all three final canvas hashes matched. Scope: this fixed record, not general cross-GPU determinism.",
     "argon": "Historical official physical replay: all 71 actions; six final PNGs matched and three videos decoded. Not rerun for this preview.",
     "opus": "Offline record verification: all 43 actions. Historical official physical replay: 18 actions (attempt 1 plus one action).",
     "grok": "Offline ReplayAgent reader matched all 239 saved actions. All three final videos decoded. No new full official physical replay was performed.",
@@ -235,7 +238,86 @@ def assert_portable_public_data(value: object) -> None:
             raise EvidenceError("Public result data contains a local path or private payload")
 
 
-def build_results(catalog_path: Path, video_links: Path | None = None) -> tuple[dict, dict, list[tuple[Path, str]]]:
+def load_public_artifacts(path: Path) -> dict:
+    """Read reviewed publication receipts, not raw payloads or mutable URLs."""
+    def unique_keys(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise EvidenceError("Duplicate key in public-artifact mapping")
+            result[key] = value
+        return result
+    value = json.loads(path.read_text("utf-8"), object_pairs_hook=unique_keys)
+    if (not isinstance(value, dict) or set(value) != {"schema", "case_id", "models"} or
+            value.get("schema") != "robopaint.public-artifacts.v1" or value.get("case_id") != "golden_gate" or
+            not isinstance(value.get("models"), dict) or set(value["models"]) != set(MODEL_INFO)):
+        raise EvidenceError("Public artifacts require the reviewed 11-model golden_gate mapping")
+    assert_portable_public_data(value)
+    for name, model in value["models"].items():
+        if not isinstance(model, dict) or set(model) != {"record", "trajectory", "canvases", "video_url"}:
+            raise EvidenceError(f"Invalid public-artifact fields for {name}")
+        public_video_url(model["video_url"])
+        canvases = model["canvases"]
+        if not isinstance(canvases, list) or len(canvases) != 3:
+            raise EvidenceError("Public artifacts require three selected canvases")
+        for canvas in canvases:
+            if not isinstance(canvas, dict) or set(canvas) != {"sha256", "bytes"}:
+                raise EvidenceError("Invalid selected-canvas receipt")
+            if not re.fullmatch(r"[0-9a-f]{64}", canvas["sha256"] or "") or type(canvas["bytes"]) is not int or canvas["bytes"] <= 0:
+                raise EvidenceError("Invalid selected-canvas identity")
+        common = {"url", "sha256", "bytes", "publication_status", "revision", "source_sha256", "source_bytes",
+                  "action_count", "attempt_action_counts"}
+        for kind in ("record", "trajectory"):
+            artifact = model[kind]
+            extra = {"all_actions_complete"} if kind == "record" else {"history_coverage", "full_history"}
+            if not isinstance(artifact, dict) or set(artifact) != common | extra:
+                raise EvidenceError(f"Invalid public {kind} receipt for {name}")
+            published_record_url({"published_record_url": artifact["url"], "published_record_revision": artifact["revision"]})
+            suffix = "_results.jsonl" if kind == "record" else "_trajectories.jsonl"
+            if (not isinstance(artifact["url"], str) or "/0107-RobotPainting/golden_gate/" not in artifact["url"] or
+                    not artifact["url"].endswith(suffix) or artifact["publication_status"] != "already_published"):
+                raise EvidenceError("Public artifact is outside the released Golden Gate collection")
+            for prefix in ("", "source_"):
+                if (not re.fullmatch(r"[0-9a-f]{64}", artifact[prefix + "sha256"] or "") or
+                        type(artifact[prefix + "bytes"]) is not int or artifact[prefix + "bytes"] <= 0):
+                    raise EvidenceError("Invalid public artifact hash or byte count")
+            counts = artifact["attempt_action_counts"]
+            if (not isinstance(counts, list) or len(counts) != 3 or
+                    any(type(count) is not int or not 1 <= count <= 96 for count in counts) or
+                    type(artifact["action_count"]) is not int or sum(counts) != artifact["action_count"]):
+                raise EvidenceError("Invalid public artifact round action counts")
+            if kind == "record" and artifact["all_actions_complete"] is not True:
+                raise EvidenceError("Public record must retain every saved action")
+            if kind == "trajectory" and (type(artifact["full_history"]) is not bool or
+                    not isinstance(artifact["history_coverage"], (str, dict))):
+                raise EvidenceError("Trajectory must describe its actual history coverage")
+        if model["record"]["revision"] != model["trajectory"]["revision"]:
+            raise EvidenceError("Public record and trajectory revisions disagree")
+    return value["models"]
+
+
+def merge_public_artifacts(name: str, reviewed: dict, record: dict, steps: list[int], attempts: list[dict]) -> tuple[dict, dict]:
+    """Match the original evaluation or its exact reviewed public copy."""
+    published = reviewed["record"]
+    known_identities = {(published["source_sha256"], published["source_bytes"]),
+                        (published["sha256"], published["bytes"])}
+    if (record["sha256"], record["bytes"]) not in known_identities:
+        raise EvidenceError(f"Public artifact source record identity mismatch for {name}; requires the original source or exact reviewed public copy")
+    for kind in ("record", "trajectory"):
+        if reviewed[kind]["attempt_action_counts"] != steps or reviewed[kind]["action_count"] != sum(steps):
+            raise EvidenceError(f"Public artifact round action counts mismatch for {name}")
+    actual_canvases = [{key: attempt["canvas"][key] for key in ("sha256", "bytes")} for attempt in attempts]
+    if reviewed["canvases"] != actual_canvases:
+        raise EvidenceError(f"Public artifact selected-canvas identity mismatch for {name}")
+    return dict(published), dict(reviewed["trajectory"])
+
+
+def build_results(catalog_path: Path, video_links: Path | None = None, public_artifacts: Path | None = None,
+                  *, unpublished: bool = False) -> tuple[dict, dict, list[tuple[Path, str]]]:
+    if unpublished and public_artifacts is not None:
+        raise EvidenceError("An unpublished collection cannot use public-artifact approvals")
+    public_artifacts = None if unpublished else (DEFAULT_PUBLIC_ARTIFACTS if public_artifacts is None else public_artifacts)
+    reviewed = load_public_artifacts(public_artifacts) if public_artifacts is not None else {}
     video_links = DEFAULT_VIDEO_LINKS if video_links is None else video_links
     curated_videos = load_video_links(video_links)
     catalog = json.loads(catalog_path.read_text("utf-8"))
@@ -313,16 +395,28 @@ def build_results(catalog_path: Path, video_links: Path | None = None) -> tuple[
             }
             attempts.append(attempt_data)
             copies.append((canvas, relative_path.removeprefix("assets/media/")))
-            artifacts.append({"id": f"{name}/attempt-{attempt:02d}/canvas", **attempt_data["canvas"], "publication_status": "pending_approval"})
+            artifacts.append({"id": f"{name}/attempt-{attempt:02d}/canvas", **attempt_data["canvas"],
+                              "publication_status": "versioned_site_asset" if name in reviewed else "pending_approval"})
             artifacts.append({"id": f"{name}/attempt-{attempt:02d}/metadata", **meta_info, "publication_status": "local_only"})
-            artifacts.append({"id": f"{name}/attempt-{attempt:02d}/video", "sha256": video_hash, "bytes": video_size,
-                              "url": attempt_data["video_url"], "publication_status": "linked_public_video" if attempt_data["video_url"] else "pending_video_host"})
+            video_artifact = {"id": f"{name}/attempt-{attempt:02d}/video", "sha256": video_hash, "bytes": video_size,
+                              "url": attempt_data["video_url"], "publication_status": "linked_public_video" if attempt_data["video_url"] else "pending_video_host"}
+            if not attempt_data["video_url"] and name in reviewed:
+                video_artifact.update(url=reviewed[name]["video_url"], url_scope="combined_model_video",
+                                      publication_status="retained_original_linked_via_model_video")
+            artifacts.append(video_artifact)
         record_path = source_path(model["recommended_record"])
         if not record_path.is_file():
             raise EvidenceError("Recommended replay record is unavailable")
         record = {"url": published_record_url(model), "sha256": sha256(record_path), "bytes": record_path.stat().st_size}
         record["publication_status"] = "already_published" if record["url"] else "local_only"
+        trajectory = None
+        if name in reviewed:
+            record, trajectory = merge_public_artifacts(name, reviewed[name], record, steps, attempts)
         artifacts.append({"id": f"{name}/record", **record})
+        if trajectory is not None:
+            artifacts.append({"id": f"{name}/trajectory", **trajectory})
+            artifacts.append({"id": f"{name}/model-video", "url": reviewed[name]["video_url"],
+                              "publication_status": "linked_public_video", "scope": "Three sequential ICL rounds in one combined video."})
         group = {"opus": "mixed-profile", "mimo": "budget-supplement", "astra": "sdk-subscription"}.get(name, "http-20480")
         public_models.append({
             "id": name, "label": label, "model_id": model_id, "backend": backend,
@@ -332,9 +426,12 @@ def build_results(catalog_path: Path, video_links: Path | None = None) -> tuple[
             "comparison_group": group, "caveats": CAVEATS[name], "replay_verification": REPLAY_SCOPES[name],
             "record": record, "attempts": attempts,
         })
+        if trajectory is not None:
+            public_models[-1].update(trajectory=trajectory, video_url=reviewed[name]["video_url"])
+    publication_status = "public_records_videos_and_versioned_site_canvases" if reviewed else "local_preview_pending_media_approval"
     result = {
         "schema": "robopaint.public-results.v1", "case_id": "golden_gate", "release_id": RELEASE_ID,
-        "publication_status": "local_preview_pending_media_approval",
+        "publication_status": publication_status,
         "harness": {
             "name": "AgentArk SimpleAgent", "shared_across_models": True,
             "shared_components": ["Agent implementation", "Task and action interface", "Environment attempt and action budget"],
@@ -359,7 +456,7 @@ def build_results(catalog_path: Path, video_links: Path | None = None) -> tuple[
     }
     manifest = {
         "schema": "robopaint.public-release-manifest.v1", "release_id": RELEASE_ID,
-        "publication_status": "local_preview_pending_media_approval",
+        "publication_status": publication_status,
         "harness": result["harness"],
         "session_protocol": {key: result["protocol"][key] for key in (
             "learning_protocol", "session_structure", "round_count", "experience_carries_across_rounds",
@@ -369,17 +466,23 @@ def build_results(catalog_path: Path, video_links: Path | None = None) -> tuple[
         "video_link_policy": "Owner-curated model/attempt associations. Remote videos are not downloaded or hash-verified; recording hashes identify the retained originals, not re-encoded copies on video hosts.",
         "verification_scope": "Canvas, metadata, and recommended record bytes were hashed locally. Canvas identity, dimensions, action counts, reference hash, and explicit attempt associations were checked. Video hashes and decode states are retained historical receipts; no new video decode or physical replay is claimed.",
         "privacy": "Explicit allowlist only. No local source paths, raw records, native reasoning, API prompts, HTTP payloads, or credentials are included.",
-        "media_policy": "PNG copies are local preview assets. This manifest does not authorize publication of new evaluation media or records.",
+        "media_policy": ("The reviewed selected PNGs are versioned website assets; records, trajectories and combined model videos are already public. "
+                         "These approvals apply only to the matched source identities and do not authorize new evaluation media or records." if reviewed else
+                         "PNG copies are local preview assets. This manifest does not authorize publication of new evaluation media or records."),
         "artifacts": artifacts,
     }
+    if public_artifacts is not None:
+        manifest["public_artifacts_sha256"] = sha256(public_artifacts)
+        manifest["public_artifact_policy"] = "Reviewed public contracts are retained only after the record matches the original source or exact reviewed public copy by hash/size, and round action counts and selected canvas identities match. Original source receipts are preserved separately from sanitized public hashes. Trajectory history coverage is preserved without claiming every history is complete."
     assert_portable_public_data(result)
     assert_portable_public_data(manifest)
     return result, manifest, copies
 
 
 def write_release(catalog_path: Path, output_dir: Path, media_output: Path | None = None,
-                  reference_image: Path | None = None, video_links: Path | None = None) -> dict:
-    result, manifest, copies = build_results(catalog_path, video_links)
+                  reference_image: Path | None = None, video_links: Path | None = None,
+                  public_artifacts: Path | None = None, *, unpublished: bool = False) -> dict:
+    result, manifest, copies = build_results(catalog_path, video_links, public_artifacts, unpublished=unpublished)
     if reference_image is not None:
         if sha256(reference_image) != REFERENCE_SHA256 or png_dimensions(reference_image) != (1280, 800):
             raise EvidenceError("Reference PNG does not match the benchmark target")
@@ -412,9 +515,15 @@ def main() -> int:
     parser.add_argument("--reference-image", type=Path, help="Optional exact reference PNG to copy to preview media")
     parser.add_argument("--video-links", type=Path, default=DEFAULT_VIDEO_LINKS,
                         help="Curated model/attempt public-video links; defaults to benchmarks/results/video-links.json")
+    approvals = parser.add_mutually_exclusive_group()
+    approvals.add_argument("--public-artifacts", type=Path,
+                           help="Reviewed public-artifact receipts; defaults to benchmarks/golden_gate/public-artifacts.json and fails closed on source mismatch")
+    approvals.add_argument("--unpublished", action="store_true",
+                           help="Build a new local-only collection without applying the existing release's publication approvals")
     args = parser.parse_args()
     try:
-        result = write_release(args.catalog, args.output, args.media_output, args.reference_image, args.video_links)
+        result = write_release(args.catalog, args.output, args.media_output, args.reference_image, args.video_links,
+                               args.public_artifacts, unpublished=args.unpublished)
     except (EvidenceError, OSError, KeyError, TypeError, json.JSONDecodeError) as error:
         parser.exit(1, f"Public evidence build failed: {error}\n")
     print(f"Verified {result['model_count']} models and {result['attempt_count']} final canvases; no inference or remote publication performed.")

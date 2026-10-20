@@ -1,6 +1,6 @@
 # 在 Colab 打开金门大桥机器人画画示例
 
-打开 [公开 Colab 示例](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing)，可以直接观看机器人重放已公开的 GPT-6.1 Sol 金门大桥绘画过程，也可以切换为自己发送动作。[本地 notebook 源文件](../notebooks/GoldenGate_Record_Colab.ipynb) 也保留在仓库中。
+打开 [公开 Colab 示例](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/GoldenGate_Record_Colab.ipynb)，可以在第 5 步的 `RECORD_MODEL` 中选择 **11 个模型中任意一个公开记录**，默认回放 GPT-6.1 Sol 的金门大桥绘画过程。也可以切换为自己发送动作。[Notebook 源文件](../notebooks/GoldenGate_Record_Colab.ipynb) 与公开入口由本仓库统一维护；如需保留自己的修改，可另存副本到 Drive。
 
 这个单文件 notebook 已内置运行所需的配套代码，默认使用 **GPU、已录制动作回放**。无需另外上传源码 ZIP，也不需要模型 API key；回放和人工交互都不调用大模型。Colab 计算资源仍按你自己的账户规则使用。
 
@@ -8,7 +8,7 @@
 
 ## 从打开文件到看到机器人
 
-1. **打开公开 notebook。** 点击 [公开 Colab 示例](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing)，登录自己的 Google 账号。若要保留修改，可以另存到自己的 Drive；也可以自行上传本地 `.ipynb` 文件后打开。
+1. **打开公开 notebook。** 点击 [公开 Colab 示例](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/GoldenGate_Record_Colab.ipynb)，登录自己的 Google 账号。若要保留修改，可以另存到自己的 Drive；也可以自行上传本地 `.ipynb` 文件后打开。
 2. **选择 GPU。** 在“运行时 / Runtime → 更改运行时类型 / Change runtime type”中选择 **Python 3** 和 **T4 GPU**（列表中可用时），保存设置。可用的 GPU 类型取决于 Colab 当时分配的资源。
 3. **保留默认选项。** GPU 渲染选项 `RENDERER="gpu"`，观看方式 `MODE="replay"`。默认会自动启动回放；`RECORD_MOTION_VIDEO=False` 可以保持不变。内置源码自动加载，无需填写源码地址或路径。
 4. **执行全部代码。** 点击顶部“全部运行 / Run all”。如果 Colab 出现常规 notebook 执行或连接权限提示，请自行按页面确认。
@@ -16,7 +16,7 @@
 6. **打开第 7 单元的网址。** 找到“Open AgentArk's existing interaction viewer”，点击它打印的 Colab 原生可视化网址，并使用打开 notebook 时的同一个 Google 账号访问。
 7. **确认画面已连接。** 页面显示 `connected` 后，应能看到两个工作区机位、金门大桥参考图，以及不断增加的动作和反馈。机器人会按照已有记录自动继续绘画。
 
-看到相机画面后就可以开始观看，不需要等整幅画完成。完整记录包含 **155 个动作、3 轮连续 ICL 尝试**；已有一次完整 T4 回放耗时约 **103 分钟**，仅为一次实测，实际耗时随运行环境变化。
+看到相机画面后就可以开始观看，不需要等整幅画完成。默认 Sol 记录包含 **155 个动作、3 轮连续 ICL 尝试**；其他模型动作数不同。已有一次完整 Sol T4 回放耗时约 **103 分钟**，仅为一次实测，实际耗时随运行环境变化。
 
 ## 画面、GPU 与录像
 
@@ -26,7 +26,7 @@
 
 要确认 Unity 实际用了 GPU，运行第 9 个 **Inspect** 单元，查看输出中的 `player.log` 渲染信息，例如 `Tesla T4/PCIe/SSE2` 和 `NVIDIA Corporation`。刚启动时可以先等相机画面出现，再重跑这个检查单元。GPU 分配状态本身不足以证明 Unity 的实际渲染设备。
 
-**观看绘画直接使用第 7 节的 viewer。** 第 9 节只是可选的 GPU 与已提交作品检查，不录制视频，也不重复呈现实时相机画面。已提交画布只在一轮正式提交后出现；模拟器启动、重置时保存的白纸不会作为作品展示。第一轮还未提交时，没有成品画布属于正常情况，不代表当前纸上没有笔迹。关闭 MP4 录像不会关闭每轮画布的保存。
+**观看绘画直接使用第 7 节的 viewer。** 第 9 节只是可选的 GPU 与已保存作品检查，不录制视频，也不重复呈现实时相机画面。作品画布在一轮正式提交或达到动作上限后保存；模拟器启动、重置时保存的白纸不会作为作品展示。第一轮还未结束时，没有成品画布属于正常情况，不代表当前纸上没有笔迹。关闭 MP4 录像不会关闭每轮画布的保存。
 
 ## 可选：自己操作机器人并保存记录
 

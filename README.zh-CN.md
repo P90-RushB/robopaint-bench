@@ -4,7 +4,7 @@
 
 基于 [AgentArk](https://p90-rushb.github.io/agentark-hub/) 的模拟机械臂绘画评测与实验环境。模型通过相机反馈控制 Panda 机械臂，寻找颜料和画纸，规划三维运动并落笔作画。
 
-[**展示网站**](https://robopaintbench.org/) · [**Colab 在线回放**](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [**本地运行**](docs/local-setup.md) · [**自定义绘画**](docs/custom-painting.md) · [**English**](README.md)
+[**展示网站**](https://robopaintbench.org/) · [**Colab 在线回放**](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/GoldenGate_Record_Colab.ipynb) · [**本地运行**](docs/local-setup.md) · [**自定义绘画**](docs/custom-painting.md) · [**English**](README.md)
 
 ![Astra 完成金门大桥第三轮绘画时的机械臂三视角画面](site/assets/media/astra-round3-complete.png)
 
@@ -26,7 +26,7 @@
 
 | 你想做什么 | 入口 |
 | --- | --- |
-| **在线观看模型回放** | [金门大桥 Colab](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [鹈鹕 Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/Pelican_Record_Colab.ipynb) |
+| **在线观看模型回放** | [金门大桥 Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/GoldenGate_Record_Colab.ipynb) · [鹈鹕 Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/Pelican_Record_Colab.ipynb) |
 | **在自己的电脑运行** | [Windows / Linux 安装与首次回放](docs/local-setup.md) |
 | **让模型画自己的目标** | [自定义 prompt 与参考图](docs/custom-painting.md) · [自定义绘画 Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/RobotPainting_Colab.ipynb) |
 | **了解或修改环境配置** | [环境与配置说明](docs/environment.md) |

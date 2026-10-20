@@ -5,10 +5,9 @@ RoboPaintBench evaluates simulated robot painting through
 [AgentArk](https://github.com/P90-RushB/AgentArk). Each of the two collections contains
 11 model configurations, each completing one continuous session of three
 **in-context learning (ICL) rounds**. The public gallery documents observable
-outcomes. An explicitly labeled
-author recommendation supplies the Golden Gate gallery order; Pelican is
-unranked and uses alphabetical display. A measured quality
-score requires actual ratings under the optional
+outcomes. An explicitly labeled author recommendation supplies each gallery's
+default order. These task-specific personal rankings are qualitative; a measured
+quality score requires actual ratings under the optional
 [human evaluation plan](../docs/scoring.md).
 
 ## What the benchmark tests
@@ -169,18 +168,20 @@ earlier attempt must not silently replace attempt 3 in the primary comparison.
 
 Task reward measures submission/saving integrity. It is **not a fidelity or
 artistic-quality score**: a poor painting may receive successful submission
-reward. The author supplied a **Golden Gate only** personal qualitative ranking
-on **2026-10-19**, used as that track's default gallery order:
+reward. The author supplied task-specific personal qualitative rankings, used
+as each track's default gallery order:
 
-**Astra → Sol → Argon → Opus → DeepSeek → Wonder (Meta) → Qwen → MiMo → Kimi →
-Grok → Doubao.**
+- **Golden Gate (2026-10-19):** Astra → Sol → Argon → Opus → DeepSeek →
+  Wonder (Meta) → Qwen → MiMo → Kimi → Grok → Doubao.
+- **Pelican (2026-10-20):** Astra → Sol → Argon → Opus → Wonder (Meta) →
+  MiMo → Qwen → Kimi → DeepSeek → Doubao → Grok.
 
-It is attributed as an author recommendation, not a numerical metric or
+Each is attributed as an author recommendation, not a numerical metric or
 human-consensus ranking. Exact model names and the optional rating plan are in
 [scoring.md](../docs/scoring.md).
 
-No corresponding Pelican ranking or numerical quality score has been supplied.
-Its 4× three-round videos and fixed-revision record/trajectory downloads are
+No numerical quality score has been assigned to either collection. Pelican's
+4× three-round videos and fixed-revision record/trajectory downloads are
 listed separately in the [Pelican evidence guide](../docs/pelican-results.md).
 
 Optional blinded human comparison of the attempt-3 canvases follows
