@@ -8,6 +8,7 @@ are never loaded; published records are hashed without parsing their contents.
 from __future__ import annotations
 
 import argparse
+from datetime import date
 import hashlib
 import json
 import os
@@ -123,6 +124,34 @@ def record_receipt(entry: dict, payload_root: Path, name: str, kind: str) -> dic
 def require(condition: bool, message: str) -> None:
     if not condition:
         raise EvidenceError(message)
+
+
+def validate_ranking(ranking: dict) -> None:
+    """Keep independently authored recommendations when refreshing evidence."""
+    require(ranking.get("schema") == "robopaint.author-recommendation.v1" and
+            ranking.get("case_id") == "pelican", "Invalid existing Pelican ranking schema or case")
+    tiers = ranking.get("tiers")
+    require(isinstance(tiers, list), "Invalid existing Pelican ranking tiers")
+    if ranking.get("status") == "awaiting_owner":
+        require(not tiers, "Pending Pelican ranking must not contain tiers")
+    else:
+        require(ranking.get("status") == "provided" and
+                all(isinstance(ranking.get(key), str) and ranking[key].strip()
+                    for key in ("attributed_to", "basis", "date")),
+                "Provided Pelican ranking requires attribution, basis and date")
+        try:
+            require(date.fromisoformat(ranking["date"]).isoformat() == ranking["date"],
+                    "Invalid existing Pelican ranking date")
+        except ValueError as error:
+            raise EvidenceError("Invalid existing Pelican ranking date") from error
+        require(all(isinstance(tier, dict) and isinstance(tier.get("label"), str) and tier["label"].strip() and
+                    isinstance(tier.get("model_ids"), list) and tier["model_ids"] and
+                    all(isinstance(model_id, str) for model_id in tier["model_ids"]) for tier in tiers),
+                "Invalid existing Pelican ranking tier")
+        ids = [model_id for tier in tiers for model_id in tier["model_ids"]]
+        require(len(ids) == len(set(ids)) and set(ids) == set(MODEL_INFO),
+                "Pelican ranking must cover each known model exactly once")
+    portable(ranking)
 
 
 def validate_video_receipt(value: dict, *, film: bool = False) -> None:
@@ -275,7 +304,7 @@ def build_release(dataset_manifest: Path, production_models: Path, delivery_mani
                      "environment_version": "1.0.5", "task_version": "task-v1", "physics_frequency_hz": 480,
                      "width": 960, "height": 720, "obs_mode": "decision", "time_scale": 1,
                      "brush": "fixed", "paper": "fixed", "pigment": "infinite", **SESSION},
-        "quality": {"status": "unscored", "note": "No Pelican quality scores or author ordering have been supplied. Submission reward is a save/submission-integrity check, not an artistic-quality metric. The model list is a presentation order, not a ranking."},
+        "quality": {"status": "unscored", "note": "No numerical Pelican artistic-quality score is assigned. Submission reward is a save/submission-integrity check, not an artistic-quality metric. Author recommendations, when supplied, are published separately in pelican-ranking.json."},
         "model_count": 11, "attempt_count": 33, "action_count": 603, "models": public_models}
     ranking = {"schema": "robopaint.author-recommendation.v1", "case_id": "pelican", "status": "awaiting_owner",
                "attributed_to": None, "basis": None, "date": None, "tiers": [],
@@ -304,6 +333,11 @@ def write_release(dataset_manifest: Path, production_models: Path, delivery_mani
                   publication_status: Path, output: Path, media_output: Path | None = None,
                   payload_root: Path | None = None) -> dict:
     outputs, copies = build_release(dataset_manifest, production_models, delivery_manifest, publication_status, payload_root)
+    ranking_path = output / "pelican-ranking.json"
+    if ranking_path.exists():
+        ranking = read_json(ranking_path)
+        validate_ranking(ranking)
+        outputs["pelican-ranking.json"] = ranking
     if media_output is not None:
         for source, relative in copies:
             destination = media_output / relative

@@ -137,8 +137,12 @@ class SiteBuildTests(unittest.TestCase):
         self.assertEqual(catalog["default_case_id"], "golden_gate")
         by_id = {case["spec"]["id"]: case for case in cases}
         self.assertEqual(by_id["golden_gate"]["recommendation"]["status"], "provided")
-        self.assertEqual(by_id["pelican"]["recommendation"]["status"], "awaiting_owner")
-        self.assertEqual(by_id["pelican"]["recommendation"]["tiers"], [])
+        self.assertEqual(by_id["pelican"]["recommendation"]["status"], "provided")
+        for case_id, order in {
+            "golden_gate": ["astra", "sol", "argon", "opus", "deepseek", "wonder", "qwen", "mimo", "kimi", "grok", "doubao"],
+            "pelican": ["astra", "sol", "argon", "opus", "wonder", "mimo", "qwen", "kimi", "deepseek", "doubao", "grok"],
+        }.items():
+            self.assertEqual([model_id for tier in by_id[case_id]["recommendation"]["tiers"] for model_id in tier["model_ids"]], order)
         self.assertEqual(by_id["pelican"]["results"]["target"]["instruction"], "Paint a pelican riding a bicycle.")
         self.assertIsNone(by_id["pelican"]["results"]["target"].get("reference"))
         self.assertEqual(by_id["golden_gate"]["videos"]["playback_speed"], 6)

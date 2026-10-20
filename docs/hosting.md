@@ -54,7 +54,7 @@ The workflow builds directly from the checked-in media and verifies each selecte
 
 ## Videos and recommendation updates
 
-The two fixed-target tabs select independent results, video indexes and replay entrances. Pelican uses `benchmarks/results/pelican-videos.json`, with 11 full three-attempt videos at **4× simulated-time speed** and no assigned quality ranking. Golden Gate remains 6× and retains its own author recommendation. The checked-in image set covers both case manifests, and the build verifies all 69 selected PNGs.
+The two fixed-target choices sit below the opening hero and select independent results, video indexes and replay entrances. Pelican uses `benchmarks/results/pelican-videos.json`, with 11 full three-attempt videos at **4× simulated-time speed** and its own author's personal ranking. Golden Gate remains 6× and retains its separate author recommendation. The checked-in image set covers both case manifests, and the build verifies all 69 selected PNGs.
 
 The 11 published Golden Gate recordings are indexed in `benchmarks/results/model-videos.json`, keyed by exact model ID. Each Bilibili video combines all three sequential ICL rounds from one continuous session, with 6× motion playback and Chinese/English captions. The site uses one shared player and model buttons in the author's ranking order; switching a model replaces the video in that same player. A direct Bilibili link is available if an embedded player is unavailable. The build checks complete model coverage, unique BVIDs and matching canonical HTTPS links, and embeds the small index so the extracted site also works over `file://`. Remote videos are streamed from Bilibili; they are not downloaded into the site bundle.
 

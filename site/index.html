@@ -19,7 +19,6 @@
   <nav aria-label="Main navigation"><a href="#results">Results</a><a href="docs/protocol.md">Protocol</a><a href="#run">Run it</a><a href="https://github.com/P90-RushB/robopaint-bench" class="repo-link">GitHub <span aria-hidden="true">↗</span></a></nav>
 </header>
 <main>
-<div class="case-navigation wrap" aria-label="Choose a benchmark task"><p class="eyebrow">CHOOSE A TASK</p><div class="case-tabs" role="group" aria-label="Benchmark task"><a href="#golden-gate" data-case="golden_gate" class="active" aria-current="true">Golden Gate Bridge <span>Reference image</span></a><a href="#pelican" data-case="pelican">A Pelican Riding a Bicycle <span>Text only</span></a></div><p id="case-status" class="small muted" aria-live="polite">Loading the recorded tasks…</p></div>
 <section class="hero wrap" aria-labelledby="hero-title">
   <div class="hero-copy">
     <p class="eyebrow"><span class="dot"></span> AN AGENTARK BENCHMARK · v0.1 RESEARCH PREVIEW</p>
@@ -47,6 +46,22 @@
     </div>
   </div>
 </section>
+<div class="case-navigation wrap" aria-label="Choose a benchmark task">
+  <p class="eyebrow case-switch-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 6 4 14 3-5 5-3L7 6Z"/><path d="M5 2v2M2 5h2M18 3l-2 2M3 18l2-2"/></svg>CHOOSE A TASK</p>
+  <div class="case-tabs" role="group" aria-label="Benchmark task">
+    <a href="#golden-gate" data-case="golden_gate" class="active" aria-current="true">
+      <svg class="case-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 28h30M12 33V9h4v24M25 33V9h4v24M5 24c4-2 6-6 7-11m4 0c3 10 6 10 9 0m4 0c1 5 3 9 6 11M8 23v5m12-8v8m13-5v5"/></svg>
+      <span class="case-tab-copy">Golden Gate Bridge<small>Reference image</small></span>
+      <span class="case-selection" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 8 2.5 2.5L12 5"/></svg></span>
+    </a>
+    <a href="#pelican" data-case="pelican">
+      <svg class="case-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="28" r="6.5"/><circle cx="31" cy="28" r="6.5"/><path d="m10 28 7-13 7 13H10l11-9 3 9m-9-13h5m9-5h-5l7 18M23 12l-4-5"/></svg>
+      <span class="case-tab-copy">A Pelican Riding a Bicycle<small>Text only</small></span>
+      <span class="case-selection" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 8 2.5 2.5L12 5"/></svg></span>
+    </a>
+  </div>
+  <p id="case-status" class="small muted" aria-live="polite">Loading the recorded tasks…</p>
+</div>
 <section class="facts" aria-label="Benchmark at a glance"><div class="wrap fact-grid"><div><strong id="model-count">11</strong><span>models in the collection</span></div><div><strong id="canvas-count">33</strong><span>round-end canvases</span></div><div><strong>3 × 96</strong><span>sequential ICL rounds × max actions</span></div><div><strong>2 views</strong><span>fixed workspace cameras</span></div></div></section>
 
 <section class="section wrap" id="results" aria-labelledby="results-title">

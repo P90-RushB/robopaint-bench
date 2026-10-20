@@ -11,7 +11,7 @@ SimpleAgent context, summaries, and archives; model weights stay fixed.
 “ICL Round n” maps to runtime `attempt n`, the term retained below for precise
 record identification. Round-to-round improvement is not assumed.
 
-Pelican has a separate 33-canvas text-goal collection with no author ranking or numerical quality score. The Golden Gate reference-fidelity rubric and ranking below do not automatically apply to its text-only target. See [Pelican results](pelican-results.md).
+Pelican has a separate 33-canvas text-goal collection with its own author's personal ranking, supplied on **2026-10-20**: **Astra → Sol → Argon → Opus → Wonder → MiMo → Qwen → Kimi → DeepSeek → Doubao → Grok**. Its gallery and settings default to that order, retained in [Pelican's ranking metadata](../benchmarks/results/pelican-ranking.json). Neither task has a numerical quality score. The Golden Gate reference-fidelity rubric and ranking below do not automatically apply to Pelican's text-only target. See [Pelican results](pelican-results.md).
 
 ## Golden Gate: author-curated recommendations
 

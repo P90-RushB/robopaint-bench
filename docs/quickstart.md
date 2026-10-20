@@ -54,6 +54,6 @@ Colab runs a native Linux Unity Player behind the notebook. AgentArk's browser v
 
 ## What a run means
 
-Golden Gate is the reference-image case: seed 107, three attempts, at most 96 environment actions per attempt. Text-only goals still use the same workspace camera observations. Pelican is the independent text-goal case: `Paint a pelican riding a bicycle.`, 11 models, 33 attempts and 603 actions. Its results and inference settings are separate from Golden Gate’s; its presentation order is not a quality ranking. Custom targets and mechanics variants belong in separate tracks. Reward records the task's submission workflow, not painting quality.
+Golden Gate is the reference-image case: seed 107, three attempts, at most 96 environment actions per attempt. Text-only goals still use the same workspace camera observations. Pelican is the independent text-goal case: `Paint a pelican riding a bicycle.`, 11 models, 33 attempts and 603 actions. Its results, inference settings and author's personal ranking are separate from Golden Gate's. The attributed rankings are subjective recommendations, not numerical quality scores. Custom targets and mechanics variants belong in separate tracks. Reward records the task's submission workflow, not painting quality.
 
 Each run is local and may be large. Keep its manifest, inputs, complete records, canvases and logs together. A saved recent-history trajectory can be shorter than the complete action record. Preparation does not upload any data or credentials.

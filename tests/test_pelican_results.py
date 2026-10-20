@@ -148,6 +148,53 @@ class PelicanResultsTests(unittest.TestCase):
         self.assertEqual(models["astra"]["effort"], "max")
         self.assertFalse(models["astra"]["settings"]["output_token_cap_enforced"])
 
+    def provided_ranking(self):
+        order = ["astra", "sol", "argon", "opus", "wonder", "mimo", "qwen", "kimi", "deepseek", "doubao", "grok"]
+        return {"schema": "robopaint.author-recommendation.v1", "case_id": "pelican", "status": "provided",
+                "attributed_to": "the benchmark author", "basis": "Personal assessment of the Pelican paintings.",
+                "date": "2026-10-20", "tiers": [{"label": str(index), "model_ids": [name]}
+                                               for index, name in enumerate(order, 1)],
+                "note": "A personal recommendation, not a numerical quality score."}
+
+    def test_refresh_preserves_the_independent_author_ranking(self):
+        self.build()
+        ranking = self.provided_ranking()
+        path = self.output / "pelican-ranking.json"
+        path.write_text(json.dumps(ranking, indent=2) + "\n", "utf-8")
+        self.build()
+        self.assertEqual(json.loads(path.read_text("utf-8")), ranking)
+        hashes = {item.name: pelican.sha256(item) for item in self.output.glob("*.json")}
+        self.build()
+        self.assertEqual(hashes, {item.name: pelican.sha256(item) for item in self.output.glob("*.json")})
+
+    def test_invalid_existing_author_ranking_aborts_before_any_output_change(self):
+        self.output.mkdir()
+        path = self.output / "pelican-ranking.json"
+        for field, value in (("case_id", "golden_gate"), ("schema", "unknown"),
+                             ("attributed_to", " "), ("basis", None), ("date", "2026-02-30"),
+                             ("status", "awaiting_owner"), ("tiers", []), ("tiers", ["invalid"])):
+            with self.subTest(field=field, value=value):
+                ranking = self.provided_ranking()
+                ranking[field] = value
+                original = json.dumps(ranking)
+                path.write_text(original, "utf-8")
+                with self.assertRaises(pelican.EvidenceError):
+                    self.build()
+                self.assertEqual(path.read_text("utf-8"), original)
+                self.assertEqual(list(self.output.iterdir()), [path])
+                self.assertFalse(self.media_output.exists())
+        for model_id in ("astra", "unknown_model"):
+            with self.subTest(model_id=model_id):
+                ranking = self.provided_ranking()
+                ranking["tiers"][-1]["model_ids"] = [model_id]
+                original = json.dumps(ranking)
+                path.write_text(original, "utf-8")
+                with self.assertRaisesRegex(pelican.EvidenceError, "each known model exactly once"):
+                    self.build()
+                self.assertEqual(path.read_text("utf-8"), original)
+                self.assertEqual(list(self.output.iterdir()), [path])
+                self.assertFalse(self.media_output.exists())
+
     def test_tampered_exported_record_aborts_before_output(self):
         (self.payload / self.catalog["models"]["sol"]["results_path"]).write_text("tampered", "utf-8")
         with self.assertRaisesRegex(pelican.EvidenceError, "SHA-256 or byte count mismatch"):

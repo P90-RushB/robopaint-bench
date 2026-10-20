@@ -118,3 +118,26 @@ No new model inference, Unity execution, physical replay, video encoding, media 
 The combined two-task source was synchronized at `11e5d1a`. On the receiving Windows checkout, exact source-bundle checks exposed CRLF/LF differences, including a CRLF Pelican metadata file inside both notebooks while Git stores its LF form. Source packaging now canonicalizes text line endings to LF before calculating sizes/hashes and creating the embedded ZIP. Archive and member verification remain byte-exact; packaging leaves source files unchanged. Both notebook bundles were regenerated while preserving their previews, defaults and other cells.
 
 All 136 checks passed, including the new LF/CRLF archive determinism and preservation regression. The full website build verified all 69 selected images. Browser checks covered Golden Gate ↔ Pelican switching, independent ranking state, rounds, per-case comparison images, 6×/4× recording maps, one shared video iframe, task-specific Colab links and mobile layout. Pelican remains explicitly unranked until the owner supplies an ordering. This follow-up makes no claim of a new hosted Pelican GPU run or model evaluation; it does not deploy the site.
+
+## Pelican author recommendation and task selector, 2026-10-20
+
+The owner supplied Pelican's personal ranking: Astra, Sol, Argon, Opus, Wonder,
+MiMo, Qwen, Kimi, DeepSeek, Doubao, Grok. The task's dated, attributed metadata
+now drives its default gallery, settings, comparison options and recording
+buttons. Golden Gate retains its separate order. Evidence regeneration
+preserves a validated existing recommendation rather than replacing it with
+the initial unranked placeholder. Numerical artistic-quality scores remain
+unassigned; the replay notebooks' embedded metadata was refreshed accordingly.
+
+The two-task selector now follows the opening hero. Cursor, bridge and bicycle
+icons, a shared segmented panel and a highlighted checked option communicate
+the choice without an explanatory sentence. Browser inspection confirmed the
+Pelican gallery and settings order, Golden Gate's unchanged ordering, correct
+selected state and placement, and a readable 390-pixel mobile layout without
+horizontal overflow. Local-only screenshots are under
+`local_save/benchmark_validation/20261020-pelican-author-switch/`.
+
+All **138 tests passed**. JavaScript syntax, notebook source-bundle checks and
+Git whitespace checks passed. The site build verified all **69 images**, with
+zero missing media. This update changes presentation and ranking metadata;
+it performs no new inference, physical replay or Pages deployment.

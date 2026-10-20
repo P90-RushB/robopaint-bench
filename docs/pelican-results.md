@@ -6,7 +6,7 @@ The fixed target is exactly:
 
 No reference image is supplied. The model still receives the same two fixed 960 × 720 workspace cameras and flange feedback. All 11 models use AgentArk SimpleAgent, with seed 107, three connected attempts of at most 96 environment actions each, fixed brush/paper, infinite pigment, 120 Hz control, 480 Hz physics and time scale 1. A fresh canvas starts each attempt while the existing managed context, summaries and archives carry experience forward. Model weights do not change.
 
-The completed independent collection contains **11 models, 33 attempts and 603 actions**. Golden Gate's author ranking is not applied here. Display order and action counts are not quality scores. Submission reward checks the saving/submission workflow, not whether the pelican or bicycle is recognizable.
+The completed independent collection contains **11 models, 33 attempts and 603 actions**. Pelican's gallery and settings default to the **benchmark author's personal ranking**, supplied on **2026-10-20**: **Astra → Sol → Argon → Opus → Wonder → MiMo → Qwen → Kimi → DeepSeek → Doubao → Grok**. This task-specific subjective recommendation is retained with attribution in [the ranking metadata](../benchmarks/results/pelican-ranking.json). It is not a numerical score or a human-consensus result. Submission reward checks the saving/submission workflow, not whether the pelican or bicycle is recognizable.
 
 All 33 selected round-end PNGs are versioned under `site/assets/media/pelican`,
 with exact hashes and episode associations. Together with Golden Gate's 36
@@ -17,17 +17,17 @@ HTTP logs, unselected media and complete videos remain outside Git.
 
 | Model | Access / reasoning | Actions, attempts 1 / 2 / 3 |
 | --- | --- | --- |
+| GPT-6 Astra | Codex SDK / max | 19 / 11 / 11 |
 | GPT-6.1 Sol | OpenRouter / max | 20 / 14 / 14 |
 | Gemini 4 Argon | OpenRouter / high | 18 / 11 / 12 |
 | Claude Opus 5.5 | OpenRouter / high | 29 / 9 / 9 |
-| Grok 4.7 | OpenRouter / xhigh | 58 / 14 / 15 |
 | Meta Muse Wonder | OpenRouter / max | 49 / 17 / 16 |
-| DeepSeek V4.1 Flash 1017 | OpenRouter / max | 50 / 15 / 23 |
+| MiMo V2.6 Pro | OpenRouter / thinking enabled | 21 / 10 / 6 |
 | Qwen3.8-Max-Prime | OpenRouter / xhigh | 32 / 10 / 10 |
 | Kimi K3 | OpenRouter / max | 16 / 9 / 10 |
-| MiMo V2.6 Pro | OpenRouter / thinking enabled | 21 / 10 / 6 |
+| DeepSeek V4.1 Flash 1017 | OpenRouter / max | 50 / 15 / 23 |
 | Doubao Seed 2.1 Pro 260915 | Volcengine Ark / high | 27 / 9 / 9 |
-| GPT-6 Astra | Codex SDK / max | 19 / 11 / 11 |
+| Grok 4.7 | OpenRouter / xhigh | 58 / 14 / 15 |
 
 The [portable results](../benchmarks/results/pelican.json) retain exact model IDs, source AgentArk commits, canvases, episode GUIDs, artifact hashes and limitations. These are historical settings, not an equal-compute comparison:
 

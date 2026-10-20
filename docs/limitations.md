@@ -14,7 +14,7 @@ There are no repeated independent sessions per model to estimate run-to-run
 reliability. More raters cannot fill that gap. Generalization needs more targets,
 setups, and repeated sessions under a prospectively fixed sampling plan.
 
-Pelican is a separate completed collection (33 attempts, 603 actions). It has no assigned artistic ranking; the Golden Gate author recommendation does not transfer to it.
+Pelican is a separate completed collection (33 attempts, 603 actions), with its own author's personal ranking supplied on 2026-10-20. Each task's subjective recommendation applies only to that collection; neither is a numerical score or a human-consensus result.
 Custom studio drawings are demonstrations or separate experimental conditions.
 Neither silently increases the sample count for the Golden Gate comparison.
 

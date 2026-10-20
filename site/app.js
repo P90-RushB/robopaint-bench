@@ -291,7 +291,7 @@ async function activateCase(id){
     byId('compare-left').value=collection.models.some(m=>m.id==='astra')?'astra':collection.models[0].id;
     byId('compare-right').value=collection.models.some(m=>m.id==='sol')?'sol':collection.models[1]?.id||collection.models[0].id;
     renderGallery();renderComparison();renderSettings();initModelVideos(videos);
-    byId('case-status').textContent=`${activeCase.label} · ${textTargetLabel()} · ${collection.models.length} models, three rounds each`;
+    byId('case-status').textContent=`${collection.models.length} models · 3 ICL rounds · ${textTargetLabel()}`;
   }catch{
     if(version!==switchVersion)return;
     byId('case-status').textContent=`${descriptor.label} could not be loaded. ${activeCase?'The previously loaded task remains selected.':''}`;

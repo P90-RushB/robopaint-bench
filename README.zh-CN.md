@@ -33,7 +33,9 @@ Grok最新资料已补完第三轮：96/96/47步；其中一个预算失败是�
 
 ## 鹈鹕骑自行车
 
-目标原文为 `Paint a pelican riding a bicycle.`，不附参考图，但保留两路工作区相机。11模型的三轮均完成，共33张画布、603动作；不沿用金门大桥主观排名，也未设置新的画质分数。
+目标原文为 `Paint a pelican riding a bicycle.`，不附参考图，但保留两路工作区相机。11模型的三轮均完成，共33张画布、603动作。
+
+鹈鹕页面默认采用作者于 **2026-10-20** 提供的独立个人排名：**Astra → Sol → Argon → Opus → Wonder（Meta）→ MiMo → Qwen → Kimi → DeepSeek → Doubao → Grok**，画廊与实际设置表均按此排列。[排名元数据](benchmarks/results/pelican-ranking.json)保留署名、日期及顺序；这是主观推荐，不是数值评分或多人共识结果。
 
 [公开结果](benchmarks/results/pelican.json)和[视频索引](benchmarks/results/pelican-videos.json)分别记录轮次、证据与链接。11段成片均含完整三轮，采用**播放速度：4× / Speed: 4×**，按模拟时间加速；去掉模型等待时间，极短步骤字幕暂停有明确标注。笔尖跟随近景只供观众观看。
 

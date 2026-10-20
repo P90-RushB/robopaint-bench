@@ -1,10 +1,22 @@
 {
   "schema": "robopaint.author-recommendation.v1",
   "case_id": "pelican",
-  "status": "awaiting_owner",
-  "attributed_to": null,
-  "basis": null,
-  "date": null,
-  "tiers": [],
-  "note": "The benchmark author has not supplied a Pelican ranking. Golden Gate recommendations do not apply to this task."
+  "status": "provided",
+  "attributed_to": "the benchmark author",
+  "basis": "The benchmark author's personal qualitative ranking of this Pelican collection.",
+  "date": "2026-10-20",
+  "tiers": [
+    {"label": "1", "model_ids": ["astra"]},
+    {"label": "2", "model_ids": ["sol"]},
+    {"label": "3", "model_ids": ["argon"]},
+    {"label": "4", "model_ids": ["opus"]},
+    {"label": "5", "model_ids": ["wonder"]},
+    {"label": "6", "model_ids": ["mimo"]},
+    {"label": "7", "model_ids": ["qwen"]},
+    {"label": "8", "model_ids": ["kimi"]},
+    {"label": "9", "model_ids": ["deepseek"]},
+    {"label": "10", "model_ids": ["doubao"]},
+    {"label": "11", "model_ids": ["grok"]}
+  ],
+  "note": "Order supplied by the benchmark author on 2026-10-20. This is a personal ranking, not an automated score or an aggregated human-rating result."
 }

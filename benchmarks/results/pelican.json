@@ -60,7 +60,7 @@
   },
   "quality": {
     "status": "unscored",
-    "note": "No Pelican quality scores or author ordering have been supplied. Submission reward is a save/submission-integrity check, not an artistic-quality metric. The model list is a presentation order, not a ranking."
+    "note": "No numerical Pelican artistic-quality score is assigned. Submission reward is a save/submission-integrity check, not an artistic-quality metric. Author recommendations, when supplied, are published separately in pelican-ranking.json."
   },
   "model_count": 11,
   "attempt_count": 33,

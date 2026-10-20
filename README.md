@@ -31,7 +31,7 @@ This project is inspired by [Thijs Simonian's Bot Ross demonstration](https://th
 | Track | Target supplied to the model | Status |
 | --- | --- | --- |
 | **Golden Gate Bridge** | Reference photograph + “Reproduce the provided reference image as closely as possible.” | Initial 11-model / 33-canvas collection assembled. |
-| **Pelican riding a bicycle** | `Paint a pelican riding a bicycle.`; workspace camera observations remain visual. | Independent 11-model / 33-canvas collection, 603 actions; no artistic ranking assigned. |
+| **Pelican riding a bicycle** | `Paint a pelican riding a bicycle.`; workspace camera observations remain visual. | Independent 11-model / 33-canvas collection, 603 actions; author's personal ranking. |
 | **Open canvas** | User text, a reference image, or multiple references. | Custom-run entry available; separate from the fixed-target comparisons. |
 
 The standard environment uses seed 107, **3 connected ICL rounds × at most 96 environment actions per round**, two fixed **960 × 720** workspace views, a fixed brush and paper, infinite pigment, 120 Hz control and 480 Hz physics, at time scale 1. The paper resets between rounds; agent experience carries over within the same session. These are dependent rounds rather than independent experimental repeats.
@@ -60,7 +60,9 @@ All rounds remain inspectable, with ICL Round 3 selected for the main comparison
 
 ## Pelican: an independent text-goal collection
 
-All 11 models completed three connected attempts: **33 canvases and 603 environment actions**. The prompt is exactly `Paint a pelican riding a bicycle.`; no reference image is appended. [Results and evidence](benchmarks/results/pelican.json) · [settings, limitations and replay](docs/pelican-results.md). Golden Gate’s author ranking is not reused for this task; model display order carries no quality claim.
+All 11 models completed three connected attempts: **33 canvases and 603 environment actions**. The prompt is exactly `Paint a pelican riding a bicycle.`; no reference image is appended. [Results and evidence](benchmarks/results/pelican.json) · [settings, limitations and replay](docs/pelican-results.md).
+
+Pelican defaults to its own **author's personal ranking**, supplied on **2026-10-20**: **Astra → Sol → Argon → Opus → Wonder → MiMo → Qwen → Kimi → DeepSeek → Doubao → Grok**. The gallery and settings follow this order. Attribution and order are retained in [Pelican's ranking metadata](benchmarks/results/pelican-ranking.json); this is a subjective recommendation, not a numerical score or a human-consensus result.
 
 The 11 Pelican process videos show all three attempts at **4× simulated-time speed**, with Chinese/English captions and explicit reading pauses for very short steps. Waiting/inference time is omitted. Videos, original canvases and records are associated by episode GUID. The [Pelican video index](benchmarks/results/pelican-videos.json) preserves the published links.
 
