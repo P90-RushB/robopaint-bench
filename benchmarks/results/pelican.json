@@ -1,0 +1,1601 @@
+{
+  "schema": "robopaint.public-results.v1",
+  "case_id": "pelican",
+  "release_id": "pelican-2026-10-20",
+  "publication_status": "public_records_and_videos_local_canvas_preview",
+  "harness": {
+    "name": "AgentArk SimpleAgent",
+    "shared_across_models": true,
+    "shared_components": [
+      "Agent implementation",
+      "Task and action interface",
+      "Environment attempt and action budget"
+    ],
+    "model_access_backends": [
+      {
+        "id": "openrouter",
+        "label": "OpenRouter"
+      },
+      {
+        "id": "volcengine",
+        "label": "Volcengine Ark"
+      },
+      {
+        "id": "codex",
+        "label": "Codex SDK"
+      }
+    ],
+    "backend_role": "All backends supply model access inside the AgentArk SimpleAgent evaluation loop.",
+    "configuration_scope": "Actual reasoning, budget exceptions, harness revisions and trajectory limits are reported per model."
+  },
+  "target": {
+    "title": "A Pelican Riding a Bicycle",
+    "mode": "text",
+    "instruction": "Paint a pelican riding a bicycle.",
+    "reference": null
+  },
+  "protocol": {
+    "attempts": 3,
+    "max_steps_per_attempt": 96,
+    "group_seed": 107,
+    "official_platform": "linux",
+    "environment_version": "1.0.5",
+    "task_version": "task-v1",
+    "physics_frequency_hz": 480,
+    "width": 960,
+    "height": 720,
+    "obs_mode": "decision",
+    "time_scale": 1,
+    "brush": "fixed",
+    "paper": "fixed",
+    "pigment": "infinite",
+    "learning_protocol": "in_context_learning",
+    "session_structure": "one_continuous_agent_session",
+    "round_count": 3,
+    "experience_carries_across_rounds": true,
+    "canvas_resets_each_round": true,
+    "model_weight_updates": false,
+    "round_index_field": "attempt",
+    "context_management": "Experience carries across rounds through SimpleAgent's managed context, summaries, and archives. Model weights remain fixed."
+  },
+  "quality": {
+    "status": "unscored",
+    "note": "No Pelican quality scores or author ordering have been supplied. Submission reward is a save/submission-integrity check, not an artistic-quality metric. The model list is a presentation order, not a ranking."
+  },
+  "model_count": 11,
+  "attempt_count": 33,
+  "action_count": 603,
+  "models": [
+    {
+      "id": "sol",
+      "label": "GPT-6.1 Sol",
+      "model_id": "openai/gpt-6.1-sol",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "max",
+      "effort_label": "max",
+      "attempt_steps": [
+        20,
+        14,
+        14
+      ],
+      "total_environment_actions": 48,
+      "agentark_commit": "299737b6eeddfb50e1f8edc9194b0a15d47049f3",
+      "comparison_group": "http-20480",
+      "settings": {
+        "reasoning_effort": "max",
+        "thinking": null,
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "required",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true
+      },
+      "caveats": [],
+      "replay_verification": "Historical official Linux GPU replay covered all three rounds; the 27 re-recorded canvases in the nine-model group were pixel-identical to source canvases. All episode videos fully decoded.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/openai-gpt-6-1-sol/20261018-openrouter-max/RobotPainting_openai-gpt-6-1-sol_results.jsonl",
+        "sha256": "57327ebe1331ec69d636f3e43343b360e947658b55519c91a68647df0af91124",
+        "bytes": 4430080,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/openai-gpt-6-1-sol/20261018-openrouter-max/RobotPainting_openai-gpt-6-1-sol_trajectories.jsonl",
+        "sha256": "93244afaa663fbaa3416fcd3946461ce33b55eebbdcd6cf578b5f3ef732fe988",
+        "bytes": 42831954,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": true,
+        "saved_steps_per_attempt": [
+          20,
+          14,
+          14
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1ZnnF6nEd4/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 20,
+          "episode_id": "4529444da62e4916a54bfc6abca2b783",
+          "recorded_at": "2026-10-18T16:15:16.3698870Z",
+          "canvas": {
+            "path": "assets/media/pelican/sol/attempt-01.png",
+            "sha256": "57db3a1857128437d85338ecfe2eb80d8e48001c2b63f21e2b45a16e013fa8d2",
+            "bytes": 125451,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "efba285fb4c7a09ded6bfbe02552f9746d42ee0b9074fd0d4b9ead4e871dff71",
+            "bytes": 2482
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "be72903fe53d14ab287a6677135437bc958b500c7246291a9a96035a1a02d6da",
+            "duration_s": 231.583333,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 14,
+          "episode_id": "f1800602f2a44a5985a83234deff3559",
+          "recorded_at": "2026-10-18T16:24:12.2293140Z",
+          "canvas": {
+            "path": "assets/media/pelican/sol/attempt-02.png",
+            "sha256": "97643263b90a2f41bca19b906a4e14d60d3457a6eec047a223195943a5031361",
+            "bytes": 125138,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "0874ce7ce2bee431cfa31cd97cbc68f566971cbf7fbaf66519bd9124e9e1dc7f",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "8e78ad878f9b974a2af1b32dc04a97dd0d76afe3b6a25a94dfe9ccb23e743b46",
+            "duration_s": 204.416667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 14,
+          "episode_id": "89d8a4152f1e47b7ab8e23e0f5474298",
+          "recorded_at": "2026-10-18T16:38:04.6988090Z",
+          "canvas": {
+            "path": "assets/media/pelican/sol/attempt-03.png",
+            "sha256": "5bbcfb3fe81a826f8270682d2b061ce2e6e8fa319e920322860ad9345b8e508a",
+            "bytes": 124285,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "f73fba336b9fd0c13962d8bfbe739fea3c25fcf63b22b5482fa1ca5806bb392c",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "6f008a61726cdeb6c6a20300c22ddcf4eb83984323f184790f4c932f34454377",
+            "duration_s": 205.916667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "argon",
+      "label": "Gemini 4 Argon",
+      "model_id": "google/gemini-4-argon",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "high",
+      "effort_label": "high",
+      "attempt_steps": [
+        18,
+        11,
+        12
+      ],
+      "total_environment_actions": 41,
+      "agentark_commit": "299737b6eeddfb50e1f8edc9194b0a15d47049f3",
+      "comparison_group": "http-20480",
+      "settings": {
+        "reasoning_effort": "high",
+        "thinking": null,
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "required",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true
+      },
+      "caveats": [],
+      "replay_verification": "Historical official Linux GPU replay covered all three rounds; the 27 re-recorded canvases in the nine-model group were pixel-identical to source canvases. All episode videos fully decoded.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/google-gemini-4-argon/20261018-openrouter-high/RobotPainting_google-gemini-4-argon_results.jsonl",
+        "sha256": "0095fa306d3397164e492c2b10b5df10a8fce5d87164e5f994d47aa3bd0c4e02",
+        "bytes": 2103470,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/google-gemini-4-argon/20261018-openrouter-high/RobotPainting_google-gemini-4-argon_trajectories.jsonl",
+        "sha256": "ef09371e14ea2405ab5d14b2f3f8dfd1ee87a0a2e79f78ce80903fc801cf8001",
+        "bytes": 39902225,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": true,
+        "saved_steps_per_attempt": [
+          18,
+          11,
+          12
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1fnnF6nEtC/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 18,
+          "episode_id": "4dda29f679f145c3a084a545a8f1accb",
+          "recorded_at": "2026-10-18T15:30:53.0153750Z",
+          "canvas": {
+            "path": "assets/media/pelican/argon/attempt-01.png",
+            "sha256": "bb709273a899eb4e33a2505db3aaf5f5dd1adb1e9bcd110da4b4dbc68480733d",
+            "bytes": 122582,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "603e3138ca0de615d45e1530d49208db8552e24ae99b9cb286ada2237b821173",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "d2933af0dd8ad88729ca7fecc83504494ece6e57a9276a74a43538348da3e646",
+            "duration_s": 127.666667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 11,
+          "episode_id": "246c3206c58c4eae8ed7019717c3a091",
+          "recorded_at": "2026-10-18T15:38:46.2989080Z",
+          "canvas": {
+            "path": "assets/media/pelican/argon/attempt-02.png",
+            "sha256": "198256f9f7eb05cf53b7365d169110b1fc831f72606831a82cd17d572a2ff4b7",
+            "bytes": 126765,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "51f3173c84914e44da9a4ab6b1dff8f78fe850bdabf60bd1169982c816eff399",
+            "bytes": 2479
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "86366e3a3589cf6dd055018fe4e86e9631d99096dd6349eb2dd4a25ce76e2535",
+            "duration_s": 100.166667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 12,
+          "episode_id": "05ba7e18e2a743fc976369327df9f55c",
+          "recorded_at": "2026-10-18T15:54:36.4911900Z",
+          "canvas": {
+            "path": "assets/media/pelican/argon/attempt-03.png",
+            "sha256": "6439087ba4f0b5d4bcf9c0892b8d9ccdae7cee489711ed7177de2bc9e69cf734",
+            "bytes": 130438,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "5da057536d5e58b61a560b1f14836de589a6217e6af60e950f93b74341872c89",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "8400e3da77d66c5b8f31aa7009c0ca52794c92c8d2ec637300ed9305034025ab",
+            "duration_s": 106.25,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "opus",
+      "label": "Claude Opus 5.5",
+      "model_id": "anthropic/claude-opus-5.5",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "high",
+      "effort_label": "high",
+      "attempt_steps": [
+        29,
+        9,
+        9
+      ],
+      "total_environment_actions": 47,
+      "agentark_commit": "54ab7cb0adf6539419611b536811b9850e429520",
+      "comparison_group": "reasoning-fallback",
+      "settings": {
+        "reasoning_effort": "high",
+        "thinking": null,
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "auto",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true
+      },
+      "caveats": [
+        "Max reasoning failed; the authorized continuation used high reasoning and tool_choice=auto after full context restoration.",
+        "The full action record is complete. The native trajectory retains only the last 24 steps of the first round; use the results record for full replay."
+      ],
+      "replay_verification": "Historical official Linux GPU replay covered all three rounds; the 27 re-recorded canvases in the nine-model group were pixel-identical to source canvases. All episode videos fully decoded.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/anthropic-claude-opus-5-5/20261018-openrouter-high/RobotPainting_anthropic-claude-opus-5-5_results.jsonl",
+        "sha256": "1360dd31cdca444f27d9a8eb9f588b71a7d8e251c44dfdee2c60fa38b0cac72a",
+        "bytes": 1368035,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/anthropic-claude-opus-5-5/20261018-openrouter-high/RobotPainting_anthropic-claude-opus-5-5_trajectories.jsonl",
+        "sha256": "215983024811cc09bee0b62f6127f0a860e2ce8ee5bea076d9fc698566c62eb8",
+        "bytes": 38371892,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": false,
+        "saved_steps_per_attempt": [
+          24,
+          9,
+          9
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1wGnF6oEzt/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 29,
+          "episode_id": "bf6460e5751b4197a1b487110ad5db8d",
+          "recorded_at": "2026-10-19T03:14:46.6346900Z",
+          "canvas": {
+            "path": "assets/media/pelican/opus/attempt-01.png",
+            "sha256": "a0281802fa4ef6f070bd290229844998a2e82e855b8312d55ff7e9cf3a36a7d2",
+            "bytes": 82628,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "07987b6ec913223d69ebb7fa1df148a51684a66256e3b2a7fb8dc4ea7f9a5e97",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "fc91d3c5838decea9d0976c5a927b2523f0d756421d560a086c8e8e4026cb9e6",
+            "duration_s": 192.583333,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 9,
+          "episode_id": "977015f0d65147018cb1420b384d30d9",
+          "recorded_at": "2026-10-19T03:19:15.0649800Z",
+          "canvas": {
+            "path": "assets/media/pelican/opus/attempt-02.png",
+            "sha256": "4e796f4cf80dc2c919042e990d18a5c81855e1383490b48b822d78d2551c253f",
+            "bytes": 83989,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "2a39d86ed272a04a767b5de58ac1b7fd8022fe2096071d100dcaf7fa3dc76d33",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "f8926a83ca34f498d19fa217b81d6338ad2572709d1a81756cea5c687ae8578f",
+            "duration_s": 105.75,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 9,
+          "episode_id": "e7ec8e0cff4b4fb4a3427790706b089e",
+          "recorded_at": "2026-10-19T03:26:56.3271230Z",
+          "canvas": {
+            "path": "assets/media/pelican/opus/attempt-03.png",
+            "sha256": "d19dcc5b42be4ccbecb78f388ff7438736a1adbd3835c20b216aee087e848019",
+            "bytes": 83965,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "81c166c39b3f2f2ae4d303fe2eb445ba8e4308c75f1debad30d30ee511ae132d",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "2c6224ee6d1650df6fc07d1c27fabeb096fd2d1479020ed4b200de9aa177b606",
+            "duration_s": 104.75,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "grok",
+      "label": "Grok 4.7",
+      "model_id": "x-ai/grok-4.7",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "xhigh",
+      "effort_label": "xhigh",
+      "attempt_steps": [
+        58,
+        14,
+        15
+      ],
+      "total_environment_actions": 87,
+      "agentark_commit": "54ab7cb0adf6539419611b536811b9850e429520",
+      "comparison_group": "http-20480",
+      "settings": {
+        "reasoning_effort": "xhigh",
+        "thinking": null,
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "required",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true
+      },
+      "caveats": [
+        "The full action record is complete. The native trajectory retains only the last 24 steps of the first round; use the results record for full replay."
+      ],
+      "replay_verification": "Historical official Linux GPU replay covered all three rounds; the 27 re-recorded canvases in the nine-model group were pixel-identical to source canvases. All episode videos fully decoded.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/x-ai-grok-4-7/20261018-openrouter-xhigh/RobotPainting_x-ai-grok-4-7_results.jsonl",
+        "sha256": "eb6fede71798a1b488c79bc3f6c3d80c5f243dfa21d59c93910233e2ba5fe9b8",
+        "bytes": 4260568,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/x-ai-grok-4-7/20261018-openrouter-xhigh/RobotPainting_x-ai-grok-4-7_trajectories.jsonl",
+        "sha256": "6248ba066431efedb8c33cf54631279ac37ff8427f50c9eddf8467205037fe94",
+        "bytes": 50546889,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": false,
+        "saved_steps_per_attempt": [
+          24,
+          14,
+          15
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1wGnF6oEGv/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 58,
+          "episode_id": "bd5d4e431c9c4cfeb337c3d6882089c8",
+          "recorded_at": "2026-10-18T18:25:53.4943570Z",
+          "canvas": {
+            "path": "assets/media/pelican/grok/attempt-01.png",
+            "sha256": "2ad818fe165ce77b8ba7cb6474e3e86272a1332b8dbf6e590077add58a80d77c",
+            "bytes": 41053,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "d7b498f79841313b8486296625f9fb0e71f7fa9bce100dcda8998bc99050cb9a",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "eec1346b5e92bde61bf65264b305f258fa11fa9c879ad88516a73e9387d59b33",
+            "duration_s": 109.083333,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 14,
+          "episode_id": "6d4c440b07be4294bbd5fe8d1611afde",
+          "recorded_at": "2026-10-18T18:40:50.1422940Z",
+          "canvas": {
+            "path": "assets/media/pelican/grok/attempt-02.png",
+            "sha256": "4dc7872ed7a39fa58f4b6bdb62c1743e0954cc66a697608216d98fec2eddd56d",
+            "bytes": 53642,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "bff4ff4039f1d44c09ecf2d9b2f6fd024e353e7b1de61021fc58715381a97cc3",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "1bb7a4ada37c434879e5661d5463e10ef6b77342fcff0d4ddd236b5c2a4e0b50",
+            "duration_s": 152.833333,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 15,
+          "episode_id": "a2ee25adffe341009f85c42c948fec82",
+          "recorded_at": "2026-10-18T18:59:35.3507150Z",
+          "canvas": {
+            "path": "assets/media/pelican/grok/attempt-03.png",
+            "sha256": "03b9faf8eeb6c087c8daa98df97cddc09241059a36495ff58b8347ca659ec385",
+            "bytes": 54667,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "68a9a31575392952402110ffbbcdb79ec1f27d909ccf888410c32a4dd9bf00fd",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "5e94a269fafbbc0326b809f7c51ae06d84db5bb7fa367ff8b5f5e999bf70f7ba",
+            "duration_s": 174.916667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "wonder",
+      "label": "Meta Muse Wonder",
+      "model_id": "meta/muse-wonder",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "max",
+      "effort_label": "max",
+      "attempt_steps": [
+        49,
+        17,
+        16
+      ],
+      "total_environment_actions": 82,
+      "agentark_commit": "54ab7cb0adf6539419611b536811b9850e429520",
+      "comparison_group": "http-20480",
+      "settings": {
+        "reasoning_effort": "max",
+        "thinking": null,
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "auto",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true
+      },
+      "caveats": [
+        "The recorded SimpleAgent profile used tool_choice=auto.",
+        "The full action record is complete. The native trajectory retains only the last 24 steps of the first round; use the results record for full replay."
+      ],
+      "replay_verification": "Historical official Linux GPU replay covered all three rounds; the 27 re-recorded canvases in the nine-model group were pixel-identical to source canvases. All episode videos fully decoded.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/meta-muse-wonder/20261018-openrouter-max/RobotPainting_meta-muse-wonder_results.jsonl",
+        "sha256": "fdcff7bee4334b69e77565c8d0080f2680f340777ad42ab659b4fc001cf4087b",
+        "bytes": 4206250,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/meta-muse-wonder/20261018-openrouter-max/RobotPainting_meta-muse-wonder_trajectories.jsonl",
+        "sha256": "b3a031a0de154cb55f95ee8bd66ff595ee4e7a48750e3c9e69fc9d740bbca7bd",
+        "bytes": 50330291,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": false,
+        "saved_steps_per_attempt": [
+          24,
+          17,
+          16
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1wGnF6oEGx/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 49,
+          "episode_id": "c5e0a818bf684bf78f22b34364f3e013",
+          "recorded_at": "2026-10-18T18:33:01.8265500Z",
+          "canvas": {
+            "path": "assets/media/pelican/wonder/attempt-01.png",
+            "sha256": "629ab9436e8de586c6a3cd0eb66b812e6148d7b18e1333a65276efe89a1683a5",
+            "bytes": 73466,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "70adb2437adb380b73c519bc17dc3c5fa71484bad84df33e9c3b10e47dfd7eb5",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "baa321da8fab756bf25ef777c4a2f05adafc9a423b5688cabd3efd0e8d96c025",
+            "duration_s": 367.0,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 17,
+          "episode_id": "ddcbe789fb7c4d9dadc9a544cd2d427a",
+          "recorded_at": "2026-10-18T18:48:20.1056510Z",
+          "canvas": {
+            "path": "assets/media/pelican/wonder/attempt-02.png",
+            "sha256": "6e9ded52d00aecd8073b83760b5b8edd759fd3b4f0dcdecf52d83572bc065c13",
+            "bytes": 72332,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "be0bf5f954a69f26a4ad18e46d0f8d13c0b83764db33d6cc73000d21a866e719",
+            "bytes": 2479
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "7535340c76362c04055b254643978c04c39cf3697dff488d5ef253dd89641c1d",
+            "duration_s": 181.5,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 16,
+          "episode_id": "e9506a562161487da4aba552d30ea3f2",
+          "recorded_at": "2026-10-18T19:03:34.5510200Z",
+          "canvas": {
+            "path": "assets/media/pelican/wonder/attempt-03.png",
+            "sha256": "1e256ff35c542f4b49c2c804792245dd364c64b0cfb09cecebfe5c473b327b7e",
+            "bytes": 72296,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "1763541a6ee23c90a7c103cab6395cbdcb68114788a45253488fe31682f61eab",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "d5dcc08426cdd2c4035664820b32b98f4ef57fb06dd4e5f901d74666943424a7",
+            "duration_s": 173.666667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "deepseek",
+      "label": "DeepSeek V4.1 Flash 1017",
+      "model_id": "deepseek/deepseek-v4.1-flash-1017",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "max",
+      "effort_label": "max",
+      "attempt_steps": [
+        50,
+        15,
+        23
+      ],
+      "total_environment_actions": 88,
+      "agentark_commit": "54ab7cb0adf6539419611b536811b9850e429520",
+      "comparison_group": "http-20480",
+      "settings": {
+        "reasoning_effort": "max",
+        "thinking": null,
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "required",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true
+      },
+      "caveats": [
+        "The full action record is complete. The native trajectory retains only the last 24 steps of the first round; use the results record for full replay."
+      ],
+      "replay_verification": "Historical official Linux GPU replay covered all three rounds; the 27 re-recorded canvases in the nine-model group were pixel-identical to source canvases. All episode videos fully decoded.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/deepseek-deepseek-v4-1-flash-1017/20261018-openrouter-max/RobotPainting_deepseek-deepseek-v4-1-flash-1017_results.jsonl",
+        "sha256": "dfd1876520050855140dca2cc50f014a58e905f10680f39b0e621bf6eb51ef13",
+        "bytes": 6898699,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/deepseek-deepseek-v4-1-flash-1017/20261018-openrouter-max/RobotPainting_deepseek-deepseek-v4-1-flash-1017_trajectories.jsonl",
+        "sha256": "7b27f864ad5efaf93ca5bd727be73688395071db246dc6046e0161d879cc694c",
+        "bytes": 60254715,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": false,
+        "saved_steps_per_attempt": [
+          24,
+          15,
+          23
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1HGnF6oE1B/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 50,
+          "episode_id": "076734f01b1545a291221ff4c2928fee",
+          "recorded_at": "2026-10-19T00:50:49.2035160Z",
+          "canvas": {
+            "path": "assets/media/pelican/deepseek/attempt-01.png",
+            "sha256": "2eaf32b01bdae126eea78d77233fa0c716238aac84e020eb0b26ca3b5df92a0a",
+            "bytes": 90177,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "dc9683c9ed3810f190ea7b6397b9ff418c7ce27b1d8ac786dcb4fe003a09b3fb",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "48e1633fa5f8b6aca9d5f1b387f39fcc036c269dd75a53821b2d1b4de258ce23",
+            "duration_s": 205.166667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 15,
+          "episode_id": "d6335ab0095c4bb9bda11204c0ec8f3d",
+          "recorded_at": "2026-10-19T01:02:59.9549190Z",
+          "canvas": {
+            "path": "assets/media/pelican/deepseek/attempt-02.png",
+            "sha256": "59b29a711089234dddf123d343bd35e5087d8a41a4253d318943c8e997f7f1f9",
+            "bytes": 89344,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "8bedd6807c033344b4406e382d0fa3526edeb82289eb3b20ab8def1f0f118acc",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "9d72fd69d5c264be21433d315f81fb1f156c12c1d29a705b49fcc37671383d20",
+            "duration_s": 103.0,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 23,
+          "episode_id": "a73f365a8381459bb67a6b4cb5dc8078",
+          "recorded_at": "2026-10-19T01:23:31.5995970Z",
+          "canvas": {
+            "path": "assets/media/pelican/deepseek/attempt-03.png",
+            "sha256": "360f632455fe92334a104331980613bfc21c864b709f19d2331d4fd0919e5e2c",
+            "bytes": 103959,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "f859dbcdd829e32d84157c316f8dbf4135f8917d9714a5c0936e4d9e582e0cfa",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "d985f5f3cfcb494734763f2154f25f83924a21617cffbac0acf69d35324d9486",
+            "duration_s": 195.5,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "qwen",
+      "label": "Qwen3.8-Max-Prime",
+      "model_id": "qwen/qwen3.8-max-prime",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "xhigh",
+      "effort_label": "xhigh",
+      "attempt_steps": [
+        32,
+        10,
+        10
+      ],
+      "total_environment_actions": 52,
+      "agentark_commit": "54ab7cb0adf6539419611b536811b9850e429520",
+      "comparison_group": "http-20480",
+      "settings": {
+        "reasoning_effort": "xhigh",
+        "thinking": null,
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "required",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true
+      },
+      "caveats": [
+        "The full action record is complete. The native trajectory retains only the last 24 steps of the first round; use the results record for full replay."
+      ],
+      "replay_verification": "Historical official Linux GPU replay covered all three rounds; the 27 re-recorded canvases in the nine-model group were pixel-identical to source canvases. All episode videos fully decoded.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/qwen-qwen3-8-max-prime/20261018-openrouter-xhigh/RobotPainting_qwen-qwen3-8-max-prime_results.jsonl",
+        "sha256": "ce7ebb17e5809807c53c4635058ee7fe9b201bfc43768b97961e45cbbe35e5dc",
+        "bytes": 1899799,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/qwen-qwen3-8-max-prime/20261018-openrouter-xhigh/RobotPainting_qwen-qwen3-8-max-prime_trajectories.jsonl",
+        "sha256": "f9328d81c11cce8efcea965a5cff5631032a7a895137974bb77623512121db36",
+        "bytes": 43102869,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": false,
+        "saved_steps_per_attempt": [
+          24,
+          10,
+          10
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1AGnF6oETK/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 32,
+          "episode_id": "46e53111844f4ef1bd7d4f109855bfc2",
+          "recorded_at": "2026-10-19T02:12:29.3027980Z",
+          "canvas": {
+            "path": "assets/media/pelican/qwen/attempt-01.png",
+            "sha256": "abdd3f124f9dfa153d3bfbf09845a2a027bcc9bff8903169fff64af38d78a8c0",
+            "bytes": 70673,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "ffa536ed366c9aa9a7bad9163618e6d0a89fc5954bb00a0db4c358b85be7efc4",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "958017bb2cbd214dbf17a28942deb9d2d51f45bf1bd3af7afd7960ae5a811fae",
+            "duration_s": 146.25,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 10,
+          "episode_id": "3b9c510758664723981e9a4e8095f9e3",
+          "recorded_at": "2026-10-19T02:15:37.2407950Z",
+          "canvas": {
+            "path": "assets/media/pelican/qwen/attempt-02.png",
+            "sha256": "b9af3c1bc0dd4d8d74e4d5d6309dc65d55ed990589e7a1a7b6bfca79b79e4b8d",
+            "bytes": 59817,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "051d96f756cce373e3f57ac7f1b4c73d57d0b8984300047850591fd7cff4b96f",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "0482100df6e17d65b69f5a03cbdeafefd247c5e1fdca14f6a16bfbdcc7784140",
+            "duration_s": 54.916667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 10,
+          "episode_id": "1f75e2a81306495b9a8671d8bea0fabb",
+          "recorded_at": "2026-10-19T02:24:55.4091320Z",
+          "canvas": {
+            "path": "assets/media/pelican/qwen/attempt-03.png",
+            "sha256": "b9af3c1bc0dd4d8d74e4d5d6309dc65d55ed990589e7a1a7b6bfca79b79e4b8d",
+            "bytes": 59817,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "b3111386044dc926cf1cc1346ca218549da409daaa62ee5ab901687de406cd12",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "0eee5d508228b4d544279e83977b06a8e9cba64cb98b180a128c1f4bcc0bef71",
+            "duration_s": 54.916667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "kimi",
+      "label": "Kimi K3",
+      "model_id": "moonshotai/kimi-k3",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": "max",
+      "effort_label": "max",
+      "attempt_steps": [
+        16,
+        9,
+        10
+      ],
+      "total_environment_actions": 35,
+      "agentark_commit": "54ab7cb0adf6539419611b536811b9850e429520",
+      "comparison_group": "http-20480",
+      "settings": {
+        "reasoning_effort": "max",
+        "thinking": null,
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "required",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true
+      },
+      "caveats": [],
+      "replay_verification": "Historical official Linux GPU replay covered all three rounds; the 27 re-recorded canvases in the nine-model group were pixel-identical to source canvases. All episode videos fully decoded.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/moonshotai-kimi-k3/20261018-openrouter-max/RobotPainting_moonshotai-kimi-k3_results.jsonl",
+        "sha256": "dafa0cd1fd9732c79cbc84d6ad0e1b1a0cf3cd3f23b0153afc2b51925d5fc788",
+        "bytes": 2728546,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/moonshotai-kimi-k3/20261018-openrouter-max/RobotPainting_moonshotai-kimi-k3_trajectories.jsonl",
+        "sha256": "ced3faa17a85dee357972b888e36e931d7f1d4c8ec63c874dd385e900246cbe9",
+        "bytes": 32020623,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": true,
+        "saved_steps_per_attempt": [
+          16,
+          9,
+          10
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1pGnF6oETx/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 16,
+          "episode_id": "6d995558268b41c2911c040ab79256a6",
+          "recorded_at": "2026-10-18T18:39:26.9094100Z",
+          "canvas": {
+            "path": "assets/media/pelican/kimi/attempt-01.png",
+            "sha256": "b763b4b23a0015921d22900c219e5fec310880cbbca2a854cae15f4957f354ca",
+            "bytes": 29853,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "2615ec1d6a48efb08819ed00c8016d8d4f0d72c0f7fe66f706210c287466d8a7",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "f582202490dcacf199940998cd73d3915f60b1b0d0b2f16ebab7625b5f94dd39",
+            "duration_s": 122.0,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 9,
+          "episode_id": "c5ac09b8e2014ad8bb96aec6414263af",
+          "recorded_at": "2026-10-18T18:49:37.3057370Z",
+          "canvas": {
+            "path": "assets/media/pelican/kimi/attempt-02.png",
+            "sha256": "daed1e1a354da90ce09ea2e3957ad00ce6c72a8461f5fd0adc81ca21a8d6e835",
+            "bytes": 57140,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "21db40b605bb4cd6494bafc09d1c34039d6bba803ff1238d9b6474b2fb9d1df9",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "c4c07df200cbaa9915dbf1b7e4b0b69dc7c5e148ab62dc370c35542bfa673d2f",
+            "duration_s": 114.416667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 10,
+          "episode_id": "40ac18a1886d40d0bf339e30e146a808",
+          "recorded_at": "2026-10-18T18:59:09.7708750Z",
+          "canvas": {
+            "path": "assets/media/pelican/kimi/attempt-03.png",
+            "sha256": "ac0d55d14caab3aca5e77683315b078aa0304cc88d36770cfe9d5cffe778698d",
+            "bytes": 57380,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "792996d6bd0481e21002c1ea380ebb7e8054cc64882c6d1ee3b18082c14c7170",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "888167926c4dd8aea6ede71bb18c5e4d1f9af2148f52d13e667365886a9a3581",
+            "duration_s": 129.5,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mimo",
+      "label": "MiMo V2.6 Pro",
+      "model_id": "xiaomi/mimo-v2.6-pro",
+      "backend": "openrouter",
+      "backend_label": "OpenRouter",
+      "effort": null,
+      "effort_label": "thinking enabled",
+      "attempt_steps": [
+        21,
+        10,
+        6
+      ],
+      "total_environment_actions": 37,
+      "agentark_commit": "54ab7cb0adf6539419611b536811b9850e429520",
+      "comparison_group": "budget-supplement",
+      "settings": {
+        "reasoning_effort": null,
+        "thinking": "enabled",
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "required",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true,
+        "actual_provider_request_caps_latest_segment": [
+          {
+            "purpose": "action",
+            "max_output_tokens": 20480,
+            "requests": 25
+          },
+          {
+            "purpose": "action",
+            "max_output_tokens": 65536,
+            "requests": 2
+          },
+          {
+            "purpose": "summary",
+            "max_output_tokens": 32768,
+            "requests": 1
+          }
+        ]
+      },
+      "caveats": [
+        "Two truncated-action retries in the latest segment used a 65,536-token provider cap. Logical records retain the original caps; this is an output-budget exception. No 131,072-token request is claimed."
+      ],
+      "replay_verification": "Historical official Linux GPU replay covered all three rounds; the 27 re-recorded canvases in the nine-model group were pixel-identical to source canvases. All episode videos fully decoded.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/xiaomi-mimo-v2-6-pro/20261018-openrouter-thinking-enabled/RobotPainting_xiaomi-mimo-v2-6-pro_results.jsonl",
+        "sha256": "08f04eb4002e3ce672f1e8ab05edba3d20754bdbf7a396c43ed968de1e5025b7",
+        "bytes": 6006096,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/xiaomi-mimo-v2-6-pro/20261018-openrouter-thinking-enabled/RobotPainting_xiaomi-mimo-v2-6-pro_trajectories.jsonl",
+        "sha256": "b87caa9120e111b29de7f1ee52222adb1a8740bdf31e4b2a61f5839da645e9a6",
+        "bytes": 34817009,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": true,
+        "saved_steps_per_attempt": [
+          21,
+          10,
+          6
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1pGnF6oEwQ/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 21,
+          "episode_id": "d37bb31326894e458aa8eadd35539743",
+          "recorded_at": "2026-10-19T05:30:39.0775460Z",
+          "canvas": {
+            "path": "assets/media/pelican/mimo/attempt-01.png",
+            "sha256": "fdf655cdf5d948357c2a896517d88fbf82231434ff0cd29644d24c2c0216554e",
+            "bytes": 88960,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "5913bafe0cf52d6fcad2bae4e8d69db348c7ae45ec7de7f50b1930cf81a47bef",
+            "bytes": 2482
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "955ee05e56a753f7c19d74a6f48e78c9588692cfaafea9a10ff8a565b098a536",
+            "duration_s": 235.916667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 10,
+          "episode_id": "4fdb112603084bf2bb5820ce7f22ea3d",
+          "recorded_at": "2026-10-19T06:09:55.4233710Z",
+          "canvas": {
+            "path": "assets/media/pelican/mimo/attempt-02.png",
+            "sha256": "2a6017112290426ed16452fb13fc46f8ffc7b52359808fb9f3dfa4a45f975811",
+            "bytes": 92143,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "7f5ab83a020b12317417ee6686691aa809eda7244b6c544cca08d83770526609",
+            "bytes": 2480
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "5e2c50814cabd786515a74fcd966c9fdf8fc65688b3df476a557779ff4b1d295",
+            "duration_s": 161.5,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 6,
+          "episode_id": "1657b82c4fab467e89674bfc0b651006",
+          "recorded_at": "2026-10-19T06:33:55.5290630Z",
+          "canvas": {
+            "path": "assets/media/pelican/mimo/attempt-03.png",
+            "sha256": "70f52c7266cda33f92d8bb4ab9ae4474319a6f4e77fcf89aa27f37946bebcb96",
+            "bytes": 92197,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "732d0ea4ea8645b515ad19fd8bbcf846f4bd5fd5be0a72561d494c4f7b8d66dc",
+            "bytes": 2479
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "43134f2cd0980c94d4d6691f746b6e6120b3d69f3a60454cdd4fff4dacde3767",
+            "duration_s": 90.5,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "doubao",
+      "label": "Doubao Seed 2.1 Pro 260915",
+      "model_id": "doubao-seed-2-1-pro-260915",
+      "backend": "volcengine",
+      "backend_label": "Volcengine Ark",
+      "effort": "high",
+      "effort_label": "high",
+      "attempt_steps": [
+        27,
+        9,
+        9
+      ],
+      "total_environment_actions": 45,
+      "agentark_commit": "54ab7cb0adf6539419611b536811b9850e429520",
+      "comparison_group": "http-20480",
+      "settings": {
+        "reasoning_effort": "high",
+        "thinking": "enabled",
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "required",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": true
+      },
+      "caveats": [
+        "The full action record is complete. The native trajectory retains only the last 24 steps of the first round; use the results record for full replay."
+      ],
+      "replay_verification": "All three native Linux GPU evaluation recordings fully decoded. No additional physical replay is claimed.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/doubao-seed-2-1-pro-260915/20261019-volcengine-high/RobotPainting_doubao-seed-2-1-pro-260915_results.jsonl",
+        "sha256": "0460d85d884747a4d0888b86d135816b0718897040e429bdbbb121a7f4657e0a",
+        "bytes": 2139041,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/doubao-seed-2-1-pro-260915/20261019-volcengine-high/RobotPainting_doubao-seed-2-1-pro-260915_trajectories.jsonl",
+        "sha256": "4e2e6566c0524333b8ffd2e2bfefd6182123c208bfc3f7650068aa3d4fd12cd3",
+        "bytes": 38921519,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": false,
+        "saved_steps_per_attempt": [
+          24,
+          9,
+          9
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1pGnF6oEei/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 27,
+          "episode_id": "6958b5832b514be485c8bb85ce7fa6aa",
+          "recorded_at": "2026-10-19T10:28:38.6495870Z",
+          "canvas": {
+            "path": "assets/media/pelican/doubao/attempt-01.png",
+            "sha256": "e8f53bf578cc8fa8bce5cc164b5eaf409626710fece89a7bcc76e969e0f07431",
+            "bytes": 73006,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "b44e69ec828dc84666d3d7742803bd8d8f05423e5721bd22fcb65f62d707737b",
+            "bytes": 2478
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "745a16ba5b0b4c45eeafaa683b4c804bd99a95b0127b8151c74c92e7f38df5c6",
+            "duration_s": 71.5,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 9,
+          "episode_id": "4a420a127ad64299a3a9149f817a1120",
+          "recorded_at": "2026-10-19T10:38:04.3513410Z",
+          "canvas": {
+            "path": "assets/media/pelican/doubao/attempt-02.png",
+            "sha256": "fff2321ee9ec25fb16758943110af8d42984ecfac011e283f6b01c05ff704748",
+            "bytes": 71505,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "02a0d89281724cb0d71601fc825028d517493078afdf9545be4786cbaaf5bf7c",
+            "bytes": 2479
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "07542d34640a55a33cad57411d155d4de04fd838d2c0a0f79f8e0f6e0634cf11",
+            "duration_s": 27.166667,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 9,
+          "episode_id": "3a2eed01e53e4d6bbcdc59c476ec81d2",
+          "recorded_at": "2026-10-19T10:46:59.0212640Z",
+          "canvas": {
+            "path": "assets/media/pelican/doubao/attempt-03.png",
+            "sha256": "c03c9c02847b3795ef8ec7140baae1030883af67c2d3acaa163d09e0a5dd2579",
+            "bytes": 72261,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "fde9e90ce4ddb032c29897044f172b5a167ffe08bcfd49c907655f1c711b1a7e",
+            "bytes": 2478
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "62342f2a70a4fe307590f6dc92b7bf532395d94037ccdc4668abc28ce7b4b2db",
+            "duration_s": 27.0,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "astra",
+      "label": "GPT-6 Astra",
+      "model_id": "gpt-6-astra",
+      "backend": "codex",
+      "backend_label": "Codex SDK",
+      "effort": "max",
+      "effort_label": "max",
+      "attempt_steps": [
+        19,
+        11,
+        11
+      ],
+      "total_environment_actions": 41,
+      "agentark_commit": "54ab7cb0adf6539419611b536811b9850e429520",
+      "comparison_group": "sdk-subscription",
+      "settings": {
+        "reasoning_effort": "max",
+        "thinking": null,
+        "action_output_token_budget": 20480,
+        "summary_output_token_budget": 32768,
+        "tool_choice": "required",
+        "env_message_mode": "delta",
+        "context_profile": "Pinned SimpleAgent defaults",
+        "output_token_cap_enforced": false
+      },
+      "caveats": [
+        "Codex SDK subscription transport did not enforce the logical hard output-token cap. API dollar cost is unavailable."
+      ],
+      "replay_verification": "All three native Linux GPU evaluation recordings fully decoded. No additional physical replay is claimed.",
+      "record": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/gpt-6-astra/20261019-codex-max/RobotPainting_gpt-6-astra_results.jsonl",
+        "sha256": "d7a59cc2511017d7632333aa5ae8c18f509486231eb9b6b94abc7fa40f263b6e",
+        "bytes": 1595362,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "all_actions_complete": true
+      },
+      "trajectory": {
+        "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/gpt-6-astra/20261019-codex-max/RobotPainting_gpt-6-astra_trajectories.jsonl",
+        "sha256": "e906686909be48768cd97ef65525d152cbfd55faee12065d5ed12facf24b60c0",
+        "bytes": 39906722,
+        "publication_status": "already_published",
+        "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+        "full_history": true,
+        "saved_steps_per_attempt": [
+          19,
+          11,
+          11
+        ]
+      },
+      "token_usage": null,
+      "api_cost_usd": null,
+      "video_url": "https://www.bilibili.com/video/BV1pGnF6oEsB/",
+      "attempts": [
+        {
+          "attempt": 1,
+          "steps": 19,
+          "episode_id": "9aa4a5c7616e4b0fb389cb852c5caf2d",
+          "recorded_at": "2026-10-19T10:08:00.5583470Z",
+          "canvas": {
+            "path": "assets/media/pelican/astra/attempt-01.png",
+            "sha256": "5dce38d7d2ac978ed5ce37493ad78284bf96c11f361165a6f1f4fdbab5729152",
+            "bytes": 118241,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "cfa320b6669179e6e6c5d4746d445f250dbb9332f61e792ef309e59ef258fe27",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "05130caa2736569d8eba81bb4ff900bff89344cfa925b274e081e058d4da4469",
+            "duration_s": 219.083333,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 2,
+          "steps": 11,
+          "episode_id": "cbd4e02535bd45db9a951cdaf820369c",
+          "recorded_at": "2026-10-19T10:36:25.5081510Z",
+          "canvas": {
+            "path": "assets/media/pelican/astra/attempt-02.png",
+            "sha256": "271cdb477f8854183eac12cbd279b672c382d42073ea60b330e4dd31e76cca5d",
+            "bytes": 116867,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "24ff89822c7b53c71184a199f6a1118592a9b791304b20e27ba5fc629abd80e8",
+            "bytes": 2481
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "1b528fc2553f41bfb8d00b6814417f819f22c53248f9bd0c7ef96f11d6953d11",
+            "duration_s": 160.5,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        },
+        {
+          "attempt": 3,
+          "steps": 11,
+          "episode_id": "5b8c6dde5b9d4b998662876c72e528e4",
+          "recorded_at": "2026-10-19T11:05:04.0663970Z",
+          "canvas": {
+            "path": "assets/media/pelican/astra/attempt-03.png",
+            "sha256": "5228dcbba106964a39f141f62910d328343f81016429dfaa76da3cd6bd99872a",
+            "bytes": 115097,
+            "width": 1024,
+            "height": 725
+          },
+          "metadata": {
+            "sha256": "3433be39617337bc9ed0ec03b9e6cdf2a5a49a60f5b345047ab8074e9a3cb423",
+            "bytes": 2479
+          },
+          "video_url": null,
+          "video": {
+            "sha256": "055d8072ca10e1b71ecf0a2bbb64b9d987d5b4b4af9924f436a33cc82a4602b5",
+            "duration_s": 161.75,
+            "verified_full_decode": true,
+            "complete": true,
+            "truncated": false,
+            "encoder_exit_code": 0,
+            "scope": "Historical native recorder receipt; public model video combines all three rounds at 4x simulated speed."
+          }
+        }
+      ]
+    }
+  ]
+}

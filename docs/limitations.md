@@ -1,20 +1,20 @@
 # Scope and limitations
 
 RoboPaintBench makes simulated robot-painting behavior visible and replayable.
-The initial release is a focused Golden Gate case study: 11 model configurations,
-one three-attempt session per configuration. It supports inspecting those
+The release contains separate Golden Gate and Pelican case studies: 11 model configurations per target,
+one three-attempt session per configuration and target. It supports inspecting those
 outcomes under their recorded conditions. It does not yet establish a general
 ranking of embodied intelligence.
 
-## One goal, dependent attempts
+## Two goals, dependent attempts
 
-The initial collection uses one reference image and one seed-dependent setup.
+Golden Gate uses one reference image; Pelican uses one fixed text prompt. Each collection uses one seed-dependent setup.
 Attempts share experience and support revision; they are not independent trials.
 There are no repeated independent sessions per model to estimate run-to-run
 reliability. More raters cannot fill that gap. Generalization needs more targets,
 setups, and repeated sessions under a prospectively fixed sampling plan.
 
-Pelican is a planned second case, whose results are not in this collection.
+Pelican is a separate completed collection (33 attempts, 603 actions). It has no assigned artistic ranking; the Golden Gate author recommendation does not transfer to it.
 Custom studio drawings are demonstrations or separate experimental conditions.
 Neither silently increases the sample count for the Golden Gate comparison.
 
@@ -48,7 +48,7 @@ The collection also retains model-specific inference settings and recovery
 history. Opus used mixed reasoning/output settings; MiMo's output budget
 increased during continuation; Astra's Codex SDK backend did not enforce an
 API-equivalent hard output cap; Grok includes one recorded harness-generated failed action.
-These material conditions are described in the [protocol](../benchmarks/protocol.md).
+These Golden Gate material conditions are described in the [protocol](../benchmarks/protocol.md). Pelican used Opus high, two temporary MiMo 65,536-token requests and Astra Codex SDK max without an equivalent hard output cap. Its exact conditions and trajectory coverage are in the [Pelican notes](pelican-results.md).
 
 Results are not compute-matched or dollar-matched. Provider reasoning labels
 are not common units of computation. Model names can identify changing API
@@ -81,8 +81,8 @@ or automatic visual metrics need separate validation.
 Trajectories vary in history coverage. A short image export does not establish
 a short agent memory. Reconstructed records retain their derivation. Readable
 actions, decoded videos, and physical replay are separate claims. Some existing
-physical replay checks cover only attempt 1 and a boundary into attempt 2; full
-three-attempt replay is not universally certified for the initial collection.
+Golden Gate physical replay checks cover only attempt 1 and a boundary into attempt 2; full
+three-attempt replay is not universally certified for that collection. Pelican’s nine later replay recordings and the two direct-model native recordings retain their distinct provenance; decoded videos alone do not certify pixel-identical physics.
 
 Some usage records are incomplete. Reasoning/cache fields can overlap
 output/input totals, and subscriptions do not expose a measured per-run API

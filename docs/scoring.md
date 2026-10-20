@@ -1,6 +1,6 @@
 # Interpreting and rating paintings
 
-The initial release can be understood directly through the 33 labeled final
+The Golden Gate collection can be understood directly through its 33 labeled final
 canvases and interaction evidence. Formal visual scoring is optional. No human
 quality scores have yet been collected under the plan below, and submission
 reward must never be used as a substitute.
@@ -11,7 +11,9 @@ SimpleAgent context, summaries, and archives; model weights stay fixed.
 “ICL Round n” maps to runtime `attempt n`, the term retained below for precise
 record identification. Round-to-round improvement is not assumed.
 
-## Initial release: author-curated recommendations
+Pelican has a separate 33-canvas text-goal collection with no author ranking or numerical quality score. The Golden Gate reference-fidelity rubric and ranking below do not automatically apply to its text-only target. See [Pelican results](pelican-results.md).
+
+## Golden Gate: author-curated recommendations
 
 The benchmark author supplied this **personal qualitative ranking on
 2026-10-19**. It is the gallery's default order, labeled **Author recommendation

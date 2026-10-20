@@ -1,0 +1,38 @@
+{
+  "schema": "robopaint.cases.v1",
+  "default_case_id": "golden_gate",
+  "cases": [
+    {
+      "id": "golden_gate",
+      "hash": "golden-gate",
+      "label": "Golden Gate Bridge",
+      "results": "golden_gate.json",
+      "recommendation": "editorial-ranking.json",
+      "videos": "model-videos.json",
+      "manifest": "release-manifest.json",
+      "editorial_media": "editorial-media.json",
+      "inline_ids": {
+        "results": "benchmark-data",
+        "recommendation": "recommendation-data",
+        "videos": "model-video-data"
+      },
+      "colab_url": "https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing"
+    },
+    {
+      "id": "pelican",
+      "hash": "pelican",
+      "label": "A Pelican Riding a Bicycle",
+      "results": "pelican.json",
+      "recommendation": "pelican-ranking.json",
+      "videos": "pelican-videos.json",
+      "manifest": "pelican-release-manifest.json",
+      "editorial_media": null,
+      "inline_ids": {
+        "results": "pelican-benchmark-data",
+        "recommendation": "pelican-recommendation-data",
+        "videos": "pelican-model-video-data"
+      },
+      "colab_url": "https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/Pelican_Record_Colab.ipynb"
+    }
+  ]
+}

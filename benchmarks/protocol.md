@@ -1,12 +1,13 @@
 # RoboPaintBench protocol v0.1
 
-**Status: initial Golden Gate collection; numerical quality ratings pending.**
+**Status: Golden Gate and Pelican collections; numerical quality ratings pending.**
 RoboPaintBench evaluates simulated robot painting through
-[AgentArk](https://github.com/P90-RushB/AgentArk). Its initial collection contains
+[AgentArk](https://github.com/P90-RushB/AgentArk). Each of the two collections contains
 11 model configurations, each completing one continuous session of three
 **in-context learning (ICL) rounds**. The public gallery documents observable
 outcomes. An explicitly labeled
-author recommendation supplies the default gallery order; a measured quality
+author recommendation supplies the Golden Gate gallery order; Pelican is
+unranked and uses alphabetical display. A measured quality
 score requires actual ratings under the optional
 [human evaluation plan](../docs/scoring.md).
 
@@ -23,13 +24,15 @@ task; they do not isolate a single cognitive capability.
 | Track | Goal supplied to the model | Release status |
 | --- | --- | --- |
 | Golden Gate | Fixed reference photograph plus `Reproduce the provided reference image as closely as possible.` | Initial 11-model collection |
-| Pelican | `Paint a pelican riding a bicycle.`; no target image | Configuration available; results pending from a separate evaluation |
+| Pelican | `Paint a pelican riding a bicycle.`; no target image | Separate 11-model / 33-round collection, 603 actions; [evidence and replay](../docs/pelican-results.md) |
 | Custom studio | User-provided text and/or ordered reference images | Interactive use; excluded from benchmark comparisons |
 
 The Pelican track still supplies rendered workspace observations. “Text goal”
-describes its target specification, not a text-only observation interface. Its
-release needs its own frozen evaluation criteria and data acceptance checks.
-No Pelican results are implied by the configuration's availability.
+describes its target specification, not a text-only observation interface.
+Its [portable results](results/pelican.json) retain their own episode mapping,
+hashes, actual inference settings and coverage limits. Golden Gate's ranking,
+mixed Opus profile and Astra ultra setting do not apply to Pelican. Pelican's
+actual Astra setting is max, and its successful Opus execution uses high.
 
 ## In-context learning across three rounds
 
@@ -166,8 +169,8 @@ earlier attempt must not silently replace attempt 3 in the primary comparison.
 
 Task reward measures submission/saving integrity. It is **not a fidelity or
 artistic-quality score**: a poor painting may receive successful submission
-reward. The author supplied a personal qualitative ranking on **2026-10-19**,
-used as the default gallery order:
+reward. The author supplied a **Golden Gate only** personal qualitative ranking
+on **2026-10-19**, used as that track's default gallery order:
 
 **Astra → Sol → Argon → Opus → DeepSeek → Wonder (Meta) → Qwen → MiMo → Kimi →
 Grok → Doubao.**
@@ -175,6 +178,10 @@ Grok → Doubao.**
 It is attributed as an author recommendation, not a numerical metric or
 human-consensus ranking. Exact model names and the optional rating plan are in
 [scoring.md](../docs/scoring.md).
+
+No corresponding Pelican ranking or numerical quality score has been supplied.
+Its 4× three-round videos and fixed-revision record/trajectory downloads are
+listed separately in the [Pelican evidence guide](../docs/pelican-results.md).
 
 Optional blinded human comparison of the attempt-3 canvases follows
 [scoring.md](../docs/scoring.md). Attempt 1 and all three attempts provide

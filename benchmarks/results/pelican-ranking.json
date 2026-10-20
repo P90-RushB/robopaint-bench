@@ -1,0 +1,10 @@
+{
+  "schema": "robopaint.author-recommendation.v1",
+  "case_id": "pelican",
+  "status": "awaiting_owner",
+  "attributed_to": null,
+  "basis": null,
+  "date": null,
+  "tiers": [],
+  "note": "The benchmark author has not supplied a Pelican ranking. Golden Gate recommendations do not apply to this task."
+}

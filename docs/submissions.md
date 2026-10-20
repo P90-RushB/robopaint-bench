@@ -52,8 +52,9 @@ python scripts/prepare_run.py --case golden_gate --model sol --goal-file my_goal
 
 These targets are different conditions even when their starting template is
 named `golden_gate` or `pelican`. Repeat `--reference-image` for multiple ordered
-images; explain their intended use in the goal text. Official Pelican results
-remain pending until their separate collection is supplied and accepted.
+images; explain their intended use in the goal text. The completed [official Pelican collection](pelican-results.md) uses exactly
+`Paint a pelican riding a bicycle.` without a reference attachment; modified goals
+are separate custom submissions.
 
 ## Evidence checklist
 

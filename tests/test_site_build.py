@@ -2,10 +2,13 @@ import hashlib
 import copy
 from html.parser import HTMLParser
 import importlib.util
+import json
 from pathlib import Path
 import tempfile
+import sys
 import unittest
 from urllib.parse import urlparse, unquote
+from unittest.mock import patch
 import zipfile
 import warnings
 
@@ -13,6 +16,10 @@ ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("site_builder", ROOT / "scripts/build_site.py")
 builder = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(builder)
+with patch.dict(sys.modules, {"build_site": builder}):
+    PACKAGE_SPEC = importlib.util.spec_from_file_location("site_media_package", ROOT / "scripts/package_site_media.py")
+    packager = importlib.util.module_from_spec(PACKAGE_SPEC)
+    PACKAGE_SPEC.loader.exec_module(packager)
 
 
 class LinkParser(HTMLParser):
@@ -27,6 +34,30 @@ class LinkParser(HTMLParser):
 
 
 class SiteBuildTests(unittest.TestCase):
+    def test_single_case_media_transfer_excludes_the_other_task(self):
+        golden, pelican = b"Golden canvas", b"Pelican canvas"
+        golden_key = "assets/media/golden_gate/test/attempt-03.png"
+        pelican_key = "assets/media/pelican/test/attempt-03.png"
+        expected = {key: {"sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)} for key, data in ((golden_key, golden), (pelican_key, pelican))}
+        cases = [{"spec": {"id": "golden_gate"}, "expected_media": {golden_key: expected[golden_key]}}, {"spec": {"id": "pelican"}, "expected_media": {pelican_key: expected[pelican_key]}}]
+        with tempfile.TemporaryDirectory() as tmp, patch.object(packager, "load_cases", return_value=({}, cases, expected)):
+            root = Path(tmp)
+            # Only this task's canvas exists: a transfer must not require Golden.
+            path = root / "media/pelican/test/attempt-03.png"
+            path.parent.mkdir(parents=True)
+            path.write_bytes(pelican)
+            archive = root / "pelican.zip"
+            report = packager.package(root / "media", archive, ["pelican"])
+            self.assertEqual(report["files"], 1)
+            self.assertFalse(report["complete_site_media"])
+            self.assertFalse(report["publication_performed"])
+            with zipfile.ZipFile(archive) as source:
+                self.assertEqual(source.namelist(), [pelican_key])
+                self.assertEqual(source.read(pelican_key), pelican)
+            with self.assertRaises(ValueError):
+                packager.package(root / "media", root / "bad.zip", ["unknown"])
+            self.assertFalse((root / "bad.zip").exists())
+
     def test_archive_tampering_duplicates_and_unselected_data_are_refused(self):
         payload = b"selected public canvas bytes"
         key = "assets/media/golden_gate/test/attempt-03.png"
@@ -74,10 +105,15 @@ class SiteBuildTests(unittest.TestCase):
             output = Path(tmp) / "site"
             report = builder.build(output, None, None, True)
             self.assertEqual(report["models"], 11)
-            self.assertEqual(len(report["missing_media"]), 37)
+            self.assertEqual(len(report["missing_media"]), 70)
+            self.assertEqual(set(report["cases"]), {"golden_gate", "pelican"})
+            self.assertEqual(report["cases"]["pelican"]["attempts"], 33)
             self.assertFalse(report["publication_performed"])
             self.assertIn('id="benchmark-data"', (output / "index.html").read_text(encoding="utf-8"))
             self.assertIn('id="model-video-data"', (output / "index.html").read_text(encoding="utf-8"))
+            self.assertIn('id="benchmark-cases-data"', (output / "index.html").read_text(encoding="utf-8"))
+            self.assertIn('id="pelican-benchmark-data"', (output / "index.html").read_text(encoding="utf-8"))
+            self.assertEqual(json.loads((output / "data/pelican.json").read_text("utf-8"))["target"]["mode"], "text")
             self.assertEqual(report["model_videos"], 11)
             broken = []
             for page in output.rglob("*.html"):
@@ -95,6 +131,43 @@ class SiteBuildTests(unittest.TestCase):
             self.assertEqual(broken, [])
             with self.assertRaises(ValueError):
                 builder.build(output, None, None, True)
+
+    def test_cases_keep_rankings_targets_and_media_separate(self):
+        catalog, cases, expected = builder.load_cases()
+        self.assertEqual(catalog["default_case_id"], "golden_gate")
+        by_id = {case["spec"]["id"]: case for case in cases}
+        self.assertEqual(by_id["golden_gate"]["recommendation"]["status"], "provided")
+        self.assertEqual(by_id["pelican"]["recommendation"]["status"], "awaiting_owner")
+        self.assertEqual(by_id["pelican"]["recommendation"]["tiers"], [])
+        self.assertEqual(by_id["pelican"]["results"]["target"]["instruction"], "Paint a pelican riding a bicycle.")
+        self.assertIsNone(by_id["pelican"]["results"]["target"].get("reference"))
+        self.assertEqual(by_id["golden_gate"]["videos"]["playback_speed"], 6)
+        self.assertEqual(by_id["pelican"]["videos"]["playback_speed"], 4)
+        self.assertEqual(len(expected), 70)
+        self.assertFalse(set(by_id["pelican"]["expected_media"]) & set(by_id["golden_gate"]["expected_media"]))
+
+    def test_text_case_cannot_smuggle_a_reference_image(self):
+        result = {"models": [], "target": {"mode": "text", "instruction": "Draw", "reference": {"path": "assets/media/reference.png"}}}
+        with self.assertRaisesRegex(ValueError, "no reference"):
+            builder.expected_media(result, {"assets": []})
+
+    def test_catalog_rejects_foreign_rankings_and_unsafe_metadata_paths(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            directory = root / "benchmarks/results"
+            directory.mkdir(parents=True)
+            real = ROOT / "benchmarks/results"
+            catalog = json.loads((real / "cases.json").read_text("utf-8"))
+            for path in real.glob("*.json"):
+                (directory / path.name).write_bytes(path.read_bytes())
+            catalog["cases"][1]["recommendation"] = "editorial-ranking.json"
+            (directory / "cases.json").write_text(json.dumps(catalog), "utf-8")
+            with patch.object(builder, "ROOT", root), self.assertRaisesRegex(ValueError, "case mismatch"):
+                builder.load_cases()
+            catalog["cases"][1]["recommendation"] = "../../private.json"
+            (directory / "cases.json").write_text(json.dumps(catalog), "utf-8")
+            with patch.object(builder, "ROOT", root), self.assertRaisesRegex(ValueError, "Unsafe"):
+                builder.load_cases()
 
     def test_public_build_refuses_missing_media_before_creating_output(self):
         with tempfile.TemporaryDirectory() as tmp:

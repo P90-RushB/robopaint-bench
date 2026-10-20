@@ -2,7 +2,7 @@
 
 **From pixels to physical strokes.** A visual, replayable benchmark of language models controlling a simulated robot arm to paint, built on [AgentArk](https://github.com/P90-RushB/AgentArk).
 
-**v0.1 research preview** · 11 models · 3 in-context learning rounds each · 33 Golden Gate canvases · [中文说明](README.zh-CN.md)
+**v0.1 research preview** · 2 fixed targets · 11 models per target · 3 ICL rounds each · 66 canvases · [中文说明](README.zh-CN.md)
 
 Give a model two workspace cameras, flange-pose feedback, and a paintbrush. It must find the canvas and paint, plan timed 3D movements, inspect the resulting marks, and use feedback across three rounds. It does not receive a ready-made stroke program or paper/paint coordinates.
 
@@ -18,6 +18,7 @@ This project is inspired by [Thijs Simonian's Bot Ross demonstration](https://th
 | --- | --- |
 | [Project-site source](site/index.html) · [local preview and deployment](docs/hosting.md) | All-model gallery, ICL round switcher, three-round progression, side-by-side comparison, actual settings and one shared Bilibili player for all 11 models. Public deployment is pending. |
 | [Open Golden Gate Colab](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing) · [guide](docs/colab-record.md) · [notebook source](notebooks/GoldenGate_Record_Colab.ipynb) | Select T4 GPU, Run all, then open the viewer URL printed in step 7 to watch the camera views and action history. Replay recorded model actions and follow the camera views and interaction history; no model API key. [Dated execution evidence](docs/colab-validation-20261020.md). |
+| [Pelican replay Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/Pelican_Record_Colab.ipynb) · [guide](docs/pelican-results.md#replay-without-inference) | Select any of the 11 published Pelican records, locked to one HF revision. No model API key. New notebook checked offline; a hosted Pelican Colab run has not been validated. |
 | [New model evaluation Colab](notebooks/RobotPainting_Colab.ipynb) | Guided installation, offline preparation and explicit user-started inference. Paid model evaluation is outside the hosted replay/interaction validation. |
 | [Quickstart](docs/quickstart.md) | Locked runtime download and first local evaluation. |
 | [Custom painting](docs/custom-painting.md) | Text goals, one or multiple reference images, configurable mechanics. |
@@ -30,14 +31,14 @@ This project is inspired by [Thijs Simonian's Bot Ross demonstration](https://th
 | Track | Target supplied to the model | Status |
 | --- | --- | --- |
 | **Golden Gate Bridge** | Reference photograph + “Reproduce the provided reference image as closely as possible.” | Initial 11-model / 33-canvas collection assembled. |
-| **Pelican riding a bicycle** | Text-only target; workspace camera observations remain visual. | Protocol entry available; results pending from a separate evaluation. |
+| **Pelican riding a bicycle** | `Paint a pelican riding a bicycle.`; workspace camera observations remain visual. | Independent 11-model / 33-canvas collection, 603 actions; no artistic ranking assigned. |
 | **Open canvas** | User text, a reference image, or multiple references. | Custom-run entry available; separate from the fixed-target comparisons. |
 
 The standard environment uses seed 107, **3 connected ICL rounds × at most 96 environment actions per round**, two fixed **960 × 720** workspace views, a fixed brush and paper, infinite pigment, 120 Hz control and 480 Hz physics, at time scale 1. The paper resets between rounds; agent experience carries over within the same session. These are dependent rounds rather than independent experimental repeats.
 
 The model submits up to 32 timed flange waypoints per action. Robot motion and brush contact generate marks. A human-only follow camera can record the process; it is not an extra model observation.
 
-The table and gallery default to the **author's personal qualitative ranking**, supplied on **2026-10-19**. It is an attributed recommendation, not a numerical metric or human-consensus ranking.
+The **Golden Gate** table and gallery default to the **author's personal qualitative ranking**, supplied on **2026-10-19**. It is an attributed recommendation, not a numerical metric or human-consensus ranking.
 
 | Author order | Model | Model access / reasoning | Actions, ICL rounds 1 / 2 / 3 |
 | --- | --- | --- | --- |
@@ -57,6 +58,14 @@ This retrospective collection uses the common SimpleAgent harness with recorded 
 
 All rounds remain inspectable, with ICL Round 3 selected for the main comparison. Formal human scoring is an optional follow-up; no numerical quality scores have been assigned. Task reward measures submission/save integrity, not fidelity. [Result presentation](docs/scoring.md) · [Scope and limitations](docs/limitations.md).
 
+## Pelican: an independent text-goal collection
+
+All 11 models completed three connected attempts: **33 canvases and 603 environment actions**. The prompt is exactly `Paint a pelican riding a bicycle.`; no reference image is appended. [Results and evidence](benchmarks/results/pelican.json) · [settings, limitations and replay](docs/pelican-results.md). Golden Gate’s author ranking is not reused for this task; model display order carries no quality claim.
+
+The 11 Pelican process videos show all three attempts at **4× simulated-time speed**, with Chinese/English captions and explicit reading pauses for very short steps. Waiting/inference time is omitted. Videos, original canvases and records are associated by episode GUID. The [Pelican video index](benchmarks/results/pelican-videos.json) preserves the published links.
+
+Public Pelican records and trajectories are pinned to HF commit `b16fb52e866ce6a33c52e287f04bfe4a77964453`. Complete action records support all 603 actions; six models’ first-attempt trajectory exports retain only their final 24 actions. These exports must not be mistaken for complete interaction or context history. Pelican Opus used **high**; MiMo had **two temporary 65,536-token requests**; Astra used **Codex SDK / max** without an API-equivalent hard output cap. These differ from some Golden Gate settings.
+
 ## Quickstart
 
 Use an existing compatible Python environment; the pinned AgentArk package requires Python **3.10.0–3.10.12**. Install the locked AgentArk revision and runtime as described in the [quickstart](docs/quickstart.md). Set machine-local `AGENTARK_ENV_PATH`, `AGENTARK_MOD_PATH`, and the relevant API key at runtime.
@@ -75,7 +84,7 @@ The repository reuses AgentArk's evaluator, SimpleAgent, model tools, context ma
 
 Read [submission requirements](docs/submissions.md) and use the [result issue form](https://github.com/P90-RushB/robopaint-bench/issues/new?template=result-submission.yml). Include every attempt, exact versions and settings, sanitized action evidence, artifact hashes, and the replay verification scope. Custom targets and altered mechanics get separate condition labels.
 
-The 11 Golden Gate process videos are [available on Bilibili](https://space.bilibili.com/277451319/channel/collectiondetail?sid=9369723) and switch within one player on the project page. Each combines one model's three sequential ICL rounds, at 6× speed with Chinese/English captions; thinking and network waits are omitted. The [model video index](benchmarks/results/model-videos.json) preserves the exact links. The Pelican collection and narrated explainer are pending on this project page.
+The 11 Golden Gate process videos are [available on Bilibili](https://space.bilibili.com/277451319/channel/collectiondetail?sid=9369723) and switch within one player on the project page. Each combines one model's three sequential ICL rounds, at 6× speed with Chinese/English captions; thinking and network waits are omitted. The [model video index](benchmarks/results/model-videos.json) preserves the exact links. The independent Pelican videos run at 4× rather than Golden Gate’s 6×; a narrated benchmark explainer remains pending.
 
 ## Development and release
 

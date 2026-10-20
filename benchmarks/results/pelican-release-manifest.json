@@ -1,0 +1,512 @@
+{
+  "schema": "robopaint.public-release-manifest.v1",
+  "case_id": "pelican",
+  "release_id": "pelican-2026-10-20",
+  "dataset_revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453",
+  "builder": "scripts/build_pelican_results.py",
+  "source_evidence": [
+    {
+      "role": "published_dataset_manifest",
+      "sha256": "9a9c4f41f22f2f16b6713f60b87dc96667db4fa026c990e9b7f39b29e1932af5",
+      "bytes": 103566
+    },
+    {
+      "role": "production_episode_map",
+      "sha256": "1c9ac461c758b5a303427c1e986cd2fb235b838fcd88b289c087459804540423",
+      "bytes": 91330
+    },
+    {
+      "role": "film_delivery_manifest",
+      "sha256": "37cc8ca48da5eaaca22cb6691343d0f7bb3a488b1c414d3697a3889f7c6bdd78",
+      "bytes": 25631
+    },
+    {
+      "role": "public_video_receipt",
+      "sha256": "63cfdeb9c4d999e16851e4948dd898e90ac13d8f365e0f576ffb52908f424b3a",
+      "bytes": 6878
+    }
+  ],
+  "model_count": 11,
+  "attempt_count": 33,
+  "action_count": 603,
+  "session_protocol": {
+    "learning_protocol": "in_context_learning",
+    "session_structure": "one_continuous_agent_session",
+    "round_count": 3,
+    "experience_carries_across_rounds": true,
+    "canvas_resets_each_round": true,
+    "model_weight_updates": false,
+    "round_index_field": "attempt",
+    "context_management": "Experience carries across rounds through SimpleAgent's managed context, summaries, and archives. Model weights remain fixed."
+  },
+  "harness": {
+    "name": "AgentArk SimpleAgent",
+    "shared_across_models": true,
+    "shared_components": [
+      "Agent implementation",
+      "Task and action interface",
+      "Environment attempt and action budget"
+    ],
+    "model_access_backends": [
+      {
+        "id": "openrouter",
+        "label": "OpenRouter"
+      },
+      {
+        "id": "volcengine",
+        "label": "Volcengine Ark"
+      },
+      {
+        "id": "codex",
+        "label": "Codex SDK"
+      }
+    ],
+    "backend_role": "All backends supply model access inside the AgentArk SimpleAgent evaluation loop.",
+    "configuration_scope": "Actual reasoning, budget exceptions, harness revisions and trajectory limits are reported per model."
+  },
+  "verification_scope": "Source canvas/metadata and exported record/trajectory bytes were hashed locally. Episodes, steps, text target and protocol were checked. Historical video decode/replay receipts were retained; no new inference, physical replay or video decode was performed by this builder.",
+  "privacy": "Explicit allowlist only. No local source paths, raw payloads, request history, credentials, reasoning contents or private context stores.",
+  "media_policy": "Byte-identical source canvas PNG copies are ignored local preview assets, published separately from Git. Raw records, trajectories, logs and videos are not copied into the code repository.",
+  "artifacts": [
+    {
+      "id": "sol/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/openai-gpt-6-1-sol/20261018-openrouter-max/RobotPainting_openai-gpt-6-1-sol_results.jsonl",
+      "sha256": "57327ebe1331ec69d636f3e43343b360e947658b55519c91a68647df0af91124",
+      "bytes": 4430080,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "sol/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/openai-gpt-6-1-sol/20261018-openrouter-max/RobotPainting_openai-gpt-6-1-sol_trajectories.jsonl",
+      "sha256": "93244afaa663fbaa3416fcd3946461ce33b55eebbdcd6cf578b5f3ef732fe988",
+      "bytes": 42831954,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "sol/attempt-01/canvas",
+      "path": "assets/media/pelican/sol/attempt-01.png",
+      "sha256": "57db3a1857128437d85338ecfe2eb80d8e48001c2b63f21e2b45a16e013fa8d2",
+      "bytes": 125451,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "sol/attempt-02/canvas",
+      "path": "assets/media/pelican/sol/attempt-02.png",
+      "sha256": "97643263b90a2f41bca19b906a4e14d60d3457a6eec047a223195943a5031361",
+      "bytes": 125138,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "sol/attempt-03/canvas",
+      "path": "assets/media/pelican/sol/attempt-03.png",
+      "sha256": "5bbcfb3fe81a826f8270682d2b061ce2e6e8fa319e920322860ad9345b8e508a",
+      "bytes": 124285,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "argon/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/google-gemini-4-argon/20261018-openrouter-high/RobotPainting_google-gemini-4-argon_results.jsonl",
+      "sha256": "0095fa306d3397164e492c2b10b5df10a8fce5d87164e5f994d47aa3bd0c4e02",
+      "bytes": 2103470,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "argon/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/google-gemini-4-argon/20261018-openrouter-high/RobotPainting_google-gemini-4-argon_trajectories.jsonl",
+      "sha256": "ef09371e14ea2405ab5d14b2f3f8dfd1ee87a0a2e79f78ce80903fc801cf8001",
+      "bytes": 39902225,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "argon/attempt-01/canvas",
+      "path": "assets/media/pelican/argon/attempt-01.png",
+      "sha256": "bb709273a899eb4e33a2505db3aaf5f5dd1adb1e9bcd110da4b4dbc68480733d",
+      "bytes": 122582,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "argon/attempt-02/canvas",
+      "path": "assets/media/pelican/argon/attempt-02.png",
+      "sha256": "198256f9f7eb05cf53b7365d169110b1fc831f72606831a82cd17d572a2ff4b7",
+      "bytes": 126765,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "argon/attempt-03/canvas",
+      "path": "assets/media/pelican/argon/attempt-03.png",
+      "sha256": "6439087ba4f0b5d4bcf9c0892b8d9ccdae7cee489711ed7177de2bc9e69cf734",
+      "bytes": 130438,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "opus/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/anthropic-claude-opus-5-5/20261018-openrouter-high/RobotPainting_anthropic-claude-opus-5-5_results.jsonl",
+      "sha256": "1360dd31cdca444f27d9a8eb9f588b71a7d8e251c44dfdee2c60fa38b0cac72a",
+      "bytes": 1368035,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "opus/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/anthropic-claude-opus-5-5/20261018-openrouter-high/RobotPainting_anthropic-claude-opus-5-5_trajectories.jsonl",
+      "sha256": "215983024811cc09bee0b62f6127f0a860e2ce8ee5bea076d9fc698566c62eb8",
+      "bytes": 38371892,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "opus/attempt-01/canvas",
+      "path": "assets/media/pelican/opus/attempt-01.png",
+      "sha256": "a0281802fa4ef6f070bd290229844998a2e82e855b8312d55ff7e9cf3a36a7d2",
+      "bytes": 82628,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "opus/attempt-02/canvas",
+      "path": "assets/media/pelican/opus/attempt-02.png",
+      "sha256": "4e796f4cf80dc2c919042e990d18a5c81855e1383490b48b822d78d2551c253f",
+      "bytes": 83989,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "opus/attempt-03/canvas",
+      "path": "assets/media/pelican/opus/attempt-03.png",
+      "sha256": "d19dcc5b42be4ccbecb78f388ff7438736a1adbd3835c20b216aee087e848019",
+      "bytes": 83965,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "grok/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/x-ai-grok-4-7/20261018-openrouter-xhigh/RobotPainting_x-ai-grok-4-7_results.jsonl",
+      "sha256": "eb6fede71798a1b488c79bc3f6c3d80c5f243dfa21d59c93910233e2ba5fe9b8",
+      "bytes": 4260568,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "grok/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/x-ai-grok-4-7/20261018-openrouter-xhigh/RobotPainting_x-ai-grok-4-7_trajectories.jsonl",
+      "sha256": "6248ba066431efedb8c33cf54631279ac37ff8427f50c9eddf8467205037fe94",
+      "bytes": 50546889,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "grok/attempt-01/canvas",
+      "path": "assets/media/pelican/grok/attempt-01.png",
+      "sha256": "2ad818fe165ce77b8ba7cb6474e3e86272a1332b8dbf6e590077add58a80d77c",
+      "bytes": 41053,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "grok/attempt-02/canvas",
+      "path": "assets/media/pelican/grok/attempt-02.png",
+      "sha256": "4dc7872ed7a39fa58f4b6bdb62c1743e0954cc66a697608216d98fec2eddd56d",
+      "bytes": 53642,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "grok/attempt-03/canvas",
+      "path": "assets/media/pelican/grok/attempt-03.png",
+      "sha256": "03b9faf8eeb6c087c8daa98df97cddc09241059a36495ff58b8347ca659ec385",
+      "bytes": 54667,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "wonder/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/meta-muse-wonder/20261018-openrouter-max/RobotPainting_meta-muse-wonder_results.jsonl",
+      "sha256": "fdcff7bee4334b69e77565c8d0080f2680f340777ad42ab659b4fc001cf4087b",
+      "bytes": 4206250,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "wonder/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/meta-muse-wonder/20261018-openrouter-max/RobotPainting_meta-muse-wonder_trajectories.jsonl",
+      "sha256": "b3a031a0de154cb55f95ee8bd66ff595ee4e7a48750e3c9e69fc9d740bbca7bd",
+      "bytes": 50330291,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "wonder/attempt-01/canvas",
+      "path": "assets/media/pelican/wonder/attempt-01.png",
+      "sha256": "629ab9436e8de586c6a3cd0eb66b812e6148d7b18e1333a65276efe89a1683a5",
+      "bytes": 73466,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "wonder/attempt-02/canvas",
+      "path": "assets/media/pelican/wonder/attempt-02.png",
+      "sha256": "6e9ded52d00aecd8073b83760b5b8edd759fd3b4f0dcdecf52d83572bc065c13",
+      "bytes": 72332,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "wonder/attempt-03/canvas",
+      "path": "assets/media/pelican/wonder/attempt-03.png",
+      "sha256": "1e256ff35c542f4b49c2c804792245dd364c64b0cfb09cecebfe5c473b327b7e",
+      "bytes": 72296,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "deepseek/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/deepseek-deepseek-v4-1-flash-1017/20261018-openrouter-max/RobotPainting_deepseek-deepseek-v4-1-flash-1017_results.jsonl",
+      "sha256": "dfd1876520050855140dca2cc50f014a58e905f10680f39b0e621bf6eb51ef13",
+      "bytes": 6898699,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "deepseek/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/deepseek-deepseek-v4-1-flash-1017/20261018-openrouter-max/RobotPainting_deepseek-deepseek-v4-1-flash-1017_trajectories.jsonl",
+      "sha256": "7b27f864ad5efaf93ca5bd727be73688395071db246dc6046e0161d879cc694c",
+      "bytes": 60254715,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "deepseek/attempt-01/canvas",
+      "path": "assets/media/pelican/deepseek/attempt-01.png",
+      "sha256": "2eaf32b01bdae126eea78d77233fa0c716238aac84e020eb0b26ca3b5df92a0a",
+      "bytes": 90177,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "deepseek/attempt-02/canvas",
+      "path": "assets/media/pelican/deepseek/attempt-02.png",
+      "sha256": "59b29a711089234dddf123d343bd35e5087d8a41a4253d318943c8e997f7f1f9",
+      "bytes": 89344,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "deepseek/attempt-03/canvas",
+      "path": "assets/media/pelican/deepseek/attempt-03.png",
+      "sha256": "360f632455fe92334a104331980613bfc21c864b709f19d2331d4fd0919e5e2c",
+      "bytes": 103959,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "qwen/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/qwen-qwen3-8-max-prime/20261018-openrouter-xhigh/RobotPainting_qwen-qwen3-8-max-prime_results.jsonl",
+      "sha256": "ce7ebb17e5809807c53c4635058ee7fe9b201bfc43768b97961e45cbbe35e5dc",
+      "bytes": 1899799,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "qwen/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/qwen-qwen3-8-max-prime/20261018-openrouter-xhigh/RobotPainting_qwen-qwen3-8-max-prime_trajectories.jsonl",
+      "sha256": "f9328d81c11cce8efcea965a5cff5631032a7a895137974bb77623512121db36",
+      "bytes": 43102869,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "qwen/attempt-01/canvas",
+      "path": "assets/media/pelican/qwen/attempt-01.png",
+      "sha256": "abdd3f124f9dfa153d3bfbf09845a2a027bcc9bff8903169fff64af38d78a8c0",
+      "bytes": 70673,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "qwen/attempt-02/canvas",
+      "path": "assets/media/pelican/qwen/attempt-02.png",
+      "sha256": "b9af3c1bc0dd4d8d74e4d5d6309dc65d55ed990589e7a1a7b6bfca79b79e4b8d",
+      "bytes": 59817,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "qwen/attempt-03/canvas",
+      "path": "assets/media/pelican/qwen/attempt-03.png",
+      "sha256": "b9af3c1bc0dd4d8d74e4d5d6309dc65d55ed990589e7a1a7b6bfca79b79e4b8d",
+      "bytes": 59817,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "kimi/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/moonshotai-kimi-k3/20261018-openrouter-max/RobotPainting_moonshotai-kimi-k3_results.jsonl",
+      "sha256": "dafa0cd1fd9732c79cbc84d6ad0e1b1a0cf3cd3f23b0153afc2b51925d5fc788",
+      "bytes": 2728546,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "kimi/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/moonshotai-kimi-k3/20261018-openrouter-max/RobotPainting_moonshotai-kimi-k3_trajectories.jsonl",
+      "sha256": "ced3faa17a85dee357972b888e36e931d7f1d4c8ec63c874dd385e900246cbe9",
+      "bytes": 32020623,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "kimi/attempt-01/canvas",
+      "path": "assets/media/pelican/kimi/attempt-01.png",
+      "sha256": "b763b4b23a0015921d22900c219e5fec310880cbbca2a854cae15f4957f354ca",
+      "bytes": 29853,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "kimi/attempt-02/canvas",
+      "path": "assets/media/pelican/kimi/attempt-02.png",
+      "sha256": "daed1e1a354da90ce09ea2e3957ad00ce6c72a8461f5fd0adc81ca21a8d6e835",
+      "bytes": 57140,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "kimi/attempt-03/canvas",
+      "path": "assets/media/pelican/kimi/attempt-03.png",
+      "sha256": "ac0d55d14caab3aca5e77683315b078aa0304cc88d36770cfe9d5cffe778698d",
+      "bytes": 57380,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "mimo/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/xiaomi-mimo-v2-6-pro/20261018-openrouter-thinking-enabled/RobotPainting_xiaomi-mimo-v2-6-pro_results.jsonl",
+      "sha256": "08f04eb4002e3ce672f1e8ab05edba3d20754bdbf7a396c43ed968de1e5025b7",
+      "bytes": 6006096,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "mimo/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/xiaomi-mimo-v2-6-pro/20261018-openrouter-thinking-enabled/RobotPainting_xiaomi-mimo-v2-6-pro_trajectories.jsonl",
+      "sha256": "b87caa9120e111b29de7f1ee52222adb1a8740bdf31e4b2a61f5839da645e9a6",
+      "bytes": 34817009,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "mimo/attempt-01/canvas",
+      "path": "assets/media/pelican/mimo/attempt-01.png",
+      "sha256": "fdf655cdf5d948357c2a896517d88fbf82231434ff0cd29644d24c2c0216554e",
+      "bytes": 88960,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "mimo/attempt-02/canvas",
+      "path": "assets/media/pelican/mimo/attempt-02.png",
+      "sha256": "2a6017112290426ed16452fb13fc46f8ffc7b52359808fb9f3dfa4a45f975811",
+      "bytes": 92143,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "mimo/attempt-03/canvas",
+      "path": "assets/media/pelican/mimo/attempt-03.png",
+      "sha256": "70f52c7266cda33f92d8bb4ab9ae4474319a6f4e77fcf89aa27f37946bebcb96",
+      "bytes": 92197,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "doubao/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/doubao-seed-2-1-pro-260915/20261019-volcengine-high/RobotPainting_doubao-seed-2-1-pro-260915_results.jsonl",
+      "sha256": "0460d85d884747a4d0888b86d135816b0718897040e429bdbbb121a7f4657e0a",
+      "bytes": 2139041,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "doubao/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/doubao-seed-2-1-pro-260915/20261019-volcengine-high/RobotPainting_doubao-seed-2-1-pro-260915_trajectories.jsonl",
+      "sha256": "4e2e6566c0524333b8ffd2e2bfefd6182123c208bfc3f7650068aa3d4fd12cd3",
+      "bytes": 38921519,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "doubao/attempt-01/canvas",
+      "path": "assets/media/pelican/doubao/attempt-01.png",
+      "sha256": "e8f53bf578cc8fa8bce5cc164b5eaf409626710fece89a7bcc76e969e0f07431",
+      "bytes": 73006,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "doubao/attempt-02/canvas",
+      "path": "assets/media/pelican/doubao/attempt-02.png",
+      "sha256": "fff2321ee9ec25fb16758943110af8d42984ecfac011e283f6b01c05ff704748",
+      "bytes": 71505,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "doubao/attempt-03/canvas",
+      "path": "assets/media/pelican/doubao/attempt-03.png",
+      "sha256": "c03c9c02847b3795ef8ec7140baae1030883af67c2d3acaa163d09e0a5dd2579",
+      "bytes": 72261,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "astra/record",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/gpt-6-astra/20261019-codex-max/RobotPainting_gpt-6-astra_results.jsonl",
+      "sha256": "d7a59cc2511017d7632333aa5ae8c18f509486231eb9b6b94abc7fa40f263b6e",
+      "bytes": 1595362,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "astra/trajectory",
+      "url": "https://huggingface.co/datasets/P90-RushB/AgentArk/resolve/b16fb52e866ce6a33c52e287f04bfe4a77964453/artifacts/records/0100-0199/0107-RobotPainting/pelican/gpt-6-astra/20261019-codex-max/RobotPainting_gpt-6-astra_trajectories.jsonl",
+      "sha256": "e906686909be48768cd97ef65525d152cbfd55faee12065d5ed12facf24b60c0",
+      "bytes": 39906722,
+      "publication_status": "already_published",
+      "revision": "b16fb52e866ce6a33c52e287f04bfe4a77964453"
+    },
+    {
+      "id": "astra/attempt-01/canvas",
+      "path": "assets/media/pelican/astra/attempt-01.png",
+      "sha256": "5dce38d7d2ac978ed5ce37493ad78284bf96c11f361165a6f1f4fdbab5729152",
+      "bytes": 118241,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "astra/attempt-02/canvas",
+      "path": "assets/media/pelican/astra/attempt-02.png",
+      "sha256": "271cdb477f8854183eac12cbd279b672c382d42073ea60b330e4dd31e76cca5d",
+      "bytes": 116867,
+      "width": 1024,
+      "height": 725
+    },
+    {
+      "id": "astra/attempt-03/canvas",
+      "path": "assets/media/pelican/astra/attempt-03.png",
+      "sha256": "5228dcbba106964a39f141f62910d328343f81016429dfaa76da3cd6bd99872a",
+      "bytes": 115097,
+      "width": 1024,
+      "height": 725
+    }
+  ]
+}

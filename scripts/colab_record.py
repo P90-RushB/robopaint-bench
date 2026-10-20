@@ -32,12 +32,14 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
-def record_contract() -> dict:
-    """Take the already-public Sol record's identity from the result release."""
-    release = json.loads((ROOT / "benchmarks/results/golden_gate.json").read_text("utf-8"))
-    entries = [item for item in release["models"] if item["id"] == "sol"]
+def record_contract(case: str = "golden_gate", model: str = "sol") -> dict:
+    """Take an already-public record's immutable identity from its own track."""
+    if case not in ("golden_gate", "pelican"):
+        raise ValueError("Unknown replay case.")
+    release = json.loads((ROOT / f"benchmarks/results/{case}.json").read_text("utf-8"))
+    entries = [item for item in release["models"] if item["id"] == model]
     if len(entries) != 1:
-        raise ValueError("The public result release must identify exactly one Sol record.")
+        raise ValueError("The public result release must identify exactly one selected model record.")
     entry = deepcopy(entries[0]["record"])
     parsed = urlsplit(entry["url"])
     match = re.fullmatch(r"/datasets/P90-RushB/AgentArk/resolve/([0-9a-f]{40})/(artifacts/records/.+\.jsonl)",
@@ -45,24 +47,25 @@ def record_contract() -> dict:
     if (entry.get("publication_status") != "already_published" or parsed.scheme != "https"
             or parsed.netloc != "huggingface.co" or parsed.query or parsed.fragment or not match
             or type(entry.get("bytes")) is not int or entry["bytes"] <= 0
-            or not re.fullmatch(r"[0-9a-f]{64}", str(entry.get("sha256", "")))):
-        raise ValueError("Public Sol record has an invalid immutable download contract.")
+            or not re.fullmatch(r"[0-9a-f]{64}", str(entry.get("sha256", "")))
+            or (match is not None and f"/0107-RobotPainting/{case}/" not in "/" + match[2])):
+        raise ValueError("Public record has an invalid immutable download contract.")
     entry.update(repo_id="P90-RushB/AgentArk", repo_type="dataset",
-                 revision=match[1], filename=match[2])
+                 revision=match[1], filename=match[2], case=case, model=model)
     return entry
 
 
 def verify_record(path: Path, contract: dict | None = None) -> dict:
     entry = contract or record_contract()
     if not path.is_file() or path.stat().st_size != entry["bytes"] or sha256(path) != entry["sha256"]:
-        raise ValueError("Replay record differs from the public Sol record's locked size/SHA-256.")
+        raise ValueError("Replay record differs from the selected public record's locked size/SHA-256.")
     return entry
 
 
-def download_record(destination: Path, *, downloader=None) -> dict:
+def download_record(destination: Path, *, case: str = "golden_gate", model: str = "sol", downloader=None) -> dict:
     if destination.exists() or destination.is_symlink():
         raise FileExistsError("Record destination exists; choose a new path. No data is overwritten.")
-    entry = record_contract()
+    entry = record_contract(case, model)
     if downloader is None:
         from huggingface_hub import hf_hub_download
         downloader = hf_hub_download
@@ -78,10 +81,12 @@ def download_record(destination: Path, *, downloader=None) -> dict:
 
 def prepare(args) -> Path:
     record = Path(args.record_path).expanduser().resolve(strict=True) if args.record_path else None
-    source = verify_record(record) if args.mode == "replay" and record else None
+    source = verify_record(record, record_contract(args.case, args.model)) if args.mode == "replay" and record else None
     if args.mode == "replay" and source is None:
         raise ValueError("Replay preparation requires --record-path from download-record.")
-    command = ["--case", "golden_gate", "--model", "sol", "--runtime-platform", "linux",
+    # Sol is only an offline template used by the existing preparer. It is
+    # removed below; source-model selection never constructs an API agent.
+    command = ["--case", args.case, "--model", "sol", "--runtime-platform", "linux",
                "--render-mode", args.render_mode, "--output-dir", args.run_dir,
                "--base-port", str(args.base_port)]
     for flag, value in (("--env-path", args.env_path), ("--mod-path", args.mod_path),
@@ -103,7 +108,7 @@ def prepare(args) -> Path:
     }
     if args.mode == "human":
         cfg["models"] = []  # AgentArk selects HumanInteractiveAgent before API model construction.
-        cfg["eval"]["cases"][0]["case_id"] = "golden-gate-human-record-seed-107"
+        cfg["eval"]["cases"][0]["case_id"] = args.case.replace("_", "-") + "-human-record-seed-107"
     else:
         cfg.pop("models", None)
         cfg.pop("eval", None)
@@ -111,14 +116,15 @@ def prepare(args) -> Path:
                          "use_record_max_attempts": True, "step_delay_s": args.step_delay,
                          "require_match": True, "stop_on_error": True,
                          "output_path": str(path.parent / "replay_results.jsonl"), "append": False}
-    cfg["robopaint_record"] = {"mode": args.mode, "model_inference": False,
+    cfg["robopaint_record"] = {"mode": args.mode, "case": args.case, "source_model": args.model,
+                              "model_inference": False,
                               "source_record": source, "graphics_api_request": args.graphics_api}
     path.write_text(yaml.safe_dump(cfg, sort_keys=False), encoding="utf-8")
     manifest_path = path.parent / "manifest.json"
     manifest = json.loads(manifest_path.read_text("utf-8"))
     manifest.update(mode=args.mode, model_inference=False, eval_config_sha256=sha256(path),
                     model={"provider": "replay" if args.mode == "replay" else "human",
-                           "source_record_model": "sol" if args.mode == "replay" else None},
+                           "source_record_model": args.model if args.mode == "replay" else None},
                     record_source=source, graphics_api_request=args.graphics_api,
                     validation_status="prepared_only_not_runtime_validated")
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
@@ -146,7 +152,9 @@ def launch(config: Path, *, record_video: bool = False, ffmpeg: str | None = Non
     if mode == "replay":
         if cfg.get("models") or cfg.get("hooks", {}).get("human_interaction", {}).get("enabled"):
             raise ValueError("Record replay cannot contain an API model or human action producer.")
-        verify_record(Path(cfg["replay"]["records_path"]))
+        identity = cfg["robopaint_record"]
+        verify_record(Path(cfg["replay"]["records_path"]),
+                      record_contract(identity.get("case", "golden_gate"), identity.get("source_model", "sol")))
     with (config.parent / "session_started.json").open("x", encoding="utf-8") as marker:
         json.dump({"started_utc": datetime.now(timezone.utc).isoformat(), "mode": mode,
                    "record_video": record_video, "model_inference": False}, marker)
@@ -186,10 +194,14 @@ def inspect_run(directory: Path) -> dict:
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description=__doc__)
     commands = result.add_subparsers(dest="command", required=True)
-    download = commands.add_parser("download-record", help="Download and hash-check the already-public Sol action record.")
+    download = commands.add_parser("download-record", help="Download and hash-check an already-public action record.")
     download.add_argument("--destination", required=True, type=Path)
+    download.add_argument("--case", choices=("golden_gate", "pelican"), default="golden_gate")
+    download.add_argument("--model", default="sol", help="Model ID in the selected track's public result manifest.")
     prep = commands.add_parser("prepare", help="Prepare only; no Unity, model, or viewer starts.")
     prep.add_argument("--mode", choices=("replay", "human"), default="replay")
+    prep.add_argument("--case", choices=("golden_gate", "pelican"), default="golden_gate")
+    prep.add_argument("--model", default="sol", help="Source-record model only; replay never calls this model.")
     prep.add_argument("--record-path")
     prep.add_argument("--run-dir", required=True, help="A new unique output directory.")
     prep.add_argument("--env-path", default=os.getenv("AGENTARK_ENV_PATH"))
@@ -214,7 +226,7 @@ def parser() -> argparse.ArgumentParser:
 def main():
     args = parser().parse_args()
     if args.command == "download-record":
-        print(json.dumps(download_record(args.destination.expanduser().absolute()), indent=2))
+        print(json.dumps(download_record(args.destination.expanduser().absolute(), case=args.case, model=args.model), indent=2))
     elif args.command == "prepare":
         path = prepare(args)
         print(json.dumps({"prepared_only": True, "config": str(path), "model_inference": False}, indent=2))

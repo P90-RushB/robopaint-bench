@@ -47,10 +47,59 @@ def expected_media(results: dict, editorial: dict) -> dict:
         if key in expected:
             raise ValueError(f"Duplicate editorial media: {key}")
         expected[key] = {"sha256": item["sha256"], "bytes": item["bytes"]}
-    reference = results["target"]["reference"]
-    if expected.get(asset_path(reference["path"]), {}).get("sha256") != reference["sha256"]:
-        raise ValueError("Editorial reference must match the benchmark input hash")
+    target = results["target"]
+    reference = target.get("reference")
+    if target.get("mode") == "reference_image":
+        if not reference or expected.get(asset_path(reference["path"]), {}).get("sha256") != reference["sha256"]:
+            raise ValueError("Editorial reference must match the benchmark input hash")
+    elif target.get("mode") == "text":
+        if reference is not None or not target.get("instruction"):
+            raise ValueError("Text targets require an instruction and no reference image")
+    else:
+        raise ValueError("Unknown target mode")
     return expected
+
+
+def load_cases() -> tuple[dict, list[dict], dict]:
+    """Load separate evidence, rankings and videos; never inherit another case."""
+    source = ROOT / "benchmarks/results"
+    catalog = json.loads((source / "cases.json").read_text(encoding="utf-8"))
+    if catalog.get("schema") != "robopaint.cases.v1" or not catalog.get("cases"):
+        raise ValueError("Invalid benchmark case catalog")
+    ids, hashes, inline_ids, expected, loaded = set(), set(), set(), {}, []
+    for spec in catalog["cases"]:
+        case_id, fragment = spec.get("id", ""), spec.get("hash", "")
+        if not re.fullmatch(r"[a-z][a-z0-9_]*", case_id) or case_id in ids:
+            raise ValueError("Invalid or duplicate case ID")
+        if not re.fullmatch(r"[a-z][a-z0-9-]*", fragment) or fragment in hashes:
+            raise ValueError("Invalid or duplicate case fragment")
+        ids.add(case_id); hashes.add(fragment)
+        files = {}
+        for role in ("results", "recommendation", "videos", "manifest", "editorial_media"):
+            filename = spec.get(role)
+            if role == "editorial_media" and filename is None:
+                files[role] = {"assets": []}
+                continue
+            if not isinstance(filename, str) or not re.fullmatch(r"[a-z][a-z0-9_-]*\.json", filename):
+                raise ValueError("Unsafe case metadata filename")
+            files[role] = json.loads((source / filename).read_text(encoding="utf-8"))
+        if files["results"].get("case_id") != case_id:
+            raise ValueError("Result case mismatch")
+        validate_recommendation(files["recommendation"], files["results"])
+        validate_model_videos(files["videos"], files["results"])
+        for role in ("results", "recommendation", "videos"):
+            element_id = spec.get("inline_ids", {}).get(role, "")
+            if not re.fullmatch(r"[a-z][a-z0-9-]*", element_id) or element_id in inline_ids:
+                raise ValueError("Invalid or duplicate inline data ID")
+            inline_ids.add(element_id)
+        assets = expected_media(files["results"], files["editorial_media"])
+        if set(assets) & set(expected):
+            raise ValueError("Cases must not share media paths")
+        expected.update(assets)
+        loaded.append({"spec": spec, **files, "expected_media": assets})
+    if catalog.get("default_case_id") not in ids:
+        raise ValueError("Unknown default benchmark case")
+    return catalog, loaded, expected
 
 
 def validate_recommendation(recommendation: dict, results: dict) -> None:
@@ -164,16 +213,9 @@ def render_doc(source: Path, destination: Path, title: str) -> None:
 
 
 def build(output: Path, media_root: Path | None, archive: str | None, allow_missing: bool, publication_approved: bool = False) -> dict:
-    results_path = ROOT / "benchmarks/results/golden_gate.json"
-    editorial_path = ROOT / "benchmarks/results/editorial-media.json"
-    results = json.loads(results_path.read_text(encoding="utf-8"))
-    editorial = json.loads(editorial_path.read_text(encoding="utf-8"))
-    recommendation_path = ROOT / "benchmarks/results/editorial-ranking.json"
-    validate_recommendation(json.loads(recommendation_path.read_text(encoding="utf-8")), results)
-    videos_path = ROOT / "benchmarks/results/model-videos.json"
-    videos = json.loads(videos_path.read_text(encoding="utf-8"))
-    validate_model_videos(videos, results)
-    expected = expected_media(results, editorial)
+    catalog, cases, expected = load_cases()
+    default = next(case for case in cases if case["spec"]["id"] == catalog["default_case_id"])
+    results, videos = default["results"], default["videos"]
     media = read_archive(archive, expected) if archive else {}
     missing = []
     if media_root:
@@ -206,18 +248,27 @@ def build(output: Path, media_root: Path | None, archive: str | None, allow_miss
     for filename in ("LICENSE", "NOTICE", "CITATION.cff"):
         shutil.copyfile(ROOT / filename, output / filename)
     (output / "data").mkdir()
-    for path in (results_path, ROOT / "benchmarks/results/release-manifest.json", editorial_path, recommendation_path, videos_path):
-        value = json.loads(path.read_text(encoding="utf-8"))
-        if publication_approved and path != recommendation_path:
-            value["publication_status"] = "approved_for_publication"
-            for artifact in value.get("artifacts", []):
-                if artifact.get("publication_status") == "pending_approval" and artifact.get("path") in expected:
-                    artifact["publication_status"] = "approved_for_publication"
-        (output / "data" / path.name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (output / "data/cases.json").write_text(json.dumps(catalog, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    for case in cases:
+        for role in ("results", "manifest", "editorial_media", "recommendation", "videos"):
+            filename = case["spec"].get(role)
+            if filename is None:
+                continue
+            # Work on a copy: approval belongs to this build, not tracked inputs.
+            value = json.loads(json.dumps(case[role]))
+            if publication_approved and role != "recommendation":
+                value["publication_status"] = "approved_for_publication"
+                for artifact in value.get("artifacts", []):
+                    if artifact.get("publication_status") == "pending_approval" and artifact.get("path") in expected:
+                        artifact["publication_status"] = "approved_for_publication"
+            (output / "data" / filename).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     # Built pages also work when opened directly from their extracted directory.
     # Keep the downloadable JSON alongside them for provenance and reuse.
     inline = []
-    for element_id, filename in (("benchmark-data", "golden_gate.json"), ("recommendation-data", "editorial-ranking.json"), ("model-video-data", "model-videos.json")):
+    bindings = [("benchmark-cases-data", "cases.json")]
+    for case in cases:
+        bindings.extend((case["spec"]["inline_ids"][role], case["spec"][role]) for role in ("results", "recommendation", "videos"))
+    for element_id, filename in bindings:
         payload = (output / "data" / filename).read_text(encoding="utf-8").replace("<", "\\u003c")
         inline.append(f'<script type="application/json" id="{element_id}">{payload}</script>')
     index = output / "index.html"
@@ -228,11 +279,12 @@ def build(output: Path, media_root: Path | None, archive: str | None, allow_miss
         destination.write_bytes(payload)
     (output / "docs").mkdir()
     docs = {"protocol.md": ROOT / "benchmarks/protocol.md"}
-    for filename in ("scoring.md", "submissions.md", "limitations.md", "quickstart.md", "custom-painting.md", "replay.md", "hosting.md", "attribution.md", "release.md", "runtime-installation.md", "colab-record.md", "colab-record.zh-CN.md", "colab-validation-20261020.md"):
+    for filename in ("scoring.md", "submissions.md", "limitations.md", "quickstart.md", "custom-painting.md", "replay.md", "pelican-results.md", "hosting.md", "attribution.md", "release.md", "runtime-installation.md", "colab-record.md", "colab-record.zh-CN.md", "colab-validation-20261020.md"):
         docs[filename] = ROOT / "docs" / filename
     for filename, source in docs.items():
         render_doc(source, output / "docs" / filename.replace(".md", ".html"), filename.removesuffix(".md").replace("-", " ").title())
-    report = {"schema": "robopaint.site-build.v1", "models": len(results["models"]), "model_videos": len(videos["models"]), "verified_media": len(media), "missing_media": missing, "publication_approved": publication_approved, "publication_performed": False}
+    case_reports = {case["spec"]["id"]: {"models": len(case["results"]["models"]), "attempts": sum(len(model["attempts"]) for model in case["results"]["models"]), "model_videos": len(case["videos"]["models"]), "verified_media": len(set(case["expected_media"]) & set(media)), "missing_media": sorted(set(case["expected_media"]) - set(media))} for case in cases}
+    report = {"schema": "robopaint.site-build.v1", "models": len(results["models"]), "model_videos": len(videos["models"]), "cases": case_reports, "verified_media": len(media), "missing_media": missing, "publication_approved": publication_approved, "publication_performed": False}
     (output / "build-report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     return report
 

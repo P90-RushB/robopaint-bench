@@ -4,6 +4,8 @@ Replay uses AgentArk's existing `ReplayAgent` and `run_replay` entry point. It e
 
 For the guided Golden Gate example, use [the recording Colab notebook](../notebooks/GoldenGate_Record_Colab.ipynb) and [its guide](colab-record.md). It downloads and verifies the public Sol record, prepares the locked runtime, selects GPU or explicit CPU rendering, and exposes the observation/history viewer. Its human mode saves new manually chosen actions.
 
+The independent [Pelican notebook](../notebooks/Pelican_Record_Colab.ipynb) supports all 11 models using that case’s locked public action records. See [Pelican download and local replay commands](pelican-results.md#replay-without-inference). It does not redirect to Golden Gate or invoke a model.
+
 ## Choose the right record
 
 Use the complete `results.jsonl` or the validated compact replay record. A trajectory export can contain only a recent-history window; its existence does not establish that all actions were retained. Preserve recovery order and the manifest identifying the final record. Do not concatenate arbitrary resumed files: overlapping prefixes can duplicate actions.
@@ -70,3 +72,5 @@ The video is 1920×1080 at 12 fps, combining overhead, side and pen-follow camer
 Associate video attempts with canvas/record episodes using episode GUIDs, not just directory counters. Check the recorder manifest, `complete`/`truncated` status, encoder exit code and decoded frame count before publishing. Keep the record, inputs and versions for a reproducible motion replay; an MP4 alone is presentation evidence.
 
 The owner has published all 11 Golden Gate process videos on Bilibili. Exact model links are in [model-videos.json](../benchmarks/results/model-videos.json); each video combines that model’s three sequential ICL rounds, at 6× speed with Chinese/English captions. The project page switches them within one player. These whole-session links are distinct from per-round video links. Preserve the local originals; code publication does not authorize automatic upload of raw records or recordings.
+
+Pelican’s [11 published process videos](../benchmarks/results/pelican-videos.json) also combine each model’s three sequential attempts, at **4× simulated-time speed**, not Golden Gate’s 6×. Bilingual captions retain only readable recorded statements; brief labeled reading pauses do not imply extra physical execution. Original native videos were verified by full decoding and per-episode frame counts; see [Pelican evidence scope](pelican-results.md).

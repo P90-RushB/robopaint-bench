@@ -2,19 +2,20 @@
 
 **从视觉到落笔。** 基于开源 [AgentArk](https://github.com/P90-RushB/AgentArk) 的模拟机械臂绘画评测，观察大模型如何利用视觉反馈规划三维运动、蘸颜料、画笔画，并利用前轮经验继续作画。
 
-当前为 **v0.1 研究预览**：金门大桥11模型，每个模型3轮上下文学习，共33张最终画布。页面展示所有ICL轮次，支持轮次切换、模型并排比较、完整三轮进程与实际推理设置。鹈鹕骑自行车的纯文字目标结果由另一台机器整理，暂未纳入；自定义绘画入口已有。
+当前为 **v0.1 研究预览**：金门大桥与鹈鹕骑自行车两个目标，各11模型、每个模型3轮上下文学习，共66张最终画布。页面展示所有ICL轮次，支持轮次切换、模型并排比较、完整三轮进程与实际推理设置。鹈鹕为独立的纯文字目标结果，33轮、603动作；自定义绘画单独呈现。
 
 **上下文学习（In-context learning）：ICL Round 1 → ICL Round 2 → ICL Round 3。** 每个模型进行一段连续会话：换轮清空画纸，前轮经验通过SimpleAgent的正常上下文、摘要和交互档案保留，供后轮参考。模型参数不更新，是否进步由实际画作体现。“ICL Round n”是展示名称，对应配置和原始记录中的`attempt n`。
 
 **所有11个模型，包括Astra，都使用AgentArk内置的同一套SimpleAgent harness。** 代理循环、动作与观察接口、任务步数和轮次预算保持一致，在harness和任务层面提供统一比较条件。Codex SDK、OpenRouter和Volcengine Ark只负责接入模型；Astra同样由SimpleAgent驱动画画。各模型的实际推理设置单独记录。
 
-页面默认采用作者于 **2026-10-19** 提供的**个人主观排名**：**Astra → Sol → Argon → Opus → DeepSeek → Wonder（Meta）→ Qwen → MiMo → Kimi → Grok → Doubao**。这是署名推荐，不是数值指标或多人共识排名。所有33张画布保留可查看，主比较默认第3轮；后续人工盲评为可选补充。环境的提交reward只代表保存/提交流程，不是画画好坏。
+**金门大桥**页面默认采用作者于 **2026-10-19** 提供的**个人主观排名**：**Astra → Sol → Argon → Opus → DeepSeek → Wonder（Meta）→ Qwen → MiMo → Kimi → Grok → Doubao**。这是署名推荐，不是数值指标或多人共识排名。所有33张画布保留可查看，主比较默认第3轮；后续人工盲评为可选补充。环境的提交reward只代表保存/提交流程，不是画画好坏。
 
 ## 入口
 
 - [英文项目说明](README.md)：结果表、协议、版本和全部文档。
 - [展示页本地预览与GitHub Pages](docs/hosting.md)：首版不需要购买服务器。
 - [打开金门大桥 Colab 回放](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing)与[中文使用说明](docs/colab-record.zh-CN.md)：默认 GPU 渲染，不需要模型 API Key；全部运行后打开第 7 步输出的 viewer 链接，查看相机画面及动作历史。[Notebook 源文件](notebooks/GoldenGate_Record_Colab.ipynb)也保存在仓库中。
+- [鹈鹕结果、实际设置与回放说明](docs/pelican-results.md)和[独立鹈鹕 Colab](https://colab.research.google.com/github/P90-RushB/robopaint-bench/blob/main/notebooks/Pelican_Record_Colab.ipynb)：可选11模型的公开record，不调用模型；新notebook仅做离线检查，未宣称已在线跑通。
 - [首次评测](docs/quickstart.md)与[新模型评测 Colab](notebooks/RobotPainting_Colab.ipynb)：复用 AgentArk 原有评测器，显式启动后才调用模型。
 - [任意图片/文字绘画](docs/custom-painting.md)与[回放](docs/replay.md)。
 - [基准协议](benchmarks/protocol.md)、[结果呈现和可选人工评分](docs/scoring.md)、[局限](docs/limitations.md)。
@@ -29,3 +30,11 @@ Grok最新资料已补完第三轮：96/96/47步；其中一个预算失败是�
 发布结构为GitHub仓库、GitHub Pages网页、B站/YouTube视频、Colab计算入口。网页源码和元数据可跟随代码版本；原始记录、请求/推理和视频均不随Git上传，网页媒体单独打包。Notebook 保留用户指定的三张内嵌预览图，供启动前阅读；不包含执行输出或原始 record。公开媒体和仓库可见性需按具体发布内容确认。Colab 回放／交互示例的实际 GPU、网页、动作和录像验证范围见[运行报告](docs/colab-validation-20261020.md)；新模型付费推理另行启动。
 
 参考照片：Frank Schulenburg，CC BY-SA 4.0；完整[来源与许可说明](docs/attribution.md)。灵感来自 [Thijs Simonian 的现实机器人画桥演示](https://thijs.net/projects/robot-painter)，本项目使用自己的模拟Panda机器人与协议。
+
+## 鹈鹕骑自行车
+
+目标原文为 `Paint a pelican riding a bicycle.`，不附参考图，但保留两路工作区相机。11模型的三轮均完成，共33张画布、603动作；不沿用金门大桥主观排名，也未设置新的画质分数。
+
+[公开结果](benchmarks/results/pelican.json)和[视频索引](benchmarks/results/pelican-videos.json)分别记录轮次、证据与链接。11段成片均含完整三轮，采用**播放速度：4× / Speed: 4×**，按模拟时间加速；去掉模型等待时间，极短步骤字幕暂停有明确标注。笔尖跟随近景只供观众观看。
+
+HF的record和trajectory固定在 `b16fb52e866ce6a33c52e287f04bfe4a77964453`，带文件大小和SHA-256。完整record覆盖603动作；六个模型的首轮trajectory只保留末24步，不能作为完整历史或完整context。实际档位保留差异：Opus为high，MiMo两次请求临时使用65,536输出上限，Astra为订阅Codex SDK的max且无等价API硬输出上限。Astra的历史SDK适配器未包含在锁定上游代码中，因此不把它伪装成可移植的新评测模板。

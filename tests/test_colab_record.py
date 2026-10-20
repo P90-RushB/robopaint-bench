@@ -47,7 +47,7 @@ class ColabRecordTests(unittest.TestCase):
     def seed_prepare(self, args):
         output = Path(args.output_dir)
         output.mkdir()
-        cfg = yaml.safe_load((ROOT / "benchmarks/golden_gate/eval.yaml").read_text("utf-8"))
+        cfg = yaml.safe_load((ROOT / f"benchmarks/{args.case}/eval.yaml").read_text("utf-8"))
         cfg["env_cfg"]["additional_args"] = ["-force-glcore33", "-logFile", str(output / "player.log")]
         path = output / "eval.yaml"
         path.write_text(yaml.safe_dump(cfg), encoding="utf-8")
@@ -107,6 +107,26 @@ class ColabRecordTests(unittest.TestCase):
         self.assertEqual((3, 96), tuple(cfg["env_cfg"]["env_config_overrides"][key]
                                       for key in ("max_attempts", "max_steps_per_attempt")))
 
+    def test_pelican_preparation_selects_text_case_without_constructing_source_model(self):
+        with patch.object(record, "record_contract", return_value=self.contract) as contract:
+            path = self.prepare(extra=("--case", "pelican", "--model", "astra"))
+        contract.assert_called_once_with("pelican", "astra")
+        cfg = yaml.safe_load(path.read_text("utf-8"))
+        self.assertEqual("pelican", self.seed_args.case)
+        self.assertEqual("text", cfg["env_cfg"]["env_config_overrides"]["task_params"]["reference_mode"])
+        self.assertEqual([], cfg["env_cfg"]["env_config_overrides"]["env_wrapper_cfg"]["attempt_initial_images"])
+        self.assertNotIn("models", cfg)
+        self.assertEqual("astra", cfg["robopaint_record"]["source_model"])
+        manifest = json.loads((path.parent / "manifest.json").read_text("utf-8"))
+        self.assertEqual("astra", manifest["model"]["source_record_model"])
+        self.assertFalse(manifest["model_inference"])
+
+    def test_selected_download_uses_case_and_model_identity_before_copy(self):
+        with patch.object(record, "record_contract", return_value=self.contract) as contract:
+            record.download_record(self.root / "selected.jsonl", case="pelican", model="mimo",
+                                   downloader=lambda **_: str(self.source))
+        contract.assert_called_once_with("pelican", "mimo")
+
     def test_human_launch_delegates_once_and_refuses_overwrite(self):
         path = self.prepare(mode="human")
         with patch.dict(os.environ), patch.object(record.run_eval, "main") as upstream:
@@ -158,6 +178,64 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
         self.assertEqual(17574365, entry["bytes"])
         self.assertEqual("3189bf011628a6f87c25f910141a5ab0c456ecc7059bb4e52b1364877acdaaaf", entry["sha256"])
         self.assertEqual("90520211bee7327482ed71805473618cdaf2d61c", entry["revision"])
+
+    def test_every_pelican_contract_has_fixed_revision_and_distinct_complete_record(self):
+        release = json.loads((ROOT / "benchmarks/results/pelican.json").read_text("utf-8"))
+        filenames = set()
+        for model in release["models"]:
+            with self.subTest(model=model["id"]):
+                entry = record.record_contract("pelican", model["id"])
+                self.assertEqual("b16fb52e866ce6a33c52e287f04bfe4a77964453", entry["revision"])
+                self.assertIn("/pelican/", entry["filename"])
+                self.assertTrue(entry["all_actions_complete"])
+                self.assertEqual(model["record"]["sha256"], entry["sha256"])
+                filenames.add(entry["filename"])
+        self.assertEqual(11, len(filenames))
+        for case, model in (("unknown", "sol"), ("pelican", "not-a-model"), ("../../private", "sol")):
+            with self.subTest(case=case, model=model), self.assertRaises(ValueError):
+                record.record_contract(case, model)
+
+    def test_pelican_notebook_uses_selected_record_and_preserves_no_inference_guards(self):
+        notebook = json.loads((ROOT / "notebooks/Pelican_Record_Colab.ipynb").read_text("utf-8"))
+        code = []
+        for cell in notebook["cells"]:
+            if cell["cell_type"] == "code":
+                source = "".join(cell["source"])
+                ast.parse(source)
+                self.assertEqual([], cell["outputs"])
+                self.assertIsNone(cell["execution_count"])
+                code.append(source)
+        joined = "\n".join(code)
+        self.assertIn('"--case", "pelican", "--model", RECORD_MODEL', joined)
+        self.assertIn('RECORD_MODEL = "sol"', joined)
+        self.assertIn('"astra"]', joined)
+        self.assertIn('MODE = "replay"', joined)
+        self.assertIn('RENDERER = "gpu"', joined)
+        self.assertIn('START_SESSION = True', joined)
+        self.assertIn('RECORD_MOTION_VIDEO = False', joined)
+        self.assertIn('PREPARED_SELECTION != (RECORD_MODEL, MODE,', joined)
+        self.assertIn('explicit cleanup cell', joined)
+        self.assertNotIn('OPENROUTER_API_KEY', joined)
+        self.assertNotIn('ARK_API_KEY', joined)
+        self.assertNotIn('public-sol-', joined)
+
+    def test_pelican_embedded_bundle_matches_both_case_contracts_and_current_helpers(self):
+        import package_colab_source
+        notebook = json.loads((ROOT / "notebooks/Pelican_Record_Colab.ipynb").read_text("utf-8"))
+        source = next("".join(cell["source"]) for cell in notebook["cells"]
+                      if "def unpack_source_bundle" in "".join(cell["source"]))
+        tree = ast.parse(source)
+        names = {"SOURCE_ARCHIVE_SHA256", "SOURCE_FILES", "EMBEDDED_SOURCE_ZIP_B64"}
+        values = {node.targets[0].id: ast.literal_eval(node.value) for node in tree.body
+                  if isinstance(node, ast.Assign) and isinstance(node.targets[0], ast.Name)
+                  and node.targets[0].id in names}
+        self.assertEqual(set(package_colab_source.ALLOWED_FILES), set(values["SOURCE_FILES"]))
+        with tempfile.TemporaryDirectory() as temporary:
+            archive = Path(temporary) / "embedded.zip"
+            archive.write_bytes(base64.b64decode(values["EMBEDDED_SOURCE_ZIP_B64"], validate=True))
+            _, payloads = package_colab_source.verify_archive(archive, values["SOURCE_ARCHIVE_SHA256"])
+            for relative, payload in payloads.items():
+                self.assertEqual((ROOT / relative).read_bytes(), payload, relative)
 
     def test_notebook_has_blank_outputs_valid_code_and_no_inference_default(self):
         notebook = json.loads((ROOT / "notebooks/GoldenGate_Record_Colab.ipynb").read_text("utf-8"))
@@ -217,7 +295,7 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
                 else:
                     exec(executable, scope)
                     self.assertEqual("embedded", scope["SOURCE_RECEIPT"]["mode"])
-                    self.assertEqual(11, scope["SOURCE_RECEIPT"]["files"])
+                    self.assertEqual(14, scope["SOURCE_RECEIPT"]["files"])
                     for relative in defaults["SOURCE_FILES"]:
                         self.assertEqual((ROOT / relative).read_bytes(), (scope["BENCH"] / relative).read_bytes())
                 scope["run"].assert_not_called()
@@ -283,7 +361,7 @@ class PublicRecordAndNotebookTests(unittest.TestCase):
             archive = root / "curated-source.zip"
             receipt = package_colab_source.pack(ROOT, archive)
             restored = scope["unpack_source_bundle"](archive, root / "restored", receipt["archive_sha256"])
-            self.assertEqual(11, restored["files"])
+            self.assertEqual(14, restored["files"])
             self.assertEqual((ROOT / "scripts/colab_record.py").read_bytes(),
                              (root / "restored/scripts/colab_record.py").read_bytes())
 

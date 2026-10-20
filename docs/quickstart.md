@@ -2,6 +2,8 @@
 
 Start with the [Golden Gate replay / interaction notebook](../notebooks/GoldenGate_Record_Colab.ipynb) to use the simulator without a model API key. It defaults to NVIDIA GPU rendering and replays public saved actions, with an alternative manual interaction mode. See the [Colab guide](colab-record.md) and [dated execution report](colab-validation-20261020.md).
 
+For the independent text-only Pelican case, use the [Pelican replay notebook](../notebooks/Pelican_Record_Colab.ipynb) and [record/settings guide](pelican-results.md). It selects Pelican records rather than Golden Gate data. Its notebook extension is checked offline; Golden Gate’s hosted validation is not a hosted Pelican result.
+
 For a new SimpleAgent evaluation, use the separate [evaluation notebook](../notebooks/RobotPainting_Colab.ipynb), or a Linux graphics machine. Its default is **prepare only**, with a software-rendering preview profile; paid model evaluation is outside the hosted replay/interaction check. Installing dependencies and downloading the runtime do not make paid model calls. No Unity Editor or local model weights are required.
 
 ## Local installation
@@ -34,7 +36,7 @@ Set credentials in the process environment, a secret manager, or the notebook's 
 
 Use `--model <profile-name>` to select one entry from the case's `eval.yaml`. These are launch profiles; consult the results provenance for historical mixed settings and resumptions. Preparing a profile is not a claim that the provider currently grants your account model access or that a new result reproduces the published drawing.
 
-**Astra:** the historical `gpt-6-astra` / `ultra` run used a verified CLI plus process-local SDK compatibility adapters. The plain pinned AgentArk entry point does not reproduce that complete transport; consequently `--model astra` is not advertised as a portable launch profile. An OpenRouter GPT profile is not a substitute reproduction of the subscription run. A future portable Astra release must publish/review the adapters, pin both `openai-codex` and its CLI, verify subscription login and the actual model/effort, and retain the SDK's lack of an equivalent hard output-token cap. Do not silently map `ultra` to another effort.
+**Astra:** the historical Golden Gate `gpt-6-astra` / `ultra` run and Pelican `gpt-6-astra` / `max` run used a verified CLI plus process-local SDK compatibility adapters. The plain pinned AgentArk entry point does not reproduce that complete transport; consequently `--model astra` is not advertised as a portable launch profile. An OpenRouter GPT profile is not a substitute reproduction of the subscription run. A future portable Astra release must publish/review the adapters, pin both `openai-codex` and its CLI, verify subscription login and the actual model/effort, and retain the SDK's lack of an equivalent hard output-token cap. Do not silently map `ultra` to another effort or report Golden Gate’s setting as Pelican’s actual setting.
 
 ## Graphics and Colab
 
@@ -52,6 +54,6 @@ Colab runs a native Linux Unity Player behind the notebook. AgentArk's browser v
 
 ## What a run means
 
-Golden Gate is the reference-image case: seed 107, three attempts, at most 96 environment actions per attempt. Text-only goals still use the same workspace camera observations. Pelican is the planned second case; its independent result set has not yet been integrated. Custom targets and mechanics variants belong in separate tracks. Reward records the task's submission workflow, not painting quality.
+Golden Gate is the reference-image case: seed 107, three attempts, at most 96 environment actions per attempt. Text-only goals still use the same workspace camera observations. Pelican is the independent text-goal case: `Paint a pelican riding a bicycle.`, 11 models, 33 attempts and 603 actions. Its results and inference settings are separate from Golden Gate’s; its presentation order is not a quality ranking. Custom targets and mechanics variants belong in separate tracks. Reward records the task's submission workflow, not painting quality.
 
 Each run is local and may be large. Keep its manifest, inputs, complete records, canvases and logs together. A saved recent-history trajectory can be shorter than the complete action record. Preparation does not upload any data or credentials.

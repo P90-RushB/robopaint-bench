@@ -54,3 +54,42 @@ All 117 existing unit/integration checks passed with the existing Python 3.10.12
 The current opening hero shows Astra’s final ICL Round 3 three-camera recording frame, with reference and saved canvas below. Desktop and mobile layouts were inspected, including image loading/order and horizontal overflow. The human-only brush-follow view is explicitly distinguished from the two model-facing cameras. All 11 recording choices share one Bilibili player; playback and switching were checked. The public Colab button opens the owner-shared notebook and explains T4 GPU, Run all, and opening the step-7 viewer URL. The [hosted execution report](colab-validation-20261020.md) records actual GPU/replay evidence separately.
 
 The standalone replay notebook has empty execution outputs; its three owner-selected preview illustrations and verified eleven-file source archive are intentional notebook presentation/bootstrap assets. Full raw records, request bodies, videos and machine-local outputs are excluded from Git. The website’s selected media is supplied separately through the size/hash-checked media bundle. Pelican results remain a future integration; this checkpoint includes no new model evaluation, numerical quality scoring or automatic site deployment.
+
+## Pelican integration follow-up, 2026-10-20
+
+The separate Pelican collection is now integrated: **11 models, 33 final
+canvases and 603 recorded environment actions**. The importer verifies the
+published results/trajectory sizes and SHA-256, source canvas and metadata
+hashes, episode GUIDs, round order, action counts, exact text goal and fixed
+physics settings. Its output is an explicit public metadata allowlist; it does
+not copy private reasoning contents, HTTP payloads, logs or local paths.
+
+All 134 offline unit/integration checks pass in the existing Python 3.10.12
+environment, and `node --check site/app.js` passes. Coverage includes separate
+task evidence and ranking contracts, case/model record selection without model
+inference, both replay notebooks' fourteen-file source bundles, unsafe archive
+and media-tampering refusal, and Pelican-only media transfer. The source bundle
+maintenance command is `python scripts/update_colab_sources.py --check`.
+
+Browser inspection verified 11 loaded images in each of the three Pelican
+rounds, three-round details, two-model comparison, independent task switching
+and hash links, and preservation of the Golden Gate author ordering. Pelican
+remains unranked. Its single recording player switches to the correct model
+BVID and displays 4× simulated-time speed; Golden Gate stays 6×. The embedded
+Bilibili region was blank in the inspected in-app browser, so stream playback
+is not claimed. Each selected recording has a direct Bilibili fallback link.
+
+This machine has all 33 verified Pelican PNGs but lacks the other machine's
+37 selected Golden Gate media files. Its local two-task preview therefore uses
+the explicit source-only build flag and reports those missing Golden Gate
+files. Normal and publication builds continue to refuse incomplete media;
+Golden Gate metadata and original source media were not replaced. A separate
+Pelican-only ZIP contains exactly the 33 reviewed PNGs, with no records, videos
+or logs. See [cross-machine media transfer](hosting.md#transfer-pelican-media-to-the-other-machine).
+
+The new [Pelican Colab](pelican-results.md#replay-without-inference) was checked
+offline; no fresh hosted GPU execution is claimed. This integration made no
+model calls, Unity launches, new physical replays, video re-encodes, external
+media uploads or Pages deployment. Existing dated evaluation/replay receipts
+retain their original scope. Raw evidence and all historical recovery segments
+remain intact.

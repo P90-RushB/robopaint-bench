@@ -60,7 +60,7 @@ class ColabSourceBundleTests(unittest.TestCase):
         self.assertFalse(self.destination.exists())
 
     def test_fixed_closure_roundtrips_without_private_checkout_content(self):
-        self.assertEqual(self.report["files"], 11)
+        self.assertEqual(self.report["files"], 14)
         with zipfile.ZipFile(self.archive) as archive:
             self.assertEqual(set(archive.namelist()), {*bundle.ALLOWED_FILES, bundle.MANIFEST_NAME})
             self.assertNotIn(b"PRIVATE_FIXTURE_DO_NOT_PACKAGE", b"".join(archive.read(name) for name in archive.namelist()))

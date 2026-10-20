@@ -31,6 +31,9 @@ ALLOWED_FILES = (
     "benchmarks/golden_gate/eval.yaml",
     "benchmarks/golden_gate/painting_goal.txt",
     "benchmarks/results/golden_gate.json",
+    "benchmarks/pelican/eval.yaml",
+    "benchmarks/pelican/painting_goal.txt",
+    "benchmarks/results/pelican.json",
 )
 MAX_ARCHIVE_BYTES = 2 * 1024 * 1024
 MAX_TOTAL_BYTES = 1024 * 1024

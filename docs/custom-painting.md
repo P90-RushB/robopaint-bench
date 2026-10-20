@@ -1,6 +1,6 @@
 # Give the robot your own painting goal
 
-Custom drawing reuses the same Panda simulation, SimpleAgent, records and replay. Write a UTF-8 goal file, choose a model, then prepare and launch a fresh run. This creates a `custom-…` case ID and records `custom_target: true`; it is separate from the fixed Golden Gate benchmark.
+Custom drawing reuses the same Panda simulation, SimpleAgent, records and replay. Write a UTF-8 goal file, choose a model, then prepare and launch a fresh run. This creates a `custom-…` case ID and records `custom_target: true`; it is separate from the fixed Golden Gate and Pelican benchmarks.
 
 ## Text only
 
@@ -16,7 +16,7 @@ Paint a small red lighthouse on a rocky island at sunset.
 Use broad shapes and leave space around the lighthouse.
 ```
 
-The model receives the goal and robot workspace cameras; no reference artwork is attached. A text-only target is still a multimodal interaction task. The Pelican template is also available, but its second-case evaluation results are pending integration.
+The model receives the goal and robot workspace cameras; no reference artwork is attached. A text-only target is still a multimodal interaction task. The fixed Pelican template and its [independent completed results](pelican-results.md) are also available. Replacing that prompt creates a custom condition, not another official Pelican attempt.
 
 ## One or several reference images
 

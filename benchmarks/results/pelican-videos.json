@@ -1,0 +1,90 @@
+{
+  "schema": "robopaint.model-videos.v1",
+  "case_id": "pelican",
+  "playback_speed": 4,
+  "speed_basis": "simulated_time",
+  "captions": [
+    "zh",
+    "en"
+  ],
+  "scope": "Each model video contains all three sequential ICL rounds. Model waits are removed. Explicit reading pauses are labeled; the brush-follow view is viewer-only and was not model input.",
+  "models": {
+    "sol": {
+      "bvid": "BV1ZnnF6nEd4",
+      "url": "https://www.bilibili.com/video/BV1ZnnF6nEd4/",
+      "duration_seconds": 173.86666666666667,
+      "source_sha256": "54e47106d75bbb4ca1e00b4918e87df76cb175e9cc03e6d0c3bc7d30726fc152",
+      "source_bytes": 51039471
+    },
+    "argon": {
+      "bvid": "BV1fnnF6nEtC",
+      "url": "https://www.bilibili.com/video/BV1fnnF6nEtC/",
+      "duration_seconds": 94.4,
+      "source_sha256": "a4275f78016ec0b2dea0a518ed4ca3f3409cf7bd3db1030782e595561fb34b3f",
+      "source_bytes": 28350791
+    },
+    "opus": {
+      "bvid": "BV1wGnF6oEzt",
+      "url": "https://www.bilibili.com/video/BV1wGnF6oEzt/",
+      "duration_seconds": 120.73333333333333,
+      "source_sha256": "1a2e73046f4ab1bb400be9c6cc0b908eb9114c546e103c86c24eb5a732c368c2",
+      "source_bytes": 33254919
+    },
+    "grok": {
+      "bvid": "BV1wGnF6oEGv",
+      "url": "https://www.bilibili.com/video/BV1wGnF6oEGv/",
+      "duration_seconds": 162.2,
+      "source_sha256": "fd3bb8afe581f11c0e16ed0b46d8880522408bfd4cf91aeec0171a655087b421",
+      "source_bytes": 43292898
+    },
+    "wonder": {
+      "bvid": "BV1wGnF6oEGx",
+      "url": "https://www.bilibili.com/video/BV1wGnF6oEGx/",
+      "duration_seconds": 202.46666666666667,
+      "source_sha256": "fa7f21ab3fc1c7c220bf67668249b2380fc28e88c1c888e5f932b385afa1821f",
+      "source_bytes": 57398097
+    },
+    "deepseek": {
+      "bvid": "BV1HGnF6oE1B",
+      "url": "https://www.bilibili.com/video/BV1HGnF6oE1B/",
+      "duration_seconds": 164.0,
+      "source_sha256": "c0496072dd4fdaccf9f361bd788d5aab107b90aa60988b5bc006ba2814e49255",
+      "source_bytes": 43329857
+    },
+    "qwen": {
+      "bvid": "BV1AGnF6oETK",
+      "url": "https://www.bilibili.com/video/BV1AGnF6oETK/",
+      "duration_seconds": 81.6,
+      "source_sha256": "6257bcc9a434c2633fc65122552f1054f4bc370795b171017a7dc2de54ab40ba",
+      "source_bytes": 19942064
+    },
+    "kimi": {
+      "bvid": "BV1pGnF6oETx",
+      "url": "https://www.bilibili.com/video/BV1pGnF6oETx/",
+      "duration_seconds": 103.3,
+      "source_sha256": "5afcf695c07da5dfe7930e851019debecf5a78a0e26dca419a513593711dc6ee",
+      "source_bytes": 25981477
+    },
+    "mimo": {
+      "bvid": "BV1pGnF6oEwQ",
+      "url": "https://www.bilibili.com/video/BV1pGnF6oEwQ/",
+      "duration_seconds": 135.26666666666668,
+      "source_sha256": "e33ea9219ff0e9ff1a8918c9771c304b1a7314aa0bbcaaaffd04b48d9ecd2f47",
+      "source_bytes": 36742012
+    },
+    "doubao": {
+      "bvid": "BV1pGnF6oEei",
+      "url": "https://www.bilibili.com/video/BV1pGnF6oEei/",
+      "duration_seconds": 59.233333333333334,
+      "source_sha256": "dd3d663ca492ce999ee542cae4d0f4f5bf3aa1d9145e137230bf4f2bd879107c",
+      "source_bytes": 12307023
+    },
+    "astra": {
+      "bvid": "BV1pGnF6oEsB",
+      "url": "https://www.bilibili.com/video/BV1pGnF6oEsB/",
+      "duration_seconds": 147.06666666666666,
+      "source_sha256": "b8013f1f24d99e9ff7ee6edb81fdf5bff3265377e24343d03f4441d834ffda7b",
+      "source_bytes": 41425050
+    }
+  }
+}

@@ -11,7 +11,7 @@ Code cells use AgentArk's existing Colab form presentation: instructions and ess
 ## Start the notebook
 
 1. Open the [shared Colab notebook](https://colab.research.google.com/drive/1szVNzToQ0VadlPTB2BymM-sgYNbnAHD_?usp=sharing). Sign in, select **Runtime → Change runtime type → Python 3 / T4 GPU**, save and connect. GPU allocation depends on your account's available resources. You may save a copy to Drive if you want to keep your changes; alternatively, upload the local `.ipynb` yourself.
-2. Keep `SOURCE_MODE="embedded"`, `RENDERER="gpu"`, `MODE="replay"`, `START_SESSION=True` and MP4 recording off. The single-file notebook embeds the reviewed eleven-file source archive and checks its SHA-256, exact file list and member hashes. No separate source upload, Drive mount or model API key is required.
+2. Keep `SOURCE_MODE="embedded"`, `RENDERER="gpu"`, `MODE="replay"`, `START_SESSION=True` and MP4 recording off. The single-file notebook embeds the reviewed fourteen-file source archive and checks its SHA-256, exact file list and member hashes. No separate source upload, Drive mount or model API key is required.
 3. Choose **Runtime → Run all**. Wait for source verification, dependency/runtime installation, GPU setup, record download and automatic launch. The Colab kernel stays unchanged; AgentArk runs in a separate **Python 3.10.12** subprocess environment. The installer verifies pinned env **1.0.5**, RobotPainting **task-v1**, archive sizes and SHA-256 hashes. No Unity Editor is required.
 4. **Open the viewer URL printed in step 7, “Open the live viewer.”** This native **`https://…prod.colab.dev/`** link opens the interactive visualization in another tab. Use the same Google account. Wait for **connected**, two workspace camera views, the Golden Gate reference and advancing action history. You can watch the interaction before a round finishes. If startup is still in progress, wait and refresh; inspect startup errors and `session.log` if it does not connect.
 5. After camera images appear, rerun **9. Inspect actual evidence and saved canvases** to view the actual Unity NVIDIA renderer. A failed GPU setup stops visibly; choose `cpu` explicitly only if software rendering is acceptable.
@@ -27,7 +27,7 @@ Source ZIP packaging, for a maintainer with the reviewed checkout:
 python scripts/package_colab_source.py pack --output '<new-source-archive>.zip'
 ```
 
-Distribute that archive together with the printed `archive_sha256`. It contains only the eleven allowlisted source/configuration/metadata files. It does not contain runtime binaries, evaluation records, images, videos, logs or credentials. Runtime and public replay data are downloaded separately from their immutable releases.
+Distribute that archive together with the printed `archive_sha256`. It contains only the fourteen allowlisted source/configuration/metadata files. It does not contain runtime binaries, evaluation records, images, videos, logs or credentials. Runtime and public replay data are downloaded separately from their immutable releases.
 
 ## What uses the GPU
 
@@ -73,3 +73,5 @@ The notebook's **7. Open AgentArk's existing interaction viewer** cell prints th
 CLI-to-browser attachment has a reported [upstream issue](https://github.com/googlecolab/google-colab-cli/issues/24): opening a CLI-generated runtime link can allocate a new CPU session instead of attaching to the existing T4. If that happens, do not assume that the webpage and CLI share a VM. Open the notebook through the normal Colab workflow and select its runtime there. This does not change the graphics profile used by the separate CLI session.
 
 The dated [validation report](colab-validation-20261020.md) distinguishes actual GPU execution, notebook/browser checks, action replay and video decoding.
+
+The new [Pelican replay notebook](../notebooks/Pelican_Record_Colab.ipynb) is an independent text-goal entry using the same no-inference helper and source bundle. It supports all 11 locked Pelican records. [Pelican settings, coverage and local replay](pelican-results.md) are separate from the Golden Gate hosted validation above.
