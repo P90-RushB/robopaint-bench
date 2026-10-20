@@ -1,6 +1,6 @@
 {
   "schema": "robopaint.editorial-media.v1",
-  "publication_status": "local_preview_pending_media_approval",
+  "publication_status": "owner_approved_website_images",
   "assets": [
     {
       "path": "assets/media/reference.png",
@@ -15,23 +15,15 @@
       "sha256": "8b07116f90b5c2b6c38b1a41fd57d80f94f2feaa21a38427a6d7eb83596add19",
       "bytes": 867177,
       "creator": "RoboPaintBench recording",
-      "license": "Pending owner media release",
-      "description": "Unaltered frame at recording second 240 of Astra attempt 3 human-view recording, matching the excerpt start."
-    },
-    {
-      "path": "assets/media/robot-motion.mp4",
-      "sha256": "287800b3f477e8b52c098f6406f95b271e5946c14d1ab60b4025a27cb6549776",
-      "bytes": 847968,
-      "creator": "RoboPaintBench recording",
-      "license": "Pending owner media release",
-      "description": "Astra attempt 3, recording seconds 240-252, resized from 1920x1080 to 1280x720; no speed change. Source recording omits model thinking waits."
+      "license": "No additional media reuse license specified; see docs/attribution.md",
+      "description": "Unaltered frame at recording second 240 of Astra ICL round 3, used as the recording section fallback poster."
     },
     {
       "path": "assets/media/astra-round3-complete.png",
       "sha256": "5a7f9c5a28cd094e3aced03b8327bf122852f4bcbff238b23188df64282523c5",
       "bytes": 1039384,
       "creator": "RoboPaintBench recording",
-      "license": "Pending owner media release",
+      "license": "No additional media reuse license specified; see docs/attribution.md",
       "description": "Unaltered original 1920x1080 three-camera recording frame after Astra ICL round 3 submission. The hero display masks only the unused bottom 120-pixel black strip; camera pixels are unchanged.",
       "source": {
         "model": "astra",

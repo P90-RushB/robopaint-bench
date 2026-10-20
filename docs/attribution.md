@@ -24,12 +24,12 @@ Runtime downloads retain their own AgentArk and Panda asset notices. The install
 
 ## Recordings and model-generated paintings
 
-The 33 selected canvas PNGs, reference PNG, two recording frames and one 12-second video excerpt are assembled locally for review. They remain excluded from Git and have not been newly uploaded by this work. Hash manifests describe the exact selected files.
+The owner has approved inclusion of the **36 selected website PNGs** in the repository: 33 canvas PNGs, the reference PNG and two robot recording frames. Hash manifests describe the exact selected files. The website streams complete recordings from Bilibili; the obsolete 12-second local excerpt is no longer a site asset. Raw interaction records, unselected media and original full recordings remain outside Git.
 
-The excerpt is from Astra attempt 3, recording seconds 240–252, resized from 1920 × 1080 to 1280 × 720 without a speed change. The poster is the unaltered source frame at second 240. Recordings omit model thinking waits and use a human-only brush-follow camera in addition to workspace views.
+The shared player's poster is the unaltered source frame at second 240 of the Astra ICL Round 3 recording. Recordings omit model thinking waits and use a human-only brush-follow camera in addition to workspace views.
 
 The opening hero uses the unaltered original Astra ICL Round 3 completion frame (source frame 6938 at 578.1667 seconds, episode `5905234c869e4bcab0ed9ddb5747aba1`). The page masks only the unused bottom 120-pixel black strip; all three camera views remain unchanged. Its two smaller images are the reference photograph and the saved final canvas from the same round. The brush-follow view is for human viewing, in addition to the two model-facing workspace cameras.
 
-The source replay notebook retains the three owner-selected preview illustrations (reference, Sol final-round camera frame, saved canvas) embedded in Markdown so they can be seen before starting a runtime. Its execution outputs are empty. These presentation illustrations are separate from raw interaction records and the separately assembled website media.
+The source replay notebook retains the three owner-selected preview illustrations (reference, Sol final-round camera frame, saved canvas) embedded in Markdown so they can be seen before starting a runtime. Its execution outputs are empty. These presentation illustrations are separate from raw interaction records.
 
-The code license does not assign a license to these evaluation media. Their public release and the chosen media license require the owner's decision. Do not interpret a draft project page, manifest, or selected local copy as an already published dataset.
+The code's Apache-2.0 license does not assign a license to these evaluation media. Permission to include the selected images in Git does not extend to the complete raw evaluation dataset. The evaluation media have no additional reuse license specified here; the reference photograph retains its separately stated CC BY-SA 4.0 license. Preserve asset notices and provenance when redistributing the site.

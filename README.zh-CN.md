@@ -26,6 +26,6 @@
 
 Grok最新资料已补完第三轮：96/96/47步；其中一个预算失败是明确记录的harness无移动拒绝步。共同SimpleAgent harness下，Opus混合推理设置、MiMo提高输出预算、Astra的Codex SDK后端输出限制差异已保留。统一任务和代理机制并不代表相同推理消耗，首版不宣称等算力对照。
 
-发布结构为GitHub仓库、GitHub Pages网页、B站/YouTube视频、Colab计算入口。网页源码和元数据可跟随代码版本；原始记录、请求/推理和视频均不随Git上传，网页媒体单独打包。Notebook 保留用户指定的三张内嵌预览图，供启动前阅读；不包含执行输出或原始 record。公开媒体和仓库可见性需按具体发布内容确认。Colab 回放／交互示例的实际 GPU、网页、动作和录像验证范围见[运行报告](docs/colab-validation-20261020.md)；新模型付费推理另行启动。
+发布结构为GitHub仓库、GitHub Pages网页、B站/YouTube视频、Colab计算入口。网页源码、元数据及精选网站PNG图片随Git版本管理：当前金门大桥共36张，包括33张画布、1张参考图和2张机械臂录制帧。新克隆仓库安装`requirements-site.txt`后，执行`python scripts/build_site.py --output local_save/site-preview-01`即可构建完整网页，无需另传媒体包或私有结果索引。完整视频由B站播放，旧的12秒本地片段不再纳入网站。原始记录、请求/推理、完整录像、日志和本机输出继续留在Git之外。Notebook 保留用户指定的三张内嵌预览图，供启动前阅读；不包含执行输出或原始 record。图片入库不代表适用代码的Apache-2.0许可，也不授权发布其他评测数据。GitHub Pages仍需手动部署。Colab 回放／交互示例的实际 GPU、网页、动作和录像验证范围见[运行报告](docs/colab-validation-20261020.md)；新模型付费推理另行启动。
 
 参考照片：Frank Schulenburg，CC BY-SA 4.0；完整[来源与许可说明](docs/attribution.md)。灵感来自 [Thijs Simonian 的现实机器人画桥演示](https://thijs.net/projects/robot-painter)，本项目使用自己的模拟Panda机器人与协议。

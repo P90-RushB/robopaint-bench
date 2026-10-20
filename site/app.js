@@ -130,7 +130,7 @@ async function initModelVideos() {
     }
     selectModelVideo(modelVideos.has('astra')?'astra':orderedModels(collection.models,'author')[0].id);
   }catch{
-    byId('model-video-status').textContent='The model recordings could not be loaded. You can still watch the original-speed excerpt below.';
+    byId('model-video-status').textContent='The model recordings could not be loaded. Refresh this page to try again.';
   }
 }
 function openModel(m) {

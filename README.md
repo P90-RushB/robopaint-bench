@@ -82,13 +82,13 @@ The 11 Golden Gate process videos are [available on Bilibili](https://space.bili
 ```sh
 python -m unittest discover -s tests -v
 python -m pip install -r requirements-site.txt
-python scripts/build_site.py --allow-missing-media --output local_save/source-only-check
+python scripts/build_site.py --output local_save/site-preview-01
 ```
 
-These checks do not run models or Unity. For full visual preview use the verified selected media described in [hosting](docs/hosting.md). The deployment workflow is manual; code upload does not upload private evaluation data. Raw audits, reasoning, trajectories, videos, credentials and machine paths stay outside Git. [Validation and limits](docs/validation.md) · [Release guide](docs/release.md) · [中文发布方案](docs/launch-plan.zh-CN.md).
+These checks do not run models or Unity. The 36 curated website PNGs are included in the repository, so a fresh clone can build the complete Golden Gate site without a separate media archive or private result catalog. They comprise 33 canvases, the reference and two robot recording frames; full videos stream from Bilibili. The deployment workflow remains manual. Raw audits, reasoning, trajectories, full videos, credentials and machine paths stay outside Git. [Preview and hosting](docs/hosting.md) · [Validation and limits](docs/validation.md) · [Release guide](docs/release.md) · [中文发布方案](docs/launch-plan.zh-CN.md).
 
 ## Attribution and citation
 
-The Golden Gate photograph is by **Frank Schulenburg**, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), resized without cropping. [Full source and asset notices](docs/attribution.md). Code/documentation use Apache-2.0; runtime/vendor assets and evaluation media retain separate terms. The selected evaluation media are local review assets pending a public release decision.
+The Golden Gate photograph is by **Frank Schulenburg**, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), resized without cropping. [Full source and asset notices](docs/attribution.md). Code/documentation use Apache-2.0; runtime/vendor assets and evaluation media retain separate terms. The owner has approved inclusion of the selected website images in Git; this does not apply the code license to those images or release the raw evaluation data.
 
 Use [CITATION.cff](CITATION.cff) when referencing this software preview. No paper or peer-reviewed acceptance is claimed.

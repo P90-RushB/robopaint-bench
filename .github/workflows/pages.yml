@@ -1,15 +1,6 @@
 name: Deploy benchmark site
 on:
   workflow_dispatch:
-    inputs:
-      media_archive_url:
-        description: Immutable HTTPS URL of the reviewed, approved site-media ZIP
-        required: true
-        type: string
-      approval:
-        description: Type PUBLISH_APPROVED_MEDIA after owner approval of this exact media selection
-        required: true
-        type: string
 permissions:
   contents: read
 concurrency:
@@ -19,19 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check explicit publication input
-        env:
-          APPROVAL: ${{ inputs.approval }}
-        run: test "$APPROVAL" = PUBLISH_APPROVED_MEDIA
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       - run: python -m pip install -r requirements-site.txt
-      - name: Verify approved media and build
-        env:
-          MEDIA_ARCHIVE_URL: ${{ inputs.media_archive_url }}
-        run: python scripts/build_site.py --media-archive "$MEDIA_ARCHIVE_URL" --publication-approved --output dist
+      - name: Verify repository media and build
+        run: python scripts/build_site.py --publication-approved --output dist
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

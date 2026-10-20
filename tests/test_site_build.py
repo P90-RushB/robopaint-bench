@@ -74,7 +74,7 @@ class SiteBuildTests(unittest.TestCase):
             output = Path(tmp) / "site"
             report = builder.build(output, None, None, True)
             self.assertEqual(report["models"], 11)
-            self.assertEqual(len(report["missing_media"]), 37)
+            self.assertEqual(len(report["missing_media"]), 36)
             self.assertFalse(report["publication_performed"])
             self.assertIn('id="benchmark-data"', (output / "index.html").read_text(encoding="utf-8"))
             self.assertIn('id="model-video-data"', (output / "index.html").read_text(encoding="utf-8"))
@@ -95,6 +95,15 @@ class SiteBuildTests(unittest.TestCase):
             self.assertEqual(broken, [])
             with self.assertRaises(ValueError):
                 builder.build(output, None, None, True)
+
+    def test_repository_images_build_a_complete_site_without_an_external_archive(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / "site"
+            report = builder.build(output, ROOT / "site/assets/media", None, False)
+            self.assertEqual(report["verified_media"], 36)
+            self.assertEqual(report["missing_media"], [])
+            self.assertEqual(len(list((output / "assets/media").rglob("*.png"))), 36)
+            self.assertEqual(list((output / "assets/media").rglob("*.mp4")), [])
 
     def test_public_build_refuses_missing_media_before_creating_output(self):
         with tempfile.TemporaryDirectory() as tmp:
