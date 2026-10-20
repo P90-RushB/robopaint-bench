@@ -58,7 +58,7 @@ The workflow builds directly from the checked-in media and verifies each selecte
 Domain configuration is separate from the repository build:
 
 1. Verify domain ownership in the GitHub account's Pages settings using the supplied DNS TXT record. Add the custom domain to this repository's Pages settings before pointing public DNS at GitHub.
-2. In **Cloudflare → robopaintbench.org → DNS → Records**, configure the apex (`@`) with GitHub Pages' published `A` records and, if desired, `AAAA` records. Configure `www` as a `CNAME` to `p90-rushb.github.io`, without the repository name. The primary address remains the apex domain.
+2. In **Cloudflare → robopaintbench.org → DNS → Records**, configure the apex (`@`) with GitHub Pages' published `A` records and, if desired, `AAAA` records. Configure `www` as a `CNAME` to `p90-rushb.github.io`, without the repository name. Set these records to **DNS only** (unproxied), so GitHub validates and serves HTTPS directly. The primary address remains the apex domain.
 3. Wait for GitHub's DNS check and TLS certificate, then enable **Enforce HTTPS**. Confirm both the primary URL and `www` resolve correctly and the latter redirects to the primary address. DNS and certificate provisioning can take up to 24 hours.
 
 This site uses a custom GitHub Actions workflow. The custom domain is stored in **Pages settings**; no repository `CNAME` file is required, and Actions-based Pages ignores such a file. Re-running the manual deployment workflow updates the site without changing the domain or DNS settings.
