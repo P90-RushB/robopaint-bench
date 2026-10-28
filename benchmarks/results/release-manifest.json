@@ -402,7 +402,7 @@
       "id": "grok/attempt-01/video",
       "sha256": "53ea860b11af62154e2a56f5ad62843c6a0bf07d8cc9adc140c8a751705de2ba",
       "bytes": 12920759,
-      "url": "https://www.bilibili.com/video/BV1UznF6MEor/",
+      "url": "https://www.bilibili.com/video/BV1Bvxj6CEm3/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -425,7 +425,7 @@
       "id": "grok/attempt-02/video",
       "sha256": "979038a69a224c48db64cc0308dc4b1858177e79778c308f2a18b827de956dc1",
       "bytes": 76779002,
-      "url": "https://www.bilibili.com/video/BV1UznF6MEor/",
+      "url": "https://www.bilibili.com/video/BV1Bvxj6CEm3/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -448,7 +448,7 @@
       "id": "grok/attempt-03/video",
       "sha256": "4b0d1b3677bd92e77ca9e60f03ef209a04c11774b699c597c2f4a677cc824e3e",
       "bytes": 63027838,
-      "url": "https://www.bilibili.com/video/BV1UznF6MEor/",
+      "url": "https://www.bilibili.com/video/BV1Bvxj6CEm3/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -497,7 +497,7 @@
     },
     {
       "id": "grok/model-video",
-      "url": "https://www.bilibili.com/video/BV1UznF6MEor/",
+      "url": "https://www.bilibili.com/video/BV1Bvxj6CEm3/",
       "publication_status": "linked_public_video",
       "scope": "Three sequential ICL rounds in one combined video."
     },
@@ -520,7 +520,7 @@
       "id": "wonder/attempt-01/video",
       "sha256": "66e55d30b51b58e9deabae4ec1aed2772f08937bf44813d891d95702e42372c4",
       "bytes": 47850908,
-      "url": "https://www.bilibili.com/video/BV1gznF6uEnt/",
+      "url": "https://www.bilibili.com/video/BV1zexj65EQb/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -543,7 +543,7 @@
       "id": "wonder/attempt-02/video",
       "sha256": "1024eec9ae484c032cc94ea23e2ad8a408e73a265f8b7c7b139f49be5bb002d2",
       "bytes": 70094987,
-      "url": "https://www.bilibili.com/video/BV1gznF6uEnt/",
+      "url": "https://www.bilibili.com/video/BV1zexj65EQb/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -566,7 +566,7 @@
       "id": "wonder/attempt-03/video",
       "sha256": "e3fa7f9b1c920df5b1f4be1d7d791e8e3a9f5ff43ea5743f13ada9bd90a48e47",
       "bytes": 61309646,
-      "url": "https://www.bilibili.com/video/BV1gznF6uEnt/",
+      "url": "https://www.bilibili.com/video/BV1zexj65EQb/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -615,7 +615,7 @@
     },
     {
       "id": "wonder/model-video",
-      "url": "https://www.bilibili.com/video/BV1gznF6uEnt/",
+      "url": "https://www.bilibili.com/video/BV1zexj65EQb/",
       "publication_status": "linked_public_video",
       "scope": "Three sequential ICL rounds in one combined video."
     },
@@ -756,7 +756,7 @@
       "id": "qwen/attempt-01/video",
       "sha256": "91f59330d8ba8db221aa2a0025ce1cf60b9285da257fde6774c7d7afec20be85",
       "bytes": 84991007,
-      "url": "https://www.bilibili.com/video/BV1SznF6MEkV/",
+      "url": "https://www.bilibili.com/video/BV1Fexj6LEjH/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -779,7 +779,7 @@
       "id": "qwen/attempt-02/video",
       "sha256": "2fcc920a972bf26bedb87ac9e198de2e4a9942d57f5b2a3e59948a2372d79cd7",
       "bytes": 80737178,
-      "url": "https://www.bilibili.com/video/BV1SznF6MEkV/",
+      "url": "https://www.bilibili.com/video/BV1Fexj6LEjH/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -802,7 +802,7 @@
       "id": "qwen/attempt-03/video",
       "sha256": "d7cbc17dba07e8dc52f7fc2d2abdb167e13da94a0b337b7b189bf153124d39ed",
       "bytes": 96095860,
-      "url": "https://www.bilibili.com/video/BV1SznF6MEkV/",
+      "url": "https://www.bilibili.com/video/BV1Fexj6LEjH/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -851,7 +851,7 @@
     },
     {
       "id": "qwen/model-video",
-      "url": "https://www.bilibili.com/video/BV1SznF6MEkV/",
+      "url": "https://www.bilibili.com/video/BV1Fexj6LEjH/",
       "publication_status": "linked_public_video",
       "scope": "Three sequential ICL rounds in one combined video."
     },
@@ -874,7 +874,7 @@
       "id": "kimi/attempt-01/video",
       "sha256": "c355b8a5f58c6578c5829d1722b45b8e5493b4690312dcc9a0029b8b3861cb05",
       "bytes": 13302913,
-      "url": "https://www.bilibili.com/video/BV1SznF6MEE1/",
+      "url": "https://www.bilibili.com/video/BV1fvxj6CEvH/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -897,7 +897,7 @@
       "id": "kimi/attempt-02/video",
       "sha256": "d7fb94ba91c6c497588b0cbefbff476caa23075a9d1be4f26cf7a87c2b69acf3",
       "bytes": 40032127,
-      "url": "https://www.bilibili.com/video/BV1SznF6MEE1/",
+      "url": "https://www.bilibili.com/video/BV1fvxj6CEvH/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -920,7 +920,7 @@
       "id": "kimi/attempt-03/video",
       "sha256": "6357d90f88a06489c9b547de451555ac483472adbbc3bff3d05a48508922e26d",
       "bytes": 45882226,
-      "url": "https://www.bilibili.com/video/BV1SznF6MEE1/",
+      "url": "https://www.bilibili.com/video/BV1fvxj6CEvH/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -969,7 +969,7 @@
     },
     {
       "id": "kimi/model-video",
-      "url": "https://www.bilibili.com/video/BV1SznF6MEE1/",
+      "url": "https://www.bilibili.com/video/BV1fvxj6CEvH/",
       "publication_status": "linked_public_video",
       "scope": "Three sequential ICL rounds in one combined video."
     },
@@ -992,7 +992,7 @@
       "id": "mimo/attempt-01/video",
       "sha256": "0ca4da4e682a829a5b1cfed3c96fe398d75ab6102b0007e0dd93e9249dfd0453",
       "bytes": 25631851,
-      "url": "https://www.bilibili.com/video/BV1sTnF6cEqS/",
+      "url": "https://www.bilibili.com/video/BV1Bvxj6CEB6/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -1015,7 +1015,7 @@
       "id": "mimo/attempt-02/video",
       "sha256": "3c8a948ce388b84f4138acd05b764c250e5e0d92ba62addb54f387b22a46385a",
       "bytes": 17604586,
-      "url": "https://www.bilibili.com/video/BV1sTnF6cEqS/",
+      "url": "https://www.bilibili.com/video/BV1Bvxj6CEB6/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -1038,7 +1038,7 @@
       "id": "mimo/attempt-03/video",
       "sha256": "2bbc6980afad85bd726eaa11ef75fb89013dcbbdde3bb0c20376e71270b95f5a",
       "bytes": 19170987,
-      "url": "https://www.bilibili.com/video/BV1sTnF6cEqS/",
+      "url": "https://www.bilibili.com/video/BV1Bvxj6CEB6/",
       "publication_status": "retained_original_linked_via_model_video",
       "url_scope": "combined_model_video"
     },
@@ -1087,7 +1087,7 @@
     },
     {
       "id": "mimo/model-video",
-      "url": "https://www.bilibili.com/video/BV1sTnF6cEqS/",
+      "url": "https://www.bilibili.com/video/BV1Bvxj6CEB6/",
       "publication_status": "linked_public_video",
       "scope": "Three sequential ICL rounds in one combined video."
     },
